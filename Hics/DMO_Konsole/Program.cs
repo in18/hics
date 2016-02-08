@@ -10,7 +10,7 @@ namespace DMO_Konsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hallo Welt to Do");
+            Console.WriteLine("Hallo Welt Erster");
 
             Console.ReadLine();
         }
