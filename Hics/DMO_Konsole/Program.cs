@@ -11,6 +11,7 @@ namespace DMO_Konsole
         static void Main(string[] args)
         {
             Console.WriteLine("Hallo Welt Zweiter");
+            Console.WriteLine("Hallo Welt Erster");
 
             Console.ReadLine();
         }
