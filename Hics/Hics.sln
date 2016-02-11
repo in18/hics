@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMO_Konsole", "DMO_Konsole\DMO_Konsole.csproj", "{BD0B3297-F0EC-47AC-9C48-894C19D97948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HicsMVC", "HicsMVC\HicsMVC.csproj", "{47329ACA-86FC-4CE2-8BDA-A3CA789957DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HicsBL", "HicsBL\HicsBL.csproj", "{4E087615-6CD9-4346-A569-DA51D1F02321}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{BD0B3297-F0EC-47AC-9C48-894C19D97948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD0B3297-F0EC-47AC-9C48-894C19D97948}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD0B3297-F0EC-47AC-9C48-894C19D97948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47329ACA-86FC-4CE2-8BDA-A3CA789957DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47329ACA-86FC-4CE2-8BDA-A3CA789957DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47329ACA-86FC-4CE2-8BDA-A3CA789957DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47329ACA-86FC-4CE2-8BDA-A3CA789957DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E087615-6CD9-4346-A569-DA51D1F02321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E087615-6CD9-4346-A569-DA51D1F02321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E087615-6CD9-4346-A569-DA51D1F02321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E087615-6CD9-4346-A569-DA51D1F02321}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
