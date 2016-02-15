@@ -8,6 +8,15 @@ namespace huedotnet
 {
     class HSVRGB
     {
+        /// <summary>
+        /// Konvertiere RGB nach HSL Farbsystem
+        /// </summary>
+        /// <param name="r">Rotwert 0-255</param>
+        /// <param name="g">Grünwert 0-255</param>
+        /// <param name="b">Blauwert 0-255</param>
+        /// <param name="hue">Variable als OUT, auf welche der HUE-Wert gespeichert wird</param>
+        /// <param name="saturation">Variable als OUT, auf welche der Sättigungs-Wert gespeichert wird</param>
+        /// <param name="luminance">Variable als OUT, auf welche der Helligkeits-Wert gespeichert wird</param>
         public void ConvertToHSL(int r, int g, int b, out double hue, out double saturation, out double luminance)
         {
             Color newColor = Color.FromArgb(r, g, b);
