@@ -25,6 +25,16 @@ namespace huedotnet
             luminance = newColor.GetBrightness();
         }
 
+        /// <summary>
+        /// Konvertier HSL zu RGB Farb-System
+        /// Die math. Formeln sind vom Internet
+        /// </summary>
+        /// <param name="hue">Grad-Parameter in der HSL-Farb-Skala. 0-0.9999</param>
+        /// <param name="sat">Stättigungswert 0-255</param>
+        /// <param name="bri">Helligkeit 0-255</param>
+        /// <param name="r">Out Variable für Rot-Wert</param>
+        /// <param name="g">Out Variable für Grün-Wert</param>
+        /// <param name="b">Out Variable für Blau-Wert</param>
         public void ConvertToRGB(double hue, double sat, double bri, out int r, out int g, out int b)
         {
             double rprime, gprime, bprime;

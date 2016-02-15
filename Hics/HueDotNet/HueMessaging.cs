@@ -13,12 +13,24 @@ namespace huedotnet
         private String bridgeIP;
         private String username;
         
+
+        /// <summary>
+        /// Speichern der IP und des Usernamens der Bridge
+        /// </summary>
+        /// <param name="bridgeIP">IP der Bridge</param>
+        /// <param name="username">Vorhandener Username in der Bridge</param>
         public HueMessaging(string bridgeIP, string username)
         {
             this.bridgeIP = bridgeIP;
             this.username = username;
         }
 
+
+        /// <summary>
+        /// Das zusammen gefügte Json-Kommando and die Bridge senden
+        /// D.h.: on/off,Brightness,.........lampState..)
+        /// </summary>
+        /// <param name="lampState"></param>
         public void SendMessage(HueLamp lampState)
         {
             WebClient webClient = new WebClient();
@@ -44,6 +56,10 @@ namespace huedotnet
             }
         }
 
+        /// <summary>
+        /// Aktuelle Daten der Bridge übermitteln
+        /// </summary>
+        /// <returns>Url samt IP und Username</returns>
         public String DownloadState()
         {
             WebClient webClient = new WebClient();

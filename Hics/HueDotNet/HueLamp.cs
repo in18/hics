@@ -32,6 +32,12 @@ namespace huedotnet
             return this.lampNumber;
         }
 
+        /// <summary>
+        /// Farbwert einer Lampe mittels RGB-System setzen
+        /// </summary>
+        /// <param name="r">Rot-Wert</param>
+        /// <param name="g">Grün-Wert</param>
+        /// <param name="b">Blau-Wert</param>
         public void SetColor(int r, int g, int b)
         {
             HSVRGB hsvrgb = new HSVRGB();
@@ -43,6 +49,11 @@ namespace huedotnet
             this.saturation = sat;
             this.brightness = bri;
         }
+
+        /// <summary>
+        /// Den Hue-Wert setzen
+        /// </summary>
+        /// <param name="hue">Hue-Wert</param>
         public void SetHue(double hue)
         {
             
@@ -62,6 +73,11 @@ namespace huedotnet
             return this.transitionTime;
         }
 
+        /// <summary>
+        /// Einen String für das Json-Kommando zusammenbasteln
+        /// Da steht drin on/off,brightness,hue,sättigung,....
+        /// </summary>
+        /// <returns></returns>
         public String GetJson()
         {
             ArrayList commands = new ArrayList();
