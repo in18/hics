@@ -26,7 +26,7 @@ namespace huedotnet
             bool loadConfigSuccess = LoadConfig();
             if (!loadConfigSuccess)
             {
-                Console.WriteLine("Failed to load config!");
+                Console.WriteLine("Failed to load configuration!");
                 Console.ReadLine();
                 return;
             }
