@@ -12,7 +12,7 @@ namespace DMO_Konsole
         {
             Console.WriteLine("Hallo Welt");
             Console.WriteLine("was anderes");
-            Console.WriteLine("hallihallo");
+            Console.WriteLine("hallihallo du floh");
             Console.WriteLine("asd");
 
             Console.ReadLine();
