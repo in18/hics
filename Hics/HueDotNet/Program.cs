@@ -21,11 +21,13 @@ namespace huedotnet
 
         static void Main(string[] args)
         {
+            
             Console.OutputEncoding = Encoding.Unicode;
             
             bool loadConfigSuccess = LoadConfig();
             if (!loadConfigSuccess)
             {
+                // gibt eine Fehlermeldung aus, wenn die Konfiguration nicht geladen werden konnte
                 Console.WriteLine("Failed to load configuration!");
                 Console.ReadLine();
                 return;
