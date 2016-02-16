@@ -8,6 +8,6 @@ namespace HicsBL
 {
     public class GuiAccess
     {
-        //erstellen
+        
     }
 }
