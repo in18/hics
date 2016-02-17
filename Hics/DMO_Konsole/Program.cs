@@ -14,7 +14,7 @@ namespace DMO_Konsole
             Console.WriteLine("was anderes");
             Console.WriteLine("hallihallo du floh");
           
-            Console.WriteLine("asd");
+            Console.WriteLine("dgfgdfgdfg");
 
             Console.WriteLine("Andrea");
 
