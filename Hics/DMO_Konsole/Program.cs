@@ -16,6 +16,8 @@ namespace DMO_Konsole
             Console.WriteLine("abcdefg");
             Console.WriteLine("asd");
 
+            Console.WriteLine("Andrea");
+
             Console.ReadLine();
         }
     }
