@@ -8,5 +8,27 @@ namespace HicsBL
 {
     public class DbAccess
     {
+        /// <summary>
+        /// PSP 1.1
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="lampadress"></param>
+        /// <param name="lampname"></param>
+        static void addLamp(string username, string password, string lampadress, string lampname)
+        {
+            string pwhash = HelperClass.GetHash(password);
+
+        }
+        /// <summary>
+        /// PSP 8.1
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+         static void addUser(string username, string password)
+        {
+            string pwhash = HelperClass.GetHash(password);
+        }
+
     }
 }
