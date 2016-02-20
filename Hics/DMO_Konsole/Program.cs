@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HicsBL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,9 @@ namespace DMO_Konsole
             Console.WriteLine("asdfasdf");
 
             Console.WriteLine("Andrea");
-
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine("123User!");
+            Console.WriteLine(HelperClass.GetHash("123User!"));
             Console.ReadLine();
         }
     }

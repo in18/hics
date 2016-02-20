@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HicsBL
 {
-    class HelperClass
+    public class HelperClass
     {
         public static string GetHash(string text)
         {
