@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace huedotnet
 {
-    class HueMessaging
+    public class HueMessaging
     {
         private String bridgeIP;
         private String username;

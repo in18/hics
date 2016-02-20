@@ -17,7 +17,7 @@ namespace HicsBL
         /// <param name="lampname"></param>
         static void addLamp(string username, string password, string lampadress, string lampname)
         {
-            //Übergebenes Passwort hashen und in Var pwhas speichern für Übergabe an DB
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
         }
@@ -28,7 +28,7 @@ namespace HicsBL
         /// <param name="password"></param>
          static void addUser(string username, string password)
         {
-            //Übergebenes Passwort hashen und in Var pwhas speichern für Übergabe an DB
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
         }
 
