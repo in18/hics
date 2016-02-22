@@ -21,15 +21,18 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
 
         }
+
         /// <summary>
         /// PSP 8.1
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-         static void addUser(string username, string password)
+        /// <param name="usernameNew"></param>
+        /// <param name="passwordNew"></param>
+        static void addUser(string username, string password,string usernameNew, string passwordNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhash = HelperClass.GetHash(password);
+            string pwhash = HelperClass.GetHash(passwordNew);
         }
 
     }
