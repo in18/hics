@@ -31,6 +31,39 @@ namespace HicsBL
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
         }
+        /// <summary>
+        /// PSP 3.1
+        /// Löschen der Lampe anhand der LampenId
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="lampId"></param>
+        /// <returns></returns>
+        static bool deleteLamp(string username, string password, int lampId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
 
+            return success;
+        
+        }
+        /// <summary>
+        /// PSP 3.2
+        /// Löschen einer Lampe anhand der Lampenadresse
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="lampAdress"></param>
+        /// <returns></returns>
+        static bool deleteLamp(string username, string password, string lampAdress)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+            return success;
+
+        }
     }
 }
