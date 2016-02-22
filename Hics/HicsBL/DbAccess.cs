@@ -117,5 +117,24 @@ namespace HicsBL
 
             return success;
         }
+
+        /// <summary>
+        /// PSP 6.3
+        /// Lampe einer Gruppe anhand groupName und lampId entfernen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupId"></param>
+        /// <param name="lampId"></param>
+        static bool RemoveLampFromGroup(string username, string password, string groupName, int lampId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+            return success;
+        }
+
+       
     }
 }
