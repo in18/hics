@@ -126,7 +126,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -172,7 +172,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\MicronLayout.cshtml" />
     <Content Include="Views\Admin\MainMenu.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\User\MainMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -200,7 +200,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50707</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

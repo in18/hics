@@ -125,7 +125,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, int groupId, int lamp_id)
+        static bool addLampToGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -141,7 +141,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, string groupName, int lamp_id)
+        static bool addLampToGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -156,10 +156,10 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="group_id"></param>
-        /// <param name="lamp_id"></param>
+        /// <param name="groupId"></param>
+        /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool removeLampFromGroup(string username, string password, int group_id, int lamp_id)
+        static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
 
@@ -170,9 +170,9 @@ namespace HicsBL
         /// PSP 7.1
         /// Lampengruppe entfernen mittels Gruppennamen
         /// </summary>
-        /// <param name="group_name"></param>
+        /// <param name="groupName"></param>
         /// <returns></returns>
-        static bool removeLampGroup(string username, string password, string group_name)
+        static bool removeLampGroup(string username, string password, string groupName)
         {
             bool success = false;
 
@@ -247,5 +247,111 @@ namespace HicsBL
             return success;
         }
 
+        /// <summary>
+        /// PSP 8.8
+        /// User hinzufügen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="usernameId"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        static bool AddUser(string username, string password, int usernameId, string usernameName)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 9.1
+        /// UserGroup editieren
+        /// </summary>
+        /// <param name="usernameId"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        static bool EditUserGroup(string username, string password, int usernameId, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 9.2
+        /// UserGroup editieren
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+       static bool EditUserGroup(string username, string password, string usernameName, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 10.1
+        /// Admin Login
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        static bool AdminLogin(string username, string password)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 13.1
+        /// Lampe wechseln
+        /// </summary>
+        /// <param name="lampOnOff"></param>
+        /// <param name="lampId"></param>
+        /// <returns></returns>
+        static bool switchLamp(string username, string password, bool lampOnOff, int lampId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 15.1
+        /// Lampen dimmen
+        /// </summary>
+        /// <param name="lampId"></param>
+        /// <param name="brightness"></param>
+        /// <returns></returns>
+        static bool dimLamp(string username, string password, int lampId, byte brightness)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 15.2
+        /// Lampen dimmen
+        /// </summary>
+        /// <param name="lampName"></param>
+        /// <param name="brightness"></param>
+        /// <returns></returns>
+        static bool dimLamp(string username, string password, string lampName, byte brightness)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
     }
 }
