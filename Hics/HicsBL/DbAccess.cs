@@ -32,7 +32,9 @@ namespace HicsBL
         static void addUser(string username, string password,string usernameNew, string passwordNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhash = HelperClass.GetHash(passwordNew);
+            string pwhash = HelperClass.GetHash(password);
+            //Übergebenes neues Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhashNew = HelperClass.GetHash(passwordNew);
         }
         /// <summary>
         /// PSP 3.1
@@ -256,11 +258,11 @@ namespace HicsBL
         /// <param name="usernameId"></param>
         /// <param name="username"></param>
         /// <returns></returns>
-        static bool AddUser(string username, string password, int usernameId, string usernameName)
+        static bool AddUser(string username, string password, string userNew, string passwordNew)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhash = HelperClass.GetHash(password);
+            string pwhash = HelperClass.GetHash(passwordNew);
             return success;
         }
 
@@ -287,21 +289,6 @@ namespace HicsBL
         /// <param name="groupId"></param>
         /// <returns></returns>
        static bool EditUserGroup(string username, string password, string usernameName, int groupId)
-        {
-            bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhash = HelperClass.GetHash(password);
-            return success;
-        }
-
-        /// <summary>
-        /// PSP 10.1
-        /// Admin Login
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        static bool AdminLogin(string username, string password)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -365,7 +352,7 @@ namespace HicsBL
         static bool EditUserPassword(string username, string passwordOld, string passwordNew)
         {
             bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
             string pwhashOld = HelperClass.GetHash(passwordOld);
             string pwhashNew = HelperClass.GetHash(passwordNew);
             return success;
