@@ -153,7 +153,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="group_id"></param>
         /// <returns></returns>
-        static bool RemoveLampGroup(string username, string password, string group_id)
+        static bool RemoveLampGroup(string username, string password, int group_id)
         {
             bool success = false;
 
