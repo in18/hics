@@ -170,6 +170,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
+        /// <returns></returns>
         static bool removeLampFromGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
@@ -188,6 +189,12 @@ namespace HicsBL
         static bool RemoveLampGroup(string username, string password, int groupId)
         {
             bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+            return success;
+
+        }
         /// <summary>
         /// PSP 8.3
         /// entfernt user anhand von GroupName und LampId
@@ -205,8 +212,6 @@ namespace HicsBL
 
             return success;
         }
-       
-            return success;
-        }
+
     }
 }
