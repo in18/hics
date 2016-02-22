@@ -13,9 +13,9 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="lampadress"></param>
-        /// <param name="lampname"></param>
-        static void addLamp(string username, string password, string lampadress, string lampname)
+        /// <param name="lampAdress"></param>
+        /// <param name="lampName"></param>
+        static void addLamp(string username, string password, string lampAdress, string lampName)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
@@ -42,7 +42,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool deleteLamp(string username, string password, int lamp_id)
+        static bool deleteLamp(string username, string password, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -59,7 +59,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampAdress"></param>
         /// <returns></returns>
-        static bool deleteLamp(string username, string password, string lamp_adress)
+        static bool deleteLamp(string username, string password, string lampAdress)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -93,6 +93,23 @@ namespace HicsBL
         /// <param name="lampNameNew"></param>
         /// <returns></returns>
         static bool editLampName(string username, string password, string lampNameOld, string lampNameNew)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+            return success;
+        }
+        /// <summary>
+        /// PSP 2.1
+        /// Editieren eines Lampennamens anhand des alten Lampennamens
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="lampId"></param>
+        /// <param name="lampNameNew"></param>
+        /// <returns></returns>
+        static bool editLampName(string username, string password, int lampId, string lampNameNew)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -186,7 +203,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="group_id"></param>
         /// <returns></returns>
-        static bool RemoveLampGroup(string username, string password, int groupId)
+        static bool removeLampGroup(string username, string password, int groupId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -197,14 +214,31 @@ namespace HicsBL
         }
         /// <summary>
         /// PSP 8.3
-        /// entfernt user anhand von GroupName und LampId
+        /// entfernt user anhand von usernameId
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="groupName"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool removeUser(string username, string password, string groupName, int lampId)
+        static bool removeUser(string username, string password, int usernameId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+            return success;
+        }
+        /// <summary>
+        /// PSP 8.5
+        /// entfernt user anhand von usernameName
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupName"></param>
+        /// <param name="lampId"></param>
+        /// <returns></returns>
+        static bool removeUser(string username, string password, string usernameName)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
