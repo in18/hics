@@ -10,11 +10,15 @@ header{
 }
 
 div{
+    padding-left:10px;
+}
+h2{
+    font-family:'Segoe UI';
+    color:#054588;
 }
 
 #logo1 {
     margin-left:100px;
-
 }
 
 #logo2 {
@@ -27,9 +31,14 @@ section{
     border: 1px solid;
     border-color: white;
     border-radius:10px;
-    border-width:250px;
+    
+    max-width:1200px;
+    max-height:1000px;
+    min-width:200px;
+    min-height:200px;
+
+    background-color:white;
+    margin-bottom:100px;
     margin-right:100px;
     margin-left:100px;
-    /*margin-top:auto;*/
-    margin-bottom:20px;
 }
