@@ -278,5 +278,20 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             return success;
         }
+
+        /// <summary>
+        /// PSP 9.2
+        /// User
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+       static bool EditUserGroup(string username, string password, string usernameName, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
     }
 }
