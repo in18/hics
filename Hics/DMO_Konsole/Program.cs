@@ -23,6 +23,7 @@ namespace DMO_Konsole
             Console.WriteLine("--------------------------------");
             Console.WriteLine("123User!");
             Console.WriteLine(HelperClass.GetHash("123User!"));
+            Console.WriteLine("Hallo ich bin daaaaa!");
             Console.ReadLine();
         }
     }
