@@ -281,7 +281,7 @@ namespace HicsBL
 
         /// <summary>
         /// PSP 9.2
-        /// User
+        /// User editieren
         /// </summary>
         /// <param name="username"></param>
         /// <param name="groupId"></param>
