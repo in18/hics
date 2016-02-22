@@ -68,5 +68,20 @@ namespace HicsBL
             return success;
 
         }
+        /// <summary>
+        /// PSP 4.1
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="lampGroupName"></param>
+        /// <returns></returns>
+        static int addLampGroup (string username, string password, string lampGroupName)
+        {
+            int lampGroupId = -1;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+            return lampGroupId;
+        }
     }
 }
