@@ -308,5 +308,20 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             return success;
         }
+
+        /// <summary>
+        /// PSP 13.1
+        /// Lampe wechseln
+        /// </summary>
+        /// <param name="lampOnOff"></param>
+        /// <param name="lampId"></param>
+        /// <returns></returns>
+        static bool switchLamp(string username, string password, bool lampOnOff, int lampId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
     }
 }
