@@ -46,5 +46,45 @@ namespace HicsBL
             //Console.WriteLine("Load config returned bridge ip [" + bridgeIP + "] and username [" + username + "] and return code [" + success + "]");
             return success;
         }
+
+       /// <summary>
+       /// PSP 2.3
+       /// Editieren einer Lampe mittels id und neuer Name
+       /// </summary>
+       /// <param name="lamp_id"></param>
+       /// <param name="new_name"></param>
+       /// <returns></returns>
+        static bool EditLampName(int lamp_id, string new_name)
+        {
+            bool success = false;
+
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 3.3
+        /// Lampe löschen mittels ID
+        /// </summary>
+        /// <param name="lamp_id"></param>
+        /// <returns></returns>
+        static bool DeleteLamp(int lamp_id)
+        {
+            bool success = false;
+
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 3.4
+        /// Lampe löschen mittels Address
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        static bool DeleteLamp(string address)
+        {
+            bool success = false;
+
+            return success;
+        }
     }
 }

@@ -1,0 +1,35 @@
+﻿body {
+    background-color: #B7B7B7;
+    margin:0;
+    padding:0;
+}
+
+header{
+    margin-top:20px;
+    margin-bottom:100px;
+}
+
+div{
+}
+
+#logo1 {
+    margin-left:100px;
+
+}
+
+#logo2 {
+    float:right;
+    margin-right:100px;
+    margin-left:100px;
+}
+
+section{
+    border: 1px solid;
+    border-color: white;
+    border-radius:10px;
+    border-width:250px;
+    margin-right:100px;
+    margin-left:100px;
+    /*margin-top:auto;*/
+    margin-bottom:20px;
+}
