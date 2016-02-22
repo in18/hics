@@ -353,5 +353,22 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             return success;
         }
+
+        /// <summary>
+        /// PSP 19.1
+        /// Edit UserPassword
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="passwordOld"></param>
+        /// <param name="passwordNew"></param>
+        /// <returns></returns>
+        static bool EditUserPassword(string username, string passwordOld, string passwordNew)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhashOld = HelperClass.GetHash(passwordOld);
+            string pwhashNew = HelperClass.GetHash(passwordNew);
+            return success;
+        }
     }
 }
