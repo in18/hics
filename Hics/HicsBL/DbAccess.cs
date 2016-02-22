@@ -146,5 +146,18 @@ namespace HicsBL
 
             return success;
         }
+
+        /// <summary>
+        /// PSP 7.3
+        /// Lampengruppe anhand id entfernen
+        /// </summary>
+        /// <param name="group_id"></param>
+        /// <returns></returns>
+        static bool RemoveLampGroup(string username, string password, string group_id)
+        {
+            bool success = false;
+
+            return success;
+        }
     }
 }
