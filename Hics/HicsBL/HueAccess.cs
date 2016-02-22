@@ -102,10 +102,10 @@ namespace HicsBL
         /// PSP 2.3
         /// Editieren einer Lampe mittels id und neuer Name
         /// </summary>
-        /// <param name="lamp_id"></param>
-        /// <param name="new_name"></param>
+        /// <param name="lampId"></param>
+        /// <param name="newName"></param>
         /// <returns></returns>
-        static bool editLampName(int lamp_id, string new_name)
+        static bool editLampName(int lampId, string newName)
         {
             bool success = false;
 
@@ -116,14 +116,14 @@ namespace HicsBL
         /// PSP 3.3
         /// Lampe löschen mittels ID
         /// </summary>
-        /// <param name="lamp_id"></param>
+        /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool deleteLamp(int lamp_id)
+        static bool deleteLamp(int lampId)
         {
             bool success = false;
             foreach (var lampkey in lamps.ToList())
             {
-                if (lampkey.Key==lamp_id)
+                if (lampkey.Key==lampId)
                 {
                     lamps.Remove(lampkey.Key);
                 }

@@ -125,7 +125,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, int groupId, int lamp_id)
+        static bool addLampToGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -141,7 +141,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, string groupName, int lamp_id)
+        static bool addLampToGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -156,10 +156,10 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="group_id"></param>
-        /// <param name="lamp_id"></param>
+        /// <param name="groupId"></param>
+        /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool removeLampFromGroup(string username, string password, int group_id, int lamp_id)
+        static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
 
@@ -170,9 +170,9 @@ namespace HicsBL
         /// PSP 7.1
         /// Lampengruppe entfernen mittels Gruppennamen
         /// </summary>
-        /// <param name="group_name"></param>
+        /// <param name="groupName"></param>
         /// <returns></returns>
-        static bool removeLampGroup(string username, string password, string group_name)
+        static bool removeLampGroup(string username, string password, string groupName)
         {
             bool success = false;
 
