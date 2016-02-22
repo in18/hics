@@ -42,7 +42,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool deleteLamp(string username, string password, int lampId)
+        static bool deleteLamp(string username, string password, int lamp_id)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -59,7 +59,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampAdress"></param>
         /// <returns></returns>
-        static bool deleteLamp(string username, string password, string lampAdress)
+        static bool deleteLamp(string username, string password, string lamp_adress)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -108,7 +108,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, int groupId, int lampId)
+        static bool addLampToGroup(string username, string password, int groupId, int lamp_id)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -124,7 +124,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, string groupName, int lampId)
+        static bool addLampToGroup(string username, string password, string groupName, int lamp_id)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -142,7 +142,7 @@ namespace HicsBL
         /// <param name="group_id"></param>
         /// <param name="lamp_id"></param>
         /// <returns></returns>
-        static bool RemoveLampFromGroup(string username, string password, int groupId, int lampId)
+        static bool RemoveLampFromGroup(string username, string password, int groupId, int lamp_id)
         {
             bool success = false;
 
@@ -170,7 +170,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool RemoveLampFromGroup(string username, string password, string groupName, int lampId)
+        static bool RemoveLampFromGroup(string username, string password, string groupName, int lamp_id)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
