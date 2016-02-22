@@ -142,7 +142,7 @@ namespace HicsBL
         /// <param name="group_id"></param>
         /// <param name="lamp_id"></param>
         /// <returns></returns>
-        static bool RemoveLampFromGroup(string username, string password, int group_id, int lamp_id)
+        static bool removeLampFromGroup(string username, string password, int group_id, int lamp_id)
         {
             bool success = false;
 
@@ -155,7 +155,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="group_name"></param>
         /// <returns></returns>
-        static bool RemoveLampGroup(string username, string password, string group_name)
+        static bool removeLampGroup(string username, string password, string group_name)
         {
             bool success = false;
 
@@ -170,7 +170,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool RemoveLampFromGroup(string username, string password, string groupName, int lampId)
+        static bool removeLampFromGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -179,6 +179,23 @@ namespace HicsBL
             return success;
         }
 
-       
+        /// <summary>
+        /// PSP 8.3
+        /// entfernt user anhand von GroupName und LampId
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupName"></param>
+        /// <param name="lampId"></param>
+        /// <returns></returns>
+        static bool removeUser(string username, string password, string groupName, int lampId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+            return success;
+        }
+
     }
 }

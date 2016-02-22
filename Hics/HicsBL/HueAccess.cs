@@ -54,7 +54,7 @@ namespace HicsBL
        /// <param name="lamp_id"></param>
        /// <param name="new_name"></param>
        /// <returns></returns>
-        static bool EditLampName(int lamp_id, string new_name)
+        static bool editLampName(int lamp_id, string new_name)
         {
             bool success = false;
 
@@ -67,7 +67,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="lamp_id"></param>
         /// <returns></returns>
-        static bool DeleteLamp(int lamp_id)
+        static bool deleteLamp(int lamp_id)
         {
             bool success = false;
 
@@ -80,7 +80,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        static bool DeleteLamp(string address)
+        static bool deleteLamp(string address)
         {
             bool success = false;
 
