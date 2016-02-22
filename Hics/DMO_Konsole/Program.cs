@@ -25,6 +25,7 @@ namespace DMO_Konsole
             Console.WriteLine(HelperClass.GetHash("123User!"));
             Console.WriteLine("Take it easy");
             Console.WriteLine("Keep Cool");
+            Console.WriteLine("Test von Josef Seiringer");
             Console.ReadLine();
         }
     }
