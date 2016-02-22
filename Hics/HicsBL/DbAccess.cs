@@ -69,6 +69,21 @@ namespace HicsBL
 
         }
         /// <summary>
+        /// PSP 4.1
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="lampGroupName"></param>
+        /// <returns></returns>
+        static int addLampGroup (string username, string password, string lampGroupName)
+        {
+            int lampGroupId = -1;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+            return lampGroupId;
+        }
+        /// <summary>
         /// PSP 2.1
         /// Editieren eines Lampennamens anhand des alten Lampennamens
         /// </summary>
@@ -127,7 +142,50 @@ namespace HicsBL
         /// <param name="group_id"></param>
         /// <param name="lamp_id"></param>
         /// <returns></returns>
-        static bool RemoveLampFromGroup(string username, string password, int group_id, int lamp_id)
+        static bool RemoveLampFromGroup(string username, string password, int groupId, int lampId)
+        {
+            bool success = false;
+
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 7.1
+        /// Lampengruppe entfernen mittels Gruppennamen
+        /// </summary>
+        /// <param name="group_name"></param>
+        /// <returns></returns>
+        static bool RemoveLampGroup(string username, string password, string groupName)
+        {
+            bool success = false;
+
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 6.3
+        /// Lampe einer Gruppe anhand groupName und lampId entfernen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupId"></param>
+        /// <param name="lampId"></param>
+        static bool RemoveLampFromGroup(string username, string password, string groupName, int lampId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 7.3
+        /// Lampengruppe anhand id entfernen
+        /// </summary>
+        /// <param name="group_id"></param>
+        /// <returns></returns>
+        static bool RemoveLampGroup(string username, string password, int groupId)
         {
             bool success = false;
 
