@@ -247,5 +247,21 @@ namespace HicsBL
             return success;
         }
 
+        /// <summary>
+        /// PSP 8.8
+        /// User hinzufügen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="usernameId"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        static bool AddUser(string username, string password, int usernameId, string usernameName)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
     }
 }
