@@ -355,6 +355,21 @@ namespace HicsBL
         }
 
         /// <summary>
+        /// PSP 16.1
+        /// User Login
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        static bool userLogin(string username, string password)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+
+        /// <summary>
         /// PSP 19.1
         /// Edit UserPassword
         /// </summary>
