@@ -357,5 +357,21 @@ namespace HicsBL
             string pwhashNew = HelperClass.GetHash(passwordNew);
             return success;
         }
+        /// <summary>
+        /// PSP 16.1
+        /// Logfile von beginDate bis endDate in einer Liste returgeben
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        static List<Object> GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
+        {
+            List<Object> tmp = new List<object>();
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return tmp;
+        }
     }
 }
