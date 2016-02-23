@@ -101,8 +101,8 @@ namespace HicsBL
             return success;
         }
         /// <summary>
-        /// PSP 2.1
-        /// Editieren eines Lampennamens anhand des alten Lampennamens
+        /// PSP 2.4
+        /// Editieren eines Lampennamens anhand der LampenId
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
