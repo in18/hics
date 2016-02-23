@@ -23,6 +23,19 @@ namespace HicsBL
         }
 
         /// <summary>
+        /// PSP 1.3
+        /// Lampe hinzufügen
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="lampNameId"></param>
+        /// <returns></returns>
+        static int addLamp(string username, string password, string address, int lampNameId)
+        {
+            int lampId = 0;
+            return lampId;
+        }
+
+        /// <summary>
         /// PSP 8.1
         /// </summary>
         /// <param name="username"></param>
