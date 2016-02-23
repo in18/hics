@@ -23,6 +23,19 @@ namespace HicsBL
         }
 
         /// <summary>
+        /// PSP 1.3
+        /// Lampe hinzufügen
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="lampNameId"></param>
+        /// <returns></returns>
+        static int addLamp(string username, string password, string address, int lampNameId)
+        {
+            int lampId = 0;
+            return lampId;
+        }
+
+        /// <summary>
         /// PSP 8.1
         /// </summary>
         /// <param name="username"></param>
@@ -103,8 +116,8 @@ namespace HicsBL
             return success;
         }
         /// <summary>
-        /// PSP 2.1
-        /// Editieren eines Lampennamens anhand des alten Lampennamens
+        /// PSP 2.4
+        /// Editieren eines Lampennamens anhand der LampenId
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -342,6 +355,21 @@ namespace HicsBL
         }
 
         /// <summary>
+        /// PSP 16.1
+        /// User Login
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        static bool userLogin(string username, string password)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+
+        /// <summary>
         /// PSP 19.1
         /// Edit UserPassword
         /// </summary>
@@ -356,6 +384,22 @@ namespace HicsBL
             string pwhashOld = HelperClass.GetHash(passwordOld);
             string pwhashNew = HelperClass.GetHash(passwordNew);
             return success;
+        }
+        /// <summary>
+        /// PSP 16.1
+        /// Logfile von beginDate bis endDate in einer Liste returgeben
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        static List<Object> GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
+        {
+            List<Object> tmp = new List<object>();
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return tmp;
         }
     }
 }
