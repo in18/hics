@@ -23,6 +23,19 @@ namespace HicsBL
         }
 
         /// <summary>
+        /// PSP 1.3
+        /// Lampe hinzufügen
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="lampNameId"></param>
+        /// <returns></returns>
+        static int addLamp(string username, string password, string address, int lampNameId)
+        {
+            int lampId = 0;
+            return lampId;
+        }
+
+        /// <summary>
         /// PSP 8.1
         /// </summary>
         /// <param name="username"></param>
@@ -103,8 +116,8 @@ namespace HicsBL
             return success;
         }
         /// <summary>
-        /// PSP 2.1
-        /// Editieren eines Lampennamens anhand des alten Lampennamens
+        /// PSP 2.4
+        /// Editieren eines Lampennamens anhand der LampenId
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -334,6 +347,21 @@ namespace HicsBL
         /// <param name="brightness"></param>
         /// <returns></returns>
         static bool dimLamp(string username, string password, string lampName, byte brightness)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 16.1
+        /// User Login
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        static bool userLogin(string username, string password)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
