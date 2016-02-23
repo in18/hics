@@ -11,16 +11,66 @@ using Newtonsoft.Json;
 using NDesk.Options;
 using System.Threading;
 using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace HicsBL
 {
     public class HueAccess
     {
+        #region Nichts verändern
         private static String bridgeIP;
         private static String username;
         private static HueMessaging messaging;
         private static Dictionary<int, HueLamp> lamps;
 
+        private static void getLampList()
+        {
+            JsonLampList lampList = JsonConvert.DeserializeObject<JsonLampList>(messaging.DownloadState());
+            lamps = lampList.ConvertToHueLamps();
+        }
+        private static void getWebClient()
+        {
+            messaging = new HueMessaging(bridgeIP, username);
+        }
+        public static double GetCurrentLampBrightness(int lampNumber)
+        {
+            HueLamp lamp;
+            lamps.TryGetValue(lampNumber, out lamp);
+
+            if (lamp == null)
+            {
+                return 254;
+            }
+            else
+            {
+                return Math.Round(lamp.brightness * 255);
+            }
+        }
+        private static void ChangeLampState(int lampNumber, Delegate stateChange)
+        {
+            HueLamp lamp;
+            lamps.TryGetValue(lampNumber, out lamp);
+
+            if (lamp == null)
+            {
+                Debug.WriteLine("Didn't find lamp for number " + lampNumber);
+                return;
+            }
+
+            stateChange.DynamicInvoke(lamp);
+
+            messaging.SendMessage(lamp);
+        }
+        private delegate void LampStateChange(HueLamp lamp);
+
+        private static void ChangeAllLampState(Delegate stateChange)
+        {
+            foreach (HueLamp lamp in lamps.Values)
+            {
+                stateChange.DynamicInvoke(lamp);
+            }
+            messaging.SendMessage(lamps.Values.ToList<HueLamp>());
+        }
         private static bool LoadConfig()
         {
             XDocument doc = XDocument.Load("Settings.xml");
@@ -45,16 +95,17 @@ namespace HicsBL
 
             //Console.WriteLine("Load config returned bridge ip [" + bridgeIP + "] and username [" + username + "] and return code [" + success + "]");
             return success;
-        }
+        } 
+        #endregion
 
-       /// <summary>
-       /// PSP 2.3
-       /// Editieren einer Lampe mittels id und neuer Name
-       /// </summary>
-       /// <param name="lamp_id"></param>
-       /// <param name="new_name"></param>
-       /// <returns></returns>
-        static bool EditLampName(int lamp_id, string new_name)
+        /// <summary>
+        /// PSP 2.3
+        /// Editieren einer Lampe mittels id und neuer Name
+        /// </summary>
+        /// <param name="lampId"></param>
+        /// <param name="newName"></param>
+        /// <returns></returns>
+        static bool editLampName(int lampId, string newName)
         {
             bool success = false;
 
@@ -65,12 +116,18 @@ namespace HicsBL
         /// PSP 3.3
         /// Lampe löschen mittels ID
         /// </summary>
-        /// <param name="lamp_id"></param>
+        /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool DeleteLamp(int lamp_id)
+        static bool deleteLamp(int lampId)
         {
             bool success = false;
-
+            foreach (var lampkey in lamps.ToList())
+            {
+                if (lampkey.Key==lampId)
+                {
+                    lamps.Remove(lampkey.Key);
+                }
+            }
             return success;
         }
 
@@ -80,10 +137,23 @@ namespace HicsBL
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        static bool DeleteLamp(string address)
+        static bool deleteLamp(string address)
         {
             bool success = false;
 
+            return success;
+        }
+
+        /// <summary>
+        /// PSP 15.4
+        /// Lampe dimmen
+        /// </summary>
+        /// <param name="lampId"></param>
+        /// <param name="brightness"></param>
+        /// <returns></returns>
+        static bool dimLamp(int lampId, byte brightness)
+        {
+            bool success = false;
             return success;
         }
     }
