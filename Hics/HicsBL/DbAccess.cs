@@ -385,5 +385,6 @@ namespace HicsBL
             string pwhashNew = HelperClass.GetHash(passwordNew);
             return success;
         }
+        
     }
 }
