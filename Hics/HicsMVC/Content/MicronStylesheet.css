@@ -39,7 +39,6 @@ section{
     margin-bottom:100px;
     margin-right:100px;
     margin-left:100px;
-    
 }
 
 
@@ -60,13 +59,12 @@ section{
         background-repeat: no-repeat;
         background-position:center;
         border-radius:10px;
-       
+        margin-top:20px;
         }
 
 .logout:hover {
             border: solid 2px #054588;
             border-radius: 10px; 
-            
 }
 
 
