@@ -7,9 +7,10 @@ using System.Web.Mvc;
 namespace HicsMVC.Controllers
 {
     public class LoginController : Controller
-    {        
+    {
         /// <summary>
-        /// GET ActionResult für Login View
+        /// Method: HttpGet
+        /// ActionResult Login für View Login
         /// </summary>
         /// <returns></returns>
         public ActionResult Login()
