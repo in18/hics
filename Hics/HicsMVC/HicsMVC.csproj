@@ -143,6 +143,7 @@
     <Content Include="Resources\HicsLogoHeader 347x100.png" />
     <Content Include="Resources\LampControl.png" />
     <Content Include="Resources\Logout.png" />
+    <Content Include="Resources\Logout.png" />
     <Content Include="Resources\Micron logo header 347x100.png" />
     <Content Include="Resources\Statistic.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -176,10 +177,13 @@
     <Content Include="Views\Shared\MicronLayout.cshtml" />
     <Content Include="Views\Admin\MainMenu.cshtml" />
     <Content Include="Views\User\MainMenu.cshtml" />
+    <Content Include="Views\Setup\AdminRegistration.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -203,7 +207,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50707</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

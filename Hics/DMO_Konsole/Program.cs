@@ -18,6 +18,7 @@ namespace DMO_Konsole
             Console.WriteLine("dgfgdfgdfg");
             Console.WriteLine("abcdefg");
             Console.WriteLine("asdfasdf");
+            Console.WriteLine("Sebastian Pfeifer macht einen äußert spannenden Eintrag");
 
             Console.WriteLine("Andrea");
             Console.WriteLine("--------------------------------");

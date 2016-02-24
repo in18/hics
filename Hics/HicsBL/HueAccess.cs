@@ -143,5 +143,30 @@ namespace HicsBL
 
             return success;
         }
+
+        /// <summary>
+        /// PSP 15.4
+        /// Lampe dimmen
+        /// </summary>
+        /// <param name="lampId"></param>
+        /// <param name="brightness"></param>
+        /// <returns></returns>
+        static bool dimLamp(int lampId, byte brightness)
+        {
+            bool success = false;
+            return success;
+        }
+        /// <summary>
+        /// PSP 15.6
+        /// Lampe dimmen
+        /// </summary>
+        /// <param name="lampName"></param>
+        /// <param name="brightness"></param>
+        /// <returns></returns>
+        static bool dimLamp(string lampName, byte brightness)
+        {
+            bool success = false;
+            return success;
+        }
     }
 }

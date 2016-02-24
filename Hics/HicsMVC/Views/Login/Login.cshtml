@@ -5,5 +5,31 @@
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
-<h2>Login/Login</h2>
-
+<style>
+    .nachrechts{
+        padding-left: 28px;
+    }
+</style>
+<form method="post" action="#">
+    <div class="nachrechts">
+        <div>
+            <h2>Login</h2>
+        </div>    
+        <div>
+            <p>
+                Username <br />
+                <input type="text" name="Username" />
+            </p>            
+        </div>
+        <div>
+            <p>
+                Password <br />
+                <input type="password" name="Password" />
+            </p>            
+        </div>
+        <br />
+        <div>
+            <input type="submit" style="height: 30px; width: 147px;" value="Login" /> @* Submit-Button *@
+        </div> 
+    </div>
+</form>
