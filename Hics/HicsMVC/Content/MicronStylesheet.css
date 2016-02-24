@@ -7,6 +7,7 @@
 header{
     margin-top:20px;
     margin-bottom:100px;
+   
 }
 
 div{
@@ -25,7 +26,7 @@ h2{
 #logo2 {
     float:right;
     margin-right:100px;
-    margin-left:100px;
+    
 }
 
 section{
@@ -35,12 +36,44 @@ section{
     
     max-width:1200px;
     max-height:1000px;
-    min-width:200px;
+    min-width:350px;
     min-height:200px;
 
     background-color:white;
     margin-bottom:100px;
     margin-right:100px;
     margin-left:100px;
-    /*lalallaaaaa*/
+    
 }
+
+
+
+/* Überschrift */
+.left { float: left; position: relative; width: 40%; height: 100%;}
+.middle {float: left; position: relative; width: 35%; height: 100%;}
+.right { float: left; position: relative;width: 10%; height: 100%;}
+
+
+
+/*Button Logout"*/
+.logout {
+        
+        background-image: url('../../Resources/Logout.png'); 
+        height:38px;
+        width:134px;
+        background-repeat: no-repeat;
+        background-position:center;
+        border-radius:10px;
+       
+        }
+
+.logout:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
+
+   
+        
+        
