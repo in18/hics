@@ -9,10 +9,6 @@ header{
     margin-bottom:100px;
 }
 
-div{
-    padding-left:10px;
-    padding-right:10px;
-}
 h2{
     font-family:'Segoe UI';
     color:#054588;
@@ -25,7 +21,7 @@ h2{
 #logo2 {
     float:right;
     margin-right:100px;
-    margin-left:100px;
+    /*margin-left:100px;*/
 }
 
 section{
@@ -42,5 +38,20 @@ section{
     margin-bottom:100px;
     margin-right:100px;
     margin-left:100px;
-    /*lalallaaaaa*/
 }
+
+ #uberschrift1 {
+     margin-left: 20px;
+     text-align:center;
+
+ }
+
+#uberschrift2 {
+    text-align:center;
+}
+
+.u{
+    float:left;
+    width:33%;
+}
+

@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <script src="~/Scripts/bootstrap.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/MicronStylesheet.css" rel="stylesheet" />
     @Styles.Render("~/Content/MicronStylesheet.css")
     @Scripts.Render("~/bundles/modernizr")
     <title>@ViewBag.Title - Meine ASP.NET-Anwendung</title>
@@ -20,7 +18,9 @@
             <img id="logo2" src="~/Resources/Micron logo header 347x100.png" alt="MicronLogo" />
         </div>
     </header>
-    <section class="container">@RenderBody()</section>
+    <section class="container">@RenderBody()
+
+    </section>
     <footer></footer>
 </body>
 </html>
