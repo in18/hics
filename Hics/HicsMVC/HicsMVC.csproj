@@ -175,7 +175,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\MicronLayout.cshtml" />
-    <Content Include="Views\Admin\MainMenu.cshtml" />
     <Content Include="Views\User\MainMenu.cshtml" />
     <Content Include="Views\Setup\AdminRegistration.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
@@ -183,7 +182,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\User\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
