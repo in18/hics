@@ -10,12 +10,17 @@ namespace HicsMVC.Controllers
     {
         /// <summary>
         /// Method: HttpGet
-        /// ActionResult Login für View Login
+        /// Methode ruft Login-View auf
         /// </summary>
         /// <returns></returns>
         public ActionResult Login()
         {
             return View();
         }
+
+        //public ActionResult Login(#)
+        //{
+        //    return View();
+        //}
     }
 }
