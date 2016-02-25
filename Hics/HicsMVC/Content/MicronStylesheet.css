@@ -13,10 +13,6 @@ header{
    
 }
 
-div{
-    padding-left:10px;
-    padding-right:10px;
-}
 h2{
     font-family:'Segoe UI';
     color:#054588;
@@ -46,7 +42,6 @@ section{
     margin-bottom:100px;
     margin-right:100px;
     margin-left:100px;
-    
 }
 
 
@@ -73,7 +68,6 @@ section{
 .logout:hover {
             border: solid 2px #054588;
             border-radius: 10px; 
-            
         }
 
 /*-------------------MENU BUTTONS Style --------------------------------------*/
@@ -106,6 +100,7 @@ section{
             
         }
 
+/*AdminSetup Syles von Josef*/
 
 /*Button UserSetup*/
 .UserSetup {
@@ -193,4 +188,14 @@ section{
             border-radius: 10px; 
             
         }
-
+.leftpadding{padding-left:28px;}
+.toptext{padding-left:10px;}
+.paragraphtext{font-family:'Segoe UI';}
+.anchornounderline{text-decoration:none;}
+.bottomatbutton{padding-bottom:38px;}
+.divinputpadding{padding:10px;border:solid 2px #054588;border-radius:5px;}
+.divinputpadding:hover{box-shadow:0 0 2px 2px #054588;}
+.paddingtop{padding-top:40px;}
+.divinputpadding:focus{box-shadow:0 0 2px 2px #054588;}     
+        
+/*-------------- Ende -----------------------*/
