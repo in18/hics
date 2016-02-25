@@ -1,4 +1,7 @@
-﻿body {
+﻿@font-face { font-family: 'Segoe UI';
+}
+
+body {
     background-color: #B7B7B7;
     margin:0;
     padding:0;
@@ -7,13 +10,23 @@
 header{
     margin-top:20px;
     margin-bottom:100px;
+}
    
+div{
+    padding-left:10px;
+    padding-right:10px;
+}
+
+div{
+  padding-left:10px;
+  padding-right:10px;
 }
 
 h2{
     font-family:'Segoe UI';
     color:#054588;
 }
+
 
 #logo1 {
     margin-left:100px;
@@ -25,20 +38,18 @@ h2{
     
 }
 
-section{
+section {
     border: 1px solid;
     border-color: white;
-    border-radius:10px;
-    
-    max-width:1200px;
-    max-height:1000px;
-    min-width:350px;
-    min-height:200px;
-
-    background-color:white;
-    margin-bottom:100px;
-    margin-right:100px;
-    margin-left:100px;
+    border-radius: 10px;
+    max-width: 1200px;
+    max-height: 1000px;
+    min-width: 350px;
+    min-height: 350px;
+    background-color: white;
+    margin-bottom: 100px;
+    margin-right: 100px;
+    margin-left: 100px;
 }
 
 
@@ -49,10 +60,8 @@ section{
 .right { float: left; position: relative;width: 10%; height: 100%;}
 
 
-
 /*Button Logout"*/
 .logout {
-        
         background-image: url('../../Resources/Logout.png'); 
         height:38px;
         width:134px;
@@ -65,9 +74,145 @@ section{
 .logout:hover {
             border: solid 2px #054588;
             border-radius: 10px; 
+        }
+
+/*-------------------MENU BUTTONS Style --------------------------------------*/
+
+.leftLamp { float: left; position: relative; width: 35%; height: 100%;}
+.middleUser {float: left; position: relative; width: 35%; height: 100%;}
+.rightStatistic { float: left; position: relative;width: 10%; height: 100%;}
+
+
+.leftLampSetup { float: left; position: relative; width: 35%; height: 100%;}
+.middleGroup {float: left; position: relative; width: 35%; height: 100%;}
+.rightLampAssigment { float: left; position: relative;width: 10%; height: 100%;}
+
+/*---------------------------END----------------------------------------------*/
+
+/*Button LampControl*/
+.LampControl {
+    background-image: url('../Resources/LampControl.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
+.LampControl:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
 
-   
+
+/*Button UserSetup*/
+.UserSetup {
+    background-image: url('../Resources/UserSetup.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.UserSetup:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
         
+/*Button Statistic*/
+.Statistic {
+    background-image: url('../Resources/Statistic.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.Statistic:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
+
+/*Button LampSetup*/
+.LampSetup {
+    background-image: url('../Resources/Lamp Setup.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.LampSetup:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
+
+/*Button GroupSetup*/
+.GroupSetup {
+    background-image: url('../Resources/Group Setup.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.GroupSetup:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
+/*Button LampAssigment*/
+.LampAssigment {
+    background-image: url('../Resources/Lamp Assignment.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.LampAssigment:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
+
+
+
+
+
+
+
+
+/*AdminSetup Syles von Josef*/
+
+
+.leftpadding{padding-left:28px;}
+.toptext{padding-left:10px;}
+.paragraphtext{font-family:'Segoe UI';}
+.anchornounderline{text-decoration:none;}
+.bottomatbutton{padding-bottom:38px;}
+.divinputpadding{padding:10px;border:solid 2px #054588;border-radius:5px;}
+.divinputpadding:hover{box-shadow:0 0 2px 2px #054588;}
+.paddingtop{padding-top:40px;}
+.divinputpadding:focus{box-shadow:0 0 2px 2px #054588;}     
         
+/*-------------- Ende -----------------------*/
