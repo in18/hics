@@ -13,10 +13,16 @@ header{
    
 }
 
+div{
+  padding-left:10px;
+  padding-right:10px;
+}
+
 h2{
     font-family:'Segoe UI';
     color:#054588;
 }
+
 
 #logo1 {
     margin-left:100px;
@@ -28,25 +34,21 @@ h2{
     
 }
 
-section{
+section {
     border: 1px solid;
     border-color: white;
-    border-radius:10px;
-    
-    max-width:1200px;
-    max-height:1000px;
-    min-width:350px;
-    min-height:350px;
-
-    background-color:white;
-    margin-bottom:100px;
-    margin-right:100px;
-    margin-left:100px;
+    border-radius: 10px;
+    max-width: 1200px;
+    max-height: 1000px;
+    min-width: 350px;
+    min-height: 350px;
+    background-color: white;
+    margin-bottom: 100px;
+    margin-right: 100px;
+    margin-left: 100px;
 }
-
-
-
 /* Überschrift */
+
 .left { float: left; position: relative; width: 40%; height: 100%;}
 .middle {float: left; position: relative; width: 35%; height: 100%;}
 .right { float: left; position: relative;width: 10%; height: 100%;}
@@ -100,7 +102,6 @@ section{
             
         }
 
-/*AdminSetup Syles von Josef*/
 
 /*Button UserSetup*/
 .UserSetup {
@@ -188,6 +189,18 @@ section{
             border-radius: 10px; 
             
         }
+
+
+
+
+
+
+
+
+
+/*AdminSetup Syles von Josef*/
+
+
 .leftpadding{padding-left:28px;}
 .toptext{padding-left:10px;}
 .paragraphtext{font-family:'Segoe UI';}
