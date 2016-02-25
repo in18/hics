@@ -1,0 +1,35 @@
+﻿@model HicsMVC.BundleConfig
+
+@{
+    ViewBag.Title = "LoginController/Login";
+    Layout = "~/Views/Shared/MicronLayout.cshtml";
+}
+
+<style>
+    .linksbuending{
+        padding-left: 28px;
+    }
+</style>
+<form method="post" action="#">
+    <div class="linksbuending">
+        <div>
+            <h2>Login</h2>
+        </div>    
+        <div>
+            <p>
+                Username <br />
+                <input type="text" placeholder="MaxMuster" name="Username" />
+            </p>            
+        </div>
+        <div>
+            <p>
+                Password <br />
+                <input type="password" name="Password" />
+            </p>            
+        </div>
+        <br />
+        <div>
+            <button style="height: 30px; width: 147px; font-weight: bold;" name="LoginButton">Login</button> @* Button für Login *@
+        </div> 
+    </div>
+</form>

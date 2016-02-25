@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NDesk.Options, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
       <Private>True</Private>
@@ -39,7 +47,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,12 +60,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbAccess.cs" />
+    <Compile Include="fn_show_users_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GuiAccess.cs" />
     <Compile Include="HelperClass.cs" />
+    <Compile Include="HICSModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HICSModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HICSModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HICSModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HICSModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="HueAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="HICSModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HICSModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="HICSModel.edmx.diagram">
+      <DependentUpon>HICSModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +101,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HICSModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HICSModel.edmx</DependentUpon>
+      <LastGenOutput>HICSModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="HICSModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HICSModel.edmx</DependentUpon>
+      <LastGenOutput>HICSModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Settings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

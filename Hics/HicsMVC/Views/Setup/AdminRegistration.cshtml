@@ -1,0 +1,29 @@
+﻿@model HicsMVC.BundleConfig
+
+@{
+    ViewBag.Title = "Admin Registration";
+    Layout = "~/Views/Shared/MicronLayout.cshtml";
+}
+
+<div class="leftpadding">
+    <h2>Admin Registration</h2>
+    <form action="#" method="post">
+        <div>
+            <p class="paragraphtext">Input Superadmin:</p>
+            <input class="divinputpadding" type="text" name="superadmin" placeholder="adminname" required />
+        </div>
+        <div>
+            <p class="paragraphtext">Input Password:</p>
+            <input class="divinputpadding" type="password" name="password" placeholder="password" required />
+        </div>
+        <div>
+            <p class="paragraphtext">Retype Password:</p>
+            <input class="divinputpadding" type="password" name="retypepassword" placeholder="retype password" required />
+        </div>
+        <div class="bottomatbutton paddingtop">
+            <a href="#" class="anchornounderline"><input class="divinputpadding" type="submit" name="submitbutton" value="Add Superadmin" /></a>
+        </div>
+    </form>
+</div>
+  
+
