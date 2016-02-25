@@ -1,4 +1,7 @@
-﻿body {
+﻿@font-face { font-family: 'Segoe UI';
+}
+
+body {
     background-color: #B7B7B7;
     margin:0;
     padding:0;
@@ -37,7 +40,7 @@ section{
     max-width:1200px;
     max-height:1000px;
     min-width:350px;
-    min-height:200px;
+    min-height:350px;
 
     background-color:white;
     margin-bottom:100px;
@@ -73,7 +76,121 @@ section{
             
         }
 
+/*-------------------MENU BUTTONS Style --------------------------------------*/
 
-   
+.leftLamp { float: left; position: relative; width: 35%; height: 100%;}
+.middleUser {float: left; position: relative; width: 35%; height: 100%;}
+.rightStatistic { float: left; position: relative;width: 10%; height: 100%;}
+
+
+.leftLampSetup { float: left; position: relative; width: 35%; height: 100%;}
+.middleGroup {float: left; position: relative; width: 35%; height: 100%;}
+.rightLampAssigment { float: left; position: relative;width: 10%; height: 100%;}
+
+/*---------------------------END----------------------------------------------*/
+
+/*Button LampControl*/
+.LampControl {
+    background-image: url('../Resources/LampControl.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.LampControl:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
+
+/*Button UserSetup*/
+.UserSetup {
+    background-image: url('../Resources/UserSetup.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.UserSetup:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
         
-        
+/*Button Statistic*/
+.Statistic {
+    background-image: url('../Resources/Statistic.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.Statistic:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
+
+/*Button LampSetup*/
+.LampSetup {
+    background-image: url('../Resources/Lamp Setup.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.LampSetup:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
+
+/*Button GroupSetup*/
+.GroupSetup {
+    background-image: url('../Resources/Group Setup.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.GroupSetup:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
+/*Button LampAssigment*/
+.LampAssigment {
+    background-image: url('../Resources/Lamp Assignment.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.LampAssigment:hover {
+            border: solid 2px #054588;
+            border-radius: 10px; 
+            
+        }
+
