@@ -10,6 +10,7 @@ namespace HicsBL
     {
         /// <summary>
         /// PSP 1.1
+        /// Lampe hinzufügen
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -19,6 +20,11 @@ namespace HicsBL
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                cont.sp_add_lamp(username, pwhash, lampAdress, lampName);
+            }
 
         }
 
