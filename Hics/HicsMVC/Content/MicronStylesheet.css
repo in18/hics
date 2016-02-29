@@ -17,6 +17,7 @@ header{
 div{
   padding-left:10px;
   padding-right:10px;
+  padding-bottom:28px;
 }
 
 h2{
@@ -42,7 +43,7 @@ section {
     max-width: 1200px;
     max-height: 1000px;
     min-width: 350px;
-    min-height: 350px;
+    min-height: 420px;
     background-color: white;
     margin-bottom: 100px;
     margin-right: 100px;
@@ -71,7 +72,7 @@ section {
         }
 
 .logout:hover {
-            border: solid 2px #054588; 
+            border: solid 2px #054588;
             border-radius: 7px; 
             box-shadow: 0 0 2px 2px #054588;
         }
@@ -126,7 +127,7 @@ section {
             border: solid 2px #054588;
             border-radius: 20px; 
             box-shadow: 0 0 2px 2px #054588;
-            
+           
             
         }
 
@@ -231,6 +232,20 @@ section {
             
         }
 
+/*Button Change Password*/
+.ChangePassword {
+    background-image: url('../Resources/UserSetup.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+}
+
+.ChangePassword:hover {
+            border: solid 2px #054588;
+            border-radius: 5px;
+        }
 
 
 
