@@ -14,8 +14,7 @@ namespace HicsMVC.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult MainMenu()
+       public ActionResult LampControl()
         {
             return View();
         }
