@@ -74,6 +74,23 @@ section {
             border-radius: 5px; 
         }
 
+/*Button Home-Menu"*/
+.home {
+        background-image: url('../../Resources/Home.png'); 
+        height:38px;
+        width:134px;
+        background-repeat: no-repeat;
+        background-position:center;
+        border-radius:5px;
+        margin-top:20px;
+        
+        }
+
+.home:hover {
+            border: solid 2px #054588;
+            border-radius: 5px; 
+        }
+
 /*-------------------MENU BUTTONS Style --------------------------------------*/
 
 .leftLamp { float: left; position: relative; width: 35%; height: 100%;}
@@ -194,6 +211,20 @@ div.LampControl:hover {
             
         }
 
+/*Button Change Password*/
+.ChangePassword {
+    background-image: url('../Resources/UserSetup.png');
+    height: 99px;
+    width: 156px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 5px;
+}
+
+.ChangePassword:hover {
+            border: solid 2px #054588;
+            border-radius: 5px;
+        }
 
 
 
