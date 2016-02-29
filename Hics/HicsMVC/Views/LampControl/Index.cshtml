@@ -4,44 +4,46 @@
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
-<h2>Lamp Control</h2>
 
-@if ((bool)ViewData["isadmin"] == true)
-{
-    <div>Willkommen Admin</div>
-}
-else {
-    <div>Willkommen User</div>
-}
-
-
-<table>
-    <tr>
-        <th>Groupname</th>
-        <th>Lampname</th>
-        <th>On</th>
-        <th>Off</th>
-        <th>Dimmer Relay</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.groupname</td>
-            <td>@item.lampname</td>
-            <td><a href="/LampControl/LampOn/@item.id"></a></td>
-            <td><a href="/LampControl/LampOff/@item.id"></a></td>
-            <td>
-                <form>
-                    <input type="hidden" id="@item.id" />
-
-                    <input type="text" />
-                    <input type="submit" value="Save" />
-                </form>
-            </td>
-
-        </tr>
-    }
+    <div class="left">
+        <h2>Lamp Control</h2>
+    </div>
     
 
+    <div class="middle">
+    <h2>Admin/Username</h2>
+    </div>
+    <br style="clear:both;" />
+    
+<div>
+        <table>
+            <tr>
+                <th>Groupname</th>
+                <th>Lampname</th>
+                <th>On</th>
+                <th>Off</th>
+                <th>Dimmer Relay</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.groupname</td>
+                    <td>@item.lampname</td>
+                    <td><a href="/LampControl/LampOn/@item.id"></a></td>
+                    <td><a href="/LampControl/LampOff/@item.id"></a></td>
+                    <td>
+                        <form>
+                            <input type="hidden" id="@item.id" />
 
-</table>
+                            <input type="text" />
+                            <input type="submit" value="Save" />
+                        </form>
+                    </td>
+
+                </tr>
+            }
+
+
+
+        </table>
+    </div>
