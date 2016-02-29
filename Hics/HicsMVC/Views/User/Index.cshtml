@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MicronLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div style="width:100%;">
+    <div class="left">
+        <h2>Main Menu</h2>
+    </div>
+
+    <div class="middle">
+        <h2>User Name</h2>
+    </div>
+    <div class="right" style="text-align:center;">
+        <button class="logout" type="button"></button>
+    </div>
+</div>
+
+
+<div style="width:100%;">
+    <div class="leftLamp">
+        <a href="~/Views/User/LampControl.cshtml">~/Views/User/LampControl.cshtml</a>"
+        @*<button class="LampControlButton" type="button"></button>*@
+    </div>
+    <div class="middleUser">
+        <button class="ChangePasswordButton" type="button"></button>
+    </div>
+    <div class="rightStatistic">
+        <button class="StatisticButton" type="button"></button>
+    </div>
+</div>
+
+
+
+<style>
+    /*Lamp Control Button*/
+    .LampControlButton {
+        background-image: url('../../Resources/LampControl.png');
+        height: 100px;
+        width: 160px;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+
+        .LampControlButton:hover {
+            border: solid 2px #054588;
+            border-radius: 10px;
+        }
+
+    /*Change Password Button*/
+    .ChangePasswordButton {
+        background-image: url('../../Resources/UserSetup.png');
+        height: 100px;
+        width: 160px;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+
+        .ChangePasswordButton:hover {
+            border: solid 2px #054588;
+            border-radius: 10px;
+        }
+
+    /*Statisctic Button*/
+    .StatisticButton {
+        background-image: url('../../Resources/Statistic.png');
+        height: 100px;
+        width: 160px;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 15px;
+        margin-top: 20px;
+    }
+
+        .StatisticButton:hover {
+            border: solid 2px #054588;
+            border-radius: 10px;
+        }
+</style>
