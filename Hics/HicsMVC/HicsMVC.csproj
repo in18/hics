@@ -140,6 +140,7 @@
     <Compile Include="SampleClass\LampClass.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Josef.css" />
     <Content Include="Content\MicronStylesheet.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
