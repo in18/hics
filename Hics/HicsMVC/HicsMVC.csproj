@@ -185,6 +185,7 @@
     <Content Include="Views\Setup\AdminRegistration.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Admin\MainMenu.cshtml" />
+    <Content Include="Views\Setup\LampSetup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
