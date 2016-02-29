@@ -5,61 +5,27 @@
 
 }
 
-<style>
-    .listframe {
-        border: solid 2px #054588;
-        border-radius: 10px;
-        padding: 10px;
-        margin-top: 28px;
-        margin-right: 18px;
-        margin-left: 12px;
-        margin-bottom: 28px;
-
-        max-width: 450px;
-    }
-
-    .listframepadding {
-        padding-right: 12px;
-        min-width: 173px;
-    }
-
-    .boxdesign {
-        padding: 5px;
-        border-radius: 5px;
-        border: solid 2px #054588;
-
-    }
-
-    .boxdesign:focus {
-        box-shadow:  0 0 2px 2px #054588;
-    }
-    .boxdesign:hover {
-        box-shadow:  0 0 2px 2px #054588;
-    }
-
-    .toptext8 {
-        padding-left: 8px;
-    }
-</style>
-
 <div class="leftpadding">
+
+    @*Überschrift*@
     <h2>Lamp Setup</h2>
 
+    @*Lampe Hinzufügen*@
     <form acton="#" method="post">
         <table class="toptext">
             <tr>
-                <td class="listframepadding">ID</td>
+                <td class="lampaddpadding">ID</td>
                 <td colspan="2" >Description</td>
             </tr>
             <tr>
                 <td><input class="boxdesign" type="text" name="id" placeholder="ID" /></td>
-                <td class="listframepadding"><input class="boxdesign" type="text" name="description" placeholder="Description" /></td>
+                <td class="lampaddpadding"><input class="boxdesign" type="text" name="description" placeholder="Description" /></td>
                 <td><input class="boxdesign" type="submit" name="addlamp" value="Add Lamp" /></td>
             </tr>
         </table>
     </form>
 
-    
+    @*Ausgabeliste*@
     <div class="listframe">
         <table>
             <tr>
@@ -67,11 +33,18 @@
                 <th align="left">Description</th>
                 <th></th>
             </tr>
-            <tr>
-                <td class="listframepadding"><p>DB-ID</p></td>
-                <td class="listframepadding"><p>DB-Desc</p></td>
+            <tr class="boxrow">
+                <td class="listframepadding">DB-ID</td>
+                <td class="listframepadding">DB-Desc</td>
                 <td><a href=""><input class="boxdesign" type="button" name="delete" value="Delete" /></a></td>
             </tr>
         </table>
     </div>
+    <div class="menubar">
+        <div class="menubarentryactual">Lamp Setup</div>
+        <div class="menubarentry">Group Setup</div>
+        <div class="menubarentry">Lamp Assignment</div>
+        <div class="menubarentry">User Setup</div>
+    </div>
 </div>
+
