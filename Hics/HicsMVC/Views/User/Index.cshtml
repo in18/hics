@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
-<h2>Index</h2>
-
 <div style="width:100%;">
     <div class="left">
         <h2>Main Menu</h2>
@@ -14,73 +12,41 @@
     <div class="middle">
         <h2>User Name</h2>
     </div>
-    <div class="right" style="text-align:center;">
-        <button class="logout" type="button"></button>
+    <div class="right">
+        <div class="logout">
+            <a></a>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="leftLamp">
+    <div style="width:100%;">
+        <a href="~/LampControl/Index">
+            <div class="LampControl"></div>
+        </a>
     </div>
 </div>
 
 
-<div style="width:100%;">
-    <div class="leftLamp">
-        <a href="~/Views/User/LampControl.cshtml">~/Views/User/LampControl.cshtml</a>"
-        @*<button class="LampControlButton" type="button"></button>*@
-    </div>
-    <div class="middleUser">
-        <button class="ChangePasswordButton" type="button"></button>
-    </div>
-    <div class="rightStatistic">
-        <button class="StatisticButton" type="button"></button>
+<div class="middleUser">
+    <div style="width:100%;">
+        <a href="~/User/ChangePassword">
+            <div class="ChangePassword"></div>
+        </a>
     </div>
 </div>
 
 
+<div class="rightStatistic">
+    <div style="width:100%;">
+        <a href="~/Statistic/Index">
+            <div class="Statistic"></div>
+        </a>
+    </div>
 
-<style>
-    /*Lamp Control Button*/
-    .LampControlButton {
-        background-image: url('../../Resources/LampControl.png');
-        height: 100px;
-        width: 160px;
-        background-repeat: no-repeat;
-        background-position: center;
-        border-radius: 15px;
-        margin-top: 20px;
-    }
+</div>
 
-        .LampControlButton:hover {
-            border: solid 2px #054588;
-            border-radius: 10px;
-        }
+<br />
 
-    /*Change Password Button*/
-    .ChangePasswordButton {
-        background-image: url('../../Resources/UserSetup.png');
-        height: 100px;
-        width: 160px;
-        background-repeat: no-repeat;
-        background-position: center;
-        border-radius: 15px;
-        margin-top: 20px;
-    }
-
-        .ChangePasswordButton:hover {
-            border: solid 2px #054588;
-            border-radius: 10px;
-        }
-
-    /*Statisctic Button*/
-    .StatisticButton {
-        background-image: url('../../Resources/Statistic.png');
-        height: 100px;
-        width: 160px;
-        background-repeat: no-repeat;
-        background-position: center;
-        border-radius: 15px;
-        margin-top: 20px;
-    }
-
-        .StatisticButton:hover {
-            border: solid 2px #054588;
-            border-radius: 10px;
-        }
-</style>
