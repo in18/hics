@@ -19,8 +19,6 @@ header{
 
 div{
   padding-left:10px;
-  padding-right:10px;
-  padding-bottom:28px;
 }
 
 h2{
@@ -89,7 +87,7 @@ section {
         background-position:center;
         border-radius:7px;
         border: solid 2px #054588; 
-        margin-bottom:20px;
+        margin-top:-40px;
         
         
         }
