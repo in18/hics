@@ -191,6 +191,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\LampControl.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Setup\LampSetup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
