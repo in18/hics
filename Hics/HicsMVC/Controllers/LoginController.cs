@@ -9,7 +9,7 @@ namespace HicsMVC.Controllers
     public class LoginController : Controller
     {
         /// <summary>
-        /// Method: HttpGet
+        /// Methode: [HttpGet]
         /// Methode ruft Login-View auf
         /// </summary>
         /// <returns></returns>
@@ -18,9 +18,10 @@ namespace HicsMVC.Controllers
             return View();
         }
 
+        //[HttpPost]
         //public ActionResult Login(#)
         //{
         //    return View();
-        //}
+        //}        
     }
 }
