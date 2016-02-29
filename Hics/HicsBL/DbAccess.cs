@@ -268,21 +268,27 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="usernameId"></param>
-        /// <param name="username"></param>
+        /// <param name="userNew"></param>
+        /// <param name="passwordNew"></param>
         /// <returns></returns>
         static bool AddUser(string username, string password, string userNew, string passwordNew)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(passwordNew);
-            return success;
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+               
+            }
+                return success;
         }
 
         /// <summary>
         /// PSP 9.1
         /// UserGroup editieren
         /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
         /// <param name="usernameId"></param>
         /// <param name="groupId"></param>
         /// <returns></returns>
@@ -299,9 +305,11 @@ namespace HicsBL
         /// UserGroup editieren
         /// </summary>
         /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="username"></param>
         /// <param name="groupId"></param>
         /// <returns></returns>
-       static bool EditUserGroup(string username, string password, string usernameName, int groupId)
+        static bool EditUserGroup(string username, string password, string usernameName, int groupId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -313,6 +321,8 @@ namespace HicsBL
         /// PSP 13.1
         /// Lampe wechseln
         /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
         /// <param name="lampOnOff"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
@@ -328,6 +338,8 @@ namespace HicsBL
         /// PSP 15.1
         /// Lampen dimmen
         /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
         /// <param name="lampId"></param>
         /// <param name="brightness"></param>
         /// <returns></returns>
@@ -343,6 +355,8 @@ namespace HicsBL
         /// PSP 15.2
         /// Lampen dimmen
         /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
         /// <param name="lampName"></param>
         /// <param name="brightness"></param>
         /// <returns></returns>
