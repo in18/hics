@@ -77,6 +77,8 @@
         <Function Name="sp_add_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="new_username" Type="nvarchar" Mode="In" />
+          <Parameter Name="new_password" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_add_usergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="name" Type="nvarchar" Mode="In" />
@@ -116,7 +118,7 @@
       <Schema Namespace="itin18_aktModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="itin18_aktEntities" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="fn_check_admin_table" IsComposable="true" ReturnType="Collection(Int32)">
-            <Parameter Name="user_id" Mode="In" Type="Int32" />
+          <Parameter Name="user_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="fn_check_user_table" IsComposable="true" ReturnType="Collection(Int32)">
             <Parameter Name="username" Mode="In" Type="String" />
@@ -131,10 +133,6 @@
             <Parameter Name="password" Mode="In" Type="String" />
             <Parameter Name="address" Mode="In" Type="String" />
             <Parameter Name="name" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_add_user">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_add_usergroup">
             <Parameter Name="name" Mode="In" Type="String" />
@@ -167,6 +165,12 @@
             <Parameter Name="del_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_insert_test_data" />
+          <FunctionImport Name="sp_add_user">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="new_username" Mode="In" Type="String" />
+            <Parameter Name="new_password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="fn_show_lampgroups_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
@@ -229,7 +233,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_add_lamp" FunctionName="itin18_aktModel.Store.sp_add_lamp" />
-          <FunctionImportMapping FunctionImportName="sp_add_user" FunctionName="itin18_aktModel.Store.sp_add_user" />
           <FunctionImportMapping FunctionImportName="sp_add_usergroup" FunctionName="itin18_aktModel.Store.sp_add_usergroup" />
           <FunctionImportMapping FunctionImportName="sp_change_password" FunctionName="itin18_aktModel.Store.sp_change_password" />
           <FunctionImportMapping FunctionImportName="sp_change_password_by_admin" FunctionName="itin18_aktModel.Store.sp_change_password_by_admin" />
@@ -237,6 +240,7 @@
           <FunctionImportMapping FunctionImportName="sp_delete_user" FunctionName="itin18_aktModel.Store.sp_delete_user" />
           <FunctionImportMapping FunctionImportName="sp_delete_usergroup" FunctionName="itin18_aktModel.Store.sp_delete_usergroup" />
           <FunctionImportMapping FunctionImportName="sp_insert_test_data" FunctionName="itin18_aktModel.Store.sp_insert_test_data" />
+          <FunctionImportMapping FunctionImportName="sp_add_user" FunctionName="itin18_aktModel.Store.sp_add_user" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
