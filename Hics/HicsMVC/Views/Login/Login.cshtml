@@ -5,31 +5,21 @@
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
-<style>
-    .linksbuending{
-        padding-left: 28px;
-    }
-</style>
-<form method="post" action="#">
-    <div class="linksbuending">
+@* = @using (Html.BeginForm("Login"(=actionName), "Login"(=controllerName), FormMethod.Post)) *@  
+@using (Html.BeginForm())
+{
+    <div class="leftpadding">        
+        <h2>Login</h2>           
         <div>
-            <h2>Login</h2>
-        </div>    
-        <div>
-            <p>
-                Username <br />
-                <input type="text" placeholder="MaxMuster" name="Username" style="padding:10px;" />
-            </p>            
+            <p class="paragraphtext">Username:</p>                
+            <input class="divinputpadding" type="text" name="Username" placeholder="JohnDoe" required />                        
         </div>
         <div>
-            <p>
-                Password <br />
-                <input type="password" name="Password" style="padding:10px;"/>
-            </p>            
-        </div>
-        <br />
-        <div style="padding-bottom: 80px;">
-            <input type="submit" name="LoginButton" value="Login" style="height:39px; width:193px; font-weight:bold;" /> @* Button für Login *@
+            <p class="paragraphtext">Password:</p>                
+                <input class="divinputpadding" type="password" name="Password" placeholder="Password123" required />                       
+        </div>        
+        <div class="bottomatbutton paddingtop">
+            <a href="#" class="anchornounderline"><input class="divinputpadding" type="submit" name="LoginButton" value="Login" /></a>@* Submit-Button für Login *@
         </div>      
     </div>
-</form>
+}

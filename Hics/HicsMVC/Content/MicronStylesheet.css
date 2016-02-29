@@ -57,7 +57,7 @@ section {
 /* Überschrift */
 .left { float: left; position: relative; width: 40%; height: 100%;}
 .middle {float: left; position: relative; width: 35%; height: 100%;}
-.right { float: left; position: relative;width: 10%; height: 100%;}
+.right { float: left; position: relative;width: 10%; height: 100%; text-align:center;}
 
 
 /*Button Logout"*/
@@ -67,42 +67,44 @@ section {
         width:134px;
         background-repeat: no-repeat;
         background-position:center;
-        border-radius:10px;
-        margin-top:20px;
+        border-radius:5px;
+        
         }
 
 .logout:hover {
             border: solid 2px #054588;
-            border-radius: 10px; 
+            border-radius: 5px; 
         }
 
 /*-------------------MENU BUTTONS Style --------------------------------------*/
 
 .leftLamp { float: left; position: relative; width: 35%; height: 100%;}
 .middleUser {float: left; position: relative; width: 35%; height: 100%;}
-.rightStatistic { float: left; position: relative;width: 10%; height: 100%;}
+.rightStatistic { float: left; position: relative;width: 20%; height: 100%;}
 
 
 .leftLampSetup { float: left; position: relative; width: 35%; height: 100%;}
 .middleGroup {float: left; position: relative; width: 35%; height: 100%;}
-.rightLampAssigment { float: left; position: relative;width: 10%; height: 100%;}
+.rightLampAssigment { float: left; position: relative;width: 20%; height: 100%;}
 
 /*---------------------------END----------------------------------------------*/
 
 /*Button LampControl*/
-.LampControl {
+div.LampControl {
     background-image: url('../Resources/LampControl.png');
     height: 99px;
     width: 156px;
     background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 10px;
-    margin-top: 20px;
+    background-position:center;
+    border-radius: 5px;
+    
 }
 
-.LampControl:hover {
+div.LampControl:hover {
+            
             border: solid 2px #054588;
-            border-radius: 10px; 
+            border-radius: 5px; 
+           
             
         }
 
@@ -114,13 +116,13 @@ section {
     width: 156px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 10px;
-    margin-top: 20px;
+    border-radius: 5px;
+    
 }
 
 .UserSetup:hover {
             border: solid 2px #054588;
-            border-radius: 10px; 
+            border-radius: 5px; 
             
         }
         
@@ -131,13 +133,13 @@ section {
     width: 156px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 10px;
-    margin-top: 20px;
+    border-radius: 5px;
+    
 }
 
 .Statistic:hover {
             border: solid 2px #054588;
-            border-radius: 10px; 
+            border-radius: 5px; 
             
         }
 
@@ -149,13 +151,13 @@ section {
     width: 156px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 10px;
-    margin-top: 20px;
+    border-radius: 5px;
+   
 }
 
 .LampSetup:hover {
             border: solid 2px #054588;
-            border-radius: 10px; 
+            border-radius: 5px; 
             
         }
 
@@ -167,13 +169,13 @@ section {
     width: 156px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 10px;
-    margin-top: 20px;
+    border-radius: 5px;
+    
 }
 
 .GroupSetup:hover {
             border: solid 2px #054588;
-            border-radius: 10px; 
+            border-radius: 5px; 
             
         }
 
@@ -184,13 +186,13 @@ section {
     width: 156px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 10px;
-    margin-top: 20px;
+    border-radius: 5px;
+ 
 }
 
 .LampAssigment:hover {
             border: solid 2px #054588;
-            border-radius: 10px; 
+            border-radius: 5px; 
             
         }
 
@@ -213,6 +215,6 @@ section {
 .divinputpadding{padding:10px;border:solid 2px #054588;border-radius:5px;}
 .divinputpadding:hover{box-shadow:0 0 2px 2px #054588;}
 .paddingtop{padding-top:40px;}
-.divinputpadding:focus{box-shadow:0 0 2px 2px #054588;}     
+.divinputpadding:focus{box-shadow:0 0 2px 2px #054588;}    
         
 /*-------------- Ende -----------------------*/

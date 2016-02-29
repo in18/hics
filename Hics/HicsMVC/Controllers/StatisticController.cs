@@ -6,16 +6,12 @@ using System.Web.Mvc;
 
 namespace HicsMVC.Controllers
 {
-    public class AdminController : Controller
+    public class StatisticController : Controller
     {
-        // GET: Admin
+        // GET: Statistic
         public ActionResult Index()
         {
             return View();
         }
-
-        
-        
     }
-
 }
