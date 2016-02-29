@@ -1,9 +1,8 @@
 ﻿
+@import url('Josef.css');
+@import url('Pfeifer.css');
 @font-face { font-family: 'Segoe UI';
 }
-@import url('Pfeifer.css');
-
-@import url('Josef.css');
 body {
     background-color: #B7B7B7;
     margin:0;
