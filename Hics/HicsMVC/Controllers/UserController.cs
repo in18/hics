@@ -18,5 +18,23 @@ namespace HicsMVC.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// Methode: [HttpGet]
+        /// Methode ruft ChangePassword-View auf
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult ChangePassword(#)
+        //{
+        //    return View();
+        //}     
+
+
     }
 }

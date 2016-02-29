@@ -11,6 +11,11 @@ namespace HicsBL
 {
     public class HelperClass
     {
+        /// <summary>
+        /// Methode um einen String zu hashen
+        /// </summary>
+        /// <param name="text">der text zum hashen</param>
+        /// <returns></returns>
         public static string GetHash(string text)
         {
             string hash = "";

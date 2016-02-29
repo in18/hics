@@ -16,5 +16,10 @@ namespace HicsMVC.Controllers
         {
             return View();
         }
+
+        public ActionResult LampSetup()
+        {
+            return View();
+        }
     }
 }

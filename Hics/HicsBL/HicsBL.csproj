@@ -60,6 +60,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbAccess.cs" />
+    <Compile Include="fn_show_lampgroups_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_show_lamps_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_show_usergroups_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="fn_show_users_Result.cs">
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>

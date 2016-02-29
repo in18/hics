@@ -151,13 +151,10 @@
     <Content Include="Resources\Lamp Assignment.png" />
     <Content Include="Resources\Lamp Setup.png" />
     <Content Include="Resources\LampControl.png" />
-    <Content Include="Resources\LampControl.png" />
     <Content Include="Resources\Logout.png" />
     <Content Include="Resources\Micron logo header 347x100.png" />
     <Content Include="Resources\Statistic.png" />
     <Content Include="Resources\UserSetup.png" />
-    <Content Include="Resources\UserSetup.png" />
-    <Content Include="Resources\Statistic.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -195,7 +192,8 @@
     <Content Include="Views\Statistic\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\LampControl.cshtml" />
-    <Content Include="Views\LampSetup\Index.cshtml" />
+    <Content Include="Views\User\ChangePassword.cshtml" />
+    <Content Include="Views\Setup\LampSetup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
