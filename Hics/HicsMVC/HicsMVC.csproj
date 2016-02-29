@@ -148,6 +148,7 @@
     <Content Include="Resources\Change Password.png" />
     <Content Include="Resources\Group Setup.png" />
     <Content Include="Resources\HicsLogoHeader 347x100.png" />
+    <Content Include="Resources\Home.png" />
     <Content Include="Resources\Lamp Assignment.png" />
     <Content Include="Resources\Lamp Setup.png" />
     <Content Include="Resources\LampControl.png" />
