@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace HicsBL
 {
@@ -31,7 +33,9 @@ namespace HicsBL
         /// <returns></returns>
         static int addLamp(string username, string password, string address, int lampNameId)
         {
-            int lampId = 0;
+            int lampId = -1;
+
+
             return lampId;
         }
 
