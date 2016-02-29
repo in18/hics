@@ -77,22 +77,6 @@ section {
             border-radius: 5px; 
         }
 
-/*Button Home-Menu"*/
-.home {
-        background-image: url('../../Resources/Home.png'); 
-        height:38px;
-        width:134px;
-        background-repeat: no-repeat;
-        background-position:center;
-        border-radius:5px;
-        margin-top:20px;
-        
-        }
-
-.home:hover {
-            border: solid 2px #054588;
-            border-radius: 5px; 
-        }
 
 /*-------------------MENU BUTTONS Style --------------------------------------*/
 
