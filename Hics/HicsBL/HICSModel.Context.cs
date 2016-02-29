@@ -97,19 +97,6 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_lamp", usernameParameter, passwordParameter, addressParameter, nameParameter);
         }
     
-        public virtual int sp_add_user(string username, string password)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_user", usernameParameter, passwordParameter);
-        }
-    
         public virtual int sp_add_usergroup(string name, Nullable<int> userlifetime)
         {
             var nameParameter = name != null ?
@@ -215,6 +202,27 @@ namespace HicsBL
         public virtual int sp_insert_test_data()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_test_data");
+        }
+    
+        public virtual int sp_add_user(string username, string password, string new_username, string new_password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var new_usernameParameter = new_username != null ?
+                new ObjectParameter("new_username", new_username) :
+                new ObjectParameter("new_username", typeof(string));
+    
+            var new_passwordParameter = new_password != null ?
+                new ObjectParameter("new_password", new_password) :
+                new ObjectParameter("new_password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_user", usernameParameter, passwordParameter, new_usernameParameter, new_passwordParameter);
         }
     }
 }

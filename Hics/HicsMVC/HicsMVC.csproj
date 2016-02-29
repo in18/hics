@@ -125,7 +125,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\GroupSetupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LampAssigmentController.cs" />
     <Compile Include="Controllers\LampControlController.cs" />
     <Compile Include="Controllers\LampSetupController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -196,6 +198,8 @@
     <Content Include="Views\User\LampControl.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Views\Setup\LampSetup.cshtml" />
+    <Content Include="Views\GroupSetup\Index.cshtml" />
+    <Content Include="Views\LampAssigment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

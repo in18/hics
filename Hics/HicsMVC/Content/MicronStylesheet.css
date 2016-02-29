@@ -15,6 +15,7 @@ header{
 }
    
 
+
 div{
   padding-left:10px;
   padding-right:10px;
@@ -61,35 +62,41 @@ section {
 /*Button Logout"*/
 .logout {
         background-image: url('../../Resources/Logout.png'); 
-        height:38px;
-        width:134px;
+        height:28px;
+        width:108px;
         background-repeat: no-repeat;
         background-position:center;
-        border-radius:5px;
+        border-radius:7px;
+        border: solid 2px #054588; 
         margin-top:20px;
         
         }
 
 .logout:hover {
             border: solid 2px #054588;
-            border-radius: 5px; 
+            border-radius: 7px; 
+            box-shadow: 0 0 2px 2px #054588;
         }
 
-/*Button Home-Menu"*/
+/*Button Home*/
+
 .home {
         background-image: url('../../Resources/Home.png'); 
-        height:38px;
-        width:134px;
+        height:28px;
+        width:108px;
         background-repeat: no-repeat;
         background-position:center;
-        border-radius:5px;
-        margin-top:20px;
+        border-radius:7px;
+        border: solid 2px #054588; 
+        margin-bottom:20px;
+        
         
         }
 
 .home:hover {
-            border: solid 2px #054588;
-            border-radius: 5px; 
+            border: solid 2px #054588; 
+            border-radius: 7px; 
+            box-shadow: 0 0 2px 2px #054588;
         }
 
 /*-------------------MENU BUTTONS Style --------------------------------------*/
@@ -106,20 +113,21 @@ section {
 /*---------------------------END----------------------------------------------*/
 
 /*Button LampControl*/
-div.LampControl {
+.LampControl {
     background-image: url('../Resources/LampControl.png');
     height: 99px;
-    width: 156px;
+    width: 136px;
     background-repeat: no-repeat;
     background-position:center;
-    border-radius: 5px;
-    
+    border-radius: 20px;
+    border: solid 2px #054588;
+    margin-left:20px;
 }
 
-div.LampControl:hover {
-            
+.LampControl:hover {
             border: solid 2px #054588;
-            border-radius: 5px; 
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588;
            
             
         }
@@ -129,16 +137,18 @@ div.LampControl:hover {
 .UserSetup {
     background-image: url('../Resources/UserSetup.png');
     height: 99px;
-    width: 156px;
+    width: 136px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 5px;
+    border-radius: 20px;
+    border: solid 2px #054588;
     
 }
 
 .UserSetup:hover {
             border: solid 2px #054588;
-            border-radius: 5px; 
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588; 
             
         }
         
@@ -146,16 +156,18 @@ div.LampControl:hover {
 .Statistic {
     background-image: url('../Resources/Statistic.png');
     height: 99px;
-    width: 156px;
+    width: 136px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 5px;
+    border: solid 2px #054588;
+    border-radius: 20px;
     
 }
 
 .Statistic:hover {
             border: solid 2px #054588;
-            border-radius: 5px; 
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588;
             
         }
 
@@ -164,16 +176,19 @@ div.LampControl:hover {
 .LampSetup {
     background-image: url('../Resources/Lamp Setup.png');
     height: 99px;
-    width: 156px;
+    width: 136px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 5px;
-   
+    border-radius: 20px;
+    border: solid 2px #054588;
+    margin-left:20px;
+    margin-top:25px;
 }
 
 .LampSetup:hover {
             border: solid 2px #054588;
-            border-radius: 5px; 
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588; 
             
         }
 
@@ -182,16 +197,19 @@ div.LampControl:hover {
 .GroupSetup {
     background-image: url('../Resources/Group Setup.png');
     height: 99px;
-    width: 156px;
+    width: 136px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 5px;
+    border: solid 2px #054588;
+    border-radius: 20px;
+    margin-top:25px;
     
 }
 
 .GroupSetup:hover {
             border: solid 2px #054588;
-            border-radius: 5px; 
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588; 
             
         }
 
@@ -199,16 +217,19 @@ div.LampControl:hover {
 .LampAssigment {
     background-image: url('../Resources/Lamp Assignment.png');
     height: 99px;
-    width: 156px;
+    width: 136px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 5px;
+    border: solid 2px #054588;
+    border-radius: 20px;
+    margin-top:25px;
  
 }
 
 .LampAssigment:hover {
             border: solid 2px #054588;
-            border-radius: 5px; 
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588; 
             
         }
 
