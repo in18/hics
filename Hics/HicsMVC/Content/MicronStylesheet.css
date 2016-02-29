@@ -1,8 +1,9 @@
-﻿
+﻿@import url('Pfeifer.css');
+
 @import url('Josef.css');
-@import url('Pfeifer.css');
 @font-face { font-family: 'Segoe UI';
 }
+
 body {
     background-color: #B7B7B7;
     margin:0;
@@ -18,9 +19,7 @@ header{
 
 
 div{
-  padding-left:10px;
-  padding-right:10px;
-  padding-bottom:28px;
+  padding-left:10px; 
 }
 
 h2{
@@ -89,7 +88,7 @@ section {
         background-position:center;
         border-radius:7px;
         border: solid 2px #054588; 
-        margin-bottom:20px;
+        margin-top:-50px;
         
         
         }
