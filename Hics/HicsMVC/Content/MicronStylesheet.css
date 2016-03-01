@@ -17,9 +17,9 @@ header{
 }
    
 
-
 div{
   padding-left:10px;
+  padding-right:10px;
 }
 
 h2{
@@ -34,7 +34,7 @@ h2{
 
 #logo2 {
     float:right;
-    margin-right:100px;    
+    margin-right:100px;
 }
 
 section {
@@ -94,7 +94,7 @@ section {
         }
 
 .home:hover {
-            border: solid 2px #054588; 
+            border: solid 2px #054588;
             border-radius: 7px; 
             box-shadow: 0 0 2px 2px #054588;
         }

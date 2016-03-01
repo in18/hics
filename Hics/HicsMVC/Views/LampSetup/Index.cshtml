@@ -1,0 +1,56 @@
+﻿@model HicsMVC.BundleConfig
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MicronLayout.cshtml";
+}
+
+<div class="leftpadding">
+
+    @*Überschrift*@
+    <div style="width:100%;">
+        <div class="left">
+            <h2>Lamp Setup</h2>
+        </div>
+
+        <div class="middle">
+            <h2>Admin Placeholder</h2>
+        </div>
+        <div class="right">
+            <div class="logout">
+                <a></a>
+            </div>
+        </div>
+    </div>
+
+    @*Lampe Hinzufügen*@
+    <form acton="#" method="post">
+        <table class="toptext">
+            <tr>
+                <td class="lampaddpadding">ID</td>
+                <td colspan="2">Description</td>
+            </tr>
+            <tr>
+                <td><input class="boxdesign" type="text" name="id" placeholder="ID" /></td>
+                <td class="lampaddpadding"><input class="boxdesign" type="text" name="description" placeholder="Description" /></td>
+                <td><input class="boxdesign" type="submit" name="addlamp" value="Add Lamp" /></td>
+            </tr>
+        </table>
+    </form>
+
+    @*Ausgabeliste*@
+    <div class="listframe">
+        <table>
+            <tr>
+                <th align="left">ID</th>
+                <th align="left">Description</th>
+                <th></th>
+            </tr>
+            <tr class="boxrow">
+                <td class="listframepadding">DB-ID</td>
+                <td class="listframepadding">DB-Desc</td>
+                <td><a href=""><input class="boxdesign" type="button" name="delete" value="Delete" /></a></td>
+            </tr>
+        </table>
+    </div>
+</div>

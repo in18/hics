@@ -201,6 +201,7 @@
     <Content Include="Views\Setup\LampSetup.cshtml" />
     <Content Include="Views\GroupSetup\Index.cshtml" />
     <Content Include="Views\LampAssigment\Index.cshtml" />
+    <Content Include="Views\LampSetup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

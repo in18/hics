@@ -1,7 +1,9 @@
 ﻿
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lamp Setup";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
+
 }
 
 
@@ -19,3 +21,63 @@
         </div>
     </div>
 </div>
+
+<br />
+<div class="leftpadding">
+    <div class="listframe">
+        <table>
+            <tr>
+                <th align="left">Date</th>
+                <th align="left">Time</th>
+                <th align="left">Group</th>
+                <th align="left">Lamp Status</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td class="listframepadding"><p>2016-06-06</p></td>
+                <td class="listframepadding"><p>12:24:03</p></td>
+                <td class="listframepadding"><p>Vorzimmer</p></td>
+                <td class="listframepadding"><p>on</p></td>
+            </tr>
+            <tr>
+                <td class="listframepadding"><p>2016-07-05</p></td>
+                <td class="listframepadding"><p>15:24:23</p></td>
+                <td class="listframepadding"><p>Schlafzimmer</p></td>
+                <td class="listframepadding"><p>of</p></td>
+            </tr>
+            <tr>
+                <td class="listframepadding"><p>2016-06-06</p></td>
+                <td class="listframepadding"><p>12:24:03</p></td>
+                <td class="listframepadding"><p>Vorzimmer</p></td>
+                <td class="listframepadding"><p>on</p></td>
+            </tr>
+            <tr>
+                <td class="listframepadding"><p>2016-07-05</p></td>
+                <td class="listframepadding"><p>15:24:23</p></td>
+                <td class="listframepadding"><p>Schlafzimmer</p></td>
+                <td class="listframepadding"><p>of</p></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<style>
+    .listframe {
+        border: solid 2px #054588;
+        padding: 10px;
+        margin-top: 50px;
+        margin-right: 18px;
+        margin-left: 10px;
+        margin-bottom: 28px;
+        width: 800px;
+        max-height: 200px;
+        overflow-y:scroll;
+    }
+
+    .listframepadding {
+        padding-right: 12px;
+        min-width: 173px;
+    }
+</style>
+
