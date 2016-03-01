@@ -25,7 +25,7 @@ namespace HicsMVC.Controllers
         /// <param name="repeatPass"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AdminRegistration(string adminname string pass, string repeatPass)
+        public ActionResult AdminRegistration(string adminname, string pass, string repeatPass)
         {
             //Weiterleitung der Daten an die Datenbank
 
