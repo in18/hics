@@ -1,5 +1,4 @@
 ﻿@model HicsMVC.BundleConfig
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
@@ -22,9 +21,11 @@
             </div>
         </div>
     </div>
+    
+    <br style="clear:both;" />
 
-    @*Lampe Hinzufügen*@
-    <form acton="#" method="post">
+    @*Lampe Hinzufügen*@    
+    <form method="post">
         <table class="toptext">
             <tr>
                 <td class="lampaddpadding">ID</td>
@@ -37,6 +38,7 @@
             </tr>
         </table>
     </form>
+
 
     @*Ausgabeliste*@
     <div class="listframe">
