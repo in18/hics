@@ -1,10 +1,14 @@
-﻿@font-face { font-family: 'Segoe UI';
+﻿@import url('Pfeifer.css');
+
+@import url('Josef.css');
+@font-face { font-family: 'Segoe UI';
 }
 
 body {
     background-color: #B7B7B7;
     margin:0;
     padding:0;
+    font-family: 'Segoe UI';
 }
 
 header{
@@ -16,7 +20,8 @@ header{
 
 div{
   padding-left:10px;
-  
+  padding-right:10px;
+  padding-bottom:28px;
 }
 
 h2{
@@ -32,7 +37,6 @@ h2{
 #logo2 {
     float:right;
     margin-right:100px;
-    
 }
 
 section {
@@ -87,7 +91,7 @@ section {
         border-radius:7px;
         border: solid 2px #054588; 
         margin-top:-50px;
-       
+        
         
         }
 
@@ -246,24 +250,3 @@ section {
             border-radius: 5px;
         }
 
-
-
-
-
-
-
-
-/*AdminSetup Syles von Josef*/
-
-
-.leftpadding{padding-left:28px;}
-.toptext{padding-left:10px;}
-.paragraphtext{font-family:'Segoe UI';}
-.anchornounderline{text-decoration:none;}
-.bottomatbutton{padding-bottom:38px;}
-.divinputpadding{padding:10px;border:solid 2px #054588;border-radius:5px;}
-.divinputpadding:hover{box-shadow:0 0 2px 2px #054588;}
-.paddingtop{padding-top:40px;}
-.divinputpadding:focus{box-shadow:0 0 2px 2px #054588;}    
-        
-/*-------------- Ende -----------------------*/
