@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HicsBL;
+using HicsMVC.Models;
 
 namespace HicsMVC.Controllers
 {
@@ -25,10 +26,10 @@ namespace HicsMVC.Controllers
         /// <param name="repeatPass"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AdminRegistration(string adminname, string pass, string repeatPass)
+        public ActionResult AdminRegistration(SuperAdminModel sam)
         {
             //Weiterleitung der Daten an die Datenbank
-
+            
             //Weiterleitung zum LampSetup
             return RedirectToAction("LampSetup", "Setup");
         }
