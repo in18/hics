@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HicsBL;
 
 namespace HicsMVC.Controllers
 {
@@ -24,7 +25,7 @@ namespace HicsMVC.Controllers
         /// <param name="repeatPass"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AdminRegistration(int id, string pass, string repeatPass)
+        public ActionResult AdminRegistration(string adminname string pass, string repeatPass)
         {
             //Weiterleitung der Daten an die Datenbank
 
