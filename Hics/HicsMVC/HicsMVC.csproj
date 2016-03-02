@@ -139,7 +139,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LampSetupModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SuperAdminModel.cs" />
+    <Compile Include="Models\UserChangePasswordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleClass\LampClass.cs" />
   </ItemGroup>

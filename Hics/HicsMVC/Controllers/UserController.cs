@@ -30,11 +30,10 @@ namespace HicsMVC.Controllers
         }
 
         //[HttpPost]
-        //public ActionResult ChangePassword(#)
+        //public ActionResult ChangePassword(MODELNAME)
         //{
-        //    return View();
-        //}     
-
-
+        //    return RedirectToAction("index");
+        //}  
+           
     }
 }

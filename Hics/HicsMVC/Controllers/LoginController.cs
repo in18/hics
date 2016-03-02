@@ -19,9 +19,10 @@ namespace HicsMVC.Controllers
         }
 
         //[HttpPost]
-        //public ActionResult Login(#)
+        //public ActionResult Login(MODELNAME)
         //{
-        //    return View();
-        //}              
+        //    return RedirectToAction("index");
+        //} 
+               
     }
 }
