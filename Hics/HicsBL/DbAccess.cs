@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using huedotnet;
 
 namespace HicsBL
 {
@@ -320,19 +321,28 @@ namespace HicsBL
 
         /// <summary>
         /// PSP 13.1
-        /// Lampe wechseln
+        /// Lampe Ein/Aus
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="lampOnOff"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool switchLamp(string username, string password, bool lampOnOff, int lampId)
+        static void switchLamp(string username, string password, bool lampOnOff, int lampId)
         {
-            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-            return success;
+
+
+            //Ab hier wird die HUE-Bridge angesprochen
+            if (lampOnOff == true)
+            {
+                HueAccess.ChangeLampState(lampId, new HueAccess.LampStateChange((HueLamp l) => l.state = true));
+            }
+            else
+            {
+                HueAccess.ChangeLampState(lampId, new HueAccess.LampStateChange((HueLamp l) => l.state = false));
+            }
         }
 
         /// <summary>
