@@ -69,7 +69,6 @@ section {
         border-radius:7px;
         border: solid 2px #054588; 
         margin-top:20px;
-        
         }
 
 .logout:hover {
@@ -89,8 +88,6 @@ section {
         border-radius:7px;
         border: solid 2px #054588; 
         margin-top:-50px;
-        
-        
         }
 
 .home:hover {
@@ -235,16 +232,18 @@ section {
 
 /*Button Change Password*/
 .ChangePassword {
-    background-image: url('../Resources/UserSetup.png');
+    background-image: url('../Resources/Change Password.png');
     height: 99px;
-    width: 156px;
+    width: 136px;
     background-repeat: no-repeat;
     background-position: center;
-    border-radius: 5px;
+    border: solid 2px #054588;
+    border-radius: 20px;
 }
 
 .ChangePassword:hover {
             border: solid 2px #054588;
-            border-radius: 5px;
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588; 
         }
 
