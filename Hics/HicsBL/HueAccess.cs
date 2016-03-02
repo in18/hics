@@ -23,16 +23,16 @@ namespace HicsBL
         private static HueMessaging messaging;
         private static Dictionary<int, HueLamp> lamps;
 
-        private static void getLampList()
+        internal static void getLampList()
         {
             JsonLampList lampList = JsonConvert.DeserializeObject<JsonLampList>(messaging.DownloadState());
             lamps = lampList.ConvertToHueLamps();
         }
-        private static void getWebClient()
+        internal static void getWebClient()
         {
             messaging = new HueMessaging(bridgeIP, username);
         }
-        public static double GetCurrentLampBrightness(int lampNumber)
+        internal static double GetCurrentLampBrightness(int lampNumber)
         {
             HueLamp lamp;
             lamps.TryGetValue(lampNumber, out lamp);
@@ -46,7 +46,7 @@ namespace HicsBL
                 return Math.Round(lamp.brightness * 255);
             }
         }
-        private static void ChangeLampState(int lampNumber, Delegate stateChange)
+        internal static void ChangeLampState(int lampNumber, Delegate stateChange)
         {
             HueLamp lamp;
             lamps.TryGetValue(lampNumber, out lamp);
@@ -61,9 +61,9 @@ namespace HicsBL
 
             messaging.SendMessage(lamp);
         }
-        private delegate void LampStateChange(HueLamp lamp);
+        internal delegate void LampStateChange(HueLamp lamp);
 
-        private static void ChangeAllLampState(Delegate stateChange)
+        internal static void ChangeAllLampState(Delegate stateChange)
         {
             foreach (HueLamp lamp in lamps.Values)
             {
@@ -71,7 +71,7 @@ namespace HicsBL
             }
             messaging.SendMessage(lamps.Values.ToList<HueLamp>());
         }
-        private static bool LoadConfig()
+        internal static bool LoadConfig()
         {
             XDocument doc = XDocument.Load("Settings.xml");
 
@@ -96,6 +96,7 @@ namespace HicsBL
             //Console.WriteLine("Load config returned bridge ip [" + bridgeIP + "] and username [" + username + "] and return code [" + success + "]");
             return success;
         } 
+
         #endregion
 
         /// <summary>

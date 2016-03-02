@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using huedotnet;
 
 namespace HicsBL
 {
@@ -32,14 +35,19 @@ namespace HicsBL
         /// PSP 1.3
         /// Lampe hinzufügen
         /// </summary>
-        /// <param name="address"></param>
+        /// <param name="lampAdress"></param>
         /// <param name="lampNameId"></param>
         /// <returns></returns>
-        static int addLamp(string username, string password, string address, int lampNameId)
-        {
-            int lampId = 0;
-            return lampId;
-        }
+        //static void addLamp(string username, string password, string lampAdress, int lampNameId)
+        //{
+        //    //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+        //    string pwhash = HelperClass.GetHash(password);
+        //    using (itin18_aktEntities cont = new itin18_aktEntities())
+        //    {
+        //        cont.sp_add_lamp(username, pwhash, lampAdress, lampNameId);
+        //    }
+           
+        //}
 
         /// <summary>
         /// PSP 8.1
@@ -313,19 +321,28 @@ namespace HicsBL
 
         /// <summary>
         /// PSP 13.1
-        /// Lampe wechseln
+        /// Lampe Ein/Aus
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="lampOnOff"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool switchLamp(string username, string password, bool lampOnOff, int lampId)
+        static void switchLamp(string username, string password, bool lampOnOff, int lampId)
         {
-            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-            return success;
+
+
+            //Ab hier wird die HUE-Bridge angesprochen
+            if (lampOnOff == true)
+            {
+                HueAccess.ChangeLampState(lampId, new HueAccess.LampStateChange((HueLamp l) => l.state = true));
+            }
+            else
+            {
+                HueAccess.ChangeLampState(lampId, new HueAccess.LampStateChange((HueLamp l) => l.state = false));
+            }
         }
 
         /// <summary>
