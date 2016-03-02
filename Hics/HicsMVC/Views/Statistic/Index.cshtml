@@ -1,7 +1,7 @@
 ﻿
 
 @{
-    ViewBag.Title = "Lamp Setup";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 
 }
@@ -11,20 +11,20 @@
     <div class="left">
         <h2>Statistic</h2>
     </div>
-
     <div class="middle">
         <h2>User Name</h2>
     </div>
     <div class="right">
-        <div class="logout">
-            <a></a>
-        </div>
+        <a href="~/Login/Login">
+            <div class="logout"></div>
+        </a>
     </div>
 </div>
 
 <br />
-<div class="leftpadding">
-    <div class="listframe">
+
+<div class="linksbündig">
+    <div class="liste">
         <table>
             <tr>
                 <th align="left">Date</th>
@@ -33,51 +33,70 @@
                 <th align="left">Lamp Status</th>
                 <th></th>
             </tr>
-            <tr>
-                <td class="listframepadding"><p>2016-06-06</p></td>
-                <td class="listframepadding"><p>12:24:03</p></td>
-                <td class="listframepadding"><p>Vorzimmer</p></td>
-                <td class="listframepadding"><p>on</p></td>
-            </tr>
-            <tr>
-                <td class="listframepadding"><p>2016-07-05</p></td>
-                <td class="listframepadding"><p>15:24:23</p></td>
-                <td class="listframepadding"><p>Schlafzimmer</p></td>
-                <td class="listframepadding"><p>of</p></td>
-            </tr>
-            <tr>
-                <td class="listframepadding"><p>2016-06-06</p></td>
-                <td class="listframepadding"><p>12:24:03</p></td>
-                <td class="listframepadding"><p>Vorzimmer</p></td>
-                <td class="listframepadding"><p>on</p></td>
-            </tr>
-            <tr>
-                <td class="listframepadding"><p>2016-07-05</p></td>
-                <td class="listframepadding"><p>15:24:23</p></td>
-                <td class="listframepadding"><p>Schlafzimmer</p></td>
-                <td class="listframepadding"><p>of</p></td>
-            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="listenpadding">@item.Date</td>
+                    <td class="listenpadding">@item.Time</td>
+                    <td class="listenpadding">@item.Group</td>
+                    <td class="listenpadding">@item.Lampstatus</td>
+                </tr>
+            }
         </table>
+    </div>
+</div>
+
+<div style="width:100%;">
+    <div class="left">
+        <h2></h2>
+    </div>
+    <div class="middle">
+        <h2></h2>
+    </div>
+    <div class="right">
+        <a href="~/User/Index">
+            <div class="homeInStatistic"></div>
+        </a>
     </div>
 </div>
 
 
 <style>
-    .listframe {
+    .homeInStatistic {
+        background-image: url('../../Resources/Home.png'); 
+        height:28px;
+        width:108px;
+        background-repeat: no-repeat;
+        background-position:center;
+        border-radius:7px;
+        border: solid 2px #054588; 
+        }
+
+    .homeInStatistic:hover {
+            border: solid 2px #054588;
+            border-radius: 7px; 
+            box-shadow: 0 0 2px 2px #054588;
+        }
+
+    .liste {
         border: solid 2px #054588;
         padding: 10px;
         margin-top: 50px;
         margin-right: 18px;
         margin-left: 10px;
         margin-bottom: 28px;
-        width: 800px;
-        max-height: 200px;
+        width: 900px;
+        height:250px;
+        max-height: 250px;
         overflow-y:scroll;
     }
 
-    .listframepadding {
+    .listenpadding {
         padding-right: 12px;
         min-width: 173px;
+    }
+    .linksbündig{
+        padding-left:10px;
     }
 </style>
 
