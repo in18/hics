@@ -34,16 +34,19 @@ namespace HicsBL
         /// PSP 1.3
         /// Lampe hinzufügen
         /// </summary>
-        /// <param name="address"></param>
+        /// <param name="lampAdress"></param>
         /// <param name="lampNameId"></param>
         /// <returns></returns>
-        static int addLamp(string username, string password, string address, int lampNameId)
-        {
-            int lampId = -1;
-
-
-            return lampId;
-        }
+        //static void addLamp(string username, string password, string lampAdress, int lampNameId)
+        //{
+        //    //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+        //    string pwhash = HelperClass.GetHash(password);
+        //    using (itin18_aktEntities cont = new itin18_aktEntities())
+        //    {
+        //        cont.sp_add_lamp(username, pwhash, lampAdress, lampNameId);
+        //    }
+           
+        //}
 
         /// <summary>
         /// PSP 8.1
