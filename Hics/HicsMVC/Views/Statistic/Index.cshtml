@@ -1,0 +1,102 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MicronLayout.cshtml";
+
+}
+
+
+<div style="width:100%;">
+    <div class="left">
+        <h2>Statistic</h2>
+    </div>
+    <div class="middle">
+        <h2>User Name</h2>
+    </div>
+    <div class="right">
+        <a href="~/Login/Login">
+            <div class="logout"></div>
+        </a>
+    </div>
+</div>
+
+<br />
+
+<div class="linksbündig">
+    <div class="liste">
+        <table>
+            <tr>
+                <th align="left">Date</th>
+                <th align="left">Time</th>
+                <th align="left">Group</th>
+                <th align="left">Lamp Status</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="listenpadding">@item.Date</td>
+                    <td class="listenpadding">@item.Time</td>
+                    <td class="listenpadding">@item.Group</td>
+                    <td class="listenpadding">@item.Lampstatus</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<div style="width:100%;">
+    <div class="left">
+        <h2></h2>
+    </div>
+    <div class="middle">
+        <h2></h2>
+    </div>
+    <div class="right">
+        <a href="~/User/Index">
+            <div class="homeInStatistic"></div>
+        </a>
+    </div>
+</div>
+
+
+<style>
+    .homeInStatistic {
+        background-image: url('../../Resources/Home.png'); 
+        height:28px;
+        width:108px;
+        background-repeat: no-repeat;
+        background-position:center;
+        border-radius:7px;
+        border: solid 2px #054588; 
+        }
+
+    .homeInStatistic:hover {
+            border: solid 2px #054588;
+            border-radius: 7px; 
+            box-shadow: 0 0 2px 2px #054588;
+        }
+
+    .liste {
+        border: solid 2px #054588;
+        padding: 10px;
+        margin-top: 50px;
+        margin-right: 18px;
+        margin-left: 10px;
+        margin-bottom: 28px;
+        width: 900px;
+        height:250px;
+        max-height: 250px;
+        overflow-y:scroll;
+    }
+
+    .listenpadding {
+        padding-right: 12px;
+        min-width: 173px;
+    }
+    .linksbündig{
+        padding-left:10px;
+    }
+</style>
+
