@@ -1,10 +1,15 @@
-﻿@font-face { font-family: 'Segoe UI';
+﻿@import url('Pfeifer.css');
+@import url('Josef.css');
+@import url('Kocerke.css');
+
+@font-face { font-family: 'Segoe UI';
 }
 
 body {
     background-color: #B7B7B7;
     margin:0;
     padding:0;
+    font-family: 'Segoe UI';
 }
 
 header{
@@ -16,7 +21,6 @@ header{
 div{
   padding-left:10px;
   padding-right:10px;
-  padding-bottom:28px;
 }
 
 h2{
@@ -32,7 +36,6 @@ h2{
 #logo2 {
     float:right;
     margin-right:100px;
-    
 }
 
 section {
@@ -42,7 +45,7 @@ section {
     max-width: 1200px;
     max-height: 1000px;
     min-width: 350px;
-    min-height: 350px;
+    min-height: 420px;
     background-color: white;
     margin-bottom: 100px;
     margin-right: 100px;
@@ -51,199 +54,4 @@ section {
 
 
 
-/* Überschrift */
-.left { float: left; position: relative; width: 40%; height: 100%;}
-.middle {float: left; position: relative; width: 35%; height: 100%;}
-.right { float: left; position: relative;width: 10%; height: 100%; text-align:center;}
 
-
-/*Button Logout"*/
-.logout {
-        background-image: url('../../Resources/Logout.png'); 
-        height:38px;
-        width:134px;
-        background-repeat: no-repeat;
-        background-position:center;
-        border-radius:5px;
-        margin-top:20px;
-        
-        }
-
-.logout:hover {
-            border: solid 2px #054588;
-            border-radius: 5px; 
-        }
-
-/*Button Home-Menu"*/
-.home {
-        background-image: url('../../Resources/Home.png'); 
-        height:38px;
-        width:134px;
-        background-repeat: no-repeat;
-        background-position:center;
-        border-radius:5px;
-        margin-top:20px;
-        
-        }
-
-.home:hover {
-            border: solid 2px #054588;
-            border-radius: 5px; 
-        }
-
-/*-------------------MENU BUTTONS Style --------------------------------------*/
-
-.leftLamp { float: left; position: relative; width: 35%; height: 100%;}
-.middleUser {float: left; position: relative; width: 35%; height: 100%;}
-.rightStatistic { float: left; position: relative;width: 20%; height: 100%;}
-
-
-.leftLampSetup { float: left; position: relative; width: 35%; height: 100%;}
-.middleGroup {float: left; position: relative; width: 35%; height: 100%;}
-.rightLampAssigment { float: left; position: relative;width: 20%; height: 100%;}
-
-/*---------------------------END----------------------------------------------*/
-
-/*Button LampControl*/
-div.LampControl {
-    background-image: url('../Resources/LampControl.png');
-    height: 99px;
-    width: 156px;
-    background-repeat: no-repeat;
-    background-position:center;
-    border-radius: 5px;
-    
-}
-
-div.LampControl:hover {
-            
-            border: solid 2px #054588;
-            border-radius: 5px; 
-           
-            
-        }
-
-
-/*Button UserSetup*/
-.UserSetup {
-    background-image: url('../Resources/UserSetup.png');
-    height: 99px;
-    width: 156px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
-    
-}
-
-.UserSetup:hover {
-            border: solid 2px #054588;
-            border-radius: 5px; 
-            
-        }
-        
-/*Button Statistic*/
-.Statistic {
-    background-image: url('../Resources/Statistic.png');
-    height: 99px;
-    width: 156px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
-    
-}
-
-.Statistic:hover {
-            border: solid 2px #054588;
-            border-radius: 5px; 
-            
-        }
-
-
-/*Button LampSetup*/
-.LampSetup {
-    background-image: url('../Resources/Lamp Setup.png');
-    height: 99px;
-    width: 156px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
-   
-}
-
-.LampSetup:hover {
-            border: solid 2px #054588;
-            border-radius: 5px; 
-            
-        }
-
-
-/*Button GroupSetup*/
-.GroupSetup {
-    background-image: url('../Resources/Group Setup.png');
-    height: 99px;
-    width: 156px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
-    
-}
-
-.GroupSetup:hover {
-            border: solid 2px #054588;
-            border-radius: 5px; 
-            
-        }
-
-/*Button LampAssigment*/
-.LampAssigment {
-    background-image: url('../Resources/Lamp Assignment.png');
-    height: 99px;
-    width: 156px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
- 
-}
-
-.LampAssigment:hover {
-            border: solid 2px #054588;
-            border-radius: 5px; 
-            
-        }
-
-/*Button Change Password*/
-.ChangePassword {
-    background-image: url('../Resources/UserSetup.png');
-    height: 99px;
-    width: 156px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
-}
-
-.ChangePassword:hover {
-            border: solid 2px #054588;
-            border-radius: 5px;
-        }
-
-
-
-
-
-
-
-
-/*AdminSetup Syles von Josef*/
-
-
-.leftpadding{padding-left:28px;}
-.toptext{padding-left:10px;}
-.paragraphtext{font-family:'Segoe UI';}
-.anchornounderline{text-decoration:none;}
-.bottomatbutton{padding-bottom:38px;}
-.divinputpadding{padding:10px;border:solid 2px #054588;border-radius:5px;}
-.divinputpadding:hover{box-shadow:0 0 2px 2px #054588;}
-.paddingtop{padding-top:40px;}
-.divinputpadding:focus{box-shadow:0 0 2px 2px #054588;}    
-        
-/*-------------- Ende -----------------------*/

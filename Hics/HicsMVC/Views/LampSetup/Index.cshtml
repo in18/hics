@@ -1,21 +1,35 @@
 ﻿@model HicsMVC.BundleConfig
 @{
-    ViewBag.Title = "Lamp Setup";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
-
 }
 
 <div class="leftpadding">
 
     @*Überschrift*@
-    <h2>Lamp Setup</h2>
+    <div style="width:100%;">
+        <div class="left">
+            <h2>Lamp Setup</h2>
+        </div>
 
-    @*Lampe Hinzufügen*@
-    <form acton="#" method="post">
+        <div class="middle">
+            <h2>Admin Placeholder</h2>
+        </div>
+        <div class="right">
+            <div class="logout">
+                <a></a>
+            </div>
+        </div>
+    </div>
+    
+    <br style="clear:both;" />
+
+    @*Lampe Hinzufügen*@    
+    <form method="post">
         <table class="toptext">
             <tr>
                 <td class="lampaddpadding">ID</td>
-                <td colspan="2" >Description</td>
+                <td colspan="2">Description</td>
             </tr>
             <tr>
                 <td><input class="boxdesign" type="text" name="id" placeholder="ID" /></td>
@@ -24,6 +38,7 @@
             </tr>
         </table>
     </form>
+
 
     @*Ausgabeliste*@
     <div class="listframe">
@@ -40,11 +55,4 @@
             </tr>
         </table>
     </div>
-    <div class="menubar">
-        <div class="menubarentryactual">Lamp Setup</div>
-        <div class="menubarentry">Group Setup</div>
-        <div class="menubarentry">Lamp Assignment</div>
-        <div class="menubarentry">User Setup</div>
-    </div>
 </div>
-

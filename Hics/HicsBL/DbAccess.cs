@@ -18,7 +18,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampAdress"></param>
         /// <param name="lampName"></param>
-        static void addLamp(string username, string password, string lampAdress, string lampName)
+        public static void addLamp(string username, string password, string lampAdress, string lampName)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
@@ -50,17 +50,23 @@ namespace HicsBL
 
         /// <summary>
         /// PSP 8.1
+        /// User hinzufügen
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="usernameNew"></param>
         /// <param name="passwordNew"></param>
-        static void addUser(string username, string password,string usernameNew, string passwordNew)
+        public static void addUser(string username, string password,string usernameNew, string passwordNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
             //Übergebenes neues Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhashNew = HelperClass.GetHash(passwordNew);
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+            }
         }
         /// <summary>
         /// PSP 3.1
@@ -70,13 +76,16 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool deleteLamp(string username, string password, int lampId)
+        public static void deleteLamp(string username, string password, int lampId)
         {
-            bool success = false;
+            
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-
-            return success;
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                cont.sp_delete_lamp(lampId, username, pwhash);
+            }
+         
         
         }
         /// <summary>
@@ -273,27 +282,6 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
 
             return success;
-        }
-
-        /// <summary>
-        /// PSP 8.8
-        /// User hinzufügen
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="userNew"></param>
-        /// <param name="passwordNew"></param>
-        /// <returns></returns>
-        static bool AddUser(string username, string password, string userNew, string passwordNew)
-        {
-            bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhash = HelperClass.GetHash(passwordNew);
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-               
-            }
-                return success;
         }
 
         /// <summary>
