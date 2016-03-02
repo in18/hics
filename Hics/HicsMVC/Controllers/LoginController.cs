@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HicsBL; //eingebunden
+using HicsMVC.Models;
 
 namespace HicsMVC.Controllers
 {
@@ -18,11 +20,19 @@ namespace HicsMVC.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Login(MODELNAME)
-        //{
-        //    return RedirectToAction("index");
-        //} 
-               
+        [HttpPost]
+        public ActionResult Login(LoginModel lm)
+        {
+            //DbAccess."Login();"
+
+            //If "User=Admin" dann gehe zum Index Admin
+            //else "User=User" dann gehe zum Index User
+
+            //Weiteleitung zum "#"
+            //return RedirectToAction("#", "#"); 
+
+            return View();                    
+        }
+
     }
 }
