@@ -46,17 +46,17 @@ namespace HicsBL
         //    {
         //        cont.sp_add_lamp(username, pwhash, lampAdress, lampNameId);
         //    }
-           
+
         //}
 
         /// <summary>
         /// PSP 8.1
         /// User hinzufügen
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="usernameNew"></param>
-        /// <param name="passwordNew"></param>
+        /// <param name="username">den aktuellen Usernamen übergeben (Überprüfung auf Rechte)</param>
+        /// <param name="password">das zum übergebenen User dazugehörige Passwort (Überprüfung auf Rechte)</param>
+        /// <param name="usernameNew">Name des neu anzulegenden User's</param>
+        /// <param name="passwordNew">Passwort des neu angelegten User</param>
         public static void addUser(string username, string password,string usernameNew, string passwordNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
