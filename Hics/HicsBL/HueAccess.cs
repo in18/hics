@@ -138,11 +138,9 @@ namespace HicsBL
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        static bool deleteLamp(string address)
+        static void deleteLamp(string address)
         {
-            bool success = false;
-
-            return success;
+            
         }
 
         /// <summary>
