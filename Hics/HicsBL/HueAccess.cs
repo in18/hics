@@ -46,11 +46,32 @@ namespace HicsBL
                 return Math.Round(lamp.brightness * 255);
             }
         }
+        internal static string GetLampName(int lampNumber)
+        {
+            HueLamp lamp;
+            lamps.TryGetValue(lampNumber, out lamp);
+            return lamp.name;
+        }
+        internal static int GetLampId(string lampName)
+        {
+            
+            int lId = 0;
+            getLampList();
+
+            for (int i = 0; i < lamps.Count; i++)
+            {
+                if (lamps[i].name == lampName)
+                {
+                    lId = lamps[i].GetLampNumber();
+                }
+            }
+            return lId;
+        }
         internal static void ChangeLampState(int lampNumber, Delegate stateChange)
         {
             HueLamp lamp;
             lamps.TryGetValue(lampNumber, out lamp);
-
+            
             if (lamp == null)
             {
                 Debug.WriteLine("Didn't find lamp for number " + lampNumber);
