@@ -28,7 +28,7 @@ namespace HicsBL
 
         /// <summary>
         /// Steuerung HUE-Bridge
-        /// Mit dieser Methode wird eine Lampe real über die HUE-Bridge ein oder ausgeschaltet
+        /// Mit dieser Methode wird eine Lampe real über die HUE-Bridge ein oder ausgeschaltet.
         /// Wichtig die lampId ist die ID der Lampe in der HUE-Bridge. !Nicht in der DB!
         /// </summary>
         /// <param name="lampId">LampenId in der HUE-Bridge</param>
@@ -40,7 +40,7 @@ namespace HicsBL
 
         /// <summary>
         /// Steuerung HUE-Bridge
-        /// Mit dieser Methode wird eine Lampe real über die HUE-Bridge eine Helligkeit zugewiesen
+        /// Mit dieser Methode wird eine Lampe real über die HUE-Bridge eine Helligkeit zugewiesen.
         /// Wichtig die lampId ist die ID der Lampe in der HUE-Bridge. !Nicht in der DB!
         /// </summary>
         /// <param name="lampId">LampenId in der HUE-Bridge</param>
@@ -52,7 +52,7 @@ namespace HicsBL
 
         /// <summary>
         /// Steuerung HUE-Bridge
-        /// Mit dieser Methode wird eine Lampe real über die HUE-Bridge umbenannt
+        /// Mit dieser Methode wird eine Lampe real über die HUE-Bridge umbenannt.
         /// Wichtig die lampId ist die ID der Lampe in der HUE-Bridge. !Nicht in der DB!
         /// </summary>
         /// <param name="lampId">LampenId in der HUE-Bridge</param>

@@ -153,10 +153,11 @@ namespace HicsBL
 
             //Console.WriteLine("Load config returned bridge ip [" + bridgeIP + "] and username [" + username + "] and return code [" + success + "]");
             return success;
-        } 
+        }
 
         #endregion
 
+        #region PSP 2.3
         /// <summary>
         /// PSP 2.3
         /// Editieren einer Lampe mittels id und neuer Name
@@ -170,7 +171,9 @@ namespace HicsBL
 
             return success;
         }
+        #endregion
 
+        #region PSP 3.3
         /// <summary>
         /// PSP 3.3
         /// Lampe löschen mittels ID
@@ -182,7 +185,7 @@ namespace HicsBL
             bool success = false;
             foreach (var lampkey in lamps.ToList())
             {
-                if (lampkey.Key==lampId)
+                if (lampkey.Key == lampId)
                 {
                     lamps.Remove(lampkey.Key);
                 }
@@ -190,6 +193,9 @@ namespace HicsBL
             return success;
         }
 
+        #endregion
+
+        #region PSP 3.4
         /// <summary>
         /// PSP 3.4
         /// Lampe löschen mittels Address
@@ -198,9 +204,11 @@ namespace HicsBL
         /// <returns></returns>
         static void deleteLamp(string address)
         {
-            
-        }
 
+        }
+        #endregion
+
+        #region PSP 15.4
         /// <summary>
         /// PSP 15.4
         /// Lampe dimmen
@@ -213,6 +221,9 @@ namespace HicsBL
             bool success = false;
             return success;
         }
+        #endregion
+
+        #region PSP 15.6
         /// <summary>
         /// PSP 15.6
         /// Lampe dimmen
@@ -224,6 +235,7 @@ namespace HicsBL
         {
             bool success = false;
             return success;
-        }
+        } 
+        #endregion
     }
 }

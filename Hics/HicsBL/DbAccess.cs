@@ -11,6 +11,7 @@ namespace HicsBL
 {
     public class DbAccess
     {
+        #region PSP 1.1
         /// <summary>
         /// PSP 1.1
         /// Lampe hinzufügen
@@ -30,7 +31,9 @@ namespace HicsBL
             }
 
         }
+        #endregion
 
+        #region PSP 1.3
         /// <summary>
         /// PSP 1.3
         /// Lampe hinzufügen
@@ -47,29 +50,10 @@ namespace HicsBL
         //        cont.sp_add_lamp(username, pwhash, lampAdress, lampNameId);
         //    }
 
-        //}
+        //} 
+        #endregion        
 
-        /// <summary>
-        /// PSP 8.1
-        /// User hinzufügen
-        /// </summary>
-        /// <param name="username">den aktuellen Usernamen übergeben (Überprüfung auf Rechte)</param>
-        /// <param name="password">das zum übergebenen User dazugehörige Passwort (Überprüfung auf Rechte)</param>
-        /// <param name="usernameNew">Name des neu anzulegenden User's</param>
-        /// <param name="passwordNew">Passwort des neu angelegten User</param>
-        public static void addUser(string username, string password,string usernameNew, string passwordNew)
-        {
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhash = HelperClass.GetHash(password);
-            //Übergebenes neues Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhashNew = HelperClass.GetHash(passwordNew);
-
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
-            }
-        }
-        /// <summary>
+        #region PSP 3.1
         /// PSP 3.1
         /// Löschen der Lampe anhand der LampenId
         /// </summary>
@@ -79,7 +63,7 @@ namespace HicsBL
         /// <returns></returns>
         public static void deleteLamp(string username, string password, int lampId)
         {
-            
+
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
@@ -87,8 +71,11 @@ namespace HicsBL
                 cont.sp_delete_lamp(lampId, username, pwhash);
             }
             HueAccess.getLampList();
-        
+
         }
+        #endregion
+
+        #region PSP 3.2
         /// <summary>
         /// PSP 3.2
         /// Löschen einer Lampe anhand der Lampenadresse
@@ -106,6 +93,9 @@ namespace HicsBL
             return success;
 
         }
+        #endregion
+
+        #region PSP 4.1
         /// <summary>
         /// PSP 4.1
         /// </summary>
@@ -113,7 +103,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampGroupName"></param>
         /// <returns></returns>
-        static int addLampGroup (string username, string password, string lampGroupName)
+        static int addLampGroup(string username, string password, string lampGroupName)
         {
             int lampGroupId = -1;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -121,6 +111,9 @@ namespace HicsBL
 
             return lampGroupId;
         }
+        #endregion
+
+        #region PSP 2.1
         /// <summary>
         /// PSP 2.1
         /// Editieren eines Lampennamens anhand des alten Lampennamens
@@ -156,6 +149,9 @@ namespace HicsBL
 
             HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
         }
+        #endregion
+
+        #region PSP 2.4
         /// <summary>
         /// PSP 2.4
         /// Editieren eines Lampennamens anhand der LampenId
@@ -173,6 +169,9 @@ namespace HicsBL
 
             return success;
         }
+        #endregion
+
+        #region PSP 5.1
         /// <summary>
         /// PSP 5.1
         /// Lampe einer Gruppe anhand groupId und lampId hinzufügen
@@ -189,6 +188,9 @@ namespace HicsBL
 
             return success;
         }
+        #endregion
+
+        #region PSP 5.3
         /// <summary>
         /// PSP 5.3
         /// Lampe einer Gruppe anhand groupName und lampId hinzufügen
@@ -205,7 +207,9 @@ namespace HicsBL
 
             return success;
         }
+        #endregion
 
+        #region PSP 6.1
         /// <summary>
         /// PSP 6.1
         /// Entfernt eine Lampe von einer Gruppe mittels group_id und lamp_id
@@ -218,9 +222,34 @@ namespace HicsBL
         static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
-           
+
             return success;
         }
+        #endregion
+
+        #region PSP 8.1
+        /// <summary>
+        /// PSP 8.1
+        /// User hinzufügen
+        /// </summary>
+        /// <param name="username">den aktuellen Usernamen übergeben (Überprüfung auf Rechte)</param>
+        /// <param name="password">das zum übergebenen User dazugehörige Passwort (Überprüfung auf Rechte)</param>
+        /// <param name="usernameNew">Name des neu anzulegenden User's</param>
+        /// <param name="passwordNew">Passwort des neu angelegten User</param>
+        public static void addUser(string username, string password, string usernameNew, string passwordNew)
+        {
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            //Übergebenes neues Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhashNew = HelperClass.GetHash(passwordNew);
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+            }
+        }
+        /// <summary> 
+        #endregion
 
         /// <summary>
         /// PSP 7.1
@@ -350,6 +379,7 @@ namespace HicsBL
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
+
 
             //Ab hier wird die HUE-Bridge angesprochen
             if (lampOnOff == true)
