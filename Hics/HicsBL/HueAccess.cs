@@ -17,12 +17,15 @@ namespace HicsBL
 {
     public class HueAccess
     {
-        #region Nichts verändern
+        #region Ja Nichts verändern
         private static String bridgeIP;
         private static String username;
         private static HueMessaging messaging;
         private static Dictionary<int, HueLamp> lamps;
 
+        /// <summary>
+        /// Es wird eine aktuelle Auflistung der vorhandenen Lampen in der HUE-Bridge in die Liste "lamps" übertragen
+        /// </summary>
         internal static void getLampList()
         {
             JsonLampList lampList = JsonConvert.DeserializeObject<JsonLampList>(messaging.DownloadState());
@@ -46,12 +49,24 @@ namespace HicsBL
                 return Math.Round(lamp.brightness * 255);
             }
         }
+
+        /// <summary>
+        /// Einen Namen einer Lampe in der aktuellen HUE-Bridge ausgeben zu lassen
+        /// </summary>
+        /// <param name="lampNumber">HUE-Bridge LampenId</param>
+        /// <returns></returns>
         internal static string GetLampName(int lampNumber)
         {
             HueLamp lamp;
             lamps.TryGetValue(lampNumber, out lamp);
             return lamp.name;
         }
+
+        /// <summary>
+        /// Eine LampenId aus der aktuellen HUE-Bridge anhand des Lampennamens zu bekommen
+        /// </summary>
+        /// <param name="lampName">HUE-Bridge Lampenname</param>
+        /// <returns></returns>
         internal static int GetLampId(string lampName)
         {
             
@@ -67,9 +82,25 @@ namespace HicsBL
             }
             return lId;
         }
+
+        /// <summary>
+        /// Mit dieser Methode können einzelne Werte einer HUE-Lampe gesetzt werden
+        /// .brightness die Helligkeit
+        /// Der HSV-Farbraum (https://de.wikipedia.org/wiki/HSV-Farbraum)
+        /// .hue der Hue-Wert
+        /// .saturation der Sättingungswert
+        /// für die komplette Beschreibung des Farbraums gehört dann auch die Brightness
+        ///     dazu. Also 3 Werte.
+        /// Mehr in :http://www.developers.meethue.com/documentation/color-conversions-rgb-xy
+        /// Bsp.: ChangeLampState(lampId, new HueAccess.LampStateChange((HueLamp l) => l.brightness = brightness / 255.0);
+        ///     um die Helligkeit zu setzten
+        /// </summary>
+        /// <param name="lampNumber">HUE-Bridge lampId</param>
+        /// <param name="stateChange">mittels Lamda was geändert werden soll</param>
         internal static void ChangeLampState(int lampNumber, Delegate stateChange)
         {
             HueLamp lamp;
+            
             lamps.TryGetValue(lampNumber, out lamp);
             
             if (lamp == null)
@@ -92,6 +123,12 @@ namespace HicsBL
             }
             messaging.SendMessage(lamps.Values.ToList<HueLamp>());
         }
+
+        /// <summary>
+        /// Die IP-Adr und den User/Appnamen aus der XML laden
+        /// und den Var bridge und user zuzuweisen
+        /// </summary>
+        /// <returns></returns>
         internal static bool LoadConfig()
         {
             XDocument doc = XDocument.Load("Settings.xml");

@@ -351,19 +351,14 @@ namespace HicsBL
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
-
             //Ab hier wird die HUE-Bridge angesprochen
             if (lampOnOff == true)
             {
-                // Direkter aufruf über HueDotNet
-                HueAccess.ChangeLampState(lampId, new HueAccess.LampStateChange((HueLamp l) => l.state = true));
                 // Vereinfachter aufruf über die HelperClass
                 HelperClass.SetLampState(lampId, true);
             }
             else
             {
-                // Direkter aufruf über HueDotNet
-                HueAccess.ChangeLampState(lampId, new HueAccess.LampStateChange((HueLamp l) => l.state = false));
                 // Vereinfachter aufruf über die HelperClass
                 HelperClass.SetLampState(lampId, false);
             }
