@@ -218,7 +218,7 @@ namespace HicsBL
         static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
-
+           
             return success;
         }
 
