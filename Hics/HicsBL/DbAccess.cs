@@ -147,6 +147,7 @@ namespace HicsBL
                         dblampId = item.id;
                         dblampAdr = item.address;
                         break;
+
                     }
                 }
                 cont.sp_delete_lamp(dblampId, username, pwhash);
