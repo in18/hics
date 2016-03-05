@@ -31,10 +31,21 @@ namespace HicsBL
             JsonLampList lampList = JsonConvert.DeserializeObject<JsonLampList>(messaging.DownloadState());
             lamps = lampList.ConvertToHueLamps();
         }
+
+        /// <summary>
+        /// Diese Methode erzeugt eine Instanz von HueMessaging mit der IP
+        ///  und dem USer bzw Appkey
+        /// </summary>
         internal static void getWebClient()
         {
             messaging = new HueMessaging(bridgeIP, username);
         }
+
+        /// <summary>
+        /// Gibt den in der HUE-Bridege eingetragenen Wert der Helligkeit einer Lampe zurück
+        /// </summary>
+        /// <param name="lampNumber">LampenId der Hue-Bridge NICHT der Db</param>
+        /// <returns>Eingetragener Helligkeitswert der Lampe in der HUE-Bridge</returns>
         internal static double GetCurrentLampBrightness(int lampNumber)
         {
             HueLamp lamp;
@@ -54,7 +65,7 @@ namespace HicsBL
         /// Einen Namen einer Lampe in der aktuellen HUE-Bridge ausgeben zu lassen
         /// </summary>
         /// <param name="lampNumber">HUE-Bridge LampenId</param>
-        /// <returns></returns>
+        /// <returns>Eingetragener Lampenname in der HUE-Bridge</returns>
         internal static string GetLampName(int lampNumber)
         {
             HueLamp lamp;
@@ -66,7 +77,7 @@ namespace HicsBL
         /// Eine LampenId aus der aktuellen HUE-Bridge anhand des Lampennamens zu bekommen
         /// </summary>
         /// <param name="lampName">HUE-Bridge Lampenname</param>
-        /// <returns></returns>
+        /// <returns>Eingetragene LampenId in der HUE-Bridge</returns>
         internal static int GetLampId(string lampName)
         {
             
@@ -86,8 +97,8 @@ namespace HicsBL
         /// <summary>
         /// Mit dieser Methode können einzelne Werte einer HUE-Lampe gesetzt werden
         /// .brightness die Helligkeit
-        /// Der HSV-Farbraum (https://de.wikipedia.org/wiki/HSV-Farbraum)
-        /// .hue der Hue-Wert
+        /// Der HSV-Farbraum (https://de.wikipedia.org/wiki/HSV-Farbraum) für
+        ///  .hue der Hue-Wert
         /// .saturation der Sättingungswert
         /// für die komplette Beschreibung des Farbraums gehört dann auch die Brightness
         ///     dazu. Also 3 Werte.
@@ -128,7 +139,7 @@ namespace HicsBL
         /// Die IP-Adr und den User/Appnamen aus der XML laden
         /// und den Var bridge und user zuzuweisen
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true für korrekte Werte</returns>
         internal static bool LoadConfig()
         {
             XDocument doc = XDocument.Load("Settings.xml");
@@ -157,7 +168,7 @@ namespace HicsBL
 
         #endregion
 
-        #region PSP 2.3
+        #region PSP 2.3 editLampName(int lampId, string newName)
         /// <summary>
         /// PSP 2.3
         /// Editieren einer Lampe mittels id und neuer Name
@@ -173,7 +184,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 3.3
+        #region PSP 3.3 deleteLamp(int lampId)
         /// <summary>
         /// PSP 3.3
         /// Lampe löschen mittels ID
@@ -195,10 +206,10 @@ namespace HicsBL
 
         #endregion
 
-        #region PSP 3.4
+        #region PSP 3.4 deleteLamp(string address)
         /// <summary>
         /// PSP 3.4
-        /// Lampe löschen mittels Address
+        /// Lampe löschen mittels Addresse
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
@@ -208,7 +219,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 15.4
+        #region PSP 15.4 dimLamp(int lampId, byte brightness)
         /// <summary>
         /// PSP 15.4
         /// Lampe dimmen
@@ -223,7 +234,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 15.6
+        #region PSP 15.6 dimLamp(string lampName, byte brightness)
         /// <summary>
         /// PSP 15.6
         /// Lampe dimmen
