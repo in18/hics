@@ -22,7 +22,8 @@ namespace HicsBL
         //#04.03.2016|Wolf          |Changelog integriert                          #
         //#05.03.2016|Wolf          |Region für die Arbeitspakete erstellt         #
         //#06.03.2016|Wolf          |XML Ausgabe für die tech. Dokumentation       #
-        //#          |              |ind HicsBl eingeschaltet                      #
+        //#          |              |in HicsBl eingeschaltet                       #
+        //#07.03.2016|Wolf          |Tech. Dok. erweitert                          #
         //##########################################################################
 
 
@@ -49,23 +50,23 @@ namespace HicsBL
         #endregion
 
         #region PSP 1.3 addLamp(string username, string password, string lampAdress, int lampNameId)
-        /// <summary>
-        /// PSP 1.3
-        /// Lampe hinzufügen
-        /// </summary>
-        /// <param name="lampAdress"></param>
-        /// <param name="lampNameId"></param>
-        /// <returns></returns>
-        //static void addLamp(string username, string password, string lampAdress, int lampNameId)
-        //{
-        //    //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-        //    string pwhash = HelperClass.GetHash(password);
-        //    using (itin18_aktEntities cont = new itin18_aktEntities())
-        //    {
-        //        cont.sp_add_lamp(username, pwhash, lampAdress, lampNameId);
-        //    }
+        ///// <summary>
+        ///// PSP 1.3
+        ///// Lampe hinzufügen
+        ///// </summary>
+        ///// <param name="lampAdress"></param>
+        ///// <param name="lampNameId"></param>
+        ///// <returns></returns>
+        ////static void addLamp(string username, string password, string lampAdress, int lampNameId)
+        ////{
+        ////    //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+        ////    string pwhash = HelperClass.GetHash(password);
+        ////    using (itin18_aktEntities cont = new itin18_aktEntities())
+        ////    {
+        ////        cont.sp_add_lamp(username, pwhash, lampAdress, lampNameId);
+        ////    }
 
-        //} 
+        ////} 
         #endregion
 
         #region PSP 2.1 editLampName(string username, string password, string lampNameOld, string lampNameNew
@@ -85,23 +86,34 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                //Table der Db-Fn holen
                 List<fn_show_lamps_Result> dblamps = cont.fn_show_lamps().ToList();
-                int? dblampId = 0;
+
+                //temporäre Variablen
+                int? dblampId = 0; //Nullable da in der Db Nullable
                 string dblampAdr = "";
+
+                // Lambda Bsp. statt foreach
+                // dblampId= cont.fn_show_lamps().Where(i => i.name == lampNameOld);
+                // Lamda ende
+
                 foreach (var item in dblamps)
                 {
                     if (item.name == lampNameOld)
                     {
+                        //Für das Wiederanlegen der Lampe die ID temp. speichern
                         dblampId = item.id;
+                        //Für das Wiederanlegen der Lampe die Adresse temp. speichern
                         dblampAdr = item.address;
+                        //Wenn gefunden muss nicht die ganze Liste durchlaufen werden
                         break;
-
                     }
                 }
+                //Edit gibt es nicht in der DB, Lampe wird gelöscht und wieder neu angelegt
                 cont.sp_delete_lamp(dblampId, username, pwhash);
                 cont.sp_add_lamp(username, pwhash, dblampAdr, lampNameNew);
             }
-
+            //Namen der Lampe in der HUE-Bridge ändern
             HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
         }
         #endregion
@@ -140,10 +152,14 @@ namespace HicsBL
 
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
+
+            //Lampe aus der DB löschen
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 cont.sp_delete_lamp(lampId, username, pwhash);
             }
+
+            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
             HueAccess.getLampList();
 
         }
@@ -248,6 +264,8 @@ namespace HicsBL
         /// PSP 7.1
         /// Lampengruppe entfernen mittels Gruppennamen
         /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
         /// <param name="groupName"></param>
         /// <returns></returns>
         static bool removeLampGroup(string username, string password, string groupName)
@@ -284,7 +302,9 @@ namespace HicsBL
         /// PSP 7.3
         /// Lampengruppe anhand id entfernen
         /// </summary>
-        /// <param name="group_id"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupId"></param>
         /// <returns></returns>
         static bool removeLampGroup(string username, string password, int groupId)
         {
@@ -300,11 +320,11 @@ namespace HicsBL
         #region PSP 8.1 addUser(string username, string password, string usernameNew, string passwordNew)
         /// <summary>
         /// PSP 8.1
-        /// User hinzufügen
+        /// User hinzufügen. (Angemeldeter User wird anhand Usernamen und Passwort auf Rechte geprüft)
         /// </summary>
-        /// <param name="username">den aktuellen Usernamen übergeben (Überprüfung auf Rechte)</param>
-        /// <param name="password">das zum übergebenen User dazugehörige Passwort (Überprüfung auf Rechte)</param>
-        /// <param name="usernameNew">Name des neu anzulegenden User's</param>
+        /// <param name="username">den angemeldeten Usernamen übergeben (Überprüfung auf Rechte)</param>
+        /// <param name="password">das dazugehörige Passwort übermitteln (Überprüfung auf Rechte)</param>
+        /// <param name="usernameNew">Name des neu anzulegenden Users</param>
         /// <param name="passwordNew">Passwort des neu angelegten User</param>
         public static void addUser(string username, string password, string usernameNew, string passwordNew)
         {
@@ -318,7 +338,6 @@ namespace HicsBL
                 cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
             }
         }
-        /// <summary> 
         #endregion
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)

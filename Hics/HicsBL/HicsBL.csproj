@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="HueAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testing.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="HICSModel.edmx">

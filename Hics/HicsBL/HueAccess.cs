@@ -127,8 +127,17 @@ namespace HicsBL
 
             messaging.SendMessage(lamp);
         }
+
+        /// <summary>
+        /// Parameter and das Obj. HueLamp delegieren
+        /// </summary>
+        /// <param name="lamp">state,hue,brightness,....</param>
         internal delegate void LampStateChange(HueLamp lamp);
 
+        /// <summary>
+        /// Parameter auf alle Lampen der HUE-Bridge setzen
+        /// </summary>
+        /// <param name="stateChange"></param>
         internal static void ChangeAllLampState(Delegate stateChange)
         {
             foreach (HueLamp lamp in lamps.Values)
