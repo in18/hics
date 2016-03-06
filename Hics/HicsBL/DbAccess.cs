@@ -9,6 +9,9 @@ using huedotnet;
 
 namespace HicsBL
 {
+    /// <summary>
+    /// Diese Klasse ist die Schnittstelle zwischen GUI,DB,HUE
+    /// </summary>
     public class DbAccess
     {
         //##########################################################################
@@ -18,6 +21,8 @@ namespace HicsBL
         //#----------+--------------+----------------------------------------------#
         //#04.03.2016|Wolf          |Changelog integriert                          #
         //#05.03.2016|Wolf          |Region für die Arbeitspakete erstellt         #
+        //#06.03.2016|Wolf          |XML Ausgabe für die tech. Dokumentation       #
+        //#          |              |ind HicsBl eingeschaltet                      #
         //##########################################################################
 
 
@@ -122,6 +127,7 @@ namespace HicsBL
         #endregion
 
         #region PSP 3.1 deleteLamp(string username, string password, int lampId)
+        ///<summary>
         /// PSP 3.1
         /// Löschen der Lampe anhand der LampenId
         /// </summary>
@@ -207,7 +213,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="groupId"></param>
+        /// <param name="groupName"></param>
         /// <param name="lampId"></param>
         static bool addLampToGroup(string username, string password, string groupName, int lampId)
         {
@@ -322,8 +328,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="groupName"></param>
-        /// <param name="lampId"></param>
+        /// <param name="usernameId"></param>
         /// <returns></returns>
         static bool removeUser(string username, string password, int usernameId)
         {
@@ -342,8 +347,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="groupName"></param>
-        /// <param name="lampId"></param>
+        /// <param name="usernameName"></param>
         /// <returns></returns>
         static bool removeUser(string username, string password, string usernameName)
         {
@@ -381,7 +385,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="username"></param>
+        /// <param name="usernameName"></param>
         /// <param name="groupId"></param>
         /// <returns></returns>
         static bool EditUserGroup(string username, string password, string usernameName, int groupId)

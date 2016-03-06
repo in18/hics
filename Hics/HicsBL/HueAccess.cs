@@ -15,6 +15,9 @@ using System.Diagnostics;
 
 namespace HicsBL
 {
+    /// <summary>
+    /// Diese Klasse bittet Methoden zur Steuerung der Hue-Bridge
+    /// </summary>
     public class HueAccess
     {
         #region Ja Nichts verändern
