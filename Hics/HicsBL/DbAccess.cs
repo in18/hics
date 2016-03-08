@@ -152,9 +152,9 @@ namespace HicsBL
             {
                 try
                 {
-                cont.sp_delete_lamp(lampId, username, pwhash);
+                    cont.sp_delete_lamp(lampId, username, pwhash);
                     success = true;
-            }
+                }
                 catch 
                 {
 
@@ -295,9 +295,30 @@ namespace HicsBL
         static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
+           
 
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                foreach (var item in cont.fn_show_lampgroups(username,password))
+                {
+                    if (item.id == groupId)
+                    {
+                        try
+                        {
+                            cont.sp_add_lamp_to_lampgroup(username, password, item.id, lampId);
+                            success = true;
+                        }
+                        catch
+                        {
+                            success = false;
+                        }
+                    }
+                }
+
+            }
             return success;
         }
+    
         #endregion
 
         #region PSP 7.1 removeLampGroup(string username, string password, string groupName)
