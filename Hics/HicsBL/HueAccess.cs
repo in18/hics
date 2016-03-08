@@ -140,17 +140,9 @@ namespace HicsBL
         /// </summary>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool deleteLamp(int lampId)
+        static void deleteLamp(int lampId)
         {
-            bool success = false;
-            foreach (var lampkey in lamps.ToList())
-            {
-                if (lampkey.Key==lampId)
-                {
-                    lamps.Remove(lampkey.Key);
-                }
-            }
-            return success;
+            getLampList();
         }
 
         /// <summary>
@@ -161,7 +153,7 @@ namespace HicsBL
         /// <returns></returns>
         static void deleteLamp(string address)
         {
-            
+            getLampList();
         }
 
         /// <summary>

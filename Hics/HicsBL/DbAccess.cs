@@ -165,13 +165,24 @@ namespace HicsBL
         /// <param name="lampId"></param>
         /// <param name="lampNameNew"></param>
         /// <returns></returns>
-        static bool editLampName(string username, string password, int lampId, string lampNameNew)
+        static void editLampName(string username, string password, int lampId, string lampNameNew)
         {
-            bool success = false;
+           
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-
-            return success;
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lamps_Result> lampen = cont.fn_show_lamps().ToList();
+                foreach (var item in lampen)
+                {
+                    if (item.id == lampId)
+                    {
+                        cont.sp_delete_lamp(item.id,username,pwhash);
+                        cont.sp_add_lamp(username, pwhash, item.address, lampNameNew);
+                    }
+                }
+            }
+            
         }
         /// <summary>
         /// PSP 5.1
