@@ -147,21 +147,30 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        public static void deleteLamp(string username, string password, int lampId)
+        public static bool deleteLamp(string username, string password, int lampId)
         {
-
+            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
             //Lampe aus der DB löschen
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_delete_lamp(lampId, username, pwhash);
+                try
+                {
+                    cont.sp_delete_lamp(lampId, username, pwhash);
+                    success = true;
+                }
+                catch 
+                {
+
+                    success = false;
+                }
             }
 
             //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
             HueAccess.getLampList();
-
+            return success;
         }
         #endregion
 
@@ -350,8 +359,9 @@ namespace HicsBL
         /// <param name="password">das dazugehörige Passwort übermitteln (Überprüfung auf Rechte)</param>
         /// <param name="usernameNew">Name des neu anzulegenden Users</param>
         /// <param name="passwordNew">Passwort des neu angelegten User</param>
-        public static void addUser(string username, string password, string usernameNew, string passwordNew)
+        public static bool addUser(string username, string password, string usernameNew, string passwordNew)
         {
+            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
             //Übergebenes neues Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -359,8 +369,19 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+
+                try
+                {
+                    cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+                    success = true;
+                }
+                catch 
+                {
+
+                    success = false;
+                }
             }
+            return success;
         }
         #endregion
 
@@ -435,26 +456,26 @@ namespace HicsBL
         }
             #endregion
 
-            #region PSP 9.1 EditUserGroup(string username, string password, int usernameId, int groupId)
-            /// <summary>
-            /// PSP 9.1
-            /// UserGroup editieren
-            /// </summary>
-            /// <param name="username"></param>
-            /// <param name="password"></param>
-            /// <param name="usernameId"></param>
-            /// <param name="groupId"></param>
-            /// <returns></returns>
-            static bool EditUserGroup(string username, string password, int usernameId, int groupId)
-            {
-                bool success = false;
-                //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-                string pwhash = HelperClass.GetHash(password);
-                return success;
-            }
-            #endregion
+        #region PSP 9.1 EditUserGroup(string username, string password, int usernameId, int groupId)
+        /// <summary>
+        /// PSP 9.1
+        /// UserGroup editieren
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="usernameId"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        static bool EditUserGroup(string username, string password, int usernameId, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+        #endregion
 
-            #region PSP 9.2 EditUserGroup(string username, string password, string usernameName, int groupId)
+        #region PSP 9.2 EditUserGroup(string username, string password, string usernameName, int groupId)
             /// <summary>
             /// PSP 9.2
             /// UserGroup editieren
@@ -473,7 +494,7 @@ namespace HicsBL
             }
             #endregion
 
-            #region PSP 13.1 switchLamp(string username, string password, bool lampOnOff, int lampId)
+        #region PSP 13.1 switchLamp(string username, string password, bool lampOnOff, int lampId)
             /// <summary>
             /// PSP 13.1
             /// Lampe Ein/Aus
@@ -503,7 +524,7 @@ namespace HicsBL
             }
             #endregion
 
-            #region PSP 16.1 dimLamp(string username, string password, int lampId, byte brightness)
+        #region PSP 16.1 dimLamp(string username, string password, int lampId, byte brightness)
             /// <summary>
             /// PSP 15.1
             /// Lampen dimmen
@@ -522,7 +543,7 @@ namespace HicsBL
             }
             #endregion
 
-            #region PSP 16.2 dimLamp(string username, string password, string lampName, byte brightness)
+        #region PSP 16.2 dimLamp(string username, string password, string lampName, byte brightness)
             /// <summary>
             /// PSP 15.2
             /// Lampen dimmen
@@ -541,7 +562,7 @@ namespace HicsBL
             }
             #endregion
 
-            #region PSP 16.1 userLogin(string username, string password)
+        #region PSP 16.1 userLogin(string username, string password)
             /// <summary>
             /// PSP 16.1
             /// User Login
@@ -558,7 +579,7 @@ namespace HicsBL
             }
             #endregion
 
-            #region PSP 19.1 EditUserPassword(string username, string passwordOld, string passwordNew)
+        #region PSP 19.1 EditUserPassword(string username, string passwordOld, string passwordNew)
             /// <summary>
             /// PSP 19.1
             /// Edit UserPassword
@@ -577,7 +598,7 @@ namespace HicsBL
             }
             #endregion
 
-            #region PSP 16.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
+        #region PSP 16.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
             /// <summary>
             /// PSP 16.1
             /// Logfile von beginDate bis endDate in einer Liste returgeben
