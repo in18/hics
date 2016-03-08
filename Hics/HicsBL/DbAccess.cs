@@ -456,166 +456,166 @@ namespace HicsBL
         }
             #endregion
 
-            #region PSP 9.1 EditUserGroup(string username, string password, int usernameId, int groupId)
-            /// <summary>
-            /// PSP 9.1
-            /// UserGroup editieren
-            /// </summary>
-            /// <param name="username"></param>
-            /// <param name="password"></param>
-            /// <param name="usernameId"></param>
-            /// <param name="groupId"></param>
-            /// <returns></returns>
-            static bool EditUserGroup(string username, string password, int usernameId, int groupId)
+        #region PSP 9.1 EditUserGroup(string username, string password, int usernameId, int groupId)
+        /// <summary>
+        /// PSP 9.1
+        /// UserGroup editieren
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="usernameId"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        static bool EditUserGroup(string username, string password, int usernameId, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+        #endregion
+
+        #region PSP 9.2 EditUserGroup(string username, string password, string usernameName, int groupId)
+        /// <summary>
+        /// PSP 9.2
+        /// UserGroup editieren
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="usernameName"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        static bool EditUserGroup(string username, string password, string usernameName, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+        #endregion
+
+        #region PSP 13.1 switchLamp(string username, string password, bool lampOnOff, int lampId)
+        /// <summary>
+        /// PSP 13.1
+        /// Lampe Ein/Aus
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="lampOnOff"></param>
+        /// <param name="lampId"></param>
+        /// <returns></returns>
+        static void switchLamp(string username, string password, bool lampOnOff, int lampId)
+        {
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+
+
+            //Ab hier wird die HUE-Bridge angesprochen
+            if (lampOnOff == true)
             {
-                bool success = false;
-                //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-                string pwhash = HelperClass.GetHash(password);
-                return success;
+                // Vereinfachter aufruf über die HelperClass
+                HelperClass.SetLampState(lampId, true);
             }
-            #endregion
-
-            #region PSP 9.2 EditUserGroup(string username, string password, string usernameName, int groupId)
-            /// <summary>
-            /// PSP 9.2
-            /// UserGroup editieren
-            /// </summary>
-            /// <param name="username"></param>
-            /// <param name="password"></param>
-            /// <param name="usernameName"></param>
-            /// <param name="groupId"></param>
-            /// <returns></returns>
-            static bool EditUserGroup(string username, string password, string usernameName, int groupId)
+            else
             {
-                bool success = false;
-                //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-                string pwhash = HelperClass.GetHash(password);
-                return success;
+                // Vereinfachter aufruf über die HelperClass
+                HelperClass.SetLampState(lampId, false);
             }
-            #endregion
+        }
+        #endregion
 
-            #region PSP 13.1 switchLamp(string username, string password, bool lampOnOff, int lampId)
-            /// <summary>
-            /// PSP 13.1
-            /// Lampe Ein/Aus
-            /// </summary>
-            /// <param name="username"></param>
-            /// <param name="password"></param>
-            /// <param name="lampOnOff"></param>
-            /// <param name="lampId"></param>
-            /// <returns></returns>
-            static void switchLamp(string username, string password, bool lampOnOff, int lampId)
-            {
-                //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-                string pwhash = HelperClass.GetHash(password);
+        #region PSP 16.1 dimLamp(string username, string password, int lampId, byte brightness)
+        /// <summary>
+        /// PSP 15.1
+        /// Lampen dimmen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="lampId"></param>
+        /// <param name="brightness"></param>
+        /// <returns></returns>
+        static bool dimLamp(string username, string password, int lampId, byte brightness)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+        #endregion
 
+        #region PSP 16.2 dimLamp(string username, string password, string lampName, byte brightness)
+        /// <summary>
+        /// PSP 15.2
+        /// Lampen dimmen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="lampName"></param>
+        /// <param name="brightness"></param>
+        /// <returns></returns>
+        static bool dimLamp(string username, string password, string lampName, byte brightness)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+        #endregion
 
-                //Ab hier wird die HUE-Bridge angesprochen
-                if (lampOnOff == true)
-                {
-                    // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(lampId, true);
-                }
-                else
-                {
-                    // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(lampId, false);
-                }
-            }
-            #endregion
+        #region PSP 16.1 userLogin(string username, string password)
+        /// <summary>
+        /// PSP 16.1
+        /// User Login
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        static bool userLogin(string username, string password)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return success;
+        }
+        #endregion
 
-            #region PSP 16.1 dimLamp(string username, string password, int lampId, byte brightness)
-            /// <summary>
-            /// PSP 15.1
-            /// Lampen dimmen
-            /// </summary>
-            /// <param name="username"></param>
-            /// <param name="password"></param>
-            /// <param name="lampId"></param>
-            /// <param name="brightness"></param>
-            /// <returns></returns>
-            static bool dimLamp(string username, string password, int lampId, byte brightness)
-            {
-                bool success = false;
-                //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-                string pwhash = HelperClass.GetHash(password);
-                return success;
-            }
-            #endregion
+        #region PSP 19.1 EditUserPassword(string username, string passwordOld, string passwordNew)
+        /// <summary>
+        /// PSP 19.1
+        /// Edit UserPassword
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="passwordOld"></param>
+        /// <param name="passwordNew"></param>
+        /// <returns></returns>
+        static bool EditUserPassword(string username, string passwordOld, string passwordNew)
+        {
+            bool success = false;
+            //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
+            string pwhashOld = HelperClass.GetHash(passwordOld);
+            string pwhashNew = HelperClass.GetHash(passwordNew);
+            return success;
+        }
+        #endregion
 
-            #region PSP 16.2 dimLamp(string username, string password, string lampName, byte brightness)
-            /// <summary>
-            /// PSP 15.2
-            /// Lampen dimmen
-            /// </summary>
-            /// <param name="username"></param>
-            /// <param name="password"></param>
-            /// <param name="lampName"></param>
-            /// <param name="brightness"></param>
-            /// <returns></returns>
-            static bool dimLamp(string username, string password, string lampName, byte brightness)
-            {
-                bool success = false;
-                //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-                string pwhash = HelperClass.GetHash(password);
-                return success;
-            }
-            #endregion
-
-            #region PSP 16.1 userLogin(string username, string password)
-            /// <summary>
-            /// PSP 16.1
-            /// User Login
-            /// </summary>
-            /// <param name="username"></param>
-            /// <param name="password"></param>
-            /// <returns></returns>
-            static bool userLogin(string username, string password)
-            {
-                bool success = false;
-                //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-                string pwhash = HelperClass.GetHash(password);
-                return success;
-            }
-            #endregion
-
-            #region PSP 19.1 EditUserPassword(string username, string passwordOld, string passwordNew)
-            /// <summary>
-            /// PSP 19.1
-            /// Edit UserPassword
-            /// </summary>
-            /// <param name="username"></param>
-            /// <param name="passwordOld"></param>
-            /// <param name="passwordNew"></param>
-            /// <returns></returns>
-            static bool EditUserPassword(string username, string passwordOld, string passwordNew)
-            {
-                bool success = false;
-                //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
-                string pwhashOld = HelperClass.GetHash(passwordOld);
-                string pwhashNew = HelperClass.GetHash(passwordNew);
-                return success;
-            }
-            #endregion
-
-            #region PSP 16.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
-            /// <summary>
-            /// PSP 16.1
-            /// Logfile von beginDate bis endDate in einer Liste returgeben
-            /// </summary>
-            /// <param name="username"></param>
-            /// <param name="password"></param>
-            /// <param name="beginDate"></param>
-            /// <param name="endDate"></param>
-            /// <returns></returns>
-            static List<Object> GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
-            {
-                List<Object> tmp = new List<object>();
-                //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-                string pwhash = HelperClass.GetHash(password);
-                return tmp;
-            }
-            #endregion
+        #region PSP 16.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
+        /// <summary>
+        /// PSP 16.1
+        /// Logfile von beginDate bis endDate in einer Liste returgeben
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        static List<Object> GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
+        {
+            List<Object> tmp = new List<object>();
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            return tmp;
+        }
+        #endregion
     }
 }
 
