@@ -7,19 +7,17 @@ using HicsBL;
 
 namespace HicsMVC.Models
 {
-    public class LampSetupModel
+    public class GroupSetupModel
     {
 
         #region Fields & Properties
 
-        [Required(ErrorMessage = "ID is required.")]
-        public string id { get; set; }
-
         [Required(ErrorMessage = "Description is required.")]
-        [Range(1, 50, ErrorMessage = "50 letters maximum.")]
-        public string description { get; set; }
+        [Range(1, 51, ErrorMessage = "50 letters maximum.")]
+        public string groupname { get; set; }
 
         #endregion
+
+
     }
 }
- 
