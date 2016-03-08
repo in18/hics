@@ -87,7 +87,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 //Table der Db-Fn holen
-                List<fn_show_lamps_Result> dblamps = cont.fn_show_lamps().ToList();
+                List<fn_show_lamps_Result> dblamps = cont.fn_show_lamps(username, password).ToList();
 
                 //temporäre Variablen
                 int? dblampId = 0; //Nullable da in der Db Nullable
@@ -190,7 +190,7 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                foreach (var item in cont.fn_show_lamps())
+                foreach (var item in cont.fn_show_lamps(username,password))
                 {
                     if (item.address == lampAdress)
                     {
