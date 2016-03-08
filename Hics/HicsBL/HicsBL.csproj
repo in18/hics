@@ -20,6 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DocumentationFile>bin\Debug\HicsBL.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -72,7 +74,6 @@
     <Compile Include="fn_show_users_Result.cs">
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="GuiAccess.cs" />
     <Compile Include="HelperClass.cs" />
     <Compile Include="HICSModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -91,6 +92,7 @@
     </Compile>
     <Compile Include="HueAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testing.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="HICSModel.edmx">
