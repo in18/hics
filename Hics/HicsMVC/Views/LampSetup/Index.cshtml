@@ -1,4 +1,4 @@
-﻿@model List<string>
+﻿@model HicsMVC.Models.LampSetupModel
 
 @{
     ViewBag.Title = "Lamp Setup";
@@ -27,39 +27,41 @@
 
     @*Lampe Hinzufügen*@
      
-@using (Html.BeginForm("AddLamp", "LampSetupController")){
+    @using (Html.BeginForm("AddLamp", "LampSetupController")){
 
-        <table class="toptext">
-            <tr>
-                <td class="addpadding">ID</td>
-                <td colspan="2">Description</td>
-            </tr>
-            @foreach (var item in Model)
-            {
-
-            }
-            <tr>
-                <td><input class="boxdesign" type="text" name="id" placeholder="ID" /></td>
-                <td class="lampaddpadding"><input class="boxdesign" type="text" name="description" placeholder="Description" /></td>
-                <td><input class="boxdesign" type="submit" name="addlamp" value="Add Lamp" /></td>
-            </tr>
-        </table>
-}
+            <table class="toptext">
+                <tr>
+                    <td class="addpadding">ID</td>
+                    <td colspan="2">Description</td>
+                </tr>
+                <tr>
+                    <td><input class="boxdesign" type="text" name="id" placeholder="ID" /></td>
+                    <td class="addpadding"><input class="boxdesign" type="text" name="description" placeholder="Description" /></td>
+                    <td><input class="boxdesign" type="submit" name="addlamp" value="Add Lamp" /></td>
+                </tr>
+            </table>
+    }
 
 
     @*Ausgabeliste*@
     <div class="listframe">
+    @*@foreach (var a in Model)
+    {*@
         <table>
             <tr>
+                @*<th align="left">@a.id</th>*@
                 <th align="left">ID</th>
+                @*<th align="left">@a.description</th>*@
                 <th align="left">Description</th>
                 <th></th>
             </tr>
             <tr class="boxrow">
                 <td class="listframepadding">DB-ID</td>
                 <td class="listframepadding">DB-Desc</td>
-                <td><a href="/LampSetup/DeleteLamp/1" class="boxdesign">Delete</a></td>
+                <td><a href="/LampSetup/DeleteLamp/1" class="boxdesign">Delete</a>
+                @*@Html.ActionLink("Delete", "DeleteLamp", new { @id = a.id })*@</td>
             </tr>
         </table>
+        @*}*@
     </div>
 </div>

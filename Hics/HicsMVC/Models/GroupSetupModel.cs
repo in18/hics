@@ -14,7 +14,7 @@ namespace HicsMVC.Models
 
         [Required(ErrorMessage = "Description is required.")]
         [Range(1, 51, ErrorMessage = "50 letters maximum.")]
-        public string groupname { get; set; }
+        public string Groupname { get; set; }
 
         #endregion
 

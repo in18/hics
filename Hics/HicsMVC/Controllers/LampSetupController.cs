@@ -16,9 +16,9 @@ namespace HicsMVC.Controllers
         {
             HicsBL.DbAccess test = new DbAccess();
 
-            List<string> namelist = new List<string>();
+            //List<Lamps> lamplist = new List<Lamps>();
 
-            return View(namelist);
+            return View();
         }
 
 
@@ -27,7 +27,7 @@ namespace HicsMVC.Controllers
         public ActionResult AddLamp(LampSetupModel lsm)
         {
                         
-            Debug.WriteLine($"ID: {lsm.id}\nDesc: {lsm.description}");            
+            Debug.WriteLine($"ID: {lsm.Id}\nDesc: {lsm.Description}");            
             
 
             return RedirectToAction("index");

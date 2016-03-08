@@ -13,11 +13,11 @@ namespace HicsMVC.Models
         #region Fields & Properties
 
         [Required(ErrorMessage = "ID is required.")]
-        public string id { get; set; }
+        public string Id { get; set; }
 
         [Required(ErrorMessage = "Description is required.")]
         [Range(1, 50, ErrorMessage = "50 letters maximum.")]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         #endregion
     }
