@@ -36,38 +36,32 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampAdress"></param>
         /// <param name="lampName"></param>
-        public static void addLamp(string username, string password, string lampAdress, string lampName)
+        public static bool addLamp(string username, string password, string lampAdress, string lampName)
         {
+            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_add_lamp(username, pwhash, lampAdress, lampName);
+                try
+                {
+                    cont.sp_add_lamp(username, pwhash, lampAdress, lampName);
+                    success = true;
+                }
+                catch 
+                {
+                    success = false;
+                }
             }
 
+            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+            HueAccess.getLampList();
+            return success;
         }
         #endregion
 
-        #region PSP 1.3 addLamp(string username, string password, string lampAdress, int lampNameId)
-        ///// <summary>
-        ///// PSP 1.3
-        ///// Lampe hinzufügen
-        ///// </summary>
-        ///// <param name="lampAdress"></param>
-        ///// <param name="lampNameId"></param>
-        ///// <returns></returns>
-        ////static void addLamp(string username, string password, string lampAdress, int lampNameId)
-        ////{
-        ////    //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-        ////    string pwhash = HelperClass.GetHash(password);
-        ////    using (itin18_aktEntities cont = new itin18_aktEntities())
-        ////    {
-        ////        cont.sp_add_lamp(username, pwhash, lampAdress, lampNameId);
-        ////    }
-
-        ////} 
-        #endregion
+       
 
         #region PSP 2.1 editLampName(string username, string password, string lampNameOld, string lampNameNew
         /// <summary>
