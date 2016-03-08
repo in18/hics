@@ -179,7 +179,25 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                foreach (var item in cont.fn_show_lamps())
+                {
+                    if (item.address == lampAdress)
+                    {
+                        try
+                        {
+                            //int? Id = item.id;
+                            cont.sp_delete_lamp(item.id, username, pwhash);
+                            success = true;
+                        }
+                        catch 
+                        {
+                            success = false;
+                        }
+                    }
+                }
+            }
             return success;
 
         }
@@ -323,7 +341,7 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_delete_usergroup(username, pwhash, groupId); //Fraglich ob IdÜbergabe passt
+                cont.sp_delete_usergroup(username, pwhash, groupId); // passt?
             }
 
             return success;
