@@ -270,10 +270,7 @@ namespace HicsBL
         static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
                 
-            }
                 return success;
         }
         #endregion
@@ -290,14 +287,6 @@ namespace HicsBL
         static bool removeLampGroup(string username, string password, string groupName)
         {
             bool success = false;
-
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhash = HelperClass.GetHash(password);
-
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                
-            }
 
             return success;
         }
@@ -341,7 +330,7 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_delete_usergroup(username, pwhash, groupId); // passt?
+                cont.sp_delete_usergroup(username, pwhash, groupId); //Fraglich ob IdÜbergabe passt
             }
 
             return success;
