@@ -11,6 +11,13 @@ namespace HicsMVC.Controllers
         // GET: LampAssigment
         public ActionResult Index()
         {
+
+            List<string> combogroup = new List<string>();
+            List<string> combolamp = new List<string>();
+
+            ViewBag.combogroup = combogroup;
+            ViewBag.combolamp = combolamp;
+
             return View();
         }
     }
