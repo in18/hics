@@ -11,7 +11,7 @@ namespace HicsBL
 {
     using System;
     
-    public partial class fn_show_lampgroups_Result
+    public partial class fn_show_lampgroup_Result
     {
         public Nullable<int> id { get; set; }
         public string roomgroupname { get; set; }
