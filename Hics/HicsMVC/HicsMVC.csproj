@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminResetPasswordModel.cs" />
     <Compile Include="Models\GroupSetupModel.cs" />
     <Compile Include="Models\LampAssignmentModel.cs" />
     <Compile Include="Models\LampSetupModel.cs" />
