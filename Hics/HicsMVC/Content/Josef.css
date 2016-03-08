@@ -9,6 +9,21 @@
 .divinputpadding{padding:10px;border:solid 2px #054588;border-radius:5px;}
 .divinputpadding:hover{box-shadow:0 0 2px 2px #054588;}
 .paddingtop{padding-top:40px;}
-.divinputpadding:focus{box-shadow:0 0 2px 2px #054588;}    
-        
+.divinputpadding:focus{box-shadow:0 0 2px 2px #054588;}
+
+
+.errorMsg {
+    background-color: red;
+    display:inline-block;
+    padding:5px;
+    border:solid 2px #054588;
+    border-radius:5px;
+    margin-left:38px;
+}
+
 /*-------------- Ende -----------------------*/
+.adminstyle{
+    color:#054588;
+    font-size:110%;
+    font-weight:bold;
+}
