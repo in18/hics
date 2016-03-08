@@ -24,6 +24,7 @@ namespace HicsMVC.SampleClass
         }
 
         private string time;
+    
 
         public string Time
         {
