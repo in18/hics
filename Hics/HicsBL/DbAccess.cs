@@ -303,7 +303,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="groupId"></param>
+        /// <param name="groupName"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
         static bool removeLampFromGroup(string username, string password, string groupName, int lampId)
