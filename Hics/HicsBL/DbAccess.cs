@@ -24,13 +24,15 @@ namespace HicsBL
         //#06.03.2016|Wolf          |XML Ausgabe für die tech. Dokumentation       #
         //#          |              |in HicsBl eingeschaltet                       #
         //#07.03.2016|Wolf          |Tech. Dok. erweitert                          #
+        //#08.03.2016|Mock,Acs      |Viele PSP erweitert                           #
+        //#08.03.2016|Wolf          |Ausbesserungen                                #
         //##########################################################################
 
 
         #region PSP 1.1 addLamp(string username, string password, string lampAdress, string lampName)
         /// <summary>
         /// PSP 1.1
-        /// Lampe hinzufügen
+        /// Lampe in der DB hinzufügen, Hue-Bridge erkennt eine neue Lampe automatisch
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -54,14 +56,12 @@ namespace HicsBL
                     success = false;
                 }
             }
-
-            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+            
+            //Neue Liste lamps von der HUE-Bridge holen
             HueAccess.getLampList();
             return success;
         }
         #endregion
-
-       
 
         #region PSP 2.1 editLampName(string username, string password, string lampNameOld, string lampNameNew
         /// <summary>
@@ -73,7 +73,7 @@ namespace HicsBL
         /// <param name="lampNameOld"></param>
         /// <param name="lampNameNew"></param>
         /// <returns></returns>
-        static void editLampName(string username, string password, string lampNameOld, string lampNameNew)
+        public static void editLampName(string username, string password, string lampNameOld, string lampNameNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
@@ -163,6 +163,7 @@ namespace HicsBL
             }
 
             //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+            //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
             HueAccess.getLampList();
             return success;
         }
@@ -203,6 +204,7 @@ namespace HicsBL
             }
 
             //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+            //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
             HueAccess.getLampList();
             return success;
 
@@ -295,11 +297,10 @@ namespace HicsBL
         static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
-           
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                foreach (var item in cont.fn_show_lampgroups(username,password))
+                foreach (var item in cont.fn_show_lampgroup())
                 {
                     if (item.id == groupId)
                     {
@@ -428,7 +429,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="usernameId"></param>
         /// <returns></returns>
-        static bool removeUser(string username, string password, int usernameId)
+        public static bool removeUser(string username, string password, int usernameId)
         {
             bool success = false;
 
@@ -444,7 +445,6 @@ namespace HicsBL
                 }
                 catch
                 {
-
                     success = false;
                 }
             }
