@@ -376,10 +376,25 @@ namespace HicsBL
         static bool removeUser(string username, string password, int usernameId)
         {
             bool success = false;
+            
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
-            return success;
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                try
+                {
+                    cont.sp_delete_user(username, pwhash, usernameId);
+                    success = true;
+                }
+                catch 
+                {
+
+                    success= false;
+                }
+            }
+
+                return success;
         }
         #endregion
 
