@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminResetPasswordModel.cs" />
     <Compile Include="Models\GroupSetupModel.cs" />
     <Compile Include="Models\LampAssignmentModel.cs" />
     <Compile Include="Models\LampSetupModel.cs" />
@@ -212,6 +213,7 @@
     <Content Include="Views\GroupSetup\Index.cshtml" />
     <Content Include="Views\LampAssigment\Index.cshtml" />
     <Content Include="Views\LampSetup\Index.cshtml" />
+    <Content Include="Views\Admin\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
