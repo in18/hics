@@ -201,58 +201,7 @@ namespace HicsBL
 
             return lampGroupId;
         }
-        /// <summary>
-        /// PSP 2.1
-        /// Editieren eines Lampennamens anhand des alten Lampennamens
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampNameOld"></param>
-        /// <param name="lampNameNew"></param>
-        /// <returns></returns>
-        static void editLampName(string username, string password, string lampNameOld, string lampNameNew)
-        {
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhash = HelperClass.GetHash(password);
-
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                List<fn_show_lamps_Result> dblamps = cont.fn_show_lamps().ToList();
-                int? dblampId = 0;
-                string dblampAdr = "";
-                foreach (var item in dblamps)
-                {
-                    if (item.name == lampNameOld)
-                    {
-                        dblampId = item.id;
-                        dblampAdr = item.address;
-                        break;
-
-                    }
-                }
-                cont.sp_delete_lamp(dblampId, username, pwhash);
-                cont.sp_add_lamp(username, pwhash, dblampAdr, lampNameNew);
-            }
-
-            HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
-        }
-        /// <summary>
-        /// PSP 2.4
-        /// Editieren eines Lampennamens anhand der LampenId
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampId"></param>
-        /// <param name="lampNameNew"></param>
-        /// <returns></returns>
-        static bool editLampName(string username, string password, int lampId, string lampNameNew)
-        {
-            bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            string pwhash = HelperClass.GetHash(password);
-
-            return success;
-        }
+       
         /// <summary>
         /// PSP 5.1
         /// Lampe einer Gruppe anhand groupId und lampId hinzufügen

@@ -205,7 +205,6 @@ namespace HicsBL
         /// <returns></returns>
         static void deleteLamp(int lampId)
         {
-            bool success = false;
             foreach (var lampkey in lamps.ToList())
             {
                 if (lampkey.Key == lampId)
@@ -213,7 +212,6 @@ namespace HicsBL
                     lamps.Remove(lampkey.Key);
                 }
             }
-            return success;
         }
 
         #endregion
