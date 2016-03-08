@@ -412,8 +412,25 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                foreach (var item in cont.fn_show_users())
+                {
+                    if (item.name == usernameName)
+                    {
+                        try
+                        {
+                            cont.sp_delete_user( username, pwhash, item.id);
+                            success = true;
+                        }
+                        catch
+                        {
+                            success = false;
+                        }
+                    }
+                }
 
-            return success;
+                return success;
         }
         #endregion
 
