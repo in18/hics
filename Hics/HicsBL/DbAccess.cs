@@ -198,6 +198,9 @@ namespace HicsBL
                     }
                 }
             }
+
+            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+            HueAccess.getLampList();
             return success;
 
         }
@@ -330,7 +333,7 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_delete_usergroup(username, pwhash, groupId); //Fraglich ob IdÜbergabe passt
+                cont.sp_delete_usergroup(username, pwhash, groupId); // passt?
             }
 
             return success;
