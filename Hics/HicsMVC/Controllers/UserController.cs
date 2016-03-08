@@ -43,7 +43,7 @@ namespace HicsMVC.Controllers
             //}
             //else
             //{
-            //    ViewBag.errorMsg = "Password does not match!";
+            //    ViewBag.errorMsg = "Password does not match";
             //}
             return View(ucpm);           
         }
