@@ -138,6 +138,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroupSetupModel.cs" />
+    <Compile Include="Models\LampAssignmentModel.cs" />
     <Compile Include="Models\LampSetupModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleClass\LampClass.cs" />
