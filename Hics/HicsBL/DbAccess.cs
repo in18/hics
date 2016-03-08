@@ -184,7 +184,7 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                foreach (var item in cont.fn_show_lamps(username,password))
+                foreach (var item in cont.fn_show_lamps(username,pwhash))
                 {
                     if (item.address == lampAdress)
                     {
@@ -259,7 +259,26 @@ namespace HicsBL
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
-            return success;
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                foreach (var item in cont.fn_show_lampgroup())
+                {
+                    if(item.roomgroupname == groupName)
+                    { 
+                        try
+                        {
+                            cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
+                            success = true;
+                        }
+                        catch
+                        {
+                            success = false;
+                        }
+                    }
+                }
+               
+            }
+                return success;
         }
         #endregion
 
