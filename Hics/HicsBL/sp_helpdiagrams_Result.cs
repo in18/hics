@@ -11,10 +11,12 @@ namespace HicsBL
 {
     using System;
     
-    public partial class fn_show_users_Result
+    public partial class sp_helpdiagrams_Result
     {
-        public Nullable<int> id { get; set; }
-        public string name { get; set; }
-        public string groupe { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }
