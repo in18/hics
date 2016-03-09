@@ -538,22 +538,28 @@ namespace HicsBL
         /// <param name="lampOnOff"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static void switchLamp(string username, string password, bool lampOnOff, int lampId)
+        public static void switchLamp(string username, string password, bool lampOnOff, int lampId)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                
+                
+                if (lampOnOff == true)
+                {
+                    cont.sp_lamp_on(username, pwhash, lampId);
+                    // Vereinfachter aufruf über die HelperClass
+                    HelperClass.SetLampState(lampId, true);
+                }
+                else
+                {
+                    cont.sp_lamp_off(username, pwhash, lampId);
+                    // Vereinfachter aufruf über die HelperClass
+                    HelperClass.SetLampState(lampId, false);
+                }
 
-            //Ab hier wird die HUE-Bridge angesprochen
-            if (lampOnOff == true)
-            {
-                // Vereinfachter aufruf über die HelperClass
-                HelperClass.SetLampState(lampId, true);
-            }
-            else
-            {
-                // Vereinfachter aufruf über die HelperClass
-                HelperClass.SetLampState(lampId, false);
             }
         }
         #endregion
