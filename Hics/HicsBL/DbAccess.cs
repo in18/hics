@@ -542,22 +542,36 @@ namespace HicsBL
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-
+            
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                
-                
+                List<fn_show_lamps_Result> dbLamps = cont.fn_show_lamps(username, pwhash).ToList();
+                int HueLampId = 0;
+                string dbLampName = "";
+
+                foreach (var item in dbLamps)
+                {
+                    if (lampId == item.id)
+                    {
+                        dbLampName = item.name;
+                        break;
+                    }
+                }
+                HueLampId = HueAccess.GetLampId(dbLampName);
+
+
+
                 if (lampOnOff == true)
                 {
                     cont.sp_lamp_on(username, pwhash, lampId);
                     // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(lampId, true);
+                    HelperClass.SetLampState(HueLampId, true);
                 }
                 else
                 {
                     cont.sp_lamp_off(username, pwhash, lampId);
                     // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(lampId, false);
+                    HelperClass.SetLampState(HueLampId, false);
                 }
 
             }
@@ -656,6 +670,18 @@ namespace HicsBL
             return tmp;
         }
         #endregion
+
+
+        public List<fn_show_lamps_Result> GetAllLamps(string username, string password)
+        {
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                
+                return cont.fn_show_lamps(username, pwhash).ToList();
+            }
+        }
     }
 }
 
