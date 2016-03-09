@@ -17,11 +17,11 @@ namespace HicsBL
             HueAccess.getLampList();// lamps liste aktuallisieren
 
             //HelperClass.SetLampState(1, true);
-            HelperClass.SetLampBrightness(2, 75);
+            HelperClass.SetLampBrightness(2, 254);
 
 
 
-            Console.ReadKey();
+            //Console.ReadKey();
 
         }
     }
