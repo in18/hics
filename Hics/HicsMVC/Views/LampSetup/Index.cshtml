@@ -35,12 +35,21 @@
                     <td colspan="2">Description</td>
                 </tr>
                 <tr>
-                    <td><input class="boxdesign" type="text" name="id" placeholder="ID" /></td>
-                    <td class="addpadding"><input class="boxdesign" type="text" name="description" placeholder="Description" /></td>
-                    <td><input class="boxdesign" type="submit" name="addlamp" value="Add Lamp" /></td>
+                    <td><input class="boxdesign" type="text" name="Id" placeholder="ID" /></td>
+                    <td class="addpadding"><input class="boxdesign" type="text" name="Description" placeholder="Description" /></td>
+                    <td><input class="boxdesign" type="submit" value="Add Lamp" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Id, String.Empty, new { @style = "color:red;font-weight:bold;" })
+                    </td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Id, String.Empty, new { @style = "color:red;font-weight:bold;" })
+                    </td>
                 </tr>
             </table>
     }
+
 
 
     @*Ausgabeliste*@
@@ -58,7 +67,7 @@
             <tr class="boxrow">
                 <td class="listframepadding">DB-ID</td>
                 <td class="listframepadding">DB-Desc</td>
-                <td><a href="/LampSetup/DeleteLamp/1" class="boxdesign">Delete</a>
+                <td><a href="/LampSetup/DeleteLamp/1" class="deletedesign">Delete</a>
                 @*@Html.ActionLink("Delete", "DeleteLamp", new { @id = a.id })*@</td>
             </tr>
         </table>
