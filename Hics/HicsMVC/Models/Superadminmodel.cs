@@ -10,10 +10,11 @@ namespace HicsMVC.Models
     {
         public string Adminname { get; set; }
 
-        [StringLength(10,MinimumLength = 3)]
+        [StringLength(10, ErrorMessage = "Password between 3 and 10 digits.", MinimumLength = 3)]
         public string Password { get; set; }
 
-        [StringLength(10, MinimumLength = 3)]
+        [StringLength(10, ErrorMessage = "Password between 3 and 10 digits.", MinimumLength = 3)]
         public string RetypePassword { get; set; }
+
     }
 }
