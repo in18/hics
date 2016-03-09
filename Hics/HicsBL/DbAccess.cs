@@ -656,6 +656,18 @@ namespace HicsBL
             return tmp;
         }
         #endregion
+
+
+        public List<fn_show_lamps_Result> GetAllLamps(string username, string password)
+        {
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                
+                return cont.fn_show_lamps(username, pwhash).ToList();
+            }
+        }
     }
 }
 
