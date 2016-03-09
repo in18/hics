@@ -17,7 +17,7 @@
     min-width: 173px;
 }
 
-.lampaddpadding {
+.addpadding {
     padding-right: 19px;
     min-width: 173px;
 }
@@ -26,7 +26,12 @@
     padding: 5px;
     border-radius: 5px;
     border: solid 2px #054588;
+}
 
+.deletedesign {
+    padding: 5px;
+    color: #054588;
+    /*font-weight: bold;*/
 }
 
 .boxdesign:focus {

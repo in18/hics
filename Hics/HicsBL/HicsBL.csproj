@@ -62,13 +62,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbAccess.cs" />
-    <Compile Include="fn_show_lampgroups_Result.cs">
+    <Compile Include="fn_show_lampgroup_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_show_lampgroup_status_Result.cs">
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="fn_show_lamps_Result.cs">
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="fn_show_usergroups_Result.cs">
+    <Compile Include="fn_show_lamp_status_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_show_usergroup_Result.cs">
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="fn_show_users_Result.cs">

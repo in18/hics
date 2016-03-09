@@ -15,6 +15,8 @@ namespace huedotnet
         public double hue { get; set; }
         public double saturation { get; set; }
         public double brightness { get; set; }
+        public double Xvalue { get; set; }
+        public double Yvalue { get; set; }
         private int? transitionTime = null;
 
         public HueLamp(int lampNumber, String name, bool state, double hue, double sat, double bri)
@@ -56,11 +58,20 @@ namespace huedotnet
         /// <param name="hue">Hue-Wert</param>
         public void SetHue(double hue)
         {
-            
-
             this.hue = hue;
             //this.saturation = sat;
             //this.brightness = bri;
+        }
+
+        /// <summary>
+        /// Den Farbwert an die Lampe mittels dem HUE-XY Farbschemas übergeben
+        /// </summary>
+        /// <param name="x">X Wert</param>
+        /// <param name="y">y Wert</param>
+        public void SetXY(double x, double y)
+        {
+            this.Xvalue = x;
+            this.Yvalue = y;
         }
 
         public void SetTransitionTime(int timeMilli)
@@ -87,6 +98,24 @@ namespace huedotnet
             commands.Add("\"sat\":" + Math.Round(saturation * 256));
             commands.Add("\"bri\": " + Math.Round(brightness * 256));
             
+            if (transitionTime != null) commands.Add("\"transitiontime\": " + transitionTime);
+
+            return String.Concat("{", String.Join(", ", commands.ToArray()), "}");
+        }
+
+        /// <summary>
+        /// Über XY Werte die Farbe übergeben, ist noch imm Test!
+        /// </summary>
+        /// <returns></returns>
+        public String GetJsonXY()
+        {
+            ArrayList commands = new ArrayList();
+            commands.Add("\"on\": " + (state == true ? "true" : "false"));
+
+            commands.Add("\"XY\":" + "[" + Xvalue + ":" +Yvalue +"]") ;
+            commands.Add("\"sat\":" + Math.Round(saturation * 256));
+            commands.Add("\"bri\": " + Math.Round(brightness * 256));
+
             if (transitionTime != null) commands.Add("\"transitiontime\": " + transitionTime);
 
             return String.Concat("{", String.Join(", ", commands.ToArray()), "}");
