@@ -19,10 +19,10 @@ namespace HicsBL
 
             HelperClass.SetLampState(1, true);
             //HelperClass.SetLampBrightness(2, 254);
-           
+
 
             //Console.ReadKey();
-        
+
+        }
     }
-}
 }

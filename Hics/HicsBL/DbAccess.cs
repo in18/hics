@@ -267,7 +267,7 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                foreach (var item in cont.fn_show_lampgroup())
+                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
                     if(item.roomgroupname == groupName)
                     { 
@@ -301,10 +301,12 @@ namespace HicsBL
         static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                foreach (var item in cont.fn_show_lampgroup())
+                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
                     if (item.id == groupId)
                     {
@@ -473,7 +475,7 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                foreach (var item in cont.fn_show_users())
+                foreach (var item in cont.fn_show_users(username, pwhash))
                 {
                     if (item.name == usernameName)
                     {
