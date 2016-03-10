@@ -16,8 +16,8 @@ namespace HicsBL
             HueAccess.getWebClient();
             HueAccess.getLampList();// lamps liste aktuallisieren
 
-            //HelperClass.SetLampState(1, true);
-            HelperClass.SetLampBrightness(2, 254);
+            HelperClass.SetLampState(4, true);
+            HelperClass.SetLampBrightness(4, 200);
 
 
 
