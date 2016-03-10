@@ -29,19 +29,19 @@
 
     @using (Html.BeginForm("Assignment", "LampAssignmentController"))
     {
+            <table class="toptextscroll">
+                <tr>
+                    <td class="addpadding">Group</td>
+                    <td colspan="2">Lamp</td>
+                </tr>
 
-        <table class="toptext">
-            <tr>
-                <td class="addpadding">Group</td>
-                <td colspan="2">Lamp</td>
-            </tr>
+                <tr>
+                    <td>@Html.DropDownList("combogroup", (IEnumerable<SelectListItem>)ViewBag.combogroup, "--Select Group--")</td>
+                    <td class="addpadding">@Html.DropDownList("combolamp", (IEnumerable<SelectListItem>)ViewBag.combolamp, "--Select Lamp--")</td>
+                    <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
+                </tr>
+            </table>
 
-            <tr>
-                <td>@Html.DropDownList("combogroup", (IEnumerable<SelectListItem>)ViewBag.combogroup, "--Select Group--")</td>
-                <td class="addpadding">@Html.DropDownList("combolamp", (IEnumerable<SelectListItem>)ViewBag.combolamp, "--Select Lamp--")</td>
-                <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
-            </tr>
-        </table>
     }
 
 

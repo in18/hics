@@ -9,7 +9,7 @@
     max-width: 450px;
     overflow-y: scroll;
     min-height: 200px;
-    max-height: 200px;
+    max-height: 400px;
 }
 
 .listframepadding {
@@ -45,7 +45,7 @@
     background-color: #e6f2fe;        
 }
 
-.toptext8 {
+.toptextscroll {
     padding-left: 8px;
 }
 

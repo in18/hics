@@ -11,10 +11,10 @@ namespace HicsBL
 {
     using System;
     
-    public partial class fn_show_users_Result
+    public partial class fn_show_lamps1_Result
     {
         public Nullable<int> id { get; set; }
         public string name { get; set; }
-        public string groupe { get; set; }
+        public string address { get; set; }
     }
 }

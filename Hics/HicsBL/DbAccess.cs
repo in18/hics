@@ -538,22 +538,42 @@ namespace HicsBL
         /// <param name="lampOnOff"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static void switchLamp(string username, string password, bool lampOnOff, int lampId)
+        public static void switchLamp(string username, string password, bool lampOnOff, int lampId)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
+            
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lamps_Result> dbLamps = cont.fn_show_lamps(username, pwhash).ToList();
+                int HueLampId = 0;
+                string dbLampName = "";
+
+                foreach (var item in dbLamps)
+                {
+                    if (lampId == item.id)
+                    {
+                        dbLampName = item.name;
+                        break;
+                    }
+                }
+                HueLampId = HueAccess.GetLampId(dbLampName);
 
 
-            //Ab hier wird die HUE-Bridge angesprochen
-            if (lampOnOff == true)
-            {
-                // Vereinfachter aufruf über die HelperClass
-                HelperClass.SetLampState(lampId, true);
-            }
-            else
-            {
-                // Vereinfachter aufruf über die HelperClass
-                HelperClass.SetLampState(lampId, false);
+
+                if (lampOnOff == true)
+                {
+                    cont.sp_lamp_on(username, pwhash, lampId);
+                    // Vereinfachter aufruf über die HelperClass
+                    HelperClass.SetLampState(HueLampId, true);
+                }
+                else
+                {
+                    cont.sp_lamp_off(username, pwhash, lampId);
+                    // Vereinfachter aufruf über die HelperClass
+                    HelperClass.SetLampState(HueLampId, false);
+                }
+
             }
         }
         #endregion
@@ -650,6 +670,18 @@ namespace HicsBL
             return tmp;
         }
         #endregion
+
+
+        public List<fn_show_lamps_Result> GetAllLamps(string username, string password)
+        {
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                
+                return cont.fn_show_lamps(username, pwhash).ToList();
+            }
+        }
     }
 }
 ö

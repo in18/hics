@@ -21,6 +21,11 @@
     margin-left:38px;
 }
 
+.errorMsg02{
+    color:red;
+    font-weight:bold;
+}
+
 /*-------------- Ende -----------------------*/
 .adminstyle{
     color:#054588;
