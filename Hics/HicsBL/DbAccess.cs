@@ -220,7 +220,7 @@ namespace HicsBL
         /// <param name="lampGroupName"></param>
         /// <returns></returns>
         static int addLampGroup(string username, string password, string lampGroupName)
-        {          
+        {
             int lampGroupId = -1;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
@@ -312,7 +312,7 @@ namespace HicsBL
                     {
                         try
                         {
-                            cont.sp_add_lamp_to_lampgroup(username, password, item.id, lampId);
+                            cont.sp_delete_lamp_from_roomgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
                         catch
@@ -340,7 +340,28 @@ namespace HicsBL
         static bool removeLampGroup(string username, string password, string groupName)
         {
             bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            string pwhash = HelperClass.GetHash(password);
 
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                foreach (var item in cont.fn_show_lampgroups(username,pwhash))
+                {
+                    if(item.roomgroupname == groupName)
+                    {
+                        try
+                        {
+                            cont.sp_delete_roomgroup(username, pwhash, item.id);
+                            success = true;
+                        }
+                        catch 
+                        {
+                            success = false;                          
+                        }
+                    }
+                }
+
+            }
             return success;
         }
 
@@ -361,7 +382,25 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                foreach (var item in cont.fn_show_lampgroups(username,pwhash))
+                {
+                    if(item.roomgroupname == groupName)
+                    {
+                        try
+                        {
+                            cont.sp_delete_lamp_from_roomgroup(username, pwhash, item.id, lampId);
+                            success = true;
+                        }
+                        catch 
+                        {
 
+                            success = false;
+                        }
+                    }
+                }
+            }
             return success;
         }
         #endregion
@@ -584,7 +623,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 16.1 dimLamp(string username, string password, int lampId, byte brightness)
+        #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness)
         /// <summary>
         /// PSP 15.1
         /// Lampen dimmen
@@ -594,16 +633,35 @@ namespace HicsBL
         /// <param name="lampId"></param>
         /// <param name="brightness"></param>
         /// <returns></returns>
-        static bool dimLamp(string username, string password, int lampId, byte brightness)
+        public static void dimLamp(string username, string password, int lampId, byte brightness)
         {
-            bool success = false;
+            //bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-            return success;
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                string dbLampName = "";
+                List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
+
+                foreach (var item in db)
+                {
+                    if (lampId == item.id)
+                    {
+                        dbLampName = item.name;
+                    }
+                   
+                }
+                int hueId = HueAccess.GetLampId(dbLampName);
+
+                HelperClass.SetLampBrightness(hueId, brightness);
+
+            }
+            
         }
         #endregion
 
-        #region PSP 16.2 dimLamp(string username, string password, string lampName, byte brightness)
+        #region PSP 15.2 dimLamp(string username, string password, string lampName, byte brightness)
         /// <summary>
         /// PSP 15.2
         /// Lampen dimmen
