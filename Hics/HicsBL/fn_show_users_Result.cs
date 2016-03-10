@@ -15,6 +15,6 @@ namespace HicsBL
     {
         public Nullable<int> id { get; set; }
         public string name { get; set; }
-        public string groupe { get; set; }
+        public string group { get; set; }
     }
 }

@@ -11,10 +11,12 @@ namespace HicsBL
 {
     using System;
     
-    public partial class fn_show_lamps1_Result
+    public partial class fn_show_lamp_status_Result
     {
         public Nullable<int> id { get; set; }
         public string name { get; set; }
         public string address { get; set; }
+        public Nullable<byte> bright { get; set; }
+        public Nullable<bool> status { get; set; }
     }
 }
