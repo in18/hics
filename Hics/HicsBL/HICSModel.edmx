@@ -17,8 +17,8 @@
           </ReturnType>
         </Function>
         <Function Name="fn_check_user_table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="varchar" Mode="In" />
-          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
@@ -37,8 +37,9 @@
               <RowType>
                 <Property Name="id" Type="int" />
                 <Property Name="name" Type="nvarchar" MaxLength="50" />
+                <Property Name="address" Type="varchar" MaxLength="50" />
                 <Property Name="bright" Type="tinyint" />
-                <Property Name="stat" Type="bit" />
+                <Property Name="status" Type="bit" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -53,13 +54,40 @@
                 <Property Name="id" Type="int" />
                 <Property Name="name" Type="nvarchar" MaxLength="50" />
                 <Property Name="address" Type="nvarchar" MaxLength="50" />
-                <Property Name="stat" Type="bit" />
-                <Property Name="bright" Type="tinyint" />
+                <Property Name="status" Type="bit" />
+                <Property Name="brightness" Type="tinyint" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_show_lampgroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" />
+                <Property Name="roomgroupname" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_show_lamps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" />
+                <Property Name="name" Type="nvarchar" MaxLength="50" />
+                <Property Name="address" Type="varchar" MaxLength="50" />
               </RowType>
             </CollectionType>
           </ReturnType>
         </Function>
         <Function Name="fn_show_usergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
@@ -70,12 +98,14 @@
           </ReturnType>
         </Function>
         <Function Name="fn_show_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
                 <Property Name="id" Type="int" />
                 <Property Name="name" Type="nvarchar" MaxLength="50" />
-                <Property Name="groupe" Type="nvarchar" MaxLength="50" />
+                <Property Name="group" Type="nvarchar" MaxLength="50" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -104,8 +134,9 @@
           <Parameter Name="new_password" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_add_usergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="name" Type="nvarchar" Mode="In" />
-          <Parameter Name="userlifetime" Type="int" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+          <Parameter Name="gourpname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -170,19 +201,19 @@
         </Function>
         <Function Name="sp_insert_test_data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_lamp_dimm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="varchar" Mode="In" />
-          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
           <Parameter Name="lamp_id" Type="int" Mode="In" />
           <Parameter Name="bright" Type="tinyint" Mode="In" />
         </Function>
         <Function Name="sp_lamp_off" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="varchar" Mode="In" />
-          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
           <Parameter Name="lamp_id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_lamp_on" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="varchar" Mode="In" />
-          <Parameter Name="password" Type="varchar" Mode="In" />
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
           <Parameter Name="lamp_id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -219,8 +250,14 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="fn_show_usergroup" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_usergroup_Result)" />
-          <FunctionImport Name="fn_show_users" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_users_Result)" />
+          <FunctionImport Name="fn_show_usergroup" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_usergroup_Result)" >
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="fn_show_users" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_users_Result)" >
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_add_lamp">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
@@ -245,8 +282,9 @@
             <Parameter Name="new_password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_add_usergroup">
-            <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="userlifetime" Mode="In" Type="Int32" />
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="gourpname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -331,6 +369,14 @@
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="fn_show_lampgroups" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lampgroups_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="fn_show_lamps1" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lamps1_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="fn_show_lamp_status_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
@@ -373,6 +419,15 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="fn_show_lampgroups_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="roomgroupname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="fn_show_lamps1_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -459,6 +514,23 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="itin18_aktModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="fn_show_lampgroups" FunctionName="itin18_aktModel.Store.fn_show_lampgroups">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lampgroups_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="roomgroupname" ColumnName="roomgroupname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fn_show_lamps1" FunctionName="itin18_aktModel.Store.fn_show_lamps">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lamps1_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
