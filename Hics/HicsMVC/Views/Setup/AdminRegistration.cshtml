@@ -1,25 +1,39 @@
-﻿@model HicsMVC.BundleConfig
+﻿@model HicsMVC.Models.SuperAdminModel
+
 
 @{
     ViewBag.Title = "Admin Registration";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
+@*Zweite Möglichkeit zum anzeigen einer Messagebox*@
+@*@if (ViewData["errMsg"] != null && ((string)ViewData["errMsg"]).Length > 0)*@
+@*Messagebox für Fehlermeldung wenn Passwort nicht übereinstimmt*@
+@if (ViewBag.errorMsg != null && ((string)ViewBag.errorMsg).Length > 0)
+{
+    
+    <div class="errorMsg">
+        @ViewBag.errorMsg
+    </div>
 
+}
+@*---------------------Messagebox Ende -----------------------------------*@
 <div class="leftpadding">
     <h2>Admin Registration</h2>
-    <form action="#" method="post">
+    <form method="post">
         <div>
-            <p class="paragraphtext">-- Input password for admin! --</p>
-            <p class="paragraphtext">Adminname:</p>
-            <input class="divinputpadding" type="text" name="adminname" value="admin" readonly />
+            <p class="paragraphtext">!-- Input password for <span class="adminstyle">admin!</span> --!</p>
+            @*<p class="paragraphtext">Adminname:</p>
+            <input class="divinputpadding" type="text" name="Adminname" value="admin" readonly />*@
         </div>
         <div>
             <p class="paragraphtext">Input Password:</p>
-            <input class="divinputpadding" type="password" name="password" placeholder="password" required />
+            <input class="divinputpadding" type="password" name="Password" placeholder="password" required />
+            @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @style = "color:red;font-weight:bold;padding-left:20px;" })
         </div>
         <div>
             <p class="paragraphtext">Retype Password:</p>
-            <input class="divinputpadding" type="password" name="retypepassword" placeholder="retype password" required />
+            <input class="divinputpadding" type="password" name="RetypePassword" placeholder="retype password" required />
+            @Html.ValidationMessageFor(model => model.RetypePassword, String.Empty, new { @style = "color:red;font-weight:bold;padding-left:20px;" })
         </div>
         <div class="bottomatbutton paddingtop">
             <a href="#" class="anchornounderline"><input class="divinputpadding" type="submit" name="submitbutton" value="Add admin" /></a>
