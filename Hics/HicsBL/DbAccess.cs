@@ -716,9 +716,9 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 16.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
+        #region PSP 18.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
         /// <summary>
-        /// PSP 16.1
+        /// PSP 18.1
         /// Logfile von beginDate bis endDate in einer Liste returgeben
         /// </summary>
         /// <param name="username"></param>
