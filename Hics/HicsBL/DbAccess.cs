@@ -578,7 +578,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 16.1 dimLamp(string username, string password, int lampId, byte brightness)
+        #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness)
         /// <summary>
         /// PSP 15.1
         /// Lampen dimmen
@@ -588,16 +588,35 @@ namespace HicsBL
         /// <param name="lampId"></param>
         /// <param name="brightness"></param>
         /// <returns></returns>
-        static bool dimLamp(string username, string password, int lampId, byte brightness)
+        public static void dimLamp(string username, string password, int lampId, byte brightness)
         {
-            bool success = false;
+            //bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-            return success;
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                string dbLampName = "";
+                List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
+
+                foreach (var item in db)
+                {
+                    if (lampId == item.id)
+                    {
+                        dbLampName = item.name;
+                    }
+                   
+                }
+                int hueId = HueAccess.GetLampId(dbLampName);
+
+                HelperClass.SetLampBrightness(hueId, brightness);
+
+            }
+            
         }
         #endregion
 
-        #region PSP 16.2 dimLamp(string username, string password, string lampName, byte brightness)
+        #region PSP 15.2 dimLamp(string username, string password, string lampName, byte brightness)
         /// <summary>
         /// PSP 15.2
         /// Lampen dimmen
