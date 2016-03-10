@@ -1,49 +1,81 @@
-﻿
+﻿@model List<HicsMVC.Models.LampControl>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
 
-    <div class="left">
-        <h2>Lamp Control</h2>
-    </div>
-    
 
-    <div class="middle">
-    <h2>Admin/Username</h2>
-    </div>
-    <br style="clear:both;" />
-    
-<div>
-        <table>
-            <tr>
-                <th>Groupname</th>
-                <th>Lampname</th>
-                <th>On</th>
-                <th>Off</th>
-                <th>Dimmer Relay</th>
+<div class="left">
+    <h2>Lamp Control</h2>
+</div>
+
+
+<div class="middle">
+    <h2></h2>
+</div>
+<div class="right">
+    <a href="~/Login/Login"><div class="logout"></div></a>
+</div>
+<br style="clear:both;" />
+
+<form>
+
+    <div class="lampcontainer">
+        <table class="lampcon">
+            <tr class="tr">
+                
+                <th class="lampcontr">Groupname</th>
+                <th class="lampcontr">Lampname</th>
+                <th class="lampcontr">OnOff</th>
+                <th class="lampcontr">Dimmer</th>
+
+                <th class="lampcontr">Edit</th>
+                
             </tr>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.groupname</td>
-                    <td>@item.lampname</td>
-                    <td><a href="/LampControl/LampOn/@item.id"></a></td>
-                    <td><a href="/LampControl/LampOff/@item.id"></a></td>
-                    <td>
-                        <form>
-                            <input type="hidden" id="@item.id" />
-
-                            <input type="text" />
-                            <input type="submit" value="Save" />
-                        </form>
+               
+                <tr class="tr">
+                    
+                    <td class="lampcontd">@item.groupname</td>
+                    <td class="lampcontd">@item.lampname</td>
+                    <th class="lampcontr">@item.OnOff</th>
+                    <th class="lampcontr">@item.dimmer</th>
+                    <td class="lampcontd">
+                        @Html.ActionLink("Edit","Edit",new { @id=item.id})
+                        
                     </td>
-
                 </tr>
+
             }
-
-
-
         </table>
+
+
     </div>
+
+</form>
+            <div class="left">
+                <h2></h2>
+            </div>
+
+
+            <div class="middle">
+                <h2></h2>
+            </div>
+            <div class="right">
+                <div style="width:100%;">
+                    <a href="~/Admin/Index">
+                        <div class="home1"></div>
+                    </a>
+                </div>
+
+
+               
+            </div>
+
+<script type="text/javascript">
+
+
+</script>

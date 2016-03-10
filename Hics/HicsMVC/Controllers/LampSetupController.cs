@@ -21,14 +21,10 @@ namespace HicsMVC.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public ActionResult AddLamp(LampSetupModel lsm)
-        {
-                        
-            Debug.WriteLine($"ID: {lsm.Id}\nDesc: {lsm.Description}");            
-            
+        {                        
+            Debug.WriteLine($"ID: {lsm.Id}\nDesc: {lsm.Description}");
 
             return RedirectToAction("index");
         }
