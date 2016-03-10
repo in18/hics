@@ -8,6 +8,13 @@ namespace HicsBL
 {
     public class GuiAccess
     {
-        
+        public int id;
+        public string groupnam;
+        public string lampname;
+
+        public byte onOff;
+
+        public byte dimmer { get; set; }
+
     }
 }
