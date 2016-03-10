@@ -16,7 +16,7 @@ namespace HicsBL
         public Nullable<int> id { get; set; }
         public string name { get; set; }
         public string address { get; set; }
-        public Nullable<bool> stat { get; set; }
-        public Nullable<byte> bright { get; set; }
+        public Nullable<bool> status { get; set; }
+        public Nullable<byte> brightness { get; set; }
     }
 }

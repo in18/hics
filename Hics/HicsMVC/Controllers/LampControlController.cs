@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HicsMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,52 +7,60 @@ using System.Web.Mvc;
 
 namespace HicsMVC.Controllers
 {
+
+
     public class LampControlController : Controller
     {
+        
         // GET: LampControl
         [HttpGet]
         public ActionResult Index()
         {
-            bool isAdmin = false;
-            ViewData["isAdmin"] = isAdmin;
-
-            List<SampleClass.LampClass> lcList = new List<SampleClass.LampClass>();
-            SampleClass.LampClass lc;
-
-            lc = new SampleClass.LampClass();
-            lc.id = 1;
-            lc.groupname = "Wohnzimmer";
-            lc.lampname = "WZ1";
-            lcList.Add(lc);
-
-            lc = new SampleClass.LampClass();
-            lc.id = 33;
-            lc.groupname = "Wohnzimmer";
-            lc.lampname = "WZ2";
-            lcList.Add(lc);
-
-            lc = new SampleClass.LampClass();
-            lc.id = 156;
-            lc.groupname = "Wohnzimmer";
-            lc.lampname = "WZ3";
-            lcList.Add(lc);
-            
-            return View(lcList);
+            List<LampControl> lamps = DbHelper.DbHelperClass.getLamps();
+            return View(lamps);
         }
 
-        public ActionResult LampOn(int id) {
 
-            // irgendwelche db operationen
 
-            return RedirectToAction("index");
-        }
-
-        public ActionResult LampÓff(int id)
+        [HttpGet]
+        public ActionResult Index_Lampcontrol()
         {
+            
 
-            // irgendwelche db operationen
-
-            return RedirectToAction("index");
+            return View();
         }
+
+        /// <summary>
+        /// Lampcontrol
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            List<LampControl> lamps = DbHelper.DbHelperClass.getLamps();
+            LampControl lc = (from a in lamps where a.id == id select a).FirstOrDefault<LampControl>();
+
+            return View(lc);
+        }
+
+
+
+
+        //public ActionResult LampOn(int id)
+        //{
+
+        //    irgendwelche db operationen
+
+        //    return RedirectToAction("index");
+        //}
+
+        //public ActionResult LampOff(int id)
+        //{
+
+        //    irgendwelche db operationen
+
+        //    return RedirectToAction("index");
+        //}
     }
 }

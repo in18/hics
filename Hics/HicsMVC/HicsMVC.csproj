@@ -136,12 +136,14 @@
     <Compile Include="Controllers\UserAddController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserSetupController.cs" />
+    <Compile Include="DbHelper\DbHelperClass.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminResetPasswordModel.cs" />
     <Compile Include="Models\GroupSetupModel.cs" />
     <Compile Include="Models\LampAssignmentModel.cs" />
+    <Compile Include="Models\LampControl.cs" />
     <Compile Include="Models\LampSetupModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SuperAdminModel.cs" />
