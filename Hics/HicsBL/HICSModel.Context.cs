@@ -74,12 +74,6 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lamp_status_Result>("[itin18_aktEntities].[fn_show_lamp_status](@username, @password, @lamp_id)", usernameParameter, passwordParameter, lamp_idParameter);
         }
     
-        [DbFunction("itin18_aktEntities", "fn_show_lampgroup")]
-        public virtual IQueryable<fn_show_lampgroup_Result> fn_show_lampgroup()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroup_Result>("[itin18_aktEntities].[fn_show_lampgroup]()");
-        }
-    
         [DbFunction("itin18_aktEntities", "fn_show_lampgroup_status")]
         public virtual IQueryable<fn_show_lampgroup_status_Result> fn_show_lampgroup_status(string username, string password, Nullable<int> group_id)
         {
@@ -96,6 +90,20 @@ namespace HicsBL
                 new ObjectParameter("group_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroup_status_Result>("[itin18_aktEntities].[fn_show_lampgroup_status](@username, @password, @group_id)", usernameParameter, passwordParameter, group_idParameter);
+        }
+    
+        [DbFunction("itin18_aktEntities", "fn_show_lampgroups")]
+        public virtual IQueryable<fn_show_lampgroups_Result> fn_show_lampgroups(string username, string password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroups_Result>("[itin18_aktEntities].[fn_show_lampgroups](@username, @password)", usernameParameter, passwordParameter);
         }
     
         [DbFunction("itin18_aktEntities", "fn_show_lamps")]
@@ -235,27 +243,6 @@ namespace HicsBL
                 new ObjectParameter("gourpname", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_usergroup", usernameParameter, passwordParameter, gourpnameParameter);
-        }
-    
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
         }
     
         public virtual int sp_change_password(string name, string oldpassword, string newpassword)
@@ -443,111 +430,6 @@ namespace HicsBL
                 new ObjectParameter("lamp_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_on", usernameParameter, passwordParameter, lamp_idParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        [DbFunction("itin18_aktEntities", "fn_show_lampgroups")]
-        public virtual IQueryable<fn_show_lampgroups_Result> fn_show_lampgroups(string username, string password)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroups_Result>("[itin18_aktEntities].[fn_show_lampgroups](@username, @password)", usernameParameter, passwordParameter);
-        }
-    
-        [DbFunction("itin18_aktEntities", "fn_show_lamps1")]
-        public virtual IQueryable<fn_show_lamps1_Result> fn_show_lamps1(string username, string password)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lamps1_Result>("[itin18_aktEntities].[fn_show_lamps1](@username, @password)", usernameParameter, passwordParameter);
         }
     }
 }

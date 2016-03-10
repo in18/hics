@@ -225,6 +225,10 @@ namespace HicsBL
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {                             
+                    cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
+            }
             return lampGroupId;
         }
 
@@ -263,7 +267,7 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                foreach (var item in cont.fn_show_lampgroup())
+                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
                     if(item.roomgroupname == groupName)
                     { 
@@ -302,7 +306,7 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                foreach (var item in cont.fn_show_lampgroup())
+                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
                     if (item.id == groupId)
                     {
@@ -356,9 +360,9 @@ namespace HicsBL
                         }
                     }
                 }
-               
+
             }
-                return success;
+            return success;
         }
 
         #endregion
@@ -397,7 +401,7 @@ namespace HicsBL
                     }
                 }
             }
-                return success;
+            return success;
         }
         #endregion
 
@@ -448,7 +452,7 @@ namespace HicsBL
 
                 try
                 {
-                    cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+                cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
                     success = true;
                 }
                 catch 
@@ -510,7 +514,7 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                foreach (var item in cont.fn_show_users(username,pwhash))
+                foreach (var item in cont.fn_show_users(username, pwhash))
                 {
                     if (item.name == usernameName)
                     {
@@ -629,16 +633,35 @@ namespace HicsBL
         /// <param name="lampId"></param>
         /// <param name="brightness"></param>
         /// <returns></returns>
-        static bool dimLamp(string username, string password, int lampId, byte brightness)
+        public static void dimLamp(string username, string password, int lampId, byte brightness)
         {
-            bool success = false;
+            //bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-            return success;
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                string dbLampName = "";
+                List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
+
+                foreach (var item in db)
+                {
+                    if (lampId == item.id)
+                    {
+                        dbLampName = item.name;
+                    }
+                   
+                }
+                int hueId = HueAccess.GetLampId(dbLampName);
+
+                HelperClass.SetLampBrightness(hueId, brightness);
+
+            }
+            
         }
         #endregion
 
-        #region PSP 16.2 dimLamp(string username, string password, string lampName, byte brightness)
+        #region PSP 15.2 dimLamp(string username, string password, string lampName, byte brightness)
         /// <summary>
         /// PSP 15.2
         /// Lampen dimmen
@@ -725,4 +748,3 @@ namespace HicsBL
         }
     }
 }
-
