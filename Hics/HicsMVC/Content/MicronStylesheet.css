@@ -61,8 +61,10 @@ section {
 .right { float: left; position: relative;width: 10%; height: 100%; text-align:center;}
 
 
+/*#region Andrea Styles */
+
 /*Button Logout"*/
-.logout {
+/*.logout {
         background-image: url('../../Resources/Logout.png'); 
         height:28px;
         width:108px;
@@ -77,9 +79,9 @@ section {
             border: solid 2px #054588;
             border-radius: 7px; 
             box-shadow: 0 0 2px 2px #054588;
-        }
+        }*/
 
-/*Button Home*/
+/*Button Home
 
 .home {
         background-image: url('../../Resources/Home.png'); 
@@ -96,11 +98,11 @@ section {
             border: solid 2px #054588;
             border-radius: 7px; 
             box-shadow: 0 0 2px 2px #054588;
-        }
+        }*/
 
 /*-------------------MENU BUTTONS Style --------------------------------------*/
 
-.leftLamp { float: left; position: relative; width: 35%; height: 100%;}
+/*.leftLamp { float: left; position: relative; width: 35%; height: 100%;}
 .middleUser {float: left; position: relative; width: 35%; height: 100%;}
 .rightStatistic { float: left; position: relative;width: 20%; height: 100%;}
 
@@ -112,7 +114,7 @@ section {
 /*---------------------------END----------------------------------------------*/
 
 /*Button LampControl*/
-.LampControl {
+/*.LampControl {
     background-image: url('../Resources/LampControl.png');
     height: 99px;
     width: 136px;
@@ -129,11 +131,11 @@ section {
             box-shadow: 0 0 2px 2px #054588;
            
             
-        }
+        }*/
 
 
 /*Button UserSetup*/
-.UserSetup {
+/*.UserSetup {
     background-image: url('../Resources/UserSetup.png');
     height: 99px;
     width: 136px;
@@ -149,10 +151,10 @@ section {
             border-radius: 20px; 
             box-shadow: 0 0 2px 2px #054588; 
             
-        }
-        
+        }*/
+
 /*Button Statistic*/
-.Statistic {
+/*.Statistic {
     background-image: url('../Resources/Statistic.png');
     height: 99px;
     width: 136px;
@@ -168,11 +170,11 @@ section {
             border-radius: 20px; 
             box-shadow: 0 0 2px 2px #054588;
             
-        }
+        }*/
 
 
 /*Button LampSetup*/
-.LampSetup {
+/*.LampSetup {
     background-image: url('../Resources/Lamp Setup.png');
     height: 99px;
     width: 136px;
@@ -189,11 +191,11 @@ section {
             border-radius: 20px; 
             box-shadow: 0 0 2px 2px #054588; 
             
-        }
+        }*/
 
 
 /*Button GroupSetup*/
-.GroupSetup {
+/*.GroupSetup {
     background-image: url('../Resources/Group Setup.png');
     height: 99px;
     width: 136px;
@@ -210,10 +212,10 @@ section {
             border-radius: 20px; 
             box-shadow: 0 0 2px 2px #054588; 
             
-        }
+        }*/
 
 /*Button LampAssigment*/
-.LampAssigment {
+/*.LampAssigment {
     background-image: url('../Resources/Lamp Assignment.png');
     height: 99px;
     width: 136px;
@@ -230,10 +232,10 @@ section {
             border-radius: 20px; 
             box-shadow: 0 0 2px 2px #054588; 
             
-        }
+        }*/
 
 /*Button Change Password*/
-.ChangePassword {
+/*.ChangePassword {
     background-image: url('../Resources/Change Password.png');
     height: 99px;
     width: 136px;
@@ -247,5 +249,7 @@ section {
             border: solid 2px #054588;
             border-radius: 20px; 
             box-shadow: 0 0 2px 2px #054588; 
-        }
+        }*/
+
+/*#endregion */
 

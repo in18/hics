@@ -28,12 +28,12 @@
         <div>
             <p class="paragraphtext">Input Password:</p>
             <input class="divinputpadding" type="password" name="Password" placeholder="password" required />
-            @Html.ValidationMessageFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @style = "color:red;font-weight:bold;padding-left:20px;" })
         </div>
         <div>
             <p class="paragraphtext">Retype Password:</p>
             <input class="divinputpadding" type="password" name="RetypePassword" placeholder="retype password" required />
-            @Html.ValidationMessageFor(model => model.RetypePassword)
+            @Html.ValidationMessageFor(model => model.RetypePassword, String.Empty, new { @style = "color:red;font-weight:bold;padding-left:20px;" })
         </div>
         <div class="bottomatbutton paddingtop">
             <a href="#" class="anchornounderline"><input class="divinputpadding" type="submit" name="submitbutton" value="Add admin" /></a>

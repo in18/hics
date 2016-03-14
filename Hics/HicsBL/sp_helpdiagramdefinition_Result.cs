@@ -11,9 +11,9 @@ namespace HicsBL
 {
     using System;
     
-    public partial class fn_show_usergroups_Result
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public Nullable<int> id { get; set; }
-        public string usergroupname { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

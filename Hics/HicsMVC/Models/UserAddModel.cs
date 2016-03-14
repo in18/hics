@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using HicsBL;
 using System.ComponentModel.DataAnnotations;
+
 
 namespace HicsMVC.Models
 {
-    public class SuperAdminModel
+    public class UserAddModel
     {
-        public string Adminname { get; set; }
-
+        [StringLength(10, ErrorMessage = "UserName between 3 and 10 digits.", MinimumLength = 3)]
+        public string NewUserName { get; set; }
         [StringLength(10, ErrorMessage = "Password between 3 and 10 digits.", MinimumLength = 3)]
-        public string Password { get; set; }
-
+        public string NewUserPassword { get; set; }
         [StringLength(10, ErrorMessage = "Password between 3 and 10 digits.", MinimumLength = 3)]
-        public string RetypePassword { get; set; }
-
+        public string RetypeNewUserPassword { get; set; }
     }
 }

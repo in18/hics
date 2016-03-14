@@ -34,17 +34,17 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult ChangePassword(UserChangePasswordModel ucpm)
         {
-            //if (ucpm.NewPassword == ucpm.RetypeNewPassword)
-            //{
+            if (ucpm.NewPassword == ucpm.RetypeNewPassword)
+            {
             //    DbAccess."ChangePassword();"
 
             //    Weiteleitung zum Login
-            //    return RedirectToAction("Login", "Login");
-            //}
-            //else
-            //{
-            //    ViewBag.errorMsg = "Password does not match!";
-            //}
+            return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                ViewBag.errorMsg = "Password does not match";
+            }
             return View(ucpm);           
         }
     }
