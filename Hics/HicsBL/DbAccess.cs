@@ -251,7 +251,9 @@ namespace HicsBL
             }
             return lampGroupId;
         }
+        #endregion
 
+        #region PSP 5.1 addLampToGroup(string username, string password, int groupId, int lampId
         /// <summary>
         /// PSP 5.1
         /// Lampe einer Gruppe anhand groupId und lampId hinzufügen
@@ -260,12 +262,30 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, int groupId, int lampId)
+        public static bool addLampToGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
+                {
+                    if (item.id == groupId)
+                    {
+                        try
+                        {
+                            cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
+                            success = true;
+                        }
+                        catch
+                        {
+                            success = false;
+                        }
+                    }
+                }
+            }
             return success;
         }
         #endregion
@@ -290,8 +310,7 @@ namespace HicsBL
                 foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
                     if(item.roomgroupname == groupName)
-                    {
-                        
+                    {                    
                         try
                         {
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
@@ -302,13 +321,10 @@ namespace HicsBL
                             success = false;
                         }
                             
-                    }
-                            
-                    
+                    }    
                 }
-               
             }
-                return success;
+            return success;
         }
         #endregion
 
