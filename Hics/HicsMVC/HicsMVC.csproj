@@ -218,6 +218,7 @@
     <Content Include="Views\LampSetup\Index.cshtml" />
     <Content Include="Views\Admin\ResetPassword.cshtml" />
     <Content Include="Views\UserAdd\Index.cshtml" />
+    <Content Include="Views\LampControl\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
