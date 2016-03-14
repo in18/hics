@@ -12,11 +12,13 @@
         <h2>Login</h2>           
         <div> 
             <p>@Html.LabelFor(x => x.Username, new { @class="paragraphtext" }):</p>         
-            @Html.TextBoxFor(x => x.Username, new { @class="divinputpadding", placeholder="Username" })          
+            @Html.TextBoxFor(x => x.Username, new { @class="divinputpadding", placeholder="Username" }) 
+            @Html.ValidationMessageFor(x => x.Username) @* Username-Validierungstext - wird im Model festgelegt *@         
         </div>
         <div>
             <p>@Html.LabelFor(x => x.Password, new { @class="paragraphtext" }):</p> 
             @Html.PasswordFor(x => x.Password, new { @class="divinputpadding", placeholder="Password123" })
+            @Html.ValidationMessageFor(x => x.Password) @* Password-Validierungstext - wird im Model festgelegt *@            
         </div>        
         <div class="bottomatbutton paddingtop">
             <input class="divinputpadding" type="submit" name="LoginButton" value="Login" />@* Submit-Button für Login *@            

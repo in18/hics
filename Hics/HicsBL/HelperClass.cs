@@ -21,13 +21,21 @@ namespace HicsBL
         /// </summary>
         /// <param name="text">der text zum hashen</param>
         /// <returns></returns>
-        public static string GetHash(string text)
+        public static Byte[] GetHash(string text)
         {
             string hash = "";
+            //Byte[] hash = null;
             SHA512 alg = SHA512.Create();
-            byte[] result = alg.ComputeHash(Encoding.UTF8.GetBytes(text));
-            hash = Encoding.UTF8.GetString(result);
-            return hash;
+            Byte[] result = alg.ComputeHash(Encoding.Unicode.GetBytes(text));
+            //hash = Encoding.UTF8.GetString(result);
+            hash = ByteArrayToString(result);
+            return result;
+        }
+
+        public static string ByteArrayToString(byte[] ba)
+        {
+            string hex = BitConverter.ToString(ba);
+            return hex.Replace("-", "");
         }
 
         /// <summary>
@@ -85,12 +93,14 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="dbLampId">LampenID der DB</param>
         /// <returns></returns>
-        public static int GetHueLampId(string username, string password, int dbLampId)
+        public static int GetHueLampId(string username, Byte[] password, int dbLampId)
         {
             int hueLampId = -1;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            //Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                List<fn_show_lamps_Result> db = new List<fn_show_lamps_Result>();
+                List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, password).ToList();
                 
                 foreach (var item in db)
                 {
