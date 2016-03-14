@@ -198,7 +198,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampAdress"></param>
         /// <returns></returns>
-        static bool deleteLamp(string username, string password, string lampAdress)
+        public static bool deleteLamp(string username, string password, string lampAdress)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -239,9 +239,8 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampGroupName"></param>
         /// <returns></returns>
-        static int addLampGroup(string username, string password, string lampGroupName)
+        public static void addLampGroup(string username, string password, string lampGroupName)
         {
-            int lampGroupId = -1;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
@@ -249,7 +248,6 @@ namespace HicsBL
             {                             
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
             }
-            return lampGroupId;
         }
 
         /// <summary>
@@ -397,7 +395,7 @@ namespace HicsBL
         /// <param name="groupName"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool removeLampFromGroup(string username, string password, string groupName, int lampId)
+        public static bool removeLampFromGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -442,7 +440,7 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_delete_usergroup(username, pwhash, groupId); // passt? denke schon
+                cont.sp_delete_roomgroup(username, pwhash, groupId);
             }
 
             return success;
