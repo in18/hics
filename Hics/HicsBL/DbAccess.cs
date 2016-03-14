@@ -12,6 +12,7 @@ namespace HicsBL
     /// <summary>
     /// Diese Klasse ist die Schnittstelle zwischen GUI,DB,HUE
     /// </summary>
+    [System.Runtime.InteropServices.Guid("6FE03D8A-15FD-4100-89A9-5BEF81361D24")]
     public class DbAccess
     {
         //##########################################################################
@@ -73,7 +74,7 @@ namespace HicsBL
         /// <param name="lampNameOld"></param>
         /// <param name="lampNameNew"></param>
         /// <returns></returns>
-        public static void editLampName(string username, string password, string lampNameOld, string lampNameNew)
+        static void editLampName(string username, string password, string lampNameOld, string lampNameNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
@@ -87,14 +88,13 @@ namespace HicsBL
                 int? dblampId = 0; //Nullable da in der Db Nullable
                 string dblampAdr = "";
 
-                // Lambda Bsp. statt foreach
-                // dblampId= cont.fn_show_lamps().Where(i => i.name == lampNameOld);
-                // Lamda ende
-
                 foreach (var item in dblamps)
                 {
+                    // Suche des alten Namens zwecks Änderung
                     if (item.name == lampNameOld)
                     {
+                        //Wenn gefunden->
+
                         //Für das Wiederanlegen der Lampe die ID temp. speichern
                         dblampId = item.id;
                         //Für das Wiederanlegen der Lampe die Adresse temp. speichern
@@ -115,19 +115,37 @@ namespace HicsBL
         #region PSP 2.4 editLampName(string username, string password, int lampId, string lampNameNew)
         /// <summary>
         /// PSP 2.4
-        /// Editieren eines Lampennamens anhand der LampenId
+        /// Editieren eines Lampennamens anhand der DB-LampenId      
+        /// Is aber wurscht, da die Hue-Bridge entfernte Lampen automatisch erkennt
+        /// Es geht nur um den Db Eintrag
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="lampId"></param>
         /// <param name="lampNameNew"></param>
         /// <returns></returns>
-        static bool editLampName(string username, string password, int lampId, string lampNameNew)
+        public static bool editLampName(string username, string password, int lampId, string lampNameNew)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
+            // Das wixdichte is wir brauchen 2 Listen, DB und Hue
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                string dbLampName = "";
+                List<fn_show_lamps_Result> dbLamps = new List<fn_show_lamps_Result>();
+                foreach (var item in dbLamps)
+                {
+                    if (item.id == lampId)
+                    {
+                        dbLampName = item.name;
+                    }
+                }
+
+                int HueLampId = HelperClass.GetHueLampId(username, pwhash, lampId);
+                HelperClass.SetLampName(HueLampId, lampNameNew);
+            }
             return success;
         }
         #endregion
@@ -136,10 +154,12 @@ namespace HicsBL
         ///<summary>
         /// PSP 3.1
         /// Löschen der Lampe anhand der LampenId
+        /// Is aber wurscht, da die Hue-Bridge entfernte Lampen automatisch erkennt
+        /// Es geht nur um den Db Eintrag
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="lampId"></param>
+        /// <param name="lampId">Id der Lampe aus der DB</param>
         /// <returns></returns>
         public static bool deleteLamp(string username, string password, int lampId)
         {
@@ -302,7 +322,7 @@ namespace HicsBL
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
+        public static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -341,7 +361,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupName"></param>
         /// <returns></returns>
-        static bool removeLampGroup(string username, string password, string groupName)
+        public static bool removeLampGroup(string username, string password, string groupName)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -418,7 +438,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <returns></returns>
-        static bool removeLampGroup(string username, string password, int groupId)
+        public static bool removeLampGroup(string username, string password, int groupId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -426,7 +446,7 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_delete_usergroup(username, pwhash, groupId); // passt?
+                cont.sp_delete_usergroup(username, pwhash, groupId); // passt? denke schon
             }
 
             return success;
@@ -511,7 +531,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="usernameName"></param>
         /// <returns></returns>
-        static bool removeUser(string username, string password, string usernameName)
+        public static bool removeUser(string username, string password, string usernameName)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -758,24 +778,32 @@ namespace HicsBL
         }
         #endregion
 
-
+        /// <summary>
+        /// Die in der DB eingetragenen Namen als Liste
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>Liste des Datentyp's "fn_show_lamps_Result". D.h. einen Table aller Lampen</returns>
         public List<fn_show_lamps_Result> GetAllLamps(string username, string password)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                
+            {                
                 return cont.fn_show_lamps(username, pwhash).ToList();
             }
         }
-
+        /// <summary>
+        /// Die in der DB eingetragenen User als Liste
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>Liste des Datentyp's "fn_show_users_Result". D.h. einen Table aller User</returns>
         public List<fn_show_users_Result> GetAllUser(string username, string password)
         {
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-
                 return cont.fn_show_users(username, pwhash).ToList();
             }
         }

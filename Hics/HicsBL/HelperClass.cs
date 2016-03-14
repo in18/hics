@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
+
 namespace HicsBL
 {
     /// <summary>
@@ -75,6 +76,33 @@ namespace HicsBL
             XElement x = new XElement("settings",
                 new XElement("bridgeip", ipAddress),
                 new XElement("username", userToken));
+        }
+
+        /// <summary>
+        /// Die HueLampId wird durch die Abfrage der Db ausgegeben
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="dbLampId">LampenID der DB</param>
+        /// <returns></returns>
+        public static int GetHueLampId(string username, string password, int dbLampId)
+        {
+            int hueLampId = -1;
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lamps_Result> db = new List<fn_show_lamps_Result>();
+                
+                foreach (var item in db)
+                {
+                    if (item.id == dbLampId)
+                    {
+                        hueLampId = HueAccess.GetLampId(item.name);
+                        break;
+                    }
+                }
+            }
+            return hueLampId;
+
         }
         
     }

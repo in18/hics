@@ -124,6 +124,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddUserController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GroupSetupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -150,7 +151,6 @@
     <Compile Include="Models\UserAddModel.cs" />
     <Compile Include="Models\UserChangePasswordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleClass\LampClass.cs" />
     <Compile Include="SampleClass\StaticClass.cs" />
     <Compile Include="SampleClass\UserName.cs" />
   </ItemGroup>
@@ -211,7 +211,6 @@
     <Content Include="Views\UserSetup\Index.cshtml" />
     <Content Include="Views\Statistic\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\LampControl.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
     <Content Include="Views\Setup\LampSetup.cshtml" />
     <Content Include="Views\GroupSetup\Index.cshtml" />
