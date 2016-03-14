@@ -10,16 +10,16 @@
 {
     <div class="leftpadding">        
         <h2>Login</h2>           
-        <div>
-            <p class="paragraphtext">Username:</p>                
-            <input class="divinputpadding" type="text" name="Username" placeholder="JohnDoe" required />                        
+        <div> 
+            <p>@Html.LabelFor(x => x.Username, new { @class="paragraphtext" }):</p>         
+            @Html.TextBoxFor(x => x.Username, new { @class="divinputpadding", placeholder="Username" })          
         </div>
         <div>
-            <p class="paragraphtext">Password:</p>                
-                <input class="divinputpadding" type="password" name="Password" placeholder="Password123" required />                       
+            <p>@Html.LabelFor(x => x.Password, new { @class="paragraphtext" }):</p> 
+            @Html.PasswordFor(x => x.Password, new { @class="divinputpadding", placeholder="Password123" })
         </div>        
         <div class="bottomatbutton paddingtop">
-            <input class="divinputpadding" type="submit" name="LoginButton" value="Login" />@* Submit-Button für Login *@
+            <input class="divinputpadding" type="submit" name="LoginButton" value="Login" />@* Submit-Button für Login *@            
         </div>      
     </div>
 }

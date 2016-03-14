@@ -36,3 +36,31 @@ namespace HicsMVC.Controllers
 
     }
 }
+
+////Wenn das Datenmodel valide ist, dann
+//            if (this.ModelState.IsValid)
+//            {
+//    // speichere in Session
+//    if (Session["Notizliste"] == null)
+//    {
+//        Session["Notizliste"] = new List<Notiz>();
+//    }
+
+//    var x = Session["Notizliste"] as List<Notiz>;
+//    //var y = (List<Notiz>)Session["Notizliste"];
+
+//    x.Add(n);
+
+//    //Erstelle Instanz von Notiz in die DB ablegen
+//    using (NotizverwaltungEntities cont = new NotizverwaltungEntities())
+//    {
+//        Notizen no = new Notizen();
+//        no.id = n.Id;
+//        no.text = n.Text;
+//        no.titel = n.Titel;
+
+//        cont.Notizen.Add(no);
+
+//        cont.SaveChanges();
+//    }
+//}
