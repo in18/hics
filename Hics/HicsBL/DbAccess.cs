@@ -756,7 +756,7 @@ namespace HicsBL
         #endregion
 
         /// <summary>
-        /// Die in der DB eingetragenen Lamen als Liste
+        /// Die in der DB eingetragenen Namen als Liste
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
