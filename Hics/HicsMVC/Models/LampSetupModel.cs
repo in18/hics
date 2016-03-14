@@ -12,6 +12,9 @@ namespace HicsMVC.Models
 
         #region Fields & Properties
 
+        /// <summary>
+        /// properties
+        /// </summary>
         [Required(ErrorMessage = "ID is required.")]
         public string Id { get; set; }
 

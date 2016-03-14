@@ -198,7 +198,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampAdress"></param>
         /// <returns></returns>
-        static bool deleteLamp(string username, string password, string lampAdress)
+        public static bool deleteLamp(string username, string password, string lampAdress)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -239,9 +239,8 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampGroupName"></param>
         /// <returns></returns>
-        static int addLampGroup(string username, string password, string lampGroupName)
+        public static void addLampGroup(string username, string password, string lampGroupName)
         {
-            int lampGroupId = -1;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
@@ -249,9 +248,10 @@ namespace HicsBL
             {                             
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
             }
-            return lampGroupId;
         }
+        #endregion
 
+        #region PSP 5.1 addLampToGroup(string username, string password, int groupId, int lampId
         /// <summary>
         /// PSP 5.1
         /// Lampe einer Gruppe anhand groupId und lampId hinzufügen
@@ -260,12 +260,30 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, int groupId, int lampId)
+        public static bool addLampToGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
 
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
+                {
+                    if (item.id == groupId)
+                    {
+                        try
+                        {
+                            cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
+                            success = true;
+                        }
+                        catch
+                        {
+                            success = false;
+                        }
+                    }
+                }
+            }
             return success;
         }
         #endregion
@@ -279,7 +297,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupName"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, string groupName, int lampId)
+        public static bool addLampToGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -290,7 +308,7 @@ namespace HicsBL
                 foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
                     if(item.roomgroupname == groupName)
-                    { 
+                    {                    
                         try
                         {
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
@@ -300,11 +318,11 @@ namespace HicsBL
                         {
                             success = false;
                         }
-                    }
+                            
+                    }    
                 }
-               
             }
-                return success;
+            return success;
         }
         #endregion
 
@@ -397,7 +415,7 @@ namespace HicsBL
         /// <param name="groupName"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        static bool removeLampFromGroup(string username, string password, string groupName, int lampId)
+        public static bool removeLampFromGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -442,7 +460,7 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_delete_usergroup(username, pwhash, groupId); // passt? denke schon
+                cont.sp_delete_roomgroup(username, pwhash, groupId);
             }
 
             return success;
@@ -691,12 +709,31 @@ namespace HicsBL
         /// <param name="lampName"></param>
         /// <param name="brightness"></param>
         /// <returns></returns>
-        static bool dimLamp(string username, string password, string lampName, byte brightness)
+        public static void dimLamp(string username, string password, string lampName, byte brightness)
         {
-            bool success = false;
+           
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-            return success;
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                int hueId = 0;
+                List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
+
+                foreach (var item in db)
+                {
+                    if (lampName == item.name)
+                    {
+                        hueId = HueAccess.GetLampId(item.name);
+                    }
+
+                }
+                
+
+                HelperClass.SetLampBrightness(hueId, brightness);
+
+            }
+
+
         }
         #endregion
 
@@ -756,12 +793,12 @@ namespace HicsBL
         #endregion
 
         /// <summary>
-        /// Die in der DB eingetragenen Lamen als Liste
+        /// Die in der DB eingetragenen Namen als Liste
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns>Liste des Datentyp's "fn_show_lamps_Result". D.h. einen Table aller Lampen</returns>
-        public List<fn_show_lamps_Result> GetAllLamps(string username, string password)
+        public static List<fn_show_lamps_Result> GetAllLamps(string username, string password)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
@@ -776,12 +813,21 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns>Liste des Datentyp's "fn_show_users_Result". D.h. einen Table aller User</returns>
-        public List<fn_show_users_Result> GetAllUser(string username, string password)
+        public static List<fn_show_users_Result> GetAllUser(string username, string password)
         {
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 return cont.fn_show_users(username, pwhash).ToList();
+            }
+        }
+
+        public static List<fn_show_lampgroups_Result> GetAllLampGroups(string username, string password)
+        {
+            string pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                return cont.fn_show_lampgroups(username, pwhash).ToList();
             }
         }
     }

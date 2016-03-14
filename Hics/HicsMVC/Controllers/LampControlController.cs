@@ -46,21 +46,22 @@ namespace HicsMVC.Controllers
 
 
 
+        /// <summary>
+        /// Lampcontrol
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="groupname"></param>
+        /// <param name="lampname"></param>
+        /// <param name="onOff"></param>
+        /// <param name="dimmer"></param>
+        /// <returns>übernimmt die Daten vom View und speichert diese auf dem Server</returns>
+        [HttpPost]
+        public ActionResult Edit (LampControl l)
+        {
+            HicsBL.DbAccess.dimLamp("Hugo", "lmaa", l.id, l.dimmer);
 
-        //public ActionResult LampOn(int id)
-        //{
+            return View();
 
-        //    irgendwelche db operationen
-
-        //    return RedirectToAction("index");
-        //}
-
-        //public ActionResult LampOff(int id)
-        //{
-
-        //    irgendwelche db operationen
-
-        //    return RedirectToAction("index");
-        //}
+        }
     }
 }
