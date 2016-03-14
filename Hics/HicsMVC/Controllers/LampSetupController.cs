@@ -16,9 +16,12 @@ namespace HicsMVC.Controllers
         {
             LampSetupModel lsm = new LampSetupModel();
 
-            //List<Lamps> lamplist = new List<Lamps>();
-            //HicsBL.DbAccess.GetAllLamps();
+            List<fn_show_lamps_Result> lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123User!");
+
+            lsm.Lamplist = lamplist;
+
             return View(lsm);
+            //return View();
         }
 
         [HttpPost]

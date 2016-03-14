@@ -23,6 +23,7 @@ namespace HicsMVC.Models
         [Required(ErrorMessage = "A Description is required.")]
         public string Description { get; set; }
         
+        public List<fn_show_lamps_Result> Lamplist { get; set; }
 
         #endregion
     }

@@ -1,5 +1,4 @@
 ﻿@model HicsMVC.Models.LampSetupModel
-
 @{
     ViewBag.Title = "Lamp Setup";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
@@ -12,7 +11,6 @@
         <div class="left">
             <h2>Lamp Setup</h2>
         </div>
-
         <div class="middle">
             <h2></h2>
         </div>
@@ -37,7 +35,7 @@
                 <tr>
                     <td> @Html.TextBoxFor(model => model.Id, new { @class = "boxdesign", @placeholder = "ID"}) </td>
                     <td> @Html.TextBoxFor(model => model.Description, new { @class = "boxdesign", @placeholder = "Description"})</td>
-                    <td><input class="boxdesign" type="submit" value="Add Lamp" /></td>
+                    <td> <input class="boxdesign" type="submit" value="Add Lamp" /></td>
                 </tr>
                 <tr>
                     <td>
@@ -50,27 +48,35 @@
             </table>
     }
 
-
-
     @*Ausgabeliste*@
     <div class="listframe">
-    @*@foreach (var a in Model)
-    {*@
+
         <table>
             <tr>
-                @*<th align="left">@a.id</th>*@
+                @*<th align="left">@Model.Lamplist </th>*@
                 <th align="left">ID</th>
-                @*<th align="left">@a.description</th>*@
+                @*<th align="left">@Model.Description</th>*@
                 <th align="left">Description</th>
                 <th></th>
             </tr>
-            <tr class="boxrow">
-                <td class="listframepadding">DB-ID</td>
-                <td class="listframepadding">DB-Desc</td>
-                <td><a href="/LampSetup/DeleteLamp/1" class="deletedesign">Delete</a>
-                @*@Html.ActionLink("Delete", "DeleteLamp", new { @id = a.id })*@</td>
-            </tr>
-        </table>
-        @*}*@
+            @for (int i = 0; i < Model.Lamplist.Count; i++)
+            {
+                <tr class="boxrow">
+                    <td class="listframepadding">@Model.Lamplist[i].address</td>
+                    <td class="listframepadding">@Model.Lamplist[i].name</td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteLamp", new { @id = Model.Lamplist[i].id, @class = "deletedesign" })
+                    </td>
+                </tr>
+            }
+        </table>        
+    </div>
+</div>
+
+<div class="left"><h2></h2></div>
+<div class="middle"><h2></h2></div>
+<div class="right">
+    <div style="width:100%;">
+        <a href="~/Admin/Index"><div class="home1"></div></a>
     </div>
 </div>
