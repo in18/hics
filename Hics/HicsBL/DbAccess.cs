@@ -593,7 +593,7 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-            return success;
+                return success;
         }
         #endregion
 
@@ -759,21 +759,35 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 19.1 EditUserPassword(string username, string passwordOld, string passwordNew)
+        #region PSP 19.1 EditUserPassword(string username, string passwordNew, string passwordOld)
         /// <summary>
         /// PSP 19.1
         /// Edit UserPassword
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="passwordOld"></param>
         /// <param name="passwordNew"></param>
+        /// <param name="passwordOld"></param>
         /// <returns></returns>
-        static bool EditUserPassword(string username, string passwordOld, string passwordNew)
+        static bool EditUserPassword(string username, string passwordNew, string passwordOld)
         {
             bool success = false;
             //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
             string pwhashOld = HelperClass.GetHash(passwordOld);
             string pwhashNew = HelperClass.GetHash(passwordNew);
+            using(itin18_aktEntities cont = new itin18_aktEntities())
+            {
+
+                try
+                {
+                    cont.sp_change_password(username, passwordNew, passwordOld);
+                    success = true;
+                }
+                catch 
+                {
+
+                    success = false;
+                }
+            }
             return success;
         }
         #endregion
