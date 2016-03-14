@@ -24,7 +24,6 @@ namespace HicsMVC.SampleClass
         }
 
         private string time;
-    
 
         public string Time
         {
@@ -45,11 +44,11 @@ namespace HicsMVC.SampleClass
         public bool Lampstatus
         {
             get { return lampstatus; }
-            set { lampstatus = value; }
+            set {lampstatus = value; }
         }
 
 
-        public StaticClass(int id, string d, string t, string g, bool ls)
+        public StaticClass(int id ,string d, string t, string g, bool ls)
         {
             this.ID = id;
             this.Date = d;
