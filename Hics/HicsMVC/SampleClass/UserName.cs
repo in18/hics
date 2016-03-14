@@ -7,7 +7,8 @@ namespace HicsMVC.SampleClass
 {
     public class UserName
     {
-
+        /* Übernahme der Namen für die Views */
+        /* Ist nur zu Testzwecken */
         private string user;
 
         public string User
