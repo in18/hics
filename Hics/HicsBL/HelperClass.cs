@@ -17,7 +17,7 @@ namespace HicsBL
     public class HelperClass
     {
         /// <summary>
-        /// Methode um einen String konform für MS-SQWL Serv 2012 'sha2_512' zu hashen
+        /// Methode um einen String konform für MS-SQL Serv 2012 'sha2_512' zu hashen
         /// </summary>
         /// <param name="text">der text zum hashen</param>
         /// <returns>Gibt ein ByteArray des gehashten Strings zurück</returns>
