@@ -762,19 +762,22 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                //ÜbergabeId 
                 int hueId = 0;
-                List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
 
-                foreach (var item in db)
+                //Suche nach Lampe mittels DB-Funktion
+                foreach (var item in cont.fn_show_lamps(username, pwhash))
                 {
+                    //Lampenname überprüfen
                     if (lampName == item.name)
                     {
+                        //Holen der LampenId über HueAccess und speichern auf hueId
                         hueId = HueAccess.GetLampId(item.name);
                     }
 
                 }
                 
-
+                //Setzt die Brightness für die Lampe(Ausführung)
                 HelperClass.SetLampBrightness(hueId, brightness);
 
             }
