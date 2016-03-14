@@ -35,6 +35,9 @@
                 <td> @Html.TextBoxFor(model => model.Groupname, new { @class = "boxdesign", @placeholder = "Groupname" } )</td>
                 <td><input class="boxdesign" type="submit" name="addgroup" value="Add Group" /></td>
             </tr>
+            <tr>
+                <td>@Html.ValidationMessageFor(model => model.Groupname, String.Empty, new { @style = "color:red;font-weight:bold;" })</td>
+            </tr>
         </table>
     }
 
@@ -52,5 +55,13 @@
             </tr>
             }
         </table>
+    </div>
+</div>
+
+<div class="left"><h2></h2></div>
+<div class="middle"><h2></h2></div>
+<div class="right">
+    <div style="width:100%;">
+        <a href="~/Admin/Index"><div class="home1"></div></a>
     </div>
 </div>

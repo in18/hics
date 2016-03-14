@@ -21,6 +21,7 @@ namespace HicsMVC.Controllers
             gsm.Grouplist = grouplist;
 
             return View(gsm);
+            //return View();
         }
 
         [HttpPost]
