@@ -35,8 +35,8 @@
                     <td colspan="2">Description</td>
                 </tr>
                 <tr>
-                    <td><input class="boxdesign" type="text" name="Id" placeholder="ID" /></td>
-                    <td class="addpadding"><input class="boxdesign" type="text" name="Description" placeholder="Description" /></td>
+                    <td> @Html.TextBoxFor(model => model.Id, new { @class = "boxdesign", @placeholder = "ID"}) </td>
+                    <td> @Html.TextBoxFor(model => model.Description, new { @class = "boxdesign", @placeholder = "Description"})</td>
                     <td><input class="boxdesign" type="submit" value="Add Lamp" /></td>
                 </tr>
                 <tr>
@@ -44,7 +44,7 @@
                         @Html.ValidationMessageFor(model => model.Id, String.Empty, new { @style = "color:red;font-weight:bold;" })
                     </td>
                     <td>
-                        @Html.ValidationMessageFor(model => model.Id, String.Empty, new { @style = "color:red;font-weight:bold;" })
+                        @Html.ValidationMessageFor(model => model.Description, String.Empty, new { @style = "color:red;font-weight:bold;" })
                     </td>
                 </tr>
             </table>

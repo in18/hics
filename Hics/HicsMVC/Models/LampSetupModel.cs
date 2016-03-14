@@ -15,12 +15,14 @@ namespace HicsMVC.Models
         /// <summary>
         /// properties
         /// </summary>
-        [Required(ErrorMessage = "ID is required.")]
+        [StringLength(6, ErrorMessage = "Only 6 letters allowed.", MinimumLength = 6)]
+        [Required(ErrorMessage = "The Lamp-Id is required.")]
         public string Id { get; set; }
 
-        [Required(ErrorMessage = "Description is required.")]
         [StringLength(50, ErrorMessage = "50 letters maximum.", MinimumLength = 1)]
+        [Required(ErrorMessage = "A Description is required.")]
         public string Description { get; set; }
+        
 
         #endregion
     }
