@@ -27,6 +27,8 @@ namespace HicsBL
         //#07.03.2016|Wolf          |Tech. Dok. erweitert                          #
         //#08.03.2016|Mock,Acs      |Viele PSP erweitert                           #
         //#08.03.2016|Wolf          |Ausbesserungen                                #
+        //#14.03.2016|Mock          |Ausbesserungen und Doku                       #
+        //#14.03.2016|Wolf          |Hashfunktion bearbeitet                       #
         //##########################################################################
 
         public DbAccess()
