@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+
 
 namespace HicsBL
 {
@@ -20,10 +22,12 @@ namespace HicsBL
             //HelperClass.SetLampState(1, true);
             //HelperClass.SetLampBrightness(2, 254);
             DbAccess.addUser("admin", "123user!", "Walter", "123user!");
-            //string ha = HelperClass.GetHash("123user!");
-            //HelperClass.GetHash("123user!");
+            //Byte[] ha = HelperClass.GetHash("123user!");
+            //HelperClass.GetHash(HelperClass.ByteArrayToString(ha));
 
-            //Console.ReadKey();
+
+
+            Console.ReadKey();
 
         }
     }

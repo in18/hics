@@ -23,13 +23,13 @@ namespace HicsBL
         /// <returns></returns>
         public static Byte[] GetHash(string text)
         {
-            string hash = "";
-            //Byte[] hash = null;
+            Byte[] hashbytes = null;
             SHA512 alg = SHA512.Create();
-            Byte[] result = alg.ComputeHash(Encoding.Unicode.GetBytes(text));
-            //hash = Encoding.UTF8.GetString(result);
-            hash = ByteArrayToString(result);
-            return result;
+            Encoding windows1252 = Encoding.GetEncoding(1252);
+            //Byte[] result = alg.ComputeHash(Encoding.Unicode.GetBytes(text));
+            Byte[] result = windows1252.GetBytes(text);
+            hashbytes = alg.ComputeHash(result);
+            return hashbytes;
         }
 
         public static string ByteArrayToString(byte[] ba)
