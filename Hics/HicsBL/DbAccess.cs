@@ -208,15 +208,17 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
+
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                //Nach Lampe in DB über Funktion suchen
                 foreach (var item in cont.fn_show_lamps(username,pwhash))
                 {
+                    //Adress wird geprüft
                     if (item.address == lampAdress)
                     {
                         try
-                        {
-                            //int? Id = item.id;
+                        {   //Lampe aus DB entfernen                    
                             cont.sp_delete_lamp(item.id, username, pwhash);
                             success = true;
                         }
@@ -250,7 +252,8 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
-            {                             
+            {        
+                    //Lampengruppe erstellen                     
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
             }
         }
@@ -273,12 +276,15 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                //Durchlauf der Lampengruppen mit Hilfe der DB-Funktion
                 foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
+                    //Überprüfung der GruppenId
                     if (item.id == groupId)
                     {
                         try
                         {
+                            //Hinzufügen einer Lampe zu einer Lampengruppe über DB-Funktion
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
@@ -310,12 +316,16 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                //Durchlauf der Lampengruppen mit Hilfe von DB-Funktion
                 foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
+                    //Überprüfung des Gruppennamens
                     if(item.roomgroupname == groupName)
                     {                    
                         try
                         {
+                            //Hinzufügen der Lampe zur Lampengruppe
+                            //item.id = Id der Lampengruppe
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
@@ -349,12 +359,15 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                //Durchlauf der Lampengruppen über DB-Funktion
                 foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
+                    //GruppenId wird überprüüft
                     if (item.id == groupId)
                     {
                         try
                         {
+                            //Lampe wird aus der Lampengruppe entfernt
                             cont.sp_delete_lamp_from_roomgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
@@ -388,12 +401,15 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                //Durchlauf der Lampengruppen mittels DB-Funktion
                 foreach (var item in cont.fn_show_lampgroups(username,pwhash))
                 {
+                    //Überprüfung des Gruppennamens
                     if(item.roomgroupname == groupName)
                     {
                         try
                         {
+                            //Löschen der Raumgruppe
                             cont.sp_delete_roomgroup(username, pwhash, item.id);
                             success = true;
                         }
@@ -427,12 +443,15 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                //Durchsuchen mittels DB-Funktion
                 foreach (var item in cont.fn_show_lampgroups(username,pwhash))
                 {
+                    //Überprüfung des Gruppennamens
                     if(item.roomgroupname == groupName)
                     {
                         try
                         {
+                            //Löschen der Lampe aus der Gruppe
                             cont.sp_delete_lamp_from_roomgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
@@ -465,7 +484,17 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                cont.sp_delete_roomgroup(username, pwhash, groupId);
+                try
+                {
+                    //Löschen der Raumgruppe
+                    cont.sp_delete_roomgroup(username, pwhash, groupId);
+                    success = true;
+                }
+                catch 
+                {
+
+                    success = false;
+                }
             }
 
             return success;
@@ -495,7 +524,8 @@ namespace HicsBL
 
                 try
                 {
-                cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+                    //User hinzufügen
+                    cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
                     success = true;
                 }
                 catch 
@@ -511,7 +541,7 @@ namespace HicsBL
         #region PSP 8.3 removeUser(string username, string password, int usernameId)
         /// <summary>
         /// PSP 8.3
-        /// entfernt user anhand von usernameId
+        /// Entfernt User anhand von usernameId
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -528,6 +558,7 @@ namespace HicsBL
             {
                 try
                 {
+                    //User wird gelöscht
                     cont.sp_delete_user(username, pwhash, usernameId);
                     success = true;
                 }
@@ -557,12 +588,16 @@ namespace HicsBL
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                //Durchlaufen der User mittels DB-Funktion
                 foreach (var item in cont.fn_show_users(username, pwhash))
                 {
+                    //Prüfung des Usernamens
                     if (item.name == usernameName)
                     {
                         try
                         {
+                            //Löschen des Users
+                            //item.id = Id des Users
                             cont.sp_delete_user(username, pwhash, item.id);
                             success = true;
                         }
@@ -593,6 +628,12 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
+            using(itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                
+
+                
+            }
                 return success;
         }
         #endregion
@@ -774,9 +815,9 @@ namespace HicsBL
             //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
             string pwhashOld = HelperClass.GetHash(passwordOld);
             string pwhashNew = HelperClass.GetHash(passwordNew);
+
             using(itin18_aktEntities cont = new itin18_aktEntities())
             {
-
                 try
                 {
                     cont.sp_change_password(username, passwordNew, passwordOld);
