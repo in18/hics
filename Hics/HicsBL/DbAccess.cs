@@ -805,5 +805,14 @@ namespace HicsBL
                 return cont.fn_show_users(username, pwhash).ToList();
             }
         }
+
+        public List<fn_show_lampgroups_Result> GetAllLampGroups(string username, string password)
+        {
+            string pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                return cont.fn_show_lampgroups(username, pwhash).ToList();
+            }
+        }
     }
 }
