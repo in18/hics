@@ -141,6 +141,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddUser.cs" />
     <Compile Include="Models\AdminResetPasswordModel.cs" />
     <Compile Include="Models\GroupSetupModel.cs" />
     <Compile Include="Models\LampAssignmentModel.cs" />
@@ -219,6 +220,7 @@
     <Content Include="Views\Admin\ResetPassword.cshtml" />
     <Content Include="Views\UserAdd\Index.cshtml" />
     <Content Include="Views\LampControl\Edit.cshtml" />
+    <Content Include="Views\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
