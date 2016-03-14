@@ -1,62 +1,64 @@
-﻿@model HicsMVC.Models.UserChangePasswordModel
+﻿
 
 @{
-    ViewBag.Title = "UserController/ChangePassword";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
-@* = @using (Html.BeginForm("ChangePassword"(=ActionName), "User"(=ControllerName), FormMethod.Post)) *@
-@using (Html.BeginForm())
-    {
-    <div style = "width:100%;" >
+
+<div style="width:100%;">
     <div class="left">
-        <h2>Change Password from User</h2>
+        <h2>Add User</h2>
     </div>
+
     <div class="middle">
-        <h2></h2>
+        <h2>Admin Name</h2>
     </div>
     <div class="right">
         <a href="~/Login/Login">
             <div class="logout"></div>
         </a>
-        </div>
     </div>
+</div>
+
+@* = @using (Html.BeginForm("ChangePassword"(=ActionName), "User"(=ControllerName), FormMethod.Post)) *@
+@using (Html.BeginForm())
+{
 
     @*Löscht alle Floats*@
-<br style="clear:both;"/>
+    <br style="clear:both;" />
 
     <div class="leftpadding">
         <div>
             <br />
-            <p class="paragraphtext">Recent Password:</p>
+            <p class="paragraphtext">Username:</p>
             <input class="divinputpadding" type="password" name="RecentPassword" placeholder="Password123" required />
         </div>
         <div>
-            <p class="paragraphtext">New Password:</p>
+            <p class="paragraphtext">Password:</p>
             <input class="divinputpadding" type="password" name="NewPassword" placeholder="Password789" required />
         </div>
         <div>
-            <p class="paragraphtext">Retype Password:</p>
+            <p class="paragraphtext">Repeat Password:</p>
             <input class="divinputpadding" type="password" name="RetypePassword" placeholder="Password789" required />
         </div>
         <div class="bottomatbutton paddingtop">
             <input class="divinputpadding" type="submit" name="SaveButton" value="Save" />@* Submit-Button für Change Password *@
         </div>
     </div>
-    <div style="width:100%;">
-        <div class="left">
-            <h2></h2>
-        </div>
-
-        <div class="middle">
-            <h2></h2>
-        </div>        
-        <div class="right">
-            <a href="~/User/Index">
-                <div class="home"></div>
-            </a>            
-        </div>
-    </div>
 }
 
+<div style="width:100%;">
+    <div class="left">
+        <h2></h2>
+    </div>
 
+    <div class="middle">
+        <h2></h2>
+    </div>
+    <div class="right">
+        <div class="home">
+            <a></a>
+        </div>
+    </div>
+</div>

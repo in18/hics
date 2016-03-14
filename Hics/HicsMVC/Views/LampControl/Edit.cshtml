@@ -1,0 +1,88 @@
+﻿@model HicsMVC.Models.LampControl
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/MicronLayout.cshtml";
+}
+
+<div class="left">
+    <h2>Lamp Control</h2>
+</div>
+
+
+<div class="middle">
+    <h2></h2>
+</div>
+<div class="right">
+    <a href="~/Login/Login"><div class="logout"></div></a>
+</div>
+<br style="clear:both;" />
+
+@using (Html.BeginForm())
+{
+
+    <div class="lampcontainer">
+        
+        <table>
+            <tr>
+                <td>Id</td>
+                <td>@Model.id</td>
+            </tr>
+            <tr>
+                <td>Groupname</td>
+                <td>@Model.groupname</td>
+            </tr>
+            <tr>
+                <td>Lampname</td>
+                <td>@Model.lampname</td>
+            </tr>
+            <tr>
+                <td>On/Off</td>
+                <td>
+                    @if (Model.OnOff == true)
+                    {
+                        <input name="OnOff" type="checkbox" checked/>
+                    }
+                    else
+                    {
+                        <input name="OnOff" type="checkbox" />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Dimmer</td>
+                <td><input type="range" value="@Model.dimmer" /> </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <input type="submit" />
+                </td>
+            </tr>
+        </table>
+
+        
+        
+    </div>
+
+}
+
+
+<div class="left">
+    <h2></h2>
+</div>
+
+
+<div class="middle">
+    <h2></h2>
+</div>
+<div class="right">
+    <div style="width:100%;">
+        <a href="~/Admin/Index">
+            <div class="home1"></div>
+        </a>
+    </div>
+
+
+
+</div>

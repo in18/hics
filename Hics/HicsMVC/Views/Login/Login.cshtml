@@ -1,11 +1,11 @@
-﻿@model HicsMVC.BundleConfig
+﻿@model HicsMVC.Models.LoginModel
 
 @{
     ViewBag.Title = "LoginController/Login";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
-@* = @using (Html.BeginForm("Login"(=actionName), "Login"(=controllerName), FormMethod.Post)) *@  
+@* = @using (Html.BeginForm("Login"(=ActionName), "Login"(=ControllerName), FormMethod.Post)) *@  
 @using (Html.BeginForm())
 {
     <div class="leftpadding">        
@@ -19,7 +19,7 @@
                 <input class="divinputpadding" type="password" name="Password" placeholder="Password123" required />                       
         </div>        
         <div class="bottomatbutton paddingtop">
-            <a href="#" class="anchornounderline"><input class="divinputpadding" type="submit" name="LoginButton" value="Login" /></a>@* Submit-Button für Login *@
+            <input class="divinputpadding" type="submit" name="LoginButton" value="Login" />@* Submit-Button für Login *@
         </div>      
     </div>
 }

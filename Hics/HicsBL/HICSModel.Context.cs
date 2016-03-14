@@ -29,13 +29,17 @@ namespace HicsBL
     
     
         [DbFunction("itin18_aktEntities", "fn_check_admin_table")]
-        public virtual IQueryable<Nullable<int>> fn_check_admin_table(Nullable<int> user_id)
+        public virtual IQueryable<Nullable<int>> fn_check_admin_table(string username, string password)
         {
-            var user_idParameter = user_id.HasValue ?
-                new ObjectParameter("user_id", user_id) :
-                new ObjectParameter("user_id", typeof(int));
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[itin18_aktEntities].[fn_check_admin_table](@user_id)", user_idParameter);
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[itin18_aktEntities].[fn_check_admin_table](@username, @password)", usernameParameter, passwordParameter);
         }
     
         [DbFunction("itin18_aktEntities", "fn_check_user_table")]
@@ -52,28 +56,96 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[itin18_aktEntities].[fn_check_user_table](@username, @password)", usernameParameter, passwordParameter);
         }
     
-        [DbFunction("itin18_aktEntities", "fn_show_lampgroups")]
-        public virtual IQueryable<fn_show_lampgroups_Result> fn_show_lampgroups()
+        [DbFunction("itin18_aktEntities", "fn_show_lamp_status")]
+        public virtual IQueryable<fn_show_lamp_status_Result> fn_show_lamp_status(string username, string password, Nullable<int> lamp_id)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroups_Result>("[itin18_aktEntities].[fn_show_lampgroups]()");
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lamp_status_Result>("[itin18_aktEntities].[fn_show_lamp_status](@username, @password, @lamp_id)", usernameParameter, passwordParameter, lamp_idParameter);
+        }
+    
+        [DbFunction("itin18_aktEntities", "fn_show_lampgroup_status")]
+        public virtual IQueryable<fn_show_lampgroup_status_Result> fn_show_lampgroup_status(string username, string password, Nullable<int> group_id)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var group_idParameter = group_id.HasValue ?
+                new ObjectParameter("group_id", group_id) :
+                new ObjectParameter("group_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroup_status_Result>("[itin18_aktEntities].[fn_show_lampgroup_status](@username, @password, @group_id)", usernameParameter, passwordParameter, group_idParameter);
+        }
+    
+        [DbFunction("itin18_aktEntities", "fn_show_lampgroups")]
+        public virtual IQueryable<fn_show_lampgroups_Result> fn_show_lampgroups(string username, string password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroups_Result>("[itin18_aktEntities].[fn_show_lampgroups](@username, @password)", usernameParameter, passwordParameter);
         }
     
         [DbFunction("itin18_aktEntities", "fn_show_lamps")]
-        public virtual IQueryable<fn_show_lamps_Result> fn_show_lamps()
+        public virtual IQueryable<fn_show_lamps_Result> fn_show_lamps(string username, string password)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lamps_Result>("[itin18_aktEntities].[fn_show_lamps]()");
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lamps_Result>("[itin18_aktEntities].[fn_show_lamps](@username, @password)", usernameParameter, passwordParameter);
         }
     
-        [DbFunction("itin18_aktEntities", "fn_show_usergroups")]
-        public virtual IQueryable<fn_show_usergroups_Result> fn_show_usergroups()
+        [DbFunction("itin18_aktEntities", "fn_show_usergroup")]
+        public virtual IQueryable<fn_show_usergroup_Result> fn_show_usergroup(string username, string password)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_usergroups_Result>("[itin18_aktEntities].[fn_show_usergroups]()");
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_usergroup_Result>("[itin18_aktEntities].[fn_show_usergroup](@username, @password)", usernameParameter, passwordParameter);
         }
     
         [DbFunction("itin18_aktEntities", "fn_show_users")]
-        public virtual IQueryable<fn_show_users_Result> fn_show_users()
+        public virtual IQueryable<fn_show_users_Result> fn_show_users(string username, string password)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_users_Result>("[itin18_aktEntities].[fn_show_users]()");
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_users_Result>("[itin18_aktEntities].[fn_show_users](@username, @password)", usernameParameter, passwordParameter);
         }
     
         public virtual int sp_add_lamp(string username, string password, string address, string name)
@@ -97,17 +169,80 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_lamp", usernameParameter, passwordParameter, addressParameter, nameParameter);
         }
     
-        public virtual int sp_add_usergroup(string name, Nullable<int> userlifetime)
+        public virtual int sp_add_lamp_to_lampgroup(string username, string password, Nullable<int> roomgroup_id, Nullable<int> lamp_id)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var roomgroup_idParameter = roomgroup_id.HasValue ?
+                new ObjectParameter("roomgroup_id", roomgroup_id) :
+                new ObjectParameter("roomgroup_id", typeof(int));
+    
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_lamp_to_lampgroup", usernameParameter, passwordParameter, roomgroup_idParameter, lamp_idParameter);
+        }
+    
+        public virtual int sp_add_lampgroup(string name, string password, string group_name)
         {
             var nameParameter = name != null ?
                 new ObjectParameter("name", name) :
                 new ObjectParameter("name", typeof(string));
     
-            var userlifetimeParameter = userlifetime.HasValue ?
-                new ObjectParameter("userlifetime", userlifetime) :
-                new ObjectParameter("userlifetime", typeof(int));
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_usergroup", nameParameter, userlifetimeParameter);
+            var group_nameParameter = group_name != null ?
+                new ObjectParameter("group_name", group_name) :
+                new ObjectParameter("group_name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_lampgroup", nameParameter, passwordParameter, group_nameParameter);
+        }
+    
+        public virtual int sp_add_user(string username, string password, string new_username, string new_password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var new_usernameParameter = new_username != null ?
+                new ObjectParameter("new_username", new_username) :
+                new ObjectParameter("new_username", typeof(string));
+    
+            var new_passwordParameter = new_password != null ?
+                new ObjectParameter("new_password", new_password) :
+                new ObjectParameter("new_password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_user", usernameParameter, passwordParameter, new_usernameParameter, new_passwordParameter);
+        }
+    
+        public virtual int sp_add_usergroup(string username, string password, string gourpname)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var gourpnameParameter = gourpname != null ?
+                new ObjectParameter("gourpname", gourpname) :
+                new ObjectParameter("gourpname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_usergroup", usernameParameter, passwordParameter, gourpnameParameter);
         }
     
         public virtual int sp_change_password(string name, string oldpassword, string newpassword)
@@ -165,6 +300,44 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_delete_lamp", lamp_idParameter, usernameParameter, passwordParameter);
         }
     
+        public virtual int sp_delete_lamp_from_roomgroup(string username, string password, Nullable<int> roomgroup_id, Nullable<int> lamp_id)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var roomgroup_idParameter = roomgroup_id.HasValue ?
+                new ObjectParameter("roomgroup_id", roomgroup_id) :
+                new ObjectParameter("roomgroup_id", typeof(int));
+    
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_delete_lamp_from_roomgroup", usernameParameter, passwordParameter, roomgroup_idParameter, lamp_idParameter);
+        }
+    
+        public virtual int sp_delete_roomgroup(string username, string password, Nullable<int> roomgroup_id)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var roomgroup_idParameter = roomgroup_id.HasValue ?
+                new ObjectParameter("roomgroup_id", roomgroup_id) :
+                new ObjectParameter("roomgroup_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_delete_roomgroup", usernameParameter, passwordParameter, roomgroup_idParameter);
+        }
+    
         public virtual int sp_delete_user(string username, string password, Nullable<int> del_id)
         {
             var usernameParameter = username != null ?
@@ -204,7 +377,7 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_insert_test_data");
         }
     
-        public virtual int sp_add_user(string username, string password, string new_username, string new_password)
+        public virtual int sp_lamp_dimm(string username, string password, Nullable<int> lamp_id, Nullable<byte> bright)
         {
             var usernameParameter = username != null ?
                 new ObjectParameter("username", username) :
@@ -214,15 +387,49 @@ namespace HicsBL
                 new ObjectParameter("password", password) :
                 new ObjectParameter("password", typeof(string));
     
-            var new_usernameParameter = new_username != null ?
-                new ObjectParameter("new_username", new_username) :
-                new ObjectParameter("new_username", typeof(string));
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
     
-            var new_passwordParameter = new_password != null ?
-                new ObjectParameter("new_password", new_password) :
-                new ObjectParameter("new_password", typeof(string));
+            var brightParameter = bright.HasValue ?
+                new ObjectParameter("bright", bright) :
+                new ObjectParameter("bright", typeof(byte));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_add_user", usernameParameter, passwordParameter, new_usernameParameter, new_passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_dimm", usernameParameter, passwordParameter, lamp_idParameter, brightParameter);
+        }
+    
+        public virtual int sp_lamp_off(string username, string password, Nullable<int> lamp_id)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_off", usernameParameter, passwordParameter, lamp_idParameter);
+        }
+    
+        public virtual int sp_lamp_on(string username, string password, Nullable<int> lamp_id)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_on", usernameParameter, passwordParameter, lamp_idParameter);
         }
     }
 }
