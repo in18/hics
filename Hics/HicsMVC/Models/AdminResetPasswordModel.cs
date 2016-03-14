@@ -10,12 +10,6 @@ namespace HicsMVC.Models
         //Felder & Eigenschaften
         public string NewPassword { get; set; }
         public string RetypePassword { get; set; }
-
-        ////Methoden   
-        //public void AdminResetPasswordData(string newpassword, string retypepassword)
-        //{
-        //    this.NewPassword = newpassword;
-        //    this.RetypePassword = retypepassword; 
-        //}
+        
     }
 }

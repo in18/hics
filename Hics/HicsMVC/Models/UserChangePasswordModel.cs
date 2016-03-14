@@ -11,13 +11,6 @@ namespace HicsMVC.Models
         public string RecentPassword { get; set; }
         public string NewPassword { get; set; }
         public string RetypeNewPassword { get; set; }
-
-        ////Methoden   
-        //public void UserChangePasswordData(string recentpassword, string newpassword, string retypenewpassword)
-        //{
-        //    this.RecentPassword = recentpassword;
-        //    this.NewPassword = newpassword;
-        //    this.RetypeNewPassword = RetypeNewPassword;
-        //}
+               
     }
 }
