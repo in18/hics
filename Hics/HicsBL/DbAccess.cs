@@ -29,7 +29,12 @@ namespace HicsBL
         //#08.03.2016|Wolf          |Ausbesserungen                                #
         //##########################################################################
 
-
+        public DbAccess()
+        {
+            HueAccess.LoadConfig();
+            HueAccess.getWebClient();
+            HueAccess.getLampList();
+        }
         #region PSP 1.1 addLamp(string username, string password, string lampAdress, string lampName)
         /// <summary>
         /// PSP 1.1
@@ -812,7 +817,7 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns>Liste des Datentyp's "fn_show_lamps_Result". D.h. einen Table aller Lampen</returns>
-        public List<fn_show_lamps_Result> GetAllLamps(string username, string password)
+        public static List<fn_show_lamps_Result> GetAllLamps(string username, string password)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
@@ -827,12 +832,27 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns>Liste des Datentyp's "fn_show_users_Result". D.h. einen Table aller User</returns>
-        public List<fn_show_users_Result> GetAllUser(string username, string password)
+        public static List<fn_show_users_Result> GetAllUser(string username, string password)
         {
             string pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 return cont.fn_show_users(username, pwhash).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Die in der DB eingetragenen Lampengruppe als Liste
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>Liste des Datentyp's "fn_show_lampgroups_Result". D.h. einen Table aller User</returns>
+        public static List<fn_show_lampgroups_Result> GetAllLampGroups(string username, string password)
+        {
+            string pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                return cont.fn_show_lampgroups(username, pwhash).ToList();
             }
         }
     }
