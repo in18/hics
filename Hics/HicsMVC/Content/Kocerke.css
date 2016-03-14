@@ -196,20 +196,7 @@
             
         }
 
-/*Button Change Password*/
-.ChangePassword {
-    background-image: url('../Resources/UserSetup.png');
-    height: 99px;
-    width: 156px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 5px;
-}
 
-.ChangePassword:hover {
-            border: solid 2px #054588;
-            border-radius: 5px;
-        }
 
 
 
