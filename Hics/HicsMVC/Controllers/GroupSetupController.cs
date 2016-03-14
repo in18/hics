@@ -14,7 +14,13 @@ namespace HicsMVC.Controllers
         // GET: GroupSetup
         public ActionResult Index()
         {
-            return View();
+            GroupSetupModel gsm = new GroupSetupModel();
+
+            List<fn_show_lampgroups_Result> grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123User!");
+
+            gsm.Grouplist = grouplist;
+
+            return View(gsm);
         }
 
         [HttpPost]
