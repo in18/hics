@@ -277,7 +277,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupName"></param>
         /// <param name="lampId"></param>
-        static bool addLampToGroup(string username, string password, string groupName, int lampId)
+        public static bool addLampToGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -288,7 +288,8 @@ namespace HicsBL
                 foreach (var item in cont.fn_show_lampgroups(username, pwhash))
                 {
                     if(item.roomgroupname == groupName)
-                    { 
+                    {
+                        
                         try
                         {
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
@@ -298,7 +299,10 @@ namespace HicsBL
                         {
                             success = false;
                         }
+                            
                     }
+                            
+                    
                 }
                
             }
@@ -689,12 +693,31 @@ namespace HicsBL
         /// <param name="lampName"></param>
         /// <param name="brightness"></param>
         /// <returns></returns>
-        static bool dimLamp(string username, string password, string lampName, byte brightness)
+        public static void dimLamp(string username, string password, string lampName, byte brightness)
         {
-            bool success = false;
+           
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             string pwhash = HelperClass.GetHash(password);
-            return success;
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                int hueId = 0;
+                List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
+
+                foreach (var item in db)
+                {
+                    if (lampName == item.name)
+                    {
+                        hueId = HueAccess.GetLampId(item.name);
+                    }
+
+                }
+                
+
+                HelperClass.SetLampBrightness(hueId, brightness);
+
+            }
+
+
         }
         #endregion
 
