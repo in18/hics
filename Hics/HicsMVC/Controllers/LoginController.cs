@@ -51,15 +51,15 @@ namespace HicsMVC.Controllers
 
 //    x.Add(n);
 
-//    //Erstelle Instanz von Notiz in die DB ablegen
-//    using (NotizverwaltungEntities cont = new NotizverwaltungEntities())
+//    //Erstellte Instanz von "Notiz" in die DB ablegen
+//    using ("Notizverwaltung"Entities cont = new "Notizverwaltung"Entities())
 //    {
-//        Notizen no = new Notizen();
+//        "Notizen no" = new "Notizen"();
 //        no.id = n.Id;
 //        no.text = n.Text;
 //        no.titel = n.Titel;
 
-//        cont.Notizen.Add(no);
+//        cont."Notizen".Add(no);
 
 //        cont.SaveChanges();
 //    }
