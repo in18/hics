@@ -21,11 +21,16 @@ namespace HicsBL
 
             //HelperClass.SetLampState(1, true);
             //HelperClass.SetLampBrightness(2, 254);
-            DbAccess.addUser("admin", "123user!", "Walter", "123user!");
+            //DbAccess.addUser("admin", "123user!", "Walter", "123user!");
             //Byte[] ha = HelperClass.GetHash("123user!");
             //HelperClass.GetHash(HelperClass.ByteArrayToString(ha));
+            List<fn_show_lamps_Result> lamplist = new List<fn_show_lamps_Result>();
+            lamplist = DbAccess.GetAllLamps("Sepp", "123user!");
 
-
+            foreach (var item in lamplist)
+            {
+                Console.WriteLine(item.name);
+            }
 
             Console.ReadKey();
 

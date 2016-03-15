@@ -14,25 +14,25 @@ namespace HicsMVC.Controllers
         // GET: LampAssigment
         public ActionResult Index()
         {
+            //Modelerstellung
+            LampAssignmentModel lsm = new LampAssignmentModel();
 
-            ViewBag.combogroup = new List<SelectListItem> { };
-            ViewBag.combolamp = new List<SelectListItem> { };
+            //Übergabe der BL-Listen an das erstellte Model, Platzhalter für Sessioninfos
+            lsm.Grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+            lsm.Lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");
 
-            return View();
+            //Model an den View schicken
+            return View(lsm);
         }
 
         [HttpPost]
         public ActionResult Assignment(LampAssignmentModel lam)
         {
-
-
             return RedirectToAction("index");
         }
 
         public ActionResult DeleteEntry()
         {
-
-
             return RedirectToAction("index");
         }
 
