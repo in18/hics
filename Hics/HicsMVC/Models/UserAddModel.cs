@@ -16,5 +16,7 @@ namespace HicsMVC.Models
         public string NewUserPassword { get; set; }
         [StringLength(10, ErrorMessage = "Password between 3 and 10 digits.", MinimumLength = 3)]
         public string RetypeNewUserPassword { get; set; }
+
+        public List<fn_show_users_Result> Userlist { get; set; }
     }
 }

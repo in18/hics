@@ -1,8 +1,89 @@
-﻿
+﻿@model HicsMVC.Models.UserAddModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="leftpadding">
+
+    @*Überschrift*@
+    <div style="width:100%;">
+        <div class="left">
+            <h2>Add User</h2>
+        </div>
+
+        <div class="middle">
+            <h2></h2>
+        </div>
+        <div class="right">
+            <div class="logout">
+                <a href="~/Login/Login"></a>
+            </div>
+        </div>
+    </div>
+
+    <br style="clear:both;" />
+    @*Eingabe eines users*@
+    @using (Html.BeginForm("UserAdd", "UserAddController"))
+    {
+        <table class="toptext">
+            <tr>
+                <td class="addpadding" colspan="2">Input User</td>
+            </tr>
+            <tr>
+                <td>
+                     @Html.TextBoxFor(model => model.NewUserName, new { @class = "boxdesign", @placeholder = "Username" })
+                </td> 
+                <td>
+                    @Html.ValidationMessageFor(model => model.NewUserName, String.Empty, new { @style = "color:red;font-weight:bold;" })
+                </td>              
+            </tr>
+            <tr>
+                <td> 
+                    @Html.TextBoxFor(model => model.NewUserPassword, new { @class = "boxdesign", @placeholder = "Password" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.NewUserPassword, String.Empty, new { @style = "color:red;font-weight:bold;" })
+                </td>
+            </tr>
+            <tr>
+                
+                <td> 
+                    @Html.TextBoxFor(model => model.RetypeNewUserPassword, new { @class = "boxdesign", @placeholder = "Retype Password" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(model => model.RetypeNewUserPassword, String.Empty, new { @style = "color:red;font-weight:bold;" })
+                </td>                
+            </tr>
+            <tr>
+                <td><input class="boxdesign" type="submit" name="newUserName" value="Add User" /></td>
+            </tr>
+        </table>
+    }
+
+    @*Ausgabeliste*@
+    <div class="listframe">
+        <table>
+            <tr>
+                <th align="left" colspan="2">Users</th>
+            </tr>
+            @for (int i = 0; i < Model.Userlist.Count; i++)
+            {
+                <tr class="boxrow">
+                    <td class="listframepadding">@Model.Userlist[i].name</td>
+                    <td class="listframepadding">@Model.Userlist[i].group</td>
+                    <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = Model.Userlist[i].id, @class = "deletedesign" })
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<div class="left"><h2></h2></div>
+<div class="middle"><h2></h2></div>
+<div class="right">
+    <div style="width:100%;">
+        <a href="~/Admin/Index"><div class="home1"></div></a>
+    </div>
+</div>
 
