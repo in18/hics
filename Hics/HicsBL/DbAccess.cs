@@ -269,6 +269,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <param name="lampId"></param>
+        /// <returns>Bool ob erfolgreich oder nicht</returns>
         public static bool addLampToGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
@@ -806,7 +807,7 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="passwordNew"></param>
         /// <param name="passwordOld"></param>
-        /// <returns></returns>
+        /// <returns>Bool ob erfolgreich</returns>
         static bool EditUserPassword(string username, string passwordNew, string passwordOld)
         {
             bool success = false;
