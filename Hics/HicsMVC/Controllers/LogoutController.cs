@@ -15,9 +15,7 @@ namespace HicsMVC.Controllers
         /// <returns></returns>
         public ActionResult Logout()
         {
-            return View();
-
-            //View noch hinzufügen!
+            return View();            
         }
     }
 }
