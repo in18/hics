@@ -47,7 +47,8 @@ namespace HicsMVC.DbHelper
             lamps.Add(lc);
 
             return lamps;
-        }
+        
 
+        }
     }
 }
