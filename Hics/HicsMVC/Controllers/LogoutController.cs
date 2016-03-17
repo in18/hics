@@ -10,12 +10,13 @@ namespace HicsMVC.Controllers
     {        
         /// <summary>
         /// Methode: [HttpGet]
-        /// Methode ruft Logout-View auf
+        /// Methode löscht die Daten der aktuellen Session und ruft den Login-View auf
         /// </summary>
         /// <returns></returns>
         public ActionResult Logout()
         {
-            //Alle Daten vom Login auf NULL setzten (= NULL)
+            //Daten der aktuellen Session löschen
+            Session["UserSession"] = null;
 
             // Weiteleitung zum Login
             return RedirectToAction("Login", "Login");
