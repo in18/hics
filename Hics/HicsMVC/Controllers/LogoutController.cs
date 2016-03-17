@@ -15,7 +15,11 @@ namespace HicsMVC.Controllers
         /// <returns></returns>
         public ActionResult Logout()
         {
-            return View();            
+            //Alle Daten vom Login auf NULL setzten (= NULL)
+
+            // Weiteleitung zum Login
+            return RedirectToAction("Login", "Login");
         }
+        
     }
 }
