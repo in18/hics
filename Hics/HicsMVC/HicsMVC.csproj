@@ -148,7 +148,6 @@
     <Compile Include="Models\LampControl.cs" />
     <Compile Include="Models\LampSetupModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\LogoutModel.cs" />
     <Compile Include="Models\SuperAdminModel.cs" />
     <Compile Include="Models\UserAddModel.cs" />
     <Compile Include="Models\UserChangePasswordModel.cs" />
@@ -222,7 +221,6 @@
     <Content Include="Views\Admin\ResetPassword.cshtml" />
     <Content Include="Views\UserAdd\Index.cshtml" />
     <Content Include="Views\LampControl\Edit.cshtml" />
-    <Content Include="Views\Logout\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
