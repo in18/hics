@@ -15,8 +15,16 @@ namespace HicsMVC.Controllers
         public ActionResult Index()
         {
 
-            ViewBag.combogroup = new List<SelectListItem> { };
-            ViewBag.combolamp = new List<SelectListItem> { };
+            LampAssignmentModel lam = new LampAssignmentModel();
+
+            List<fn_show_lampgroups_Result> grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+            List<fn_show_lamps_Result> lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");
+
+            lam.grouplist = grouplist;
+            lam.lamplist = lamplist;
+
+            //ViewBag.combogroup = new List<SelectListItem> { };
+            //ViewBag.combolamp = new List<SelectListItem> { };
 
             return View();
         }

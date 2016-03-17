@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using HicsBL; //Verweis hinzugefügt und hier eingebunden
 using HicsMVC.Models;
+using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
@@ -23,44 +24,41 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel lm)
         {
+            //Von BL erfragen, ob Login erfolgreich war - bool als return
             //DbAccess."Login();"
+            bool usercorrect = false;
 
-            //If "User=Admin" dann gehe zum Index Admin
+            //Wenn UserLogin Correct
+            if (usercorrect)
+            {
+                //Erstelle Session mit Username und Password
+                UserSession us = new UserSession();
+                //us.ID = 
+                us.name = lm.Username;
+                us.pw = lm.Password;
+                us.admin = true;
+
+                Session["UserSession"] = us;
+                //Sessionparameter werden in der allgemeinen webconfig konfiguriert
+                //Session.Timeout kann theoretisch auch hier konfiguriert werden, macht aber in der Webconfig mehr Sinn.
+
+                //If "User=Admin" dann gehe zum Index Admin
+                if (us.admin)
+                {
+                    return RedirectToAction("index", "admin");
+                }
+                else
+                {
+                    return RedirectToAction("index", "user");
+                }
+            }
+            
             //else "User=User" dann gehe zum Index User
-
-            //Weiteleitung zum "#"
-            //return RedirectToAction("#", "#"); 
-
-            return View();                    
+            else
+            {
+                ViewBag.errorMessage = "Login failed";
+                return View();
+            }                  
         }
-
     }
 }
-
-////Wenn das Datenmodel valide ist, dann
-//            if (this.ModelState.IsValid)
-//            {
-//    // speichere in Session
-//    if (Session["Notizliste"] == null)
-//    {
-//        Session["Notizliste"] = new List<"Notiz">();
-//    }
-
-//    var x = Session["Notizliste"] as List<"Notiz">;
-//    //var y = (List<"Notiz">)Session["Notizliste"];
-
-//    x.Add(n);
-
-//    //Erstellte Instanz von "Notiz" in die DB ablegen
-//    using ("Notizverwaltung"Entities cont = new "Notizverwaltung"Entities())
-//    {
-//        "Notizen no" = new "Notizen"();
-//        no.id = n.Id;
-//        no.text = n.Text;
-//        no.titel = n.Titel;
-
-//        cont."Notizen".Add(no);
-
-//        cont.SaveChanges();
-//    }
-//}

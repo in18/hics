@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using HicsBL;
 
 namespace HicsMVC.Models
 {
@@ -12,6 +13,12 @@ namespace HicsMVC.Models
         public string groupselect { get; set; }
 
         public string lampselect { get; set; }
+
+        public List<fn_show_lampgroups_Result> grouplist { get; set; }
+
+        //IEnumerable<fn_show_lampgroups_Result> groupenum
+
+        public List<fn_show_lamps_Result> lamplist { get; set; }
 
         #endregion
 
