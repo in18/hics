@@ -14,12 +14,13 @@ namespace HicsMVC.Controllers
         public ActionResult Index()
         {
             UserAddModel uam = new UserAddModel();
-            List<fn_show_users_Result> userlist = HicsBL.DbAccess.GetAllUser("Sepp", "123user!");
+            List<fn_show_users_Result> userlist = new List<fn_show_users_Result>();
+            //HicsBL.DbAccess.GetAllUser("Sepp", "123user!");
             uam.Userlist = userlist;
             return View(uam);
         }
         [HttpPost]
-        public ActionResult AddUser(UserAddModel uam)
+        public ActionResult UserAdd(UserAddModel uam)
         {
             return RedirectToAction("index");
         }
