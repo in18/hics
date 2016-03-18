@@ -36,7 +36,7 @@
                 </tr>
 
                 <tr>
-                    <td>@Html.DropDownList("combogroup", (IEnumerable<SelectListItem>)ViewBag.combogroup, "--Select Group--")</td>
+                    <td>@Html.DropDownList("combogroup", new SelectList(Model.grouplist), "--Select Group--")</td>
                     <td class="addpadding">@Html.DropDownList("combolamp", (IEnumerable<SelectListItem>)ViewBag.combolamp, "--Select Lamp--")</td>
                     <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
                 </tr>

@@ -16,8 +16,6 @@ namespace HicsMVC.Models
 
         public List<fn_show_lampgroups_Result> grouplist { get; set; }
 
-        //IEnumerable<fn_show_lampgroups_Result> groupenum
-
         public List<fn_show_lamps_Result> lamplist { get; set; }
 
         #endregion
