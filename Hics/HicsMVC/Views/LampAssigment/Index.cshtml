@@ -36,9 +36,9 @@
                 </tr>
 
                 <tr>
-                    <td>@Html.DropDownList("combogroup", new SelectList(Model.grouplist), "--Select Group--")</td>            
+                    <td>@Html.DropDownList("groupselect", (List<SelectListItem>)ViewBag.GroupList, "--Select Group--") </td>            
                     
-                    <td>@Html.DropDownList("combolamps", new SelectList(Model.lamplist), "--Select Lamp--") </td>
+                    <td>@Html.DropDownList("lampselect", (List<SelectListItem>)ViewBag.LampList, "--Select Lamp--") </td>
                     <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
                 </tr>
             </table>
