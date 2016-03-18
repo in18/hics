@@ -33,27 +33,29 @@
             <tr>
                 <td>
                      @Html.TextBoxFor(model => model.NewUserName, new { @class = "boxdesign", @placeholder = "Username" })
-                </td> 
+                   
+                </td>
                 <td>
-                    @Html.ValidationMessageFor(model => model.NewUserName, String.Empty, new { @style = "color:red;font-weight:bold;" })
-                </td>              
+                    @Html.ValidationMessageFor(model => model.NewUserName, String.Empty, new { @style = "color:red;font-weight:bold;margin-left:20px;" })
+                </td>           
             </tr>
             <tr>
                 <td> 
-                    @Html.TextBoxFor(model => model.NewUserPassword, new { @class = "boxdesign", @placeholder = "Password" })
+                    @Html.PasswordFor(model => model.NewUserPassword, new { @class = "boxdesign", @placeholder = "Password" })
+                   
                 </td>
                 <td>
-                    @Html.ValidationMessageFor(model => model.NewUserPassword, String.Empty, new { @style = "color:red;font-weight:bold;" })
+                    @Html.ValidationMessageFor(model => model.NewUserPassword, String.Empty, new { @style = "color:red;font-weight:bold;margin-left:20px;" })
                 </td>
             </tr>
             <tr>
-                
                 <td> 
-                    @Html.TextBoxFor(model => model.RetypeNewUserPassword, new { @class = "boxdesign", @placeholder = "Retype Password" })
-                </td>
+                    @Html.PasswordFor(model => model.RetypeNewUserPassword, new { @class = "boxdesign", @placeholder = "Retype Password" })
+                    
+                </td>  
                 <td>
-                    @Html.ValidationMessageFor(model => model.RetypeNewUserPassword, String.Empty, new { @style = "color:red;font-weight:bold;" })
-                </td>                
+                    @Html.ValidationMessageFor(model => model.RetypeNewUserPassword, String.Empty, new { @style = "color:red;font-weight:bold;margin-left:20px;" })
+                </td>           
             </tr>
             <tr>
                 <td><input class="boxdesign" type="submit" name="newUserName" value="Add User" /></td>
