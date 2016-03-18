@@ -18,6 +18,12 @@ namespace HicsMVC.Models
 
         public List<fn_show_lamps_Result> lamplist { get; set; }
 
+        //List<singleListItems> sli = new List<singleListItems>();
+        //public List<singleListItem> grouplist2 { get; set; }
+        //public List<singleListItem> lamplist2 { get; set; }
+
+        //public List<assignmentList> assignmentlist { get; set; }
+
         #endregion
 
     }
