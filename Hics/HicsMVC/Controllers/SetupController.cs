@@ -39,7 +39,7 @@ namespace HicsMVC.Controllers
                     return RedirectToAction("LampSetup", "Setup");
                 }
                 else {
-                    ViewBag.errorMsg = "Password does not match !";
+                    ViewBag.errorMsg = "Password does not match";
                 }
             }
             
