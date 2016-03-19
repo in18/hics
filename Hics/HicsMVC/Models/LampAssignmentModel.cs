@@ -14,12 +14,6 @@ namespace HicsMVC.Models
 
         public string lampselect { get; set; }
 
-        //public List<fn_show_lampgroups_Result> grouplist { get; set; }
-
-        //public List<fn_show_lamps_Result> lamplist { get; set; }
-
-        //public List<assignmentList> assignmentlist { get; set; }
-
         #endregion
 
     }
