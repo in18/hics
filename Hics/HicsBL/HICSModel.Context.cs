@@ -503,5 +503,19 @@ namespace HicsBL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_on", usernameParameter, passwordParameter, lamp_idParameter);
         }
+    
+        [DbFunction("itin18_aktEntities", "fn_show_lamp_control_history")]
+        public virtual IQueryable<fn_show_lamp_control_history_Result> fn_show_lamp_control_history(string username, byte[] password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lamp_control_history_Result>("[itin18_aktEntities].[fn_show_lamp_control_history](@username, @password)", usernameParameter, passwordParameter);
+        }
     }
 }
