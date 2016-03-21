@@ -834,19 +834,30 @@ namespace HicsBL
         #region PSP 18.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
         /// <summary>
         /// PSP 18.1
-        /// Logfile von beginDate bis endDate in einer Liste returgeben
+        /// Logfile von beginDate bis endDate in einer Liste retourgeben
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="beginDate"></param>
         /// <param name="endDate"></param>
-        /// <returns></returns>
-        static List<Object> GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
+        /// <returns>Liste des Datentyp's "fn_show_lamp_control_history_Result" </returns>
+        public static List<fn_show_lamp_control_history_Result> GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
         {
-            List<Object> tmp = new List<object>();
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-            return tmp;
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lamp_control_history_Result> tmp = new List<fn_show_lamp_control_history_Result>();
+                List<fn_show_lamp_control_history_Result> db = cont.fn_show_lamp_control_history(username, pwhash).ToList();
+
+                foreach (var item in db)
+                {
+                    if (item.date >= beginDate && item.date <= endDate)
+                    {
+                        tmp.Add(item);
+                    }
+                }
+                return tmp;
+            }
         }
         #endregion
 
@@ -894,5 +905,6 @@ namespace HicsBL
                 return cont.fn_show_lampgroups(username, pwhash).ToList();
             }
         }
+
     }
 }
