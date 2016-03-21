@@ -31,23 +31,23 @@ namespace HicsMVC.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult ChangePassword(UserChangePasswordModel ucpm)
-        //{
-        //    altes PW mit der DB abgleichen, wenn gleich->neues PW in DB speichern
+        [HttpPost]
+        public ActionResult ChangePassword(UserChangePasswordModel ucpm)
+        {
+            //Altes PW mit der DB abgleichen, wenn gleich -> neues PW in DB speichern.
 
-        //    if ()
-        //    {
-        //        //    DbAccess."ChangePassword();"
+            if (ucpm.NewPassword == ucpm.RetypeNewPassword)
+            {
+                //    DbAccess."ChangePassword(ucpm.#);"
 
-        //        //    Weiteleitung zum Login
-        //        return RedirectToAction("Login", "Login");
-        //    }
-        //    else
-        //    {
-        //        ViewBag.errorMsg = "Password does not match";
-        //    }
-        //    return View(ucpm);
-        //}
+                // Weiteleitung zum Logout
+            return RedirectToAction("Logout", "Logout");
+            }
+            else
+            {
+                ViewBag.errorMsg = "Password does not match";
+            }
+            return View(ucpm);
+        }
     }
 }

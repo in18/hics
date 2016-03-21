@@ -87,6 +87,12 @@
     <Compile Include="fn_show_lamps_Result.cs">
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="fn_show_lamp_control_history_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_show_lamp_control_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="fn_show_lamp_status_Result.cs">
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>

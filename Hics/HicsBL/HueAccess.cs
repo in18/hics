@@ -16,7 +16,7 @@ using System.Diagnostics;
 namespace HicsBL
 {
     /// <summary>
-    /// Diese Klasse bittet Methoden zur Steuerung der Hue-Bridge
+    /// Diese Klasse bietet Methoden zur Steuerung der Hue-Bridge
     /// </summary>
     public class HueAccess
     {
@@ -89,7 +89,7 @@ namespace HicsBL
 
             for (int i = 0; i < lamps.Count; i++)
             {
-                if (lamps[i].name == lampName)
+                if (lamps[i].name  == lampName)
                 {
                     lId = lamps[i].GetLampNumber();
                 }

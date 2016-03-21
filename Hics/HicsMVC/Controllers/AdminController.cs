@@ -29,12 +29,14 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult ResetPassword(AdminResetPasswordModel arpm)
         {
+            //Neues PW mit neuem wiederholtem PW vergleichen, wenn gleich -> neues PW in DB speichern.
+
             if (arpm.NewPassword == arpm.RetypePassword)
             {
-            //    DbAccess."ResetPassword();"
+            //    DbAccess."ResetPassword(arpm.#);"
 
-            //    Weiteleitung zum Login
-            return RedirectToAction("Login", "Login");
+            // Weiteleitung zum Logout
+            return RedirectToAction("Logout", "Logout");
             }
             else
             {
@@ -42,8 +44,5 @@ namespace HicsMVC.Controllers
             }
             return View(arpm);
         }
-
-
     }
-
 }
