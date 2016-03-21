@@ -1,5 +1,5 @@
 ﻿  
-/*Einstellungen für Statistic View*/
+/* CSS Einstellungen für Statistic View*/
   .homeInStatistic {
         background-image: url('../../Resources/Home.png'); 
         height:28px;
@@ -36,3 +36,68 @@
     .linksbündig{
         padding-left:10px;
     }
+
+
+
+/*CSS Einstellungen für den User Index*/
+.LampControl {
+    background-image: url('../Resources/LampControl.png');
+    height: 99px;
+    width: 136px;
+    background-repeat: no-repeat;
+    background-position:center;
+    border-radius: 20px;
+    border: solid 2px #054588;
+    margin-left:20px;
+}
+
+.LampControl:hover {
+            border: solid 2px #054588;
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588;
+        }
+
+.ChangePassword {
+    background-image: url('../Resources/Change Password.png');
+    height: 99px;
+    width: 136px;
+    background-repeat: no-repeat;
+    background-position:center;
+    border-radius: 20px;
+    border: solid 2px #054588;
+    margin-left:20px;
+}
+
+.ChangePassword:hover {
+            border: solid 2px #054588;
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588;
+        }
+
+.Statistic {
+    background-image: url('../Resources/Statistic.png');
+    height: 99px;
+    width: 136px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: solid 2px #054588;
+    border-radius: 20px;
+    
+}
+
+.Statistic:hover {
+            border: solid 2px #054588;
+            border-radius: 20px; 
+            box-shadow: 0 0 2px 2px #054588;
+        }
+
+/*CSS Einstellungen für Add User*/
+.leftpadding{padding-left:28px;}
+.toptext{padding-left:10px;}
+.paragraphtext{font-family:'Segoe UI';}
+.anchornounderline{text-decoration:none;}
+.bottomatbutton{padding-bottom:38px;}
+.divinputpadding{padding:10px;border:solid 2px #054588;border-radius:5px;}
+.divinputpadding:hover{box-shadow:0 0 2px 2px #054588;}
+.paddingtop{padding-top:40px;}
+.divinputpadding:focus{box-shadow:0 0 2px 2px #054588;}

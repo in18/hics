@@ -2,6 +2,7 @@
 @import url('Josef.css');
 @import url('Kocerke.css');
 @import url('Yueksel.css');
+@import url('Hehenberger.css');
 
 @font-face { font-family: 'Segoe UI';
 }
@@ -45,12 +46,12 @@ section {
     border-radius: 10px;
     max-width: 1200px;
     max-height: 1000px;
-    min-width: 350px;
+    min-width: 370px;
     min-height: 420px;
     background-color: white;
     margin-bottom: 100px;
-    margin-right: 100px;
-    margin-left: 100px;
+    margin-right: 5%;
+    margin-left: 5%;
 }
 
 
@@ -59,6 +60,19 @@ section {
 .left { float: left; position: relative; width: 40%; height: 100%;}
 .middle {float: left; position: relative; width: 35%; height: 100%;}
 .right { float: left; position: relative;width: 10%; height: 100%; text-align:center;}
+
+/*-------------------MENU BUTTONS Style --------------------------------------*/
+
+.leftLamp { float: left; position: relative; width: 35%; height: 100%;}
+.middleUser {float: left; position: relative; width: 35%; height: 100%;}
+.rightStatistic { float: left; position: relative;width: 20%; height: 100%;}
+
+
+.leftLampSetup { float: left; position: relative; width: 35%; height: 100%;}
+.middleGroup {float: left; position: relative; width: 35%; height: 100%;}
+.rightLampAssigment { float: left; position: relative;width: 20%; height: 100%;}
+
+/*---------------------------END----------------------------------------------*/
 
 
 /*#region Andrea Styles */
@@ -100,18 +114,7 @@ section {
             box-shadow: 0 0 2px 2px #054588;
         }*/
 
-/*-------------------MENU BUTTONS Style --------------------------------------*/
 
-/*.leftLamp { float: left; position: relative; width: 35%; height: 100%;}
-.middleUser {float: left; position: relative; width: 35%; height: 100%;}
-.rightStatistic { float: left; position: relative;width: 20%; height: 100%;}
-
-
-.leftLampSetup { float: left; position: relative; width: 35%; height: 100%;}
-.middleGroup {float: left; position: relative; width: 35%; height: 100%;}
-.rightLampAssigment { float: left; position: relative;width: 20%; height: 100%;}
-
-/*---------------------------END----------------------------------------------*/
 
 /*Button LampControl*/
 /*.LampControl {

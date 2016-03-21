@@ -4,50 +4,57 @@
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
-<div class="leftpadding">
-
     @*Überschrift*@
-    <div style="width:100%;">
-        <div class="left">
-            <h2>Group Setup</h2>
-        </div>
 
-        <div class="middle">
-            <h2></h2>
-        </div>
-        <div class="right">
-            <div class="logout">
-                <a></a>
-            </div>
-        </div>
+    <div class="leftpfeifer" style="margin-bottom: 0;">
+        <h2>Group Setup</h2>
     </div>
+
+    <div>
+        <a href="~/Logout/Logout">
+            <div class="logoutpfeifer"></div>
+        </a>
+    </div>
+
 
     <br style="clear:both;" />
 
     @*Lampe Hinzufügen*@
-    @using (Html.BeginForm("AddGroup", "GroupSetupController"))
-    {
-        <table class="toptext">
-            <tr>
-                <td class="addpadding" colspan="2">Groupname</td>
-            </tr>
-            <tr>
-                <td><input class="boxdesign" type="text" name="groupname" placeholder="Groupname" /></td>
-                <td><input class="boxdesign" type="submit" name="addgroup" value="Add Group" /></td>
-            </tr>
-        </table>
-    }
+    <div align="center" class="mainframe">
+        @using (Html.BeginForm("AddGroup", "GroupSetupController"))
+        {
+            <table class="toptextscroll">
+                <tr>
+                    <td class="addpadding" colspan="2">Groupname</td>
+                </tr>
+                <tr>
+                    <td> @Html.TextBoxFor(model => model.Groupname, new { @class = "boxdesign", @placeholder = "Groupname" })</td>
+                    <td><input class="boxdesign" type="submit" name="addgroup" value="Add Group" /></td>
+                </tr>
+                <tr>
+                    <td>@Html.ValidationMessageFor(model => model.Groupname, String.Empty, new { @style = "color:red;font-weight:bold;" })</td>
+                </tr>
+            </table>
+        }
 
-    @*Ausgabeliste*@
-    <div class="listframe">
-        <table>
-            <tr>
-                <th align="left" colspan="2">Groupname</th>
-            </tr>
-            <tr class="boxrow">
-                <td class="listframepadding">DB-Groupname</td>
-                <td><a href="" class="deletedesign">Delete</a></td>
-            </tr>
-        </table>
+        @*Ausgabeliste*@
+        <div>
+            <table>
+                <tr>
+                    <th align="left" colspan="2">Groupname</th>
+                </tr>
+                @*@for (int i = 0; i < Model.Grouplist.Count; i++)
+                    {
+                    <tr class="boxrow">
+                        <td class="listframepadding">@Model.Grouplist[i].roomgroupname</td>
+                        <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = Model.Grouplist[i].id, @class = "deletedesign"})
+                    </tr>
+                    }*@
+            </table>
+        </div>
+        <br />
     </div>
+
+<div style="width:100%;">
+    <a href="~/Admin/Index"><div class="homepfeifer"></div></a>
 </div>

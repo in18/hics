@@ -8,14 +8,7 @@
 @*Zweite Möglichkeit zum anzeigen einer Messagebox*@
 @*@if (ViewData["errMsg"] != null && ((string)ViewData["errMsg"]).Length > 0)*@
 @*Messagebox für Fehlermeldung wenn Passwort nicht übereinstimmt*@
-@if (ViewBag.errorMsg != null && ((string)ViewBag.errorMsg).Length > 0)
-{
-    
-    <div class="errorMsg">
-        @ViewBag.errorMsg
-    </div>
 
-}
 @*---------------------Messagebox Ende -----------------------------------*@
 <div class="leftpadding">
     <h2>Admin Registration</h2>
@@ -37,7 +30,16 @@
         </div>
         <div class="bottomatbutton paddingtop">
             <a href="#" class="anchornounderline"><input class="divinputpadding" type="submit" name="submitbutton" value="Add admin" /></a>
+                @*@if (ViewBag.errorMsg != null && ((string)ViewBag.errorMsg).Length > 0)
+                {
+                    <div class="errorMsg"> @ViewBag.errorMsg </div> 
+                }*@
         </div>
+
+
+
+
+
     </form>
 </div>
   

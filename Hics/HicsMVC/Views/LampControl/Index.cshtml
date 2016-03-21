@@ -1,4 +1,4 @@
-﻿@model List<HicsMVC.Models.LampControl>
+﻿@model List<HicsBL.fn_show_lampgroup_status_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -15,9 +15,13 @@
 <div class="middle">
     <h2></h2>
 </div>
+
 <div class="right">
-    <a href="~/Login/Login"><div class="logout"></div></a>
+    <a href="~/Logout/Logout">
+        <div class="logout"></div>
+    </a>
 </div>
+
 <br style="clear:both;" />
 
 <form>
@@ -26,9 +30,9 @@
         <table class="lampcon">
             <tr class="tr">
                 
-                <th class="lampcontr">Groupname</th>
                 <th class="lampcontr">Lampname</th>
-                <th class="lampcontr">OnOff</th>
+                <th class="lampcontr"></th>
+                <th class="lampcontr"></th>
                 <th class="lampcontr">Dimmer</th>
 
                 <th class="lampcontr">Edit</th>
@@ -39,12 +43,12 @@
                
                 <tr class="tr">
                     
-                    <td class="lampcontd">@item.groupname</td>
-                    <td class="lampcontd">@item.lampname</td>
-                    <th class="lampcontr">@item.OnOff</th>
-                    <th class="lampcontr">@item.dimmer</th>
+                    <td class="lampcontd">@item.id</td>
+                    <td class="lampcontd">@item.name</td>
+                    <td class="lampcontr">@item.OnOff</td>
+                    <td class="lampcontr">@item.dimmer</td>
                     <td class="lampcontd">
-                        @Html.ActionLink("Edit","Edit",new { @id=item.id})
+                        @Html.ActionLink("Edit","Edit",new { @id=item.id}, new { @class = "edit" })
                         
                     </td>
                 </tr>

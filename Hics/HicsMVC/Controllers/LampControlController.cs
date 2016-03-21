@@ -38,29 +38,31 @@ namespace HicsMVC.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            List<LampControl> lamps = DbHelper.DbHelperClass.getLamps();
-            LampControl lc = (from a in lamps where a.id == id select a).FirstOrDefault<LampControl>();
-
-            return View(lc);
+            //List<LampControl> lamps = DbHelper.DbHelperClass.getLamps();
+            List<HicsBL.fn_show_lamps_Result> lamps = HicsBL.DbAccess.GetAllLamps("admin","123user!");
+            //LampControl lc = (from a in lamps where a.id == id select a).FirstOrDefault<LampControl>();
+            lamps = ((lamps.Where(x => x.id == id)).ToList());
+            return View(lamps);
         }
 
 
 
+        /// <summary>
+        /// Lampcontrol
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="groupname"></param>
+        /// <param name="lampname"></param>
+        /// <param name="onOff"></param>
+        /// <param name="dimmer"></param>
+        /// <returns>übernimmt die Daten vom View und speichert diese auf dem Server</returns>
+        [HttpPost]
+        public ActionResult Edit (LampControl l)
+        {
+            HicsBL.DbAccess.dimLamp("Hugo", "lmaa", l.id, l.dimmer);
 
-        //public ActionResult LampOn(int id)
-        //{
+            return View();
 
-        //    irgendwelche db operationen
-
-        //    return RedirectToAction("index");
-        //}
-
-        //public ActionResult LampOff(int id)
-        //{
-
-        //    irgendwelche db operationen
-
-        //    return RedirectToAction("index");
-        //}
+        }
     }
 }

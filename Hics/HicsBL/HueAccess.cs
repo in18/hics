@@ -16,7 +16,7 @@ using System.Diagnostics;
 namespace HicsBL
 {
     /// <summary>
-    /// Diese Klasse bittet Methoden zur Steuerung der Hue-Bridge
+    /// Diese Klasse bietet Methoden zur Steuerung der Hue-Bridge
     /// </summary>
     public class HueAccess
     {
@@ -29,7 +29,7 @@ namespace HicsBL
         /// <summary>
         /// Es wird eine aktuelle Auflistung der vorhandenen Lampen in der HUE-Bridge in die Liste "lamps" übertragen
         /// </summary>
-        internal static void getLampList()
+        public static void getLampList()
         {
             JsonLampList lampList = JsonConvert.DeserializeObject<JsonLampList>(messaging.DownloadState());
             lamps = lampList.ConvertToHueLamps();
@@ -39,7 +39,7 @@ namespace HicsBL
         /// Diese Methode erzeugt eine Instanz von HueMessaging mit der IP
         ///  und dem USer bzw Appkey
         /// </summary>
-        internal static void getWebClient()
+        public static void getWebClient()
         {
             messaging = new HueMessaging(bridgeIP, username);
         }
@@ -49,7 +49,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="lampNumber">LampenId der Hue-Bridge NICHT der Db</param>
         /// <returns>Eingetragener Helligkeitswert der Lampe in der HUE-Bridge</returns>
-        internal static double GetCurrentLampBrightness(int lampNumber)
+        public static double GetCurrentLampBrightness(int lampNumber)
         {
             HueLamp lamp;
             lamps.TryGetValue(lampNumber, out lamp);
@@ -69,7 +69,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="lampNumber">HUE-Bridge LampenId</param>
         /// <returns>Eingetragener Lampenname in der HUE-Bridge</returns>
-        internal static string GetLampName(int lampNumber)
+        public static string GetLampName(int lampNumber)
         {
             HueLamp lamp;
             lamps.TryGetValue(lampNumber, out lamp);
@@ -81,7 +81,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="lampName">HUE-Bridge Lampenname</param>
         /// <returns>Eingetragene LampenId in der HUE-Bridge</returns>
-        internal static int GetLampId(string lampName)
+        public static int GetLampId(string lampName)
         {
             
             int lId = 0;
@@ -111,7 +111,7 @@ namespace HicsBL
         /// </summary>
         /// <param name="lampNumber">HUE-Bridge lampId</param>
         /// <param name="stateChange">mittels Lamda was geändert werden soll</param>
-        internal static void ChangeLampState(int lampNumber, Delegate stateChange)
+        public static void ChangeLampState(int lampNumber, Delegate stateChange)
         {
             HueLamp lamp;
             
@@ -132,13 +132,13 @@ namespace HicsBL
         /// Parameter and das Obj. HueLamp delegieren
         /// </summary>
         /// <param name="lamp">state,hue,brightness,....</param>
-        internal delegate void LampStateChange(HueLamp lamp);
+        public delegate void LampStateChange(HueLamp lamp);
 
         /// <summary>
         /// Parameter auf alle Lampen der HUE-Bridge setzen
         /// </summary>
         /// <param name="stateChange"></param>
-        internal static void ChangeAllLampState(Delegate stateChange)
+        public static void ChangeAllLampState(Delegate stateChange)
         {
             foreach (HueLamp lamp in lamps.Values)
             {
@@ -152,7 +152,7 @@ namespace HicsBL
         /// und den Var bridge und user zuzuweisen
         /// </summary>
         /// <returns>true für korrekte Werte</returns>
-        internal static bool LoadConfig()
+        public static bool LoadConfig()
         {
             XDocument doc = XDocument.Load("Settings.xml");
 
