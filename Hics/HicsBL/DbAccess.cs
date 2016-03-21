@@ -109,7 +109,7 @@ namespace HicsBL
                     if (item.lampname == lampNameOld)
                     {
                         //Wenn gefunden->
-                        
+
                         dblampId = item.lamp_id;
                         //Für das Wiederanlegen der Lampe die Adresse temp. speichern
                         dblampAdr = item.address;
@@ -908,12 +908,34 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <returns></returns>
-        static bool userLogin(string username, string password)
+        /// <returns>true, wenn Anmeldedaten richtig sind ansonsten false</returns>
+        public static bool userLogin(string username, string password)
         {
             bool success = false;
+            List<int?> result = new List<int?>();
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                try
+                {
+                    result = cont.fn_check_user_table(username, pwhash).ToList();
+                    if (result.Count > 0)
+                    {
+                        success = true;
+                    }
+                    else
+                    {
+                        success = false;
+                    }
+                 
+            }
+                catch (Exception)
+            {
+
+                success = false;
+            }
+        }
             return success;
         }
         #endregion
@@ -924,10 +946,10 @@ namespace HicsBL
         /// Edit UserPassword
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="passwordNew"></param>
         /// <param name="passwordOld"></param>
+        /// <param name="passwordNew"></param>
         /// <returns>Bool ob erfolgreich</returns>
-        public static bool EditUserPassword(string username, string passwordNew, string passwordOld)
+        public static bool EditUserPassword(string username, string passwordOld,string passwordNew )
         {
             bool success = false;
             //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
