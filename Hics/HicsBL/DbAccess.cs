@@ -81,7 +81,7 @@ namespace HicsBL
         /// <param name="lampNameOld"></param>
         /// <param name="lampNameNew"></param>
         /// <returns></returns>
-        static void editLampName(string username, string password, string lampNameOld, string lampNameNew)
+        internal static void editLampName(string username, string password, string lampNameOld, string lampNameNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
@@ -89,30 +89,78 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 //Table der Db-Fn holen
-                List<fn_show_lamps_Result> dblamps = cont.fn_show_lamps(username, pwhash).ToList();
-
+                //List<fn_show_lamps_Result> dblamps = cont.fn_show_lamps(username, pwhash).ToList();
+                List<fn_show_lamp_status_Result> dbLampStatus = null;
+                List<fn_show_lamp_control_Result> dbLampsStatus = cont.fn_show_lamp_control(username, pwhash).ToList();
+                List<fn_show_lamp_control_Result> dbLampsStatusResult = new List<fn_show_lamp_control_Result>();
+                List<fn_show_lampgroups_Result> dbLampGroups = cont.fn_show_lampgroups(username, pwhash).ToList();
+                List<fn_show_lampgroup_status_Result> dbLampGroupStatus = null;
+                List<fn_show_lamp_control_Result> dbLampsStatusNew = null;
+                List<fn_show_lamps_Result> dbLampsNew = null;
                 //temporäre Variablen
+                int? dbLampIdNew = 0;
                 int? dblampId = 0; //Nullable da in der Db Nullable
                 string dblampAdr = "";
+                string dbLampGroupName = "";
 
-                foreach (var item in dblamps)
+                foreach (var item in dbLampsStatus)
                 {
                     // Suche des alten Namens zwecks Änderung
-                    if (item.name == lampNameOld)
+                    if (item.lampname == lampNameOld)
                     {
                         //Wenn gefunden->
 
-                        //Für das Wiederanlegen der Lampe die ID temp. speichern
-                        dblampId = item.id;
+                        dblampId = item.lamp_id;
                         //Für das Wiederanlegen der Lampe die Adresse temp. speichern
                         dblampAdr = item.address;
-                        //Wenn gefunden muss nicht die ganze Liste durchlaufen werden
-                        break;
+
+                        dbLampStatus = cont.fn_show_lamp_status(username, pwhash, item.lamp_id).ToList();
+
+                        dbLampsStatusResult.Add(item);
+
+                        dbLampGroupName = item.groupname;  
                     }
                 }
+
                 //Edit gibt es nicht in der DB, Lampe wird gelöscht und wieder neu angelegt
+                Console.WriteLine(dblampAdr);
                 cont.sp_delete_lamp(dblampId, username, pwhash);
                 cont.sp_add_lamp(username, pwhash, dblampAdr, lampNameNew);
+
+                //dbLampsStatusNew = cont.fn_show_lamp_control(username, pwhash).ToList();
+                dbLampsNew = cont.fn_show_lamps(username, pwhash).ToList();
+                foreach (var item in dbLampsNew)
+                {
+                    if (item.name == lampNameNew)
+                    {
+                        dbLampIdNew = item.id;
+                    }
+                }
+
+
+                foreach (var outerItem in dbLampGroups)
+                {
+                    dbLampGroupStatus = cont.fn_show_lampgroup_status(username, pwhash, outerItem.id).ToList();
+                    foreach (var innerItem in dbLampGroupStatus)
+                    {
+                        if (innerItem.id == dblampId)
+                        {
+                            cont.sp_delete_lamp_from_roomgroup(username, pwhash, outerItem.id, dblampId);
+                            cont.sp_add_lamp_to_lampgroup(username, pwhash, outerItem.id, dbLampIdNew);
+                        }
+                    }
+                }
+
+                cont.sp_lamp_dimm(username, pwhash, dbLampIdNew, dbLampStatus[0].bright);
+                if (dbLampStatus[0].status == true)
+                {
+                    cont.sp_lamp_on(username, pwhash, dbLampIdNew);
+                }
+                else
+                {
+                    cont.sp_lamp_off(username, pwhash, dbLampIdNew);
+                }
+                
             }
             //Namen der Lampe in der HUE-Bridge ändern
             HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
@@ -131,7 +179,7 @@ namespace HicsBL
         /// <param name="lampId"></param>
         /// <param name="lampNameNew"></param>
         /// <returns></returns>
-        public static bool editLampName(string username, string password, int lampId, string lampNameNew)
+        static bool editLampName(string username, string password, int lampId, string lampNameNew)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -141,12 +189,14 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 string dbLampName = "";
+                
                 List<fn_show_lamps_Result> dbLamps = new List<fn_show_lamps_Result>();
                 foreach (var item in dbLamps)
                 {
                     if (item.id == lampId)
                     {
                         dbLampName = item.name;
+                        
                     }
                 }
 
@@ -667,7 +717,7 @@ namespace HicsBL
             {
                 try
                 {
-                    //cont(username, groupId);
+                    //cont.sp_add_user_to_usergroup(   (username, groupId);
                     success = true;
                 }
                 catch
@@ -775,6 +825,7 @@ namespace HicsBL
                     if (lampId == item.id)
                     {
                         dbLampName = item.name;
+                        cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                     }
                    
                 }
@@ -815,6 +866,7 @@ namespace HicsBL
                     {
                         //Holen der LampenId über HueAccess und speichern auf hueId
                         hueId = HueAccess.GetLampId(item.name);
+                        cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                     }
 
                 }
@@ -876,7 +928,7 @@ namespace HicsBL
         /// <param name="passwordNew"></param>
         /// <param name="passwordOld"></param>
         /// <returns>Bool ob erfolgreich</returns>
-        static bool EditUserPassword(string username, string passwordNew, string passwordOld)
+        public static bool EditUserPassword(string username, string passwordNew, string passwordOld)
         {
             bool success = false;
             //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
