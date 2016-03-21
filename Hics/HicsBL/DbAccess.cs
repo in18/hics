@@ -137,7 +137,7 @@ namespace HicsBL
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
 
-            // Das wixdichte is wir brauchen 2 Listen, DB und Hue
+            // Das wichtigste ist, wir brauchen 2 Listen, DB und Hue
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 string dbLampName = "";
