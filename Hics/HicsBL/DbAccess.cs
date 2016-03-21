@@ -876,6 +876,23 @@ namespace HicsBL
                 return cont.fn_show_lamps(username, pwhash).ToList();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>Liste des Datentyp's "fn_show_lamp_control_Result"</returns>
+        public static List<fn_show_lamp_control_Result> GetAllLampsStatus(string username, string password)
+        {
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                return cont.fn_show_lamp_control(username, pwhash).ToList();
+            }
+        }
+
         /// <summary>
         /// Die in der DB eingetragenen User als Liste
         /// </summary>
