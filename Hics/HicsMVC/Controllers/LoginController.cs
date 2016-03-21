@@ -36,6 +36,7 @@ namespace HicsMVC.Controllers
                 //us.ID = 
                 us.name = lm.Username;
                 us.pw = lm.Password;
+                //Statt True abfrage an BL mit Username/Password
                 us.admin = true;
 
                 Session["UserSession"] = us;

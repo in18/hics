@@ -124,8 +124,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AddUserController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminStatisticController.cs" />
     <Compile Include="Controllers\GroupSetupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LampAssigmentController.cs" />
@@ -159,6 +159,7 @@
   <ItemGroup>
     <Content Include="Content\Josef.css" />
     <Content Include="Content\Kocerke.css" />
+    <Content Include="Content\Hehenberger.css" />
     <Content Include="Content\MicronStylesheet.css" />
     <Content Include="Content\Pfeifer.css" />
     <Content Include="Content\Yueksel.css" />
@@ -210,7 +211,6 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\LampControl\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\UserSetup\Index.cshtml" />
     <Content Include="Views\Statistic\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\ChangePassword.cshtml" />
@@ -221,6 +221,8 @@
     <Content Include="Views\Admin\ResetPassword.cshtml" />
     <Content Include="Views\UserAdd\Index.cshtml" />
     <Content Include="Views\LampControl\Edit.cshtml" />
+    <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\AdminStatistic\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

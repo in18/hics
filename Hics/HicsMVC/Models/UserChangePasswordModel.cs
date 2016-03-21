@@ -11,13 +11,13 @@ namespace HicsMVC.Models
         //Felder & Eigenschaften
 
         // [] = Attribute - stehen direkt darüber
-        [Required(ErrorMessage = "required field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "This field is required.", AllowEmptyStrings = false)]
         public string RecentPassword { get; set; }
 
-        [Required(ErrorMessage = "required field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "This field is required.", AllowEmptyStrings = false)]
         public string NewPassword { get; set; }
 
-        [Required(ErrorMessage = "required field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "This field is required.", AllowEmptyStrings = false)]
         [CompareAttribute("NewPassword", ErrorMessage = "Passwords don't match.")]
         public string RetypeNewPassword { get; set; }               
     }
