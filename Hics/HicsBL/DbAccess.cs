@@ -925,10 +925,10 @@ namespace HicsBL
         /// Edit UserPassword
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="passwordNew"></param>
         /// <param name="passwordOld"></param>
+        /// <param name="passwordNew"></param>
         /// <returns>Bool ob erfolgreich</returns>
-        public static bool EditUserPassword(string username, string passwordNew, string passwordOld)
+        public static bool EditUserPassword(string username, string passwordOld,string passwordNew )
         {
             bool success = false;
             //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
