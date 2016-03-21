@@ -503,6 +503,23 @@ namespace HicsBL
 
         }
         #endregion
+        #region PSP 7.4 editLampGroup(string username, string password, int groupId)
+        /// <summary>
+        /// PSP 7.4
+        /// Lampengruppen editieren
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        public static bool editLampGroup(string username, string password, int groupId) {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            return success;
+
+        }
+        #endregion
 
         #region PSP 8.1 addUser(string username, string password, string usernameNew, string passwordNew)
         /// <summary>
