@@ -929,13 +929,13 @@ namespace HicsBL
                         success = false;
                     }
                  
-            }
+                }
                 catch (Exception)
-            {
+                 {
 
                 success = false;
+                 }
             }
-        }
             return success;
         }
         #endregion
