@@ -16,7 +16,6 @@ namespace HicsMVC.Models
         [Range(1, 51, ErrorMessage = "50 letters maximum.")]
         public string Groupname { get; set; }
 
-        public List<fn_show_lampgroups_Result> Grouplist { get; set; }
         #endregion
 
 

@@ -3,8 +3,6 @@
     ViewBag.Title = "Lamp Assignment";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
-@*in Micron-Stylesheet: Margin-Right: 5%;*@ 
-
 
 @*Überschrift*@
 
@@ -32,9 +30,9 @@
             </tr>
 
             <tr>
-                <td>@Html.DropDownList("groupselect", (List<SelectListItem>)ViewBag.GroupList, "--Select Group--") </td>
+                <td>@Html.DropDownList("groupselect", new SelectList((List<HicsBL.fn_show_lampgroups_Result>)ViewBag.GroupList, "id", "roomgroupname"), "--Select Group--") </td>
 
-                <td>@Html.DropDownList("lampselect", (List<SelectListItem>)ViewBag.LampList, "--Select Lamp--") </td>
+                <td>@Html.DropDownList("lampselect", new SelectList(ViewBag.LampList, "id", "name"), "--Select Lamp--") </td>
                 <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
                 <td></td>
             </tr>
