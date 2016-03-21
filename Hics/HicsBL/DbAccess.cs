@@ -553,6 +553,23 @@ namespace HicsBL
 
         }
         #endregion
+        #region PSP 7.4 editLampGroup(string username, string password, int groupId)
+        /// <summary>
+        /// PSP 7.4
+        /// Lampengruppen editieren
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        public static bool editLampGroup(string username, string password, int groupId) {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            return success;
+
+        }
+        #endregion
 
         #region PSP 8.1 addUser(string username, string password, string usernameNew, string passwordNew)
         /// <summary>
@@ -681,6 +698,35 @@ namespace HicsBL
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
                 return success;
+        }
+        #endregion
+        #region PSP 9.2 editUserGroup (string username, int groupId)
+        /// <summary>
+        /// PSP 9.2
+        /// //editUserGroup
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        static bool editUserGroup(string username, int groupId)
+        {
+            bool success = false;
+            
+            
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                try
+                {
+                    cont(username, groupId);
+                    success = true;
+                }
+                catch
+                {
+
+                    success = false;
+                }
+            }
+            return success;
         }
         #endregion
 
