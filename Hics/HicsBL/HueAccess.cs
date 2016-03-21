@@ -89,7 +89,7 @@ namespace HicsBL
 
             for (int i = 0; i < lamps.Count; i++)
             {
-                if (lamps[i].name == lampName)
+                if (lamps[i].name  == lampName)
                 {
                     lId = lamps[i].GetLampNumber();
                 }

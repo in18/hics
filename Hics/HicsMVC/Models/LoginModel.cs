@@ -11,10 +11,10 @@ namespace HicsMVC.Models
         //Felder & Eigenschaften
 
         // [] = Attribute - stehen direkt darüber
-        [Required(ErrorMessage = "required field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "This field is required.", AllowEmptyStrings = false)]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "required field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "This field is required.", AllowEmptyStrings = false)]
         public string Password { get; set; }        
     }    
 }
