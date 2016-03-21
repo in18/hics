@@ -132,6 +132,7 @@
     <Compile Include="Controllers\LampControlController.cs" />
     <Compile Include="Controllers\LampSetupController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\SetupController.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\UserAddController.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleClass\StaticClass.cs" />
     <Compile Include="SampleClass\UserName.cs" />
+    <Compile Include="SampleClass\UserSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Josef.css" />

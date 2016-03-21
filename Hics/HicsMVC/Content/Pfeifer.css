@@ -5,10 +5,21 @@
     margin-top: 10px;
     margin-right: 18px;
     margin-left: 12px;
-    margin-bottom: 28px;
+    margin-bottom: 10px;
     max-width: 450px;
+    min-width: 250px;
     overflow-y: scroll;
     min-height: 200px;
+    max-height: 400px;
+}
+
+.mainframe {
+    padding: 10px;
+    margin: auto;
+    width: 85%;
+    min-width: 300px;
+    overflow: auto;
+    min-height: 250px;
     max-height: 400px;
 }
 
@@ -46,7 +57,8 @@
 }
 
 .toptextscroll {
-    padding-left: 8px;
+    margin-top: 40px;
+    padding-left: 15px;
 }
 
 .menubar {
@@ -62,3 +74,40 @@
     display: inline-block;
     color: #054588;
 }
+
+
+/*Überarbeitungen 19.03.2016*/
+.homepfeifer {
+    background-image: url('../../Resources/Home.png');
+    height:28px;
+    width:108px;
+    background-repeat:no-repeat;
+    background-position:center;
+    border-radius:7px;
+    border: solid 2px #054588; 
+    margin-top: 5px;
+    position: absolute;
+    right: 10%;
+}
+
+.logoutpfeifer {
+    background-image: url('../../Resources/Logout.png'); 
+    height:28px;
+    width:108px;
+    background-repeat:no-repeat;
+    background-position:center;
+    border-radius:7px;
+    border: solid 2px #054588; 
+    margin-top:20px;
+    position: absolute;
+    right: 10%;
+}
+
+.rightpfeifer { 
+    float: right; 
+    position: absolute; 
+    width: 10%; 
+    height: 100%; 
+    text-align:center;}
+
+.leftpfeifer { float: left; position: relative; width: auto; height: 100%;}

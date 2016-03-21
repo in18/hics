@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using HicsBL; //eingebunden
+using HicsBL; //Verweis hinzugefügt und hier eingebunden
 
 namespace HicsMVC.Controllers
 {
@@ -31,21 +31,23 @@ namespace HicsMVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult ChangePassword(UserChangePasswordModel ucpm)
-        {
-            if (ucpm.NewPassword == ucpm.RetypeNewPassword)
-            {
-            //    DbAccess."ChangePassword();"
+        //[HttpPost]
+        //public ActionResult ChangePassword(UserChangePasswordModel ucpm)
+        //{
+        //    altes PW mit der DB abgleichen, wenn gleich->neues PW in DB speichern
 
-            //    Weiteleitung zum Login
-            return RedirectToAction("Login", "Login");
-            }
-            else
-            {
-                ViewBag.errorMsg = "Password does not match";
-            }
-            return View(ucpm);           
-        }
+        //    if ()
+        //    {
+        //        //    DbAccess."ChangePassword();"
+
+        //        //    Weiteleitung zum Login
+        //        return RedirectToAction("Login", "Login");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.errorMsg = "Password does not match";
+        //    }
+        //    return View(ucpm);
+        //}
     }
 }

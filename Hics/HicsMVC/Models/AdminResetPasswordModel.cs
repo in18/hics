@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,14 +9,14 @@ namespace HicsMVC.Models
     public class AdminResetPasswordModel
     {
         //Felder & Eigenschaften
-        public string NewPassword { get; set; }
-        public string RetypePassword { get; set; }
 
-        ////Methoden   
-        //public void AdminResetPasswordData(string newpassword, string retypepassword)
-        //{
-        //    this.NewPassword = newpassword;
-        //    this.RetypePassword = retypepassword; 
-        //}
+        // [] = Attribute - stehen direkt darüber
+        [Required(ErrorMessage = "required field", AllowEmptyStrings = false)]
+        public string NewPassword { get; set; }
+            
+            
+        [Required(ErrorMessage = "required field", AllowEmptyStrings = false)]
+        [CompareAttribute("NewPassword", ErrorMessage = "Passwords don't match.")]
+        public string RetypePassword { get; set; }        
     }
 }

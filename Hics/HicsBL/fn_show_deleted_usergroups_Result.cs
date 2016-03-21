@@ -11,12 +11,9 @@ namespace HicsBL
 {
     using System;
     
-    public partial class sp_helpdiagrams_Result
+    public partial class fn_show_deleted_usergroups_Result
     {
-        public string Database { get; set; }
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Owner { get; set; }
-        public int OwnerID { get; set; }
+        public Nullable<int> id { get; set; }
+        public string usergroup_name { get; set; }
     }
 }
