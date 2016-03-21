@@ -27,6 +27,54 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="fn_show_deleted_lamps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" />
+                <Property Name="lamp_name" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_show_deleted_roomgroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" />
+                <Property Name="roomgroup_name" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_show_deleted_usergroups" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" />
+                <Property Name="usergroup_name" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_show_deleted_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" />
+                <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="fn_show_lamp_status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
@@ -210,6 +258,22 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
           </FunctionImport>
+          <FunctionImport Name="fn_show_deleted_lamps" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_deleted_lamps_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="fn_show_deleted_roomgroups" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_deleted_roomgroups_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="fn_show_deleted_usergroups" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_deleted_usergroups_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="fn_show_deleted_users" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_deleted_users_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
           <FunctionImport Name="fn_show_lamp_status" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lamp_status_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
@@ -324,6 +388,22 @@
             <Parameter Name="lamp_id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="fn_show_deleted_lamps_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="lamp_name" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="fn_show_deleted_roomgroups_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="roomgroup_name" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="fn_show_deleted_usergroups_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="usergroup_name" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="fn_show_deleted_users_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="user_name" Nullable="true" MaxLength="50" />
+        </ComplexType>
         <ComplexType Name="fn_show_lamp_status_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
           <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
@@ -364,6 +444,38 @@
         <EntityContainerMapping StorageEntityContainer="itin18_aktModelStoreContainer" CdmEntityContainer="itin18_aktEntities">
           <FunctionImportMapping FunctionImportName="fn_check_admin_table" FunctionName="itin18_aktModel.Store.fn_check_admin_table" />
           <FunctionImportMapping FunctionImportName="fn_check_user_table" FunctionName="itin18_aktModel.Store.fn_check_user_table" />
+          <FunctionImportMapping FunctionImportName="fn_show_deleted_lamps" FunctionName="itin18_aktModel.Store.fn_show_deleted_lamps">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_deleted_lamps_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="lamp_name" ColumnName="lamp_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fn_show_deleted_roomgroups" FunctionName="itin18_aktModel.Store.fn_show_deleted_roomgroups">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_deleted_roomgroups_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="roomgroup_name" ColumnName="roomgroup_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fn_show_deleted_usergroups" FunctionName="itin18_aktModel.Store.fn_show_deleted_usergroups">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_deleted_usergroups_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usergroup_name" ColumnName="usergroup_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fn_show_deleted_users" FunctionName="itin18_aktModel.Store.fn_show_deleted_users">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_deleted_users_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="fn_show_lamp_status" FunctionName="itin18_aktModel.Store.fn_show_lamp_status">
             <ResultMapping>
               <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lamp_status_Result">
