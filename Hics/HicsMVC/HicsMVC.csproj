@@ -137,6 +137,7 @@
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\UserAddController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserLampControlController.cs" />
     <Compile Include="Controllers\UserSetupController.cs" />
     <Compile Include="DbHelper\DbHelperClass.cs" />
     <Compile Include="Global.asax.cs">
@@ -151,6 +152,7 @@
     <Compile Include="Models\SuperAdminModel.cs" />
     <Compile Include="Models\UserAddModel.cs" />
     <Compile Include="Models\UserChangePasswordModel.cs" />
+    <Compile Include="Models\UserLampControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleClass\StaticClass.cs" />
     <Compile Include="SampleClass\UserName.cs" />
@@ -221,6 +223,8 @@
     <Content Include="Views\Admin\ResetPassword.cshtml" />
     <Content Include="Views\UserAdd\Index.cshtml" />
     <Content Include="Views\LampControl\Edit.cshtml" />
+    <Content Include="Views\UserLampControl\Index.cshtml" />
+    <Content Include="Views\UserLampControl\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
