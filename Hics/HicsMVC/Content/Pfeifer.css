@@ -87,9 +87,9 @@
     background-position:center;
     border-radius:7px;
     border: solid 2px #054588;
-    position: relative;
+    position: absolute;
     float: right;
-    right: 5%;
+    right: 7%;
     margin-top: 15px;
 }
 
@@ -101,9 +101,9 @@
     background-position:center;
     border-radius:7px;
     border: solid 2px #054588; 
-    position: relative;
+    position: absolute;
     float: right;
-    right: 1%;
+    right: 7%;
     margin: 15px 0 15px 0;
 }
 
