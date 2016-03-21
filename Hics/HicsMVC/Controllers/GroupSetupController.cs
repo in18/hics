@@ -16,10 +16,7 @@ namespace HicsMVC.Controllers
         {
             GroupSetupModel gsm = new GroupSetupModel();
 
-            List<fn_show_lampgroups_Result> grouplist = new List<fn_show_lampgroups_Result>(); 
-            //HicsBL.DbAccess.GetAllLampGroups("Sepp", "123User!");
-
-            gsm.Grouplist = grouplist;
+            gsm.Grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!"); 
 
             return View(gsm);
             //return View();
