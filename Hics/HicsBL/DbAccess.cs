@@ -489,7 +489,7 @@ namespace HicsBL
                 try
                 {
                     //Löschen der Raumgruppe
-                cont.sp_delete_roomgroup(username, pwhash, groupId);
+                    cont.sp_delete_roomgroup(username, pwhash, groupId);
                     success = true;
                 }
                 catch 
@@ -501,6 +501,25 @@ namespace HicsBL
 
             return success;
 
+        }
+        #endregion
+
+        #region PSP  7.4 editLampGroup (string username, string password, int groupId)
+        /// <summary>
+        /// PSP 7.4
+        /// Lampengruppe umbenennen anhand Id
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        public static bool editLampGroup(string username, string password, int groupId, string newGroupName)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+           
+                return success;   
         }
         #endregion
 
@@ -630,7 +649,9 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-                return success;
+            
+           
+            return success;
         }
         #endregion
 
