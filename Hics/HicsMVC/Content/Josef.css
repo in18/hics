@@ -13,12 +13,13 @@
 
 
 .errorMsg {
-    background-color: red;
+    color: red;
     display:inline-block;
-    padding:5px;
-    border:solid 2px #054588;
-    border-radius:5px;
-    margin-left:38px;
+    font-weight: bold;
+    /*padding:5px;*/
+    /*border:solid 2px #054588;
+    border-radius:5px;*/
+    /*margin-left:38px;*/
 }
 
 .errorMsg02{

@@ -45,12 +45,12 @@ section {
     border-radius: 10px;
     max-width: 1200px;
     max-height: 1000px;
-    min-width: 350px;
+    min-width: 370px;
     min-height: 420px;
     background-color: white;
     margin-bottom: 100px;
-    margin-right: 100px;
-    margin-left: 100px;
+    margin-right: 5%;
+    margin-left: 5%;
 }
 
 

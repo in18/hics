@@ -17,11 +17,14 @@
         </div>
         <div>
             <p>@Html.LabelFor(x => x.Password, new { @class="paragraphtext" }):</p> 
-            @Html.PasswordFor(x => x.Password, new { @class="divinputpadding", placeholder="Password123" })
+            @Html.PasswordFor(x => x.Password, new { @class="divinputpadding", placeholder="Password" })
             @Html.ValidationMessageFor(x => x.Password) @* Password-Validierungstext - wird im Model festgelegt *@            
         </div>        
         <div class="bottomatbutton paddingtop">
             <input class="divinputpadding" type="submit" name="LoginButton" value="Login" />@* Submit-Button für Login *@            
-        </div>      
+                <div class="errorMsg">
+                    @ViewBag.errorMessage
+                </div>       
+         </div>         
     </div>
 }
