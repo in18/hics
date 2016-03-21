@@ -66,6 +66,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbAccess.cs" />
+    <Compile Include="fn_show_deleted_lamps_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_show_deleted_roomgroups_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_show_deleted_usergroups_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_show_deleted_users_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="fn_show_lampgroups_Result.cs">
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>
@@ -73,6 +85,9 @@
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="fn_show_lamps_Result.cs">
+      <DependentUpon>HICSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fn_show_lamp_control_history_Result.cs">
       <DependentUpon>HICSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="fn_show_lamp_status_Result.cs">
