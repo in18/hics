@@ -125,6 +125,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminStatisticController.cs" />
     <Compile Include="Controllers\GroupSetupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LampAssigmentController.cs" />
@@ -220,6 +221,7 @@
     <Content Include="Views\UserAdd\Index.cshtml" />
     <Content Include="Views\LampControl\Edit.cshtml" />
     <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\AdminStatistic\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
