@@ -56,6 +56,62 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Nullable<int>>("[itin18_aktEntities].[fn_check_user_table](@username, @password)", usernameParameter, passwordParameter);
         }
     
+        [DbFunction("itin18_aktEntities", "fn_show_deleted_lamps")]
+        public virtual IQueryable<fn_show_deleted_lamps_Result> fn_show_deleted_lamps(string username, byte[] password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_deleted_lamps_Result>("[itin18_aktEntities].[fn_show_deleted_lamps](@username, @password)", usernameParameter, passwordParameter);
+        }
+    
+        [DbFunction("itin18_aktEntities", "fn_show_deleted_roomgroups")]
+        public virtual IQueryable<fn_show_deleted_roomgroups_Result> fn_show_deleted_roomgroups(string username, byte[] password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_deleted_roomgroups_Result>("[itin18_aktEntities].[fn_show_deleted_roomgroups](@username, @password)", usernameParameter, passwordParameter);
+        }
+    
+        [DbFunction("itin18_aktEntities", "fn_show_deleted_usergroups")]
+        public virtual IQueryable<fn_show_deleted_usergroups_Result> fn_show_deleted_usergroups(string username, byte[] password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_deleted_usergroups_Result>("[itin18_aktEntities].[fn_show_deleted_usergroups](@username, @password)", usernameParameter, passwordParameter);
+        }
+    
+        [DbFunction("itin18_aktEntities", "fn_show_deleted_users")]
+        public virtual IQueryable<fn_show_deleted_users_Result> fn_show_deleted_users(string username, byte[] password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_deleted_users_Result>("[itin18_aktEntities].[fn_show_deleted_users](@username, @password)", usernameParameter, passwordParameter);
+        }
+    
         [DbFunction("itin18_aktEntities", "fn_show_lamp_status")]
         public virtual IQueryable<fn_show_lamp_status_Result> fn_show_lamp_status(string username, byte[] password, Nullable<int> lamp_id)
         {
@@ -446,6 +502,34 @@ namespace HicsBL
                 new ObjectParameter("lamp_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_on", usernameParameter, passwordParameter, lamp_idParameter);
+        }
+    
+        [DbFunction("itin18_aktEntities", "fn_show_lamp_control_history")]
+        public virtual IQueryable<fn_show_lamp_control_history_Result> fn_show_lamp_control_history(string username, byte[] password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lamp_control_history_Result>("[itin18_aktEntities].[fn_show_lamp_control_history](@username, @password)", usernameParameter, passwordParameter);
+        }
+    
+        [DbFunction("itin18_aktEntities", "fn_show_lamp_control")]
+        public virtual IQueryable<fn_show_lamp_control_Result> fn_show_lamp_control(string username, byte[] password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lamp_control_Result>("[itin18_aktEntities].[fn_show_lamp_control](@username, @password)", usernameParameter, passwordParameter);
         }
     }
 }

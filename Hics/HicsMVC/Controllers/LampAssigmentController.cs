@@ -53,6 +53,7 @@ namespace HicsMVC.Controllers
             ViewBag.GroupList = ListItemGroup;
             ViewBag.LampList  = ListItemLamps;
 
+            //Model an den View schicken
             return View();
         }
 
