@@ -75,6 +75,22 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="fn_show_lamp_control" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="lamp_id" Type="int" />
+                <Property Name="groupname" Type="nvarchar" MaxLength="50" />
+                <Property Name="lampname" Type="nvarchar" MaxLength="50" />
+                <Property Name="address" Type="varchar" MaxLength="50" />
+                <Property Name="status" Type="bit" />
+                <Property Name="brightness" Type="tinyint" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="fn_show_lamp_control_history" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
@@ -409,6 +425,10 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
           </FunctionImport>
+          <FunctionImport Name="fn_show_lamp_control" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lamp_control_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="fn_show_deleted_lamps_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
@@ -464,6 +484,14 @@
           <Property Type="Int32" Name="userlifetime" Nullable="true" />
           <Property Type="String" Name="user_name" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="status" Nullable="true" />
+          <Property Type="Byte" Name="brightness" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="fn_show_lamp_control_Result">
+          <Property Type="Int32" Name="lamp_id" Nullable="true" />
+          <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="lampname" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="address" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="status" Nullable="true" />
           <Property Type="Byte" Name="brightness" Nullable="true" />
@@ -588,6 +616,18 @@
                 <ScalarProperty Name="userlifetime" ColumnName="userlifetime" />
                 <ScalarProperty Name="user_name" ColumnName="user_name" />
                 <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="brightness" ColumnName="brightness" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fn_show_lamp_control" FunctionName="itin18_aktModel.Store.fn_show_lamp_control">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lamp_control_Result">
+                <ScalarProperty Name="lamp_id" ColumnName="lamp_id" />
+                <ScalarProperty Name="groupname" ColumnName="groupname" />
+                <ScalarProperty Name="lampname" ColumnName="lampname" />
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="brightness" ColumnName="brightness" />
