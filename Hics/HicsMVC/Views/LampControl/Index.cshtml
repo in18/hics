@@ -1,4 +1,4 @@
-﻿@model List<HicsMVC.Models.LampControl>
+﻿@model List<HicsBL.fn_show_lampgroup_status_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -30,9 +30,9 @@
         <table class="lampcon">
             <tr class="tr">
                 
-                <th class="lampcontr">Groupname</th>
                 <th class="lampcontr">Lampname</th>
-                <th class="lampcontr">OnOff</th>
+                <th class="lampcontr"></th>
+                <th class="lampcontr"></th>
                 <th class="lampcontr">Dimmer</th>
 
                 <th class="lampcontr">Edit</th>
@@ -43,8 +43,8 @@
                
                 <tr class="tr">
                     
-                    <td class="lampcontd">@item.groupname</td>
-                    <td class="lampcontd">@item.lampname</td>
+                    <td class="lampcontd">@item.id</td>
+                    <td class="lampcontd">@item.name</td>
                     <td class="lampcontr">@item.OnOff</td>
                     <td class="lampcontr">@item.dimmer</td>
                     <td class="lampcontd">

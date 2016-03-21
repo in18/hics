@@ -38,10 +38,11 @@ namespace HicsMVC.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            List<LampControl> lamps = DbHelper.DbHelperClass.getLamps();
-            LampControl lc = (from a in lamps where a.id == id select a).FirstOrDefault<LampControl>();
-
-            return View(lc);
+            //List<LampControl> lamps = DbHelper.DbHelperClass.getLamps();
+            List<HicsBL.fn_show_lamps_Result> lamps = HicsBL.DbAccess.GetAllLamps("admin","123user!");
+            //LampControl lc = (from a in lamps where a.id == id select a).FirstOrDefault<LampControl>();
+            lamps = ((lamps.Where(x => x.id == id)).ToList());
+            return View(lamps);
         }
 
 
