@@ -650,6 +650,35 @@ namespace HicsBL
                 return success;
         }
         #endregion
+        #region PSP 9.2 editUserGroup (string username, int groupId)
+        /// <summary>
+        /// PSP 9.2
+        /// //editUserGroup
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        static bool editUserGroup(string username, int groupId)
+        {
+            bool success = false;
+            
+            
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                try
+                {
+                    cont(username, groupId);
+                    success = true;
+                }
+                catch
+                {
+
+                    success = false;
+                }
+            }
+            return success;
+        }
+        #endregion
 
         #region PSP 9.2 EditUserGroup(string username, string password, string usernameName, int groupId)
         /// <summary>
