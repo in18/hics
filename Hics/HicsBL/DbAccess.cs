@@ -717,7 +717,7 @@ namespace HicsBL
             {
                 try
                 {
-                    cont(username, groupId);
+                    //cont.sp_add_user_to_usergroup(   (username, groupId);
                     success = true;
                 }
                 catch
@@ -906,7 +906,7 @@ namespace HicsBL
         /// <param name="passwordNew"></param>
         /// <param name="passwordOld"></param>
         /// <returns>Bool ob erfolgreich</returns>
-        static bool EditUserPassword(string username, string passwordNew, string passwordOld)
+        public static bool EditUserPassword(string username, string passwordNew, string passwordOld)
         {
             bool success = false;
             //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
