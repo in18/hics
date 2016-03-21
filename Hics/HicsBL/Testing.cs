@@ -24,13 +24,14 @@ namespace HicsBL
             //DbAccess.addUser("admin", "123user!", "Walter", "123user!");
             //Byte[] ha = HelperClass.GetHash("123user!");
             //HelperClass.GetHash(HelperClass.ByteArrayToString(ha));
-            List<fn_show_lamps_Result> lamplist = new List<fn_show_lamps_Result>();
-            lamplist = DbAccess.GetAllLamps("Sepp", "123user!");
+            //List<fn_show_lamps_Result> lamplist = new List<fn_show_lamps_Result>();
+            //lamplist = DbAccess.GetAllLamps("Sepp", "123user!");
 
-            foreach (var item in lamplist)
-            {
-                Console.WriteLine(item.name);
-            }
+            //foreach (var item in lamplist)
+            //{
+            //    Console.WriteLine(item.name);
+            //}
+            Console.WriteLine(DbAccess.userLogin("admini","123user!"));
 
             Console.ReadKey();
 
