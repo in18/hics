@@ -919,6 +919,9 @@ namespace HicsBL
             {
                 try
                 {
+                    //Von der DB mit den übergebenen Usernamen und PW einen Table der User
+                    // zurück zu bekommen. Wenn kein Eintrag vorhanden ist, ist der User
+                    // mit den übergebenen Daten nicht berechtigt
                     result = cont.fn_check_user_table(username, pwhash).ToList();
                     if (result.Count > 0)
                     {
@@ -1003,7 +1006,7 @@ namespace HicsBL
         #endregion
 
         /// <summary>
-        /// Die in der DB eingetragenen Namen als Liste
+        /// Die in der DB eingetragenen Lampennamen als Liste
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -1019,7 +1022,8 @@ namespace HicsBL
         }
 
         /// <summary>
-        /// 
+        /// Eine Liste welche zurechtgeschnitten ist für den LampControlController
+        /// Gibt folgendes zurück: address, brightness, groupname, Lamp_id, lampname, status
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
