@@ -1,4 +1,4 @@
-﻿@model List<HicsMVC.Models.LampControl>
+﻿@model List<HicsBL.fn_show_lamp_control_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -15,9 +15,13 @@
 <div class="middle">
     <h2></h2>
 </div>
+
 <div class="right">
-    <a href="~/Login/Login"><div class="logout"></div></a>
+    <a href="~/Logout/Logout">
+        <div class="logout"></div>
+    </a>
 </div>
+
 <br style="clear:both;" />
 
 <form>
@@ -26,25 +30,41 @@
         <table class="lampcon">
             <tr class="tr">
                 
+                <th class="lampcontr">ID</th>
+                <th class="lampcontr">Adress</th>
                 <th class="lampcontr">Groupname</th>
                 <th class="lampcontr">Lampname</th>
-                <th class="lampcontr">OnOff</th>
-                <th class="lampcontr">Dimmer</th>
+                <th class="lampcontr">Status</th>
+                <th class="lampcontr">Brigtness</th>
 
                 <th class="lampcontr">Edit</th>
                 
             </tr>
-            @foreach (var item in Model)
-            {
-               
+           @foreach (var item in Model)
+           {
+
                 <tr class="tr">
-                    
-                    <td class="lampcontd">@item.groupname</td>
-                    <td class="lampcontd">@item.lampname</td>
-                    <td class="lampcontr">@item.OnOff</td>
-                    <th class="lampcontr">@item.dimmer</th>
-                    <td class="lampcontd">
-                        @Html.ActionLink("Edit","Edit",new { @id=item.id}, new { @class = "edit" })
+                   
+                    <td>
+                    @item.lamp_id
+                    </td>
+                    <td>
+                        @item.address
+                    </td>
+                    <td>
+                    @item.groupname
+                    </td>
+                    <td>
+                    @item.lampname
+                    </td>
+                    <td>
+                    @item.status
+                    </td>
+                    <td>
+                    @item.brightness
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit","Edit",new { @id=item.lamp_id}, new { @class = "edit" })
                         
                     </td>
                 </tr>

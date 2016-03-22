@@ -21,19 +21,19 @@
         <div>
             <p class="paragraphtext">Input Password:</p>
             <input class="divinputpadding" type="password" name="Password" placeholder="password" required />
-            @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @style = "color:red;font-weight:bold;padding-left:20px;" })
+            @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @class="requiredField" }) @* Password-Validierungstext - wird im Model festgelegt *@
         </div>
         <div>
             <p class="paragraphtext">Retype Password:</p>
             <input class="divinputpadding" type="password" name="RetypePassword" placeholder="retype password" required />
-            @Html.ValidationMessageFor(model => model.RetypePassword, String.Empty, new { @style = "color:red;font-weight:bold;padding-left:20px;" })
+            @Html.ValidationMessageFor(model => model.RetypePassword, String.Empty, new { @class="requiredField" }) @* RetypePassword-Validierungstext - wird im Model festgelegt *@
         </div>
         <div class="bottomatbutton paddingtop">
             <a href="#" class="anchornounderline"><input class="divinputpadding" type="submit" name="submitbutton" value="Add admin" /></a>
-                @if (ViewBag.errorMsg != null && ((string)ViewBag.errorMsg).Length > 0)
+                @*@if (ViewBag.errorMsg != null && ((string)ViewBag.errorMsg).Length > 0)
                 {
                     <div class="errorMsg"> @ViewBag.errorMsg </div> 
-                }
+                }*@
         </div>
 
 

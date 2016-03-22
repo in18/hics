@@ -22,7 +22,18 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult UserAdd(UserAddModel uam)
         {
-            return RedirectToAction("index");
+            if (uam.NewUserPassword == uam.RetypeNewUserPassword)
+            {
+                //    DbAccess."ResetPassword();"
+
+                //    Weiteleitung zum Login
+                return RedirectToAction("index");
+            }
+            else
+            {
+                ViewBag.errorMsg = "Password does not match";
+            }
+            return View(uam);
         }
 
         public ActionResult DeleteUser(int id)

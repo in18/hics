@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using HicsBL;
 using HicsMVC.Models;
 using System.Diagnostics;
+using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
@@ -15,17 +16,23 @@ namespace HicsMVC.Controllers
         public ActionResult Index()
         {
 
-            LampAssignmentModel lam = new LampAssignmentModel();
+            //Momentane Usersession Abfragen und zur weiteren Benutzung zur Verfügung stellen
+            UserSession us = (UserSession)Session["UserSession"];
 
-            List<fn_show_lampgroups_Result> grouplist = new List<fn_show_lampgroups_Result>();
-            List <fn_show_lamps_Result> lamplist = new List<fn_show_lamps_Result>();
+            //User-Session-Advanced mit Fehlerabfrage
+            //UserSession us = Session["UserSession"] as UserSession;
+            //if (us == null)
+            //    //Fehler
+            //    Debug.WriteLine("Falscher Datentyp");
 
-            //List<fn_show_lampgroups_Result> grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
-            //List<fn_show_lamps_Result> lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");
+            List<fn_show_lampgroups_Result> grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+            List<fn_show_lamps_Result> lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");
 
-            lam.grouplist = grouplist;
-            lam.lamplist = lamplist;
-
+            //Viewbags mit Gruppen- und Lampenliste per Viewbag an den View übergeben
+            ViewBag.GroupList = grouplist;
+            ViewBag.LampList  = lamplist;
+            
+            //Model an den View schicken
             return View();
         }
 
@@ -39,6 +46,5 @@ namespace HicsMVC.Controllers
         {
             return RedirectToAction("index");
         }
-
     }
 }

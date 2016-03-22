@@ -15,9 +15,9 @@
             <h2></h2>
         </div>
         <div class="right">
-            <div class="logout">
-                <a></a>
-            </div>
+            <a href="~/Logout/Logout">
+                <div class="logout"></div>
+            </a>
         </div>
     </div>
     
@@ -25,7 +25,8 @@
 
     @*Lampe Hinzufügen*@
      
-    @using (Html.BeginForm("AddLamp", "LampSetupController")){
+    @using (Html.BeginForm("AddLamp", "LampSetupController"))
+    {
 
             <table class="toptext">
                 <tr>
@@ -53,9 +54,7 @@
 
         <table>
             <tr>
-                @*<th align="left">@Model.Lamplist </th>*@
                 <th align="left">ID</th>
-                @*<th align="left">@Model.Description</th>*@
                 <th align="left">Description</th>
                 <th></th>
             </tr>
@@ -64,9 +63,7 @@
                 <tr class="boxrow">
                     <td class="listframepadding">@Model.Lamplist[i].address</td>
                     <td class="listframepadding">@Model.Lamplist[i].name</td>
-                    <td>
-                        @Html.ActionLink("Delete", "DeleteLamp", new { @id = Model.Lamplist[i].id, @class = "deletedesign" })
-                    </td>
+                    <td>@Html.ActionLink("Delete", "DeleteLamp", new { @id = Model.Lamplist[i].id, @class = "deletedesign" })</td>
                 </tr>
             }
         </table>        
