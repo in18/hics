@@ -12,6 +12,8 @@ using NDesk.Options;
 using System.Threading;
 using System.Xml.Linq;
 using System.Diagnostics;
+using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HicsBL
 {
@@ -85,6 +87,8 @@ namespace HicsBL
         {
             
             int lId = 0;
+            LoadConfig();
+            getWebClient();
             getLampList();
 
             for (int i = 0; i < lamps.Count; i++)
@@ -154,7 +158,9 @@ namespace HicsBL
         /// <returns>true für korrekte Werte</returns>
         public static bool LoadConfig()
         {
-            XDocument doc = XDocument.Load("Settings.xml");
+            string tmp = Path.GetDirectoryName(System.Environment.CurrentDirectory);
+
+            XDocument doc = XDocument.Load(@"Settings.xml");
 
             var data = from item in doc.Descendants("settings")
                        select new
