@@ -992,16 +992,27 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamp_control_history_Result> tmp = new List<fn_show_lamp_control_history_Result>();
-                List<fn_show_lamp_control_history_Result> db = cont.fn_show_lamp_control_history(username, pwhash).ToList();
-
-                foreach (var item in db)
+                try
                 {
-                    if (item.date >= beginDate && item.date <= endDate)
+
+                    List<fn_show_lamp_control_history_Result> db = cont.fn_show_lamp_control_history(username, pwhash).ToList();
+
+                    foreach (var item in db)
                     {
-                        tmp.Add(item);
+                        if (item.date >= beginDate && item.date <= endDate)
+                        {
+                            tmp.Add(item);
+                        }
                     }
+                    return tmp;
                 }
-                return tmp;
+                catch
+                {
+                    tmp[0].lamp_name = "Keine Datenbankverbindung";
+                    tmp[1].lamp_name = "No databaseconnection";
+
+                    return tmp;
+                }
             }
         }
         #endregion
