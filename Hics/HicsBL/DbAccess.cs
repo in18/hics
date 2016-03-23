@@ -29,6 +29,7 @@ namespace HicsBL
         //#08.03.2016|Wolf          |Ausbesserungen                                #
         //#14.03.2016|Mock          |Ausbesserungen und Doku                       #
         //#14.03.2016|Wolf          |Hashfunktion bearbeitet                       #
+        //#23.03.2016|Kornfeld,Acs  |Exception Behandlung                          #
         //##########################################################################
 
         public DbAccess()
@@ -95,7 +96,7 @@ namespace HicsBL
                 List<fn_show_lamp_control_Result> dbLampsStatusResult = new List<fn_show_lamp_control_Result>();
                 List<fn_show_lampgroups_Result> dbLampGroups = cont.fn_show_lampgroups(username, pwhash).ToList();
                 List<fn_show_lampgroup_status_Result> dbLampGroupStatus = null;
-                List<fn_show_lamp_control_Result> dbLampsStatusNew = null;
+                //List<fn_show_lamp_control_Result> dbLampsStatusNew = null;
                 List<fn_show_lamps_Result> dbLampsNew = null;
                 //temporäre Variablen
                 int? dbLampIdNew = 0;
@@ -553,6 +554,7 @@ namespace HicsBL
 
         }
         #endregion
+
         #region PSP 7.4 editLampGroup(string username, string password, int groupId)
         /// <summary>
         /// PSP 7.4
@@ -993,16 +995,27 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamp_control_history_Result> tmp = new List<fn_show_lamp_control_history_Result>();
-                List<fn_show_lamp_control_history_Result> db = cont.fn_show_lamp_control_history(username, pwhash).ToList();
-
-                foreach (var item in db)
+                try
                 {
-                    if (item.date >= beginDate && item.date <= endDate)
+
+                    List<fn_show_lamp_control_history_Result> db = cont.fn_show_lamp_control_history(username, pwhash).ToList();
+
+                    foreach (var item in db)
                     {
-                        tmp.Add(item);
+                        if (item.date >= beginDate && item.date <= endDate)
+                        {
+                            tmp.Add(item);
+                        }
                     }
+                    return tmp;
                 }
-                return tmp;
+                catch
+                {
+                    tmp[0].lamp_name = "Keine Datenbankverbindung";
+                    tmp[1].lamp_name = "No databaseconnection";
+
+                    return tmp;
+                }
             }
         }
         #endregion
@@ -1018,8 +1031,19 @@ namespace HicsBL
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
-            {                
-                return cont.fn_show_lamps(username, pwhash).ToList();
+            {
+                List<fn_show_lamps_Result> tmp = new List<fn_show_lamps_Result>();
+
+                try
+                {
+                    return cont.fn_show_lamps(username, pwhash).ToList();
+                }
+                catch
+                {
+                    tmp[0].name = "Keine Datenbankverbindung";
+                    tmp[1].name = "No database connection";
+                    return tmp;
+                }
             }
         }
 
@@ -1036,7 +1060,18 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                return cont.fn_show_lamp_control(username, pwhash).ToList();
+                List<fn_show_lamp_control_Result> tmp = new List<fn_show_lamp_control_Result>();
+
+                try
+                {
+                    return cont.fn_show_lamp_control(username, pwhash).ToList();
+                }
+                catch 
+                {
+                    tmp[0].lampname = "Keine Datenbankverbindung";
+                    tmp[1].lampname = "No database connection";
+                    return tmp;
+                }
             }
         }
 
@@ -1051,7 +1086,18 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                return cont.fn_show_users(username, pwhash).ToList();
+                List<fn_show_users_Result> tmp = new List<fn_show_users_Result>();
+
+                try
+                {
+                    return cont.fn_show_users(username, pwhash).ToList();
+                }
+                catch 
+                {
+                    tmp[0].name = "Keine Datenbankverbindung";
+                    tmp[1].name = "No database connection";
+                    return tmp;
+                }
             }
         }
 
@@ -1066,7 +1112,18 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                return cont.fn_show_lampgroups(username, pwhash).ToList();
+                List<fn_show_lampgroups_Result> tmp = new List<fn_show_lampgroups_Result>();
+
+                try
+                {
+                    return cont.fn_show_lampgroups(username, pwhash).ToList();
+                }
+                catch
+                {
+                    tmp[0].roomgroupname = "Keine Datenbankverbindung";
+                    tmp[1].roomgroupname = "No database connection";
+                    return tmp;
+                }
             }
         }
 
