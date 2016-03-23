@@ -1029,8 +1029,19 @@ namespace HicsBL
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
-            {                
-                return cont.fn_show_lamps(username, pwhash).ToList();
+            {
+                List<fn_show_lamps_Result> tmp = new List<fn_show_lamps_Result>();
+
+                try
+                {
+                    return cont.fn_show_lamps(username, pwhash).ToList();
+                }
+                catch
+                {
+                    tmp[0].name = "Keine Datenbankverbindung";
+                    tmp[1].name = "No databaseconnection";
+                    return tmp;
+                }
             }
         }
 
