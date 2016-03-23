@@ -1084,7 +1084,18 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                return cont.fn_show_users(username, pwhash).ToList();
+                List<fn_show_users_Result> tmp = new List<fn_show_users_Result>();
+
+                try
+                {
+                    return cont.fn_show_users(username, pwhash).ToList();
+                }
+                catch 
+                {
+                    tmp[0].name = "Keine Datenbankverbindung";
+                    tmp[1].name = "No databaseconnection";
+                    return tmp;
+                }
             }
         }
 
@@ -1099,7 +1110,18 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                return cont.fn_show_lampgroups(username, pwhash).ToList();
+                List<fn_show_lampgroups_Result> tmp = new List<fn_show_lampgroups_Result>();
+
+                try
+                {
+                    return cont.fn_show_lampgroups(username, pwhash).ToList();
+                }
+                catch
+                {
+                    tmp[0].roomgroupname = "Keine Datenbankverbindung";
+                    tmp[1].roomgroupname = "No databaseconnection";
+                    return tmp;
+                }
             }
         }
 
