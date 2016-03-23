@@ -1127,6 +1127,12 @@ namespace HicsBL
             }
         }
 
+        /// <summary>
+        /// Special 4 Bastl
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static List<fn_show_lamp_control_Result>GetLampControl(string username, string password)
         {
             Byte[] pwhash = HelperClass.GetHash(password);
