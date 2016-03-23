@@ -1070,5 +1070,14 @@ namespace HicsBL
             }
         }
 
+        public static List<fn_show_lamp_control_Result>GetLampControl(string username, string password)
+        {
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                return cont.fn_show_lamp_control(username, pwhash).ToList();
+            }
+        }
+
     }
 }
