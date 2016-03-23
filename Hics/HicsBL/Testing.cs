@@ -33,7 +33,7 @@ namespace HicsBL
             //    Console.WriteLine($"{item.id} {item.roomgroupname}");
             //    Console.WriteLine((item.ToString()));
             //}
-            DbAccess.editLampName("admin", "123user!","Flur1","Flur99");
+            //DbAccess.editLampName("admin", "123user!","Flur1","Flur99");
             //using (itin18_aktEntities cont = new itin18_aktEntities())
             //{
             //    cont.sp_add_lamp("admin", ha, "12345", "Flur3");
