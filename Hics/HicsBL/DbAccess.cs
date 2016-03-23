@@ -553,6 +553,7 @@ namespace HicsBL
 
         }
         #endregion
+
         #region PSP 7.4 editLampGroup(string username, string password, int groupId)
         /// <summary>
         /// PSP 7.4
