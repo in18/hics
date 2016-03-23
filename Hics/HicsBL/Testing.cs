@@ -44,7 +44,14 @@ namespace HicsBL
             //{
             //    Console.WriteLine($"{i.id} {i.name} {i.address}");
             //}
+            //List<fn_show_lamps_Result> lamplist = new List<fn_show_lamps_Result>();
+            //lamplist = DbAccess.GetAllLamps("Sepp", "123user!");
 
+            //foreach (var item in lamplist)
+            //{
+            //    Console.WriteLine(item.name);
+            //}
+            Console.WriteLine(DbAccess.userLogin("admini","123user!"));
 
             Console.ReadKey();
 

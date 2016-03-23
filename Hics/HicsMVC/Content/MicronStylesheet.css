@@ -32,12 +32,14 @@ h2{
 
 
 #logo1 {
-    margin-left:100px;
+    margin-left:5%;
+    width: 19%;
 }
 
 #logo2 {
     float:right;
-    margin-right:100px;
+    margin-right: 5%;
+    width: 27%;
 }
 
 section {
@@ -46,7 +48,7 @@ section {
     border-radius: 10px;
     max-width: 1200px;
     max-height: 1000px;
-    min-width: 370px;
+    min-width: 500px;
     min-height: 420px;
     background-color: white;
     margin-bottom: 100px;

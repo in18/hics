@@ -109,7 +109,7 @@ namespace HicsBL
                     if (item.lampname == lampNameOld)
                     {
                         //Wenn gefunden->
-                        
+
                         dblampId = item.lamp_id;
                         //Für das Wiederanlegen der Lampe die Adresse temp. speichern
                         dblampAdr = item.address;
@@ -539,7 +539,7 @@ namespace HicsBL
                 try
                 {
                     //Löschen der Raumgruppe
-                cont.sp_delete_roomgroup(username, pwhash, groupId);
+                    cont.sp_delete_roomgroup(username, pwhash, groupId);
                     success = true;
                 }
                 catch 
@@ -568,6 +568,25 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             return success;
 
+        }
+        #endregion
+
+        #region PSP  7.4 editLampGroup (string username, string password, int groupId)
+        /// <summary>
+        /// PSP 7.4
+        /// Lampengruppe umbenennen anhand Id
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        public static bool editLampGroup(string username, string password, int groupId, string newGroupName)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+           
+                return success;   
         }
         #endregion
 
@@ -697,7 +716,9 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-                return success;
+            
+           
+            return success;
         }
         #endregion
         #region PSP 9.2 editUserGroup (string username, int groupId)
@@ -887,12 +908,37 @@ namespace HicsBL
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <returns></returns>
-        static bool userLogin(string username, string password)
+        /// <returns>true, wenn Anmeldedaten richtig sind ansonsten false</returns>
+        public static bool userLogin(string username, string password)
         {
             bool success = false;
+            List<int?> result = new List<int?>();
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                try
+                {
+                    //Von der DB mit den übergebenen Usernamen und PW einen Table der User
+                    // zurück zu bekommen. Wenn kein Eintrag vorhanden ist, ist der User
+                    // mit den übergebenen Daten nicht berechtigt
+                    result = cont.fn_check_user_table(username, pwhash).ToList();
+                    if (result.Count > 0)
+                    {
+                        success = true;
+                    }
+                    else
+                    {
+                        success = false;
+                    }
+                 
+                }
+                catch (Exception)
+                 {
+
+                success = false;
+                 }
+            }
             return success;
         }
         #endregion
@@ -903,10 +949,10 @@ namespace HicsBL
         /// Edit UserPassword
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="passwordNew"></param>
         /// <param name="passwordOld"></param>
+        /// <param name="passwordNew"></param>
         /// <returns>Bool ob erfolgreich</returns>
-        public static bool EditUserPassword(string username, string passwordNew, string passwordOld)
+        public static bool EditUserPassword(string username, string passwordOld,string passwordNew )
         {
             bool success = false;
             //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
@@ -960,7 +1006,7 @@ namespace HicsBL
         #endregion
 
         /// <summary>
-        /// Die in der DB eingetragenen Namen als Liste
+        /// Die in der DB eingetragenen Lampennamen als Liste
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -976,7 +1022,8 @@ namespace HicsBL
         }
 
         /// <summary>
-        /// 
+        /// Eine Liste welche zurechtgeschnitten ist für den LampControlController
+        /// Gibt folgendes zurück: address, brightness, groupname, Lamp_id, lampname, status
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
