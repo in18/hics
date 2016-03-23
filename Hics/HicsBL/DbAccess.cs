@@ -29,6 +29,7 @@ namespace HicsBL
         //#08.03.2016|Wolf          |Ausbesserungen                                #
         //#14.03.2016|Mock          |Ausbesserungen und Doku                       #
         //#14.03.2016|Wolf          |Hashfunktion bearbeitet                       #
+        //#23.03.2016|Kornfeld,Acs  |Exception Behandlung                          #
         //##########################################################################
 
         public DbAccess()
