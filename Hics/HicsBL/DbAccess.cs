@@ -1039,7 +1039,7 @@ namespace HicsBL
                 catch
                 {
                     tmp[0].name = "Keine Datenbankverbindung";
-                    tmp[1].name = "No databaseconnection";
+                    tmp[1].name = "No database connection";
                     return tmp;
                 }
             }
@@ -1067,7 +1067,7 @@ namespace HicsBL
                 catch 
                 {
                     tmp[0].lampname = "Keine Datenbankverbindung";
-                    tmp[1].lampname = "No databaseconnection";
+                    tmp[1].lampname = "No database connection";
                     return tmp;
                 }
             }
@@ -1093,7 +1093,7 @@ namespace HicsBL
                 catch 
                 {
                     tmp[0].name = "Keine Datenbankverbindung";
-                    tmp[1].name = "No databaseconnection";
+                    tmp[1].name = "No database connection";
                     return tmp;
                 }
             }
@@ -1119,7 +1119,7 @@ namespace HicsBL
                 catch
                 {
                     tmp[0].roomgroupname = "Keine Datenbankverbindung";
-                    tmp[1].roomgroupname = "No databaseconnection";
+                    tmp[1].roomgroupname = "No database connection";
                     return tmp;
                 }
             }
