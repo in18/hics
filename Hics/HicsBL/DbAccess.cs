@@ -1127,12 +1127,29 @@ namespace HicsBL
             }
         }
 
+        /// <summary>
+        /// Special 4 Bastl
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static List<fn_show_lamp_control_Result>GetLampControl(string username, string password)
         {
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                return cont.fn_show_lamp_control(username, pwhash).ToList();
+                List<fn_show_lamp_control_Result> tmp = new List<fn_show_lamp_control_Result>();
+
+                try
+                {
+                    return cont.fn_show_lamp_control(username, pwhash).ToList();
+                }
+                catch 
+                {
+                    tmp[0].groupname = "Keine Datenbankverbindung";
+                    tmp[1].groupname = "No database connection";
+                    return tmp;
+                }
             }
         }
 
