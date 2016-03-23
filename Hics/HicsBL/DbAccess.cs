@@ -721,6 +721,7 @@ namespace HicsBL
             return success;
         }
         #endregion
+
         #region PSP 9.2 editUserGroup (string username, int groupId)
         /// <summary>
         /// PSP 9.2
@@ -933,7 +934,7 @@ namespace HicsBL
                 catch (Exception)
                  {
 
-                success = false;
+                    success = false;
                  }
             }
             return success;
