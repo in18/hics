@@ -186,7 +186,7 @@ namespace HicsBL
             {
                 bridgeIP = "192.168.118.240";
                 username = "26a36d65807946339133551842be44";
-                throw;
+                return true;
             }
             //string tmp = Path.GetDirectoryName(System.Environment.CurrentDirectory);
 
