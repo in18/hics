@@ -96,7 +96,7 @@ namespace HicsBL
                 List<fn_show_lamp_control_Result> dbLampsStatusResult = new List<fn_show_lamp_control_Result>();
                 List<fn_show_lampgroups_Result> dbLampGroups = cont.fn_show_lampgroups(username, pwhash).ToList();
                 List<fn_show_lampgroup_status_Result> dbLampGroupStatus = null;
-                List<fn_show_lamp_control_Result> dbLampsStatusNew = null;
+                //List<fn_show_lamp_control_Result> dbLampsStatusNew = null;
                 List<fn_show_lamps_Result> dbLampsNew = null;
                 //temporäre Variablen
                 int? dbLampIdNew = 0;
