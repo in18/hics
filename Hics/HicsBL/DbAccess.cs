@@ -823,7 +823,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness)
+        #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness,bool lampOnOff)
         /// <summary>
         /// PSP 15.1
         /// Lampen dimmen
@@ -832,8 +832,9 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampId"></param>
         /// <param name="brightness"></param>
+        /// <param name="lampOnOff"></param>
         /// <returns></returns>
-        public static void dimLamp(string username, string password, int lampId, byte brightness)
+        public static void dimLamp(string username, string password, int lampId, byte brightness, bool lampOnOff)
         {
             //bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -842,6 +843,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 string dbLampName = "";
+                bool onOff = true;
                 List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
 
                 foreach (var item in db)
@@ -850,13 +852,25 @@ namespace HicsBL
                     {
                         dbLampName = item.name;
                         cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+                       
+                        if(lampOnOff == true)
+                        {
+                            cont.sp_lamp_on(username, pwhash, lampId);
+                            onOff = true;
+                        }
+                        else
+                        {
+                            cont.sp_lamp_off(username, pwhash, lampId);
+                            onOff = false;
+                        }
                     }
                    
                 }
+
                 int hueId = HueAccess.GetLampId(dbLampName);
 
                 HelperClass.SetLampBrightness(hueId, brightness);
-
+                HelperClass.SetLampState(hueId, onOff);
             }
             
         }
