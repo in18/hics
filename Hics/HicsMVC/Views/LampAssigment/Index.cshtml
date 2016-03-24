@@ -6,60 +6,60 @@
 
 @*Überschrift*@
 
-<div class="leftpfeifer" style="margin-bottom: 0;">
-    <h2>Lamp Assignment</h2>
-</div>
 <div>
-    <a href="~/Logout/Logout">
-        <div class="logoutpfeifer"></div>
-    </a>
-</div>
+    <div>
+        <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
 
+        <a href="~/Logout/Logout"><div class="logoutpfeifer2"></div></a>
+    </div>
+
+    <div align="center" class="middlepfeifer">
+        <h2>Lamp Assignment</h2>
+    </div>
+</div> 
 
 <br style="clear:both;" />
 
-@*Combine Group*@
-<div align="center" class="mainframe">
-        @using (Html.BeginForm("Assignment", "LampAssignmentController"))
-        {
-            <table class="toptextscroll">
-                <tr>
-                    <td class="addpadding">Group</td>
-                    <td class="addpadding">Lamp</td>
-                </tr>
+    @*Combine Group*@
 
-                <tr>
-                    <td>@Html.DropDownList("groupselect", new SelectList((List<HicsBL.fn_show_lampgroups_Result>)ViewBag.GroupList, "id", "roomgroupname"), "--Select Group--") </td>
+    <div align="center" class="mainframe">
+            @using (Html.BeginForm("Assignment", "LampAssignmentController"))
+            {
+                <table class="toptextscroll">
+                    <tr>
+                        <td class="addpadding">Group</td>
+                        <td class="addpadding">Lamp</td>
+                    </tr>
 
-                    <td>@Html.DropDownList("lampselect", new SelectList(ViewBag.LampList, "id", "name"), "--Select Lamp--") </td>
-                    <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
-                    <td></td>
-                </tr>
-            </table>
-        }
+                    <tr>
+                        <td>@Html.DropDownList("groupselect", new SelectList((List<HicsBL.fn_show_lampgroups_Result>)ViewBag.GroupList, "id", "roomgroupname"), "--Select Group--") </td>
 
-@*Ausgabeliste*@
-<div align="center" class="borderframe">
-    <table @*class="borderframe"*@>
-        <tr>
-            <th align="left">Groupname</th>
-            <th align="left">Lampname</th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr class="boxrow">
-                <td class="listframepadding">@item.groupname </td>
-                <td class="listframepadding">@item.lampname </td>
-                <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { lamp_id = item.lamp_id.Value, groupname = item.groupname })</td>
+                        <td>@Html.DropDownList("lampselect", new SelectList(ViewBag.LampList, "id", "name"), "--Select Lamp--") </td>
+                        <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
+                        <td></td>
+                    </tr>
+                </table>
+            }
+
+    @*Ausgabeliste*@
+    <div class="borderframe">
+        <table @*class="borderframe"*@>
+            <tr>
+                <th align="left">Groupname</th>
+                <th align="left">Lampname</th>
+                <th></th>
             </tr>
-        }
-    </table>
-</div>
+            @foreach (var item in Model)
+            {
+                <tr class="boxrow">
+                    <td class="listframepadding">@item.groupname </td>
+                    <td class="listframepadding">@item.lampname </td>
+                    <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { lamp_id = item.lamp_id.Value, groupname = item.groupname })</td>
+                </tr>
+            }
+        </table>
+        @*</div>*@
+    </div>
     
-<br /><br />
 
-</div>
-<div style="width:100%;">
-<a href="~/Admin/Index"><div class="homepfeifer"></div></a>
-</div>
+
