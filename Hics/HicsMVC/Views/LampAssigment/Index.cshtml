@@ -1,4 +1,4 @@
-﻿@model HicsMVC.Models.LampAssignmentModel
+﻿@model List<HicsBL.fn_show_lamp_control_Result>
 @{
     ViewBag.Title = "Lamp Assignment";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
@@ -46,24 +46,14 @@
             <th align="left">Lampname</th>
             <th></th>
         </tr>
-
-            @*@for (int i = 0; i < Model.zusammengeführteliste.Count; i++)
-                {}*@
-        <tr class="boxrow">
-            <td class="listframepadding">DB-ID</td>
-            <td class="listframepadding">DB-Desc</td>
-            <td><a href="/LampSetup/DeleteLamp/1" class="deletedesign">Delete</a></td>
-        </tr>
-        <tr class="boxrow">
-            <td class="listframepadding">DB-ID</td>
-            <td class="listframepadding">DB-Desc</td>
-            <td><a href="/LampSetup/DeleteLamp/1" class="deletedesign">Delete</a></td>
-        </tr>
-        <tr class="boxrow">
-            <td class="listframepadding">DB-ID</td>
-            <td class="listframepadding">DB-Desc</td>
-            <td><a href="/LampSetup/DeleteLamp/1" class="deletedesign">Delete</a></td>
-        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="boxrow">
+                <td class="listframepadding">@item.groupname </td>
+                <td class="listframepadding">@item.lampname </td>
+                <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { item.lamp_id.Value, item.groupname })</td>
+            </tr>
+        }
     </table>
 </div>
     
