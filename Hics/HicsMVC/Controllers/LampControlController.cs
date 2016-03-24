@@ -69,7 +69,7 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult Edit (HicsBL.fn_show_lamp_control_Result l)
         {
-            HicsBL.DbAccess.dimLamp("admin", "123user!", (int)l.lamp_id, (byte)l.brightness);
+            HicsBL.DbAccess.dimLamp("admin", "123user!", (int)l.lamp_id, (byte)l.brightness,(bool)l.status);
 
             return View();
 
