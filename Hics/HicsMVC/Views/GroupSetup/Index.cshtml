@@ -1,4 +1,5 @@
-﻿@model HicsMVC.Models.GroupSetupModel
+﻿@model List<HicsBL.fn_show_lampgroups_Result>
+
 @{
     ViewBag.Title = "Group Setup";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
@@ -22,7 +23,7 @@
 
     @*Lampe Hinzufügen*@
 
-    @*<div align="center" class="mainframe">*@
+    <div align="center" class="mainframe">
         @using (Html.BeginForm("AddGroup", "GroupSetupController"))
         {
             <table class="toptextscroll">
@@ -30,7 +31,7 @@
                     <td class="addpadding" colspan="2">Groupname</td>
                 </tr>
                 <tr>
-                    <td> @Html.TextBoxFor(model => model.Groupname, new { @class = "boxdesign", @placeholder = "Groupname" })</td>
+                    <td> @Html.TextBoxFor(model => model.Groupname , new { @class = "boxdesign", @placeholder = "Groupname" })</td>
                     <td><input class="boxdesign" type="submit" name="addgroup" value="Add Group" /></td>
                 </tr>
                 <tr>
@@ -45,20 +46,20 @@
         <tr>
             <th align="left" colspan="2">Groupname</th>
         </tr>
-        @foreach (var item in ViewBag.GroupList)
+        @*@foreach (var item in ViewBag.GroupList )
         {
             <tr class="boxrow">
                 <td class="listframepadding"> item.roomgroupname</td>
-                <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = item.id, @class = "deletedesign" })
+                <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = @item.id , @class = "deletedesign" })
             </tr>
-        }
-        @*@for (int i = 0; i < ViewBag.GroupList.Count; i++)
+        }*@
+        @for (int i = 0; i < ViewBag.GroupList.Count; i++)
         {
             <tr class="boxrow">
                 <td class="listframepadding"> @ViewBag.GroupList[i].roomgroupname</td>
                 <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = @ViewBag.GroupList[i].id, @class = "deletedesign" })
             </tr>
-        }*@
+        }
     </table>
-    @*</div>*@
+    </div>
 </div>
