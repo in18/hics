@@ -51,7 +51,7 @@
             <tr class="boxrow">
                 <td class="listframepadding">@item.groupname </td>
                 <td class="listframepadding">@item.lampname </td>
-                <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { item.lamp_id.Value, item.groupname })</td>
+                <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { lamp_id = item.lamp_id.Value, groupname = item.groupname })</td>
             </tr>
         }
     </table>
