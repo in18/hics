@@ -1160,8 +1160,11 @@ namespace HicsBL
                 }
                 catch 
                 {
-                    tmp[0].groupname = "Keine Datenbankverbindung";
-                    tmp[1].groupname = "No database connection";
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Lampenname eingetragen
+                    tmp.Add(new fn_show_lamp_control_Result { address = "", groupname = "", brightness = 0, status = true, lamp_id = 999, lampname = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamp_control_Result { address = "", groupname = "", brightness = 0, status = true, lamp_id = 999, lampname = "No database connection" });
+                    //tmp[0].groupname = "Keine Datenbankverbindung";
+                    //tmp[1].groupname = "No database connection";
                     return tmp;
                 }
             }
