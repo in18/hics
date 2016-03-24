@@ -6,21 +6,23 @@
 
     @*Überschrift*@
 
-    <div class="leftpfeifer" style="margin-bottom: 0;">
-        <h2>Group Setup</h2>
+<div>
+    <div>
+        <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
+
+        <a href="~/Logout/Logout"><div class="logoutpfeifer2"></div></a>
     </div>
 
-    <div>
-        <a href="~/Logout/Logout">
-            <div class="logoutpfeifer"></div>
-        </a>
+    <div align="center" class="middlepfeifer">
+        <h2>Group Setup</h2>
     </div>
+</div> 
 
     <br style="clear:both;" />
 
     @*Lampe Hinzufügen*@
 
-    <div align="center" class="mainframe">
+    @*<div align="center" class="mainframe">*@
         @using (Html.BeginForm("AddGroup", "GroupSetupController"))
         {
             <table class="toptextscroll">
@@ -39,22 +41,24 @@
 
         @*Ausgabeliste*@
         <div align="center" class="borderframe">
-            <table>
-                <tr>
-                    <th align="left" colspan="2">Groupname</th>
-                </tr>
-                @for (int i = 0; i < ViewBag.GroupList.Count; i++)
-                    {
-                    <tr class="boxrow">
-                        <td class="listframepadding"> @ViewBag.GroupList[i].roomgroupname</td>
-                        <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = @ViewBag.GroupList[i].id, @class = "deletedesign"})
-                    </tr>
-                    }
-            </table>
-        </div>
-        <br />
-    </div>
-
-<div style="width:100%;">
-    <a href="~/Admin/Index"><div class="homepfeifer"></div></a>
+    <table>
+        <tr>
+            <th align="left" colspan="2">Groupname</th>
+        </tr>
+        @foreach (var item in ViewBag.GroupList)
+        {
+            <tr class="boxrow">
+                <td class="listframepadding"> item.roomgroupname</td>
+                <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = item.id, @class = "deletedesign" })
+            </tr>
+        }
+        @*@for (int i = 0; i < ViewBag.GroupList.Count; i++)
+        {
+            <tr class="boxrow">
+                <td class="listframepadding"> @ViewBag.GroupList[i].roomgroupname</td>
+                <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = @ViewBag.GroupList[i].id, @class = "deletedesign" })
+            </tr>
+        }*@
+    </table>
+    @*</div>*@
 </div>
