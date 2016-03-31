@@ -40,6 +40,7 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult Assignment(LampAssignmentModel lam)
         {
+            HicsBL.DbAccess.addLampToGroup("Sepp", "123user!", lam.groupname, lam.lamp_id);
             return RedirectToAction("index");
         }
 
