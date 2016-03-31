@@ -12,7 +12,6 @@ using NDesk.Options;
 using System.Threading;
 using System.Xml.Linq;
 using System.Diagnostics;
-using System.IO;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace HicsBL
