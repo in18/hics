@@ -14,11 +14,13 @@ namespace HicsMVC.Controllers
         // GET: GroupSetup
         public ActionResult Index()
         {
-            ViewBag.GroupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
-
+            //ViewBag.GroupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
             //List<fn_show_lampgroups_Result> erg = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
 
-            return View();
+            GroupSetupModel gsm = new GroupSetupModel();            
+            gsm.GroupSetupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+            
+            return View(gsm);
         }
 
         [HttpPost]

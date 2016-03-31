@@ -1,4 +1,4 @@
-﻿@model List<HicsBL.fn_show_lampgroups_Result>
+﻿@model HicsMVC.Models.GroupSetupModel
 
 @{
     ViewBag.Title = "Group Setup";
@@ -21,17 +21,17 @@
 
     <br style="clear:both;" />
 
-    @*Lampe Hinzufügen*@
+    @*Gruppe Hinzufügen*@
 
     <div align="center" class="mainframe">
-        @using (Html.BeginForm("AddGroup", "GroupSetupController"))
+        @using (Html.BeginForm("AddGroup", "GroupSetup"))
         {
             <table class="toptextscroll">
                 <tr>
                     <td class="addpadding" colspan="2">Groupname</td>
                 </tr>
                 <tr>
-                    <td> @Html.TextBoxFor(model => model.Groupname , new { @class = "boxdesign", @placeholder = "Groupname" })</td>
+                    <td>@Html.TextBoxFor(model => model.Groupname , new { @class = "boxdesign", @placeholder = "Groupname" })</td>
                     <td><input class="boxdesign" type="submit" name="addgroup" value="Add Group" /></td>
                 </tr>
                 <tr>
@@ -53,11 +53,11 @@
                 <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = @item.id , @class = "deletedesign" })
             </tr>
         }*@
-        @for (int i = 0; i < ViewBag.GroupList.Count; i++)
+        @for (int i = 0; i < Model.GroupSetupList.Count; i++)
         {
             <tr class="boxrow">
-                <td class="listframepadding"> @ViewBag.GroupList[i].roomgroupname</td>
-                <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = @ViewBag.GroupList[i].id, @class = "deletedesign" })
+                <td class="listframepadding"> @Model.GroupSetupList[i].roomgroupname</td>
+                <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = Model.GroupSetupList[i].id }, new { @class = "deletedesign" })
             </tr>
         }
     </table>
