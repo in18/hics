@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using huedotnet;
-
+ 
 namespace HicsBL
 {
     /// <summary>
     /// Diese Klasse ist die Schnittstelle zwischen GUI,DB,HUE
     /// </summary>
-    [System.Runtime.InteropServices.Guid("6FE03D8A-15FD-4100-89A9-5BEF81361D24")]
+    //[System.Runtime.InteropServices.Guid("6FE03D8A-15FD-4100-89A9-5BEF81361D24")]
     public class DbAccess
     {
         //##########################################################################
