@@ -123,6 +123,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminStatisticController.cs" />
     <Compile Include="Controllers\GroupSetupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
