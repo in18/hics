@@ -10,7 +10,7 @@ using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
-    public class LampAssigmentController : Controller
+    public class LampAssignmentController : Controller
     {
         // GET: LampAssigment
         public ActionResult Index()

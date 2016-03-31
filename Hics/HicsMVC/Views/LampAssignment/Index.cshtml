@@ -25,16 +25,16 @@
     <div align="center" class="mainframe">
             @using (Html.BeginForm("Assignment", "LampAssignmentController"))
             {
-                <table class="toptextscroll">
+                <table>
                     <tr>
-                        <td class="addpadding">Group</td>
-                        <td class="addpadding">Lamp</td>
+                        <td @*class="addpadding"*@>Group</td>
+                        <td @*class="addpadding"*@>Lamp</td>
                     </tr>
 
                     <tr>
-                        <td>@Html.DropDownList("groupselect", new SelectList((List<HicsBL.fn_show_lampgroups_Result>)ViewBag.GroupList, "id", "roomgroupname"), "--Select Group--") </td>
+                        <td>@Html.DropDownList("groupselect", new SelectList(ViewBag.GroupList, "id", "roomgroupname"), "--Select Group--", new { @class = "inputdesign" }) </td>
 
-                        <td>@Html.DropDownList("lampselect", new SelectList(ViewBag.LampList, "id", "name"), "--Select Lamp--") </td>
+                        <td>@Html.DropDownList("lampselect", new SelectList(ViewBag.LampList, "id", "name"), "--Select Lamp--", new { @class = "inputdesign" }) </td>
                         <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
                         <td></td>
                     </tr>
@@ -43,7 +43,7 @@
 
     @*Ausgabeliste*@
     <div class="borderframe">
-        <table @*class="borderframe"*@>
+        <table height="210">
             <tr>
                 <th align="left">Groupname</th>
                 <th align="left">Lampname</th>
@@ -54,11 +54,11 @@
                 <tr class="boxrow">
                     <td class="listframepadding">@item.groupname </td>
                     <td class="listframepadding">@item.lampname </td>
-                    <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { lamp_id = item.lamp_id.Value, groupname = item.groupname })</td>
+                    <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { lamp_id = (int)item.lamp_id , groupname = item.groupname }, null)</td>
                 </tr>
             }
         </table>
-        @*</div>*@
+        </div>
     </div>
     
 
