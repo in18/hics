@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HicsBL; //Verweis hinzugefügt und hier eingebunden
+using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
@@ -38,7 +39,9 @@ namespace HicsMVC.Controllers
 
             if (ucpm.NewPassword == ucpm.RetypeNewPassword)
             {
-                //    DbAccess."ChangePassword(ucpm.#);"
+                UserSession userdaten = (UserSession)Session["UserSession"];
+
+                DbAccess.EditUserPassword(userdaten.name, ucpm.RecentPassword, ucpm.NewPassword);
 
                 // Weiteleitung zum Logout
             return RedirectToAction("Logout", "Logout");
@@ -48,6 +51,6 @@ namespace HicsMVC.Controllers
                 ViewBag.errorMsg = "Password does not match";
             }
             return View(ucpm);
-        }
+        }    
     }
 }
