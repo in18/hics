@@ -26,11 +26,13 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult AddGroup(GroupSetupModel gsm)
         {
+            HicsBL.DbAccess.addLampGroup("Sepp", "123user!", gsm.Groupname);
             return RedirectToAction("index");
         }
 
         public ActionResult DeleteGroup(int id)
         {
+            HicsBL.DbAccess.removeLampGroup("Sepp", "123user!", id);
             return RedirectToAction("index");
         }
 
