@@ -1054,9 +1054,8 @@ namespace HicsBL
                 }
                 catch
                 {
-                    tmp[0].name = "Keine Datenbankverbindung";
-                    tmp[1].name = "No database connection";
-                    return tmp;
+                    tmp.Add(new fn_show_lamps_Result { });
+                   tmp.Add(new fn_show_lamps_Result { });
                 }
             }
         }
