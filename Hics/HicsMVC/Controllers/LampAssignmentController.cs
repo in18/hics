@@ -10,7 +10,7 @@ using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
-    public class LampAssigmentController : Controller
+    public class LampAssignmentController : Controller
     {
         // GET: LampAssigment
         public ActionResult Index()
@@ -27,13 +27,14 @@ namespace HicsMVC.Controllers
 
             List<fn_show_lampgroups_Result> grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
             List<fn_show_lamps_Result> lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");
+            
 
             //Viewbags mit Gruppen- und Lampenliste per Viewbag an den View übergeben
             ViewBag.GroupList = grouplist;
             ViewBag.LampList  = lamplist;
-            
-            //Model an den View schicken
-            return View();
+
+            //Liste an den View schicken
+            return View(HicsBL.DbAccess.GetLampControl("Sepp", "123user!"));
         }
 
         [HttpPost]
@@ -42,8 +43,9 @@ namespace HicsMVC.Controllers
             return RedirectToAction("index");
         }
 
-        public ActionResult DeleteEntry()
+        public ActionResult DeleteEntry(int lamp_id, string groupname)
         {
+            HicsBL.DbAccess.removeLampFromGroup("Sepp", "123user!", groupname, lamp_id);
             return RedirectToAction("index");
         }
     }

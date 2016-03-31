@@ -18,9 +18,10 @@
     margin: auto;
     width: 60%;
     min-width: 470px;
-    overflow: auto;
-    min-height: 250px;
-    max-height: 400px;
+    /*overflow: auto;*/
+    /*min-height: 250px;
+    max-height: 400px;*/
+    /*height: 280px;*/
 }
 
 .borderframe {
@@ -28,6 +29,7 @@
     border-radius: 10px;
     padding: 5px 0 5px 0;
     min-width: 450px;
+    /*overflow:auto;*/
 }
 
 .listframepadding {
@@ -44,6 +46,7 @@
     padding: 5px;
     border-radius: 5px;
     border: solid 2px #054588;
+    margin-bottom: 10px;
 }
 
 .deletedesign {
@@ -64,7 +67,7 @@
 }
 
 .toptextscroll {
-    margin-top: 40px;
+    /*margin-top: 40px;*/
     padding-left: 15px;
 }
 
@@ -98,6 +101,18 @@
     margin-top: 15px;
 }
 
+.homepfeifer2 {
+    background-image: url('../../Resources/Home.png');
+    height:28px;
+    width:108px;
+    background-repeat:no-repeat;
+    background-position:center;
+    border-radius:7px;
+    border: solid 2px #054588;
+    float: left;
+    left: 7%;
+}
+
 .logoutpfeifer {
     background-image: url('../../Resources/Logout.png'); 
     height:28px;
@@ -105,11 +120,23 @@
     background-repeat:no-repeat;
     background-position:center;
     border-radius:7px;
-    border: solid 2px #054588; 
-    position: absolute;
+    border: solid 2px #054588;  
+    position: absolute;   
     float: right;
     right: 7%;
     margin: 15px 0 15px 0;
+}
+
+.logoutpfeifer2 {
+    background-image: url('../../Resources/Logout.png'); 
+    height:28px;
+    width:108px;
+    background-repeat:no-repeat;
+    background-position:center;
+    border-radius:7px;
+    border: solid 2px #054588;     
+    float: right;
+    right: 7%;
 }
 
 .rightpfeifer { 
@@ -120,3 +147,13 @@
     text-align:center;}
 
 .leftpfeifer { float: left; position: relative; width: auto; height: 100%;}
+
+.middlepfeifer { width: auto; height: 100%;}
+
+.inputdesign {
+    padding: 5px; 
+    border: solid 2px #054588;  
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

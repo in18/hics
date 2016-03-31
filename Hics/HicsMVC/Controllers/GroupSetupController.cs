@@ -16,6 +16,8 @@ namespace HicsMVC.Controllers
         {
             ViewBag.GroupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
 
+            //List<fn_show_lampgroups_Result> erg = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+
             return View();
         }
 

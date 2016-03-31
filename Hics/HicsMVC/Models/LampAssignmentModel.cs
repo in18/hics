@@ -11,12 +11,9 @@ namespace HicsMVC.Models
     {
         #region Fields & Properties
 
-        public string groupselect { get; set; }
+        public string groupname { get; set; }
 
-        public string lampselect { get; set; }
-
-        public List<fn_show_lampgroups_Result> Grouplist { get; set; }
-        public List<fn_show_lamps_Result> Lamplist { get; set; }
+        public int lamp_id { get; set; }
 
         #endregion
     }

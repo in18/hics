@@ -19,10 +19,10 @@ namespace HicsBL
             HueAccess.getWebClient();
             HueAccess.getLampList();// lamps liste aktuallisieren
 
-            //HelperClass.SetLampState(1, true);
+            HelperClass.SetLampState(1, false);
             //HelperClass.SetLampBrightness(2, 254);
             //DbAccess.addUser("admin", "123user!", "Walter", "123user!");
-            Byte[] ha = HelperClass.GetHash("123user!");
+            //Byte[] ha = HelperClass.GetHash("123user!");
             //HelperClass.GetHash(HelperClass.ByteArrayToString(ha));
             //List<fn_show_lamp_control_history_Result> l = new List<fn_show_lamp_control_history_Result>();
             //l = DbAccess.GetLogFile("admin", "123user!", new DateTime(1990, 1, 1), new DateTime(2016, 3, 22));
@@ -51,7 +51,7 @@ namespace HicsBL
             //{
             //    Console.WriteLine(item.name);
             //}
-            Console.WriteLine(DbAccess.userLogin("admini","123user!"));
+            //Console.WriteLine(DbAccess.userLogin("admini","123user!"));
 
             Console.ReadKey();
 

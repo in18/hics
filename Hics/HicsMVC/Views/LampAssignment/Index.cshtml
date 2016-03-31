@@ -1,0 +1,65 @@
+﻿@model List<HicsBL.fn_show_lamp_control_Result>
+@{
+    ViewBag.Title = "Lamp Assignment";
+    Layout = "~/Views/Shared/MicronLayout.cshtml";
+}
+
+@*Überschrift*@
+
+<div>
+    <div>
+        <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
+
+        <a href="~/Logout/Logout"><div class="logoutpfeifer2"></div></a>
+    </div>
+
+    <div align="center" class="middlepfeifer">
+        <h2>Lamp Assignment</h2>
+    </div>
+</div> 
+
+<br style="clear:both;" />
+
+    @*Combine Group*@
+
+    <div align="center" class="mainframe">
+            @using (Html.BeginForm("Assignment", "LampAssignmentController"))
+            {
+                <table>
+                    <tr>
+                        <td @*class="addpadding"*@>Group</td>
+                        <td @*class="addpadding"*@>Lamp</td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.DropDownList("groupselect", new SelectList(ViewBag.GroupList, "id", "roomgroupname"), "--Select Group--", new { @class = "inputdesign" }) </td>
+
+                        <td>@Html.DropDownList("lampselect", new SelectList(ViewBag.LampList, "id", "name"), "--Select Lamp--", new { @class = "inputdesign" }) </td>
+                        <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
+                        <td></td>
+                    </tr>
+                </table>
+            }
+
+    @*Ausgabeliste*@
+    <div class="borderframe">
+        <table height="210">
+            <tr>
+                <th align="left">Groupname</th>
+                <th align="left">Lampname</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="boxrow">
+                    <td class="listframepadding">@item.groupname </td>
+                    <td class="listframepadding">@item.lampname </td>
+                    <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { lamp_id = (int)item.lamp_id , groupname = item.groupname }, null)</td>
+                </tr>
+            }
+        </table>
+        </div>
+    </div>
+    
+
+
