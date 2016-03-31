@@ -57,7 +57,7 @@
         {
             <tr class="boxrow">
                 <td class="listframepadding"> @Model.GroupSetupList[i].roomgroupname</td>
-                <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = Model.GroupSetupList[i].id }, new { @class = "deletedesign" })
+                <td>@Html.ActionLink("Delete", "DeleteGroup", new { @id = Model.GroupSetupList[i].id }, new { @class = "deletedesign" })
             </tr>
         }
     </table>

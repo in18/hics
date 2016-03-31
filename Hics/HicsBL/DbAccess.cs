@@ -1054,8 +1054,9 @@ namespace HicsBL
                 }
                 catch
                 {
-                    tmp[0].name = "Keine Datenbankverbindung";
-                    tmp[1].name = "No database connection";
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
+                    tmp.Add(new fn_show_lamps_Result {address = "", name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamps_Result { address = "", name = "No database connection" });
                     return tmp;
                 }
             }
