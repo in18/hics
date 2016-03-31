@@ -1082,8 +1082,9 @@ namespace HicsBL
                 }
                 catch 
                 {
-                    tmp[0].lampname = "Keine Datenbankverbindung";
-                    tmp[1].lampname = "No database connection";
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Lampenname eingetragen
+                    tmp.Add( new fn_show_lamp_control_Result { groupname=" ", address=" ", lampname = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamp_control_Result { groupname = " ", address = " ", lampname = "No database connection" });
                     return tmp;
                 }
             }
@@ -1108,8 +1109,9 @@ namespace HicsBL
                 }
                 catch 
                 {
-                    tmp[0].name = "Keine Datenbankverbindung";
-                    tmp[1].name = "No database connection";
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Username eingetragen
+                    tmp.Add(new fn_show_users_Result { group = " ", name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_users_Result { group =" ", name = "No database connection" });
                     return tmp;
                 }
             }
@@ -1134,8 +1136,9 @@ namespace HicsBL
                 }
                 catch
                 {
-                    tmp[0].roomgroupname = "Keine Datenbankverbindung";
-                    tmp[1].roomgroupname = "No database connection";
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Gruppenname eingetragen
+                    tmp.Add(new fn_show_lampgroups_Result { roomgroupname = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lampgroups_Result { roomgroupname = "No database connection" });
                     return tmp;
                 }
             }
