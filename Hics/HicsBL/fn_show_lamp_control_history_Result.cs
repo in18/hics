@@ -21,5 +21,6 @@ namespace HicsBL
         public string address { get; set; }
         public Nullable<bool> status { get; set; }
         public Nullable<byte> brightness { get; set; }
+        public Nullable<int> deleted { get; set; }
     }
 }
