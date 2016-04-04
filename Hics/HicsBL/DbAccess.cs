@@ -83,89 +83,93 @@ namespace HicsBL
         /// <param name="lampNameOld"></param>
         /// <param name="lampNameNew"></param>
         /// <returns></returns>
-        internal static void editLampName(string username, string password, string lampNameOld, string lampNameNew)
+        internal static bool editLampName(string username, string password, string lampNameOld, string lampNameNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-
+            bool success = false;
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                //Table der Db-Fn holen
-                //List<fn_show_lamps_Result> dblamps = cont.fn_show_lamps(username, pwhash).ToList();
+                
                 List<fn_show_lamp_status_Result> dbLampStatus = null;
                 List<fn_show_lamp_control_Result> dbLampsStatus = cont.fn_show_lamp_control(username, pwhash).ToList();
                 List<fn_show_lamp_control_Result> dbLampsStatusResult = new List<fn_show_lamp_control_Result>();
                 List<fn_show_lampgroups_Result> dbLampGroups = cont.fn_show_lampgroups(username, pwhash).ToList();
                 List<fn_show_lampgroup_status_Result> dbLampGroupStatus = null;
-                //List<fn_show_lamp_control_Result> dbLampsStatusNew = null;
                 List<fn_show_lamps_Result> dbLampsNew = null;
                 //temporäre Variablen
                 int? dbLampIdNew = 0;
-                int? dblampId = 0; //Nullable da in der Db Nullable
+                int? dblampId = 0;
                 string dblampAdr = "";
                 string dbLampGroupName = "";
 
-                foreach (var item in dbLampsStatus)
+                try
                 {
-                    // Suche des alten Namens zwecks Änderung
-                    if (item.lampname == lampNameOld)
+                    foreach (var item in dbLampsStatus)
                     {
-                        //Wenn gefunden->
-
-                        dblampId = item.lamp_id;
-                        //Für das Wiederanlegen der Lampe die Adresse temp. speichern
-                        dblampAdr = item.address;
-
-                        dbLampStatus = cont.fn_show_lamp_status(username, pwhash, item.lamp_id).ToList();
-
-                        dbLampsStatusResult.Add(item);
-
-                        dbLampGroupName = item.groupname;  
-                    }
-                }
-
-                //Edit gibt es nicht in der DB, Lampe wird gelöscht und wieder neu angelegt
-                Console.WriteLine(dblampAdr);
-                cont.sp_delete_lamp(dblampId, username, pwhash);
-                cont.sp_add_lamp(username, pwhash, dblampAdr, lampNameNew);
-
-                //dbLampsStatusNew = cont.fn_show_lamp_control(username, pwhash).ToList();
-                dbLampsNew = cont.fn_show_lamps(username, pwhash).ToList();
-                foreach (var item in dbLampsNew)
-                {
-                    if (item.name == lampNameNew)
-                    {
-                        dbLampIdNew = item.id;
-                    }
-                }
-
-
-                foreach (var outerItem in dbLampGroups)
-                {
-                    dbLampGroupStatus = cont.fn_show_lampgroup_status(username, pwhash, outerItem.id).ToList();
-                    foreach (var innerItem in dbLampGroupStatus)
-                    {
-                        if (innerItem.id == dblampId)
+                        // Suche des alten Namens zwecks Änderung
+                        if (item.lampname == lampNameOld)
                         {
-                            cont.sp_delete_lamp_from_roomgroup(username, pwhash, outerItem.id, dblampId);
-                            cont.sp_add_lamp_to_lampgroup(username, pwhash, outerItem.id, dbLampIdNew);
+                            dblampId = item.lamp_id;
+
+                            dblampAdr = item.address;
+
+                            dbLampStatus = cont.fn_show_lamp_status(username, pwhash, item.lamp_id).ToList();
+
+                            dbLampsStatusResult.Add(item);
+
+                            dbLampGroupName = item.groupname;
                         }
                     }
-                }
 
-                cont.sp_lamp_dimm(username, pwhash, dbLampIdNew, dbLampStatus[0].bright);
-                if (dbLampStatus[0].status == true)
-                {
-                    cont.sp_lamp_on(username, pwhash, dbLampIdNew);
+                    //Edit gibt es nicht in der DB, Lampe wird gelöscht und wieder neu angelegt
+                    cont.sp_delete_lamp(dblampId, username, pwhash);
+                    cont.sp_add_lamp(username, pwhash, dblampAdr, lampNameNew);
+
+                    dbLampsNew = cont.fn_show_lamps(username, pwhash).ToList();
+                    foreach (var item in dbLampsNew)
+                    {
+                        if (item.name == lampNameNew)
+                        {
+                            dbLampIdNew = item.id;
+                        }
+                    }
+
+
+                    foreach (var outerItem in dbLampGroups)
+                    {
+                        dbLampGroupStatus = cont.fn_show_lampgroup_status(username, pwhash, outerItem.id).ToList();
+                        foreach (var innerItem in dbLampGroupStatus)
+                        {
+                            if (innerItem.id == dblampId)
+                            {
+                                cont.sp_delete_lamp_from_roomgroup(username, pwhash, outerItem.id, dblampId);
+                                cont.sp_add_lamp_to_lampgroup(username, pwhash, outerItem.id, dbLampIdNew);
+                            }
+                        }
+                    }
+
+                    cont.sp_lamp_dimm(username, pwhash, dbLampIdNew, dbLampStatus[0].bright);
+                    if (dbLampStatus[0].status == true)
+                    {
+                        cont.sp_lamp_on(username, pwhash, dbLampIdNew);
+                    }
+                    else
+                    {
+                        cont.sp_lamp_off(username, pwhash, dbLampIdNew);
+                    }
+                 //Namen der Lampe in der HUE-Bridge ändern
+                 HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
+                    success = true;
                 }
-                else
+                catch (Exception)
                 {
-                    cont.sp_lamp_off(username, pwhash, dbLampIdNew);
+                    success = false;
                 }
+               
                 
             }
-            //Namen der Lampe in der HUE-Bridge ändern
-            HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
+            return success;
         }
         #endregion
 
@@ -643,23 +647,25 @@ namespace HicsBL
                         {
                             if (addUserToUsergroup(username, password, usernameNew, 1)==true)
                             {
-                                return success = true;
+                                 success = true;
                             }
                         }
                     else
                         {
                             if (addUserToUsergroup(username, password, usernameNew, 2) == true)
                             {
-                                return success = true;
+                                success = true;
                             }
                         }
-                    return success = false;
+                    success = false;
                 }
                 catch 
                 {
-                    return success = false;
+                    success = false;
                 }
+                
             }
+            return success;
         }
         #endregion
 
@@ -681,13 +687,14 @@ namespace HicsBL
                             success = true;
                         }
                     }
-                    return success;
+                   
                 }
-                catch (Exception)
+                catch 
                 {
-                    return success;
+                   success = false;
                 }
             }
+            return success;
         }
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)

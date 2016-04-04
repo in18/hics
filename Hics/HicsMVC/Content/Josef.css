@@ -36,3 +36,7 @@
 .test{
     min-width:666px;
 }
+.text-danger{
+    color:red;
+    font-weight:bold;
+}
