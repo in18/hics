@@ -38,7 +38,7 @@ namespace HicsMVC.Controllers
 
                 //hard-coded:
                 //Statt True abfrage an BL mit Username/Password
-                //us.admin = true; -->
+                us.admin = true;
 
                 //4.4.2016 / LEO:
                 //foreach (var item in DbAccess.GetAllUser(lm.Username, lm.Password))
