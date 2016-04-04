@@ -23,12 +23,14 @@ namespace HicsMVC.Controllers
 
         [HttpPost]
         public ActionResult AddLamp(LampSetupModel lsm)
-        {                        
+        {
+            HicsBL.DbAccess.addLamp("Sepp", "123user!", lsm.Id, lsm.Description);
             return RedirectToAction("index");
         }
 
         public ActionResult DeleteLamp(int id)
         {
+            HicsBL.DbAccess.deleteLamp("Sepp", "123user!", id);
             return RedirectToAction("index");
         }
 

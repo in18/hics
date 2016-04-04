@@ -307,17 +307,17 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
+            {                             
                 try
                 {
                     //Lampengruppe erstellen                     
-                    cont.sp_add_lampgroup(username, pwhash, lampGroupName);
+                    cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
                     success = true;
-                }
+            }
                 catch 
                 {
                     success = false;
-                }                       
+        }
             }
 
             return success;
@@ -628,7 +628,7 @@ namespace HicsBL
                 try
                 {
                     //User hinzufügen
-                    cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+                cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
                     success = true;
                 }
                 catch 
@@ -801,7 +801,7 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-            
+            bool success = false;
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamps_Result> dbLamps = cont.fn_show_lamps(username, pwhash).ToList();
@@ -810,40 +810,34 @@ namespace HicsBL
 
                 try
                 {
-                    foreach (var item in dbLamps)
-                    {
-                        if (lampId == item.id)
-                        {
-                            dbLampName = item.name;
-                            break;
-                        }
-                    }
-                    HueLampId = HueAccess.GetLampId(dbLampName);
-
-
-
-                    if (lampOnOff == true)
-                    {
-                        cont.sp_lamp_on(username, pwhash, lampId);
-                        // Vereinfachter aufruf über die HelperClass
-                        HelperClass.SetLampState(HueLampId, true);
-                    }
-                    else
-                    {
-                        cont.sp_lamp_off(username, pwhash, lampId);
-                        // Vereinfachter aufruf über die HelperClass
-                        HelperClass.SetLampState(HueLampId, false);
-                    }
-                    success = true;
-                }
-                catch 
+                foreach (var item in dbLamps)
                 {
-                    success = false;
+                    if (lampId == item.id)
+                    {
+                        dbLampName = item.name;
+                        break;
+                    }
+                }
+                HueLampId = HueAccess.GetLampId(dbLampName);
+
+
+
+                if (lampOnOff == true)
+                {
+                    cont.sp_lamp_on(username, pwhash, lampId);
+                    // Vereinfachter aufruf über die HelperClass
+                    HelperClass.SetLampState(HueLampId, true);
+                }
+                else
+                {
+                    cont.sp_lamp_off(username, pwhash, lampId);
+                    // Vereinfachter aufruf über die HelperClass
+                    HelperClass.SetLampState(HueLampId, false);
                 }
 
+                    return success;
             }
-
-            return success;
+        }
         }
         #endregion
 
@@ -873,30 +867,30 @@ namespace HicsBL
 
                 try
                 {
-                    foreach (var item in db)
+                foreach (var item in db)
+                {
+                    if (lampId == item.id)
                     {
-                        if (lampId == item.id)
-                        {
-                            dbLampName = item.name;
-                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
-
+                        dbLampName = item.name;
+                        cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+                       
                             hueId = HueAccess.GetLampId(dbLampName);
                             HelperClass.SetLampBrightness(hueId, brightness);
 
                             if (lampOnOff == true)
-                            {
-                                cont.sp_lamp_on(username, pwhash, lampId);
-                                onOff = true;
-                            }
-                            else
-                            {
-                                cont.sp_lamp_off(username, pwhash, lampId);
-                                onOff = false;
-                            }
-                            HelperClass.SetLampState(hueId, onOff);
+                        {
+                            cont.sp_lamp_on(username, pwhash, lampId);
+                            onOff = true;
                         }
-
+                        else
+                        {
+                            cont.sp_lamp_off(username, pwhash, lampId);
+                            onOff = false;
+                        }
+                            HelperClass.SetLampState(hueId, onOff);
                     }
+                   
+                }
                     success = true;
                 }
                 catch 
@@ -904,7 +898,7 @@ namespace HicsBL
                     success = false;
                 }                              
             }
-
+            
             return success;
         }
         #endregion
@@ -1042,6 +1036,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamp_control_history_Result> tmp = new List<fn_show_lamp_control_history_Result>();
+            
                 try
                 {
 
@@ -1058,8 +1053,9 @@ namespace HicsBL
                 }
                 catch
                 {
-                    tmp[0].lamp_name = "Keine Datenbankverbindung";
-                    tmp[1].lamp_name = "No databaseconnection";
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "No database connection" });
 
                     return tmp;
                 }

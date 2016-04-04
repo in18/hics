@@ -23,7 +23,7 @@
     @*Combine Group*@
 
     <div align="center" class="mainframe">
-            @using (Html.BeginForm("Assignment", "LampAssignmentController"))
+            @using (Html.BeginForm("Assignment", "LampAssignment"))
             {
                 <table>
                     <tr>
@@ -32,9 +32,9 @@
                     </tr>
 
                     <tr>
-                        <td>@Html.DropDownList("groupselect", new SelectList(ViewBag.GroupList, "id", "roomgroupname"), "--Select Group--", new { @class = "inputdesign" }) </td>
+                        <td>@Html.DropDownList("groupname", new SelectList(ViewBag.GroupList, "id", "roomgroupname"), "--Select Group--", new { @class = "inputdesign" }) </td>
 
-                        <td>@Html.DropDownList("lampselect", new SelectList(ViewBag.LampList, "id", "name"), "--Select Lamp--", new { @class = "inputdesign" }) </td>
+                        <td>@Html.DropDownList("lamp_id", new SelectList(ViewBag.LampList, "id", "name"), "--Select Lamp--", new { @class = "inputdesign" }) </td>
                         <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
                         <td></td>
                     </tr>
@@ -54,7 +54,7 @@
                 <tr class="boxrow">
                     <td class="listframepadding">@item.groupname </td>
                     <td class="listframepadding">@item.lampname </td>
-                    <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { lamp_id = (int)item.lamp_id , groupname = item.groupname }, null)</td>
+                    <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { @groupname = item.groupname, @lamp_id = (int)item.lamp_id }, null)</td>
                 </tr>
             }
         </table>
