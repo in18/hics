@@ -1101,10 +1101,15 @@ namespace HicsBL
 
                     foreach (var item in db)
                     {
-                        if (item.date >= beginDate && item.date <= endDate)
+                        if (Convert.ToDateTime((item.date).Value.ToShortDateString()) >= Convert.ToDateTime(beginDate.ToShortDateString()) 
+                         && Convert.ToDateTime((item.date).Value.ToShortDateString()) <= Convert.ToDateTime(endDate))
                         {
                             tmp.Add(item);
                         }
+                    }
+                    if (tmp.Count <= 0)
+                    {
+                        tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Daten" });
                     }
                     return tmp;
                 }
