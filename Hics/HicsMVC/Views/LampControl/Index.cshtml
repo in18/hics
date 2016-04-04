@@ -5,97 +5,69 @@
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
+<div>
+    <div>
+        <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
 
-
-<div class="left">
-    <h2>Lamp Control</h2>
-</div>
-
-
-<div class="middle">
-    <h2></h2>
-</div>
-
-<div class="right">
-    <a href="~/Logout/Logout">
-        <div class="logout"></div>
-    </a>
-</div>
-
-<br style="clear:both;" />
-
-<form>
-
-    <div class="lampcontainer">
-        <table class="lampcon">
-            <tr class="tr">
-                
-                <th class="lampcontr">ID</th>
-                <th class="lampcontr">Adress</th>
-                <th class="lampcontr">Groupname</th>
-                <th class="lampcontr">Lampname</th>
-                <th class="lampcontr">Status</th>
-                <th class="lampcontr">Brigtness</th>
-
-                <th class="lampcontr">Edit</th>
-                
-            </tr>
-           @foreach (var item in Model)
-           {
-
-                <tr class="tr">
-                   
-                    <td>
-                    @item.lamp_id
-                    </td>
-                    <td>
-                        @item.address
-                    </td>
-                    <td>
-                    @item.groupname
-                    </td>
-                    <td>
-                    @item.lampname
-                    </td>
-                    <td>
-                    @item.status
-                    </td>
-                    <td>
-                    @item.brightness
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit","Edit",new { @id=item.lamp_id}, new { @class = "edit" })
-                        
-                    </td>
-                </tr>
-
-            }
-        </table>
-
-
+        <a href="~/Logout/Logout"><div class="logoutpfeifer2"></div></a>
     </div>
 
-</form>
-            <div class="left">
-                <h2></h2>
-            </div>
+    <div align="center" class="middlepfeifer">
+        <h2>Lamp Control</h2>
+    </div>
+</div>
+<br style="clear:both;" />
+
+<div align="center">
+    <form>
+        <div class="lampcontainer">
+            <table class="lampcon">
+                <tr class="tr">
+
+                    <th class="lampcontr">ID</th>
+                    <th class="lampcontr">Adress</th>
+                    <th class="lampcontr">Groupname</th>
+                    <th class="lampcontr">Lampname</th>
+                    <th class="lampcontr">Status</th>
+                    <th class="lampcontr">Brigtness</th>
+
+                    <th class="lampcontr">Edit</th>
+
+                </tr>
+                @foreach (var item in Model)
+                {
+
+                    <tr class="tr">
+
+                        <td>
+                            @item.lamp_id
+                        </td>
+                        <td>
+                            @item.address
+                        </td>
+                        <td>
+                            @item.groupname
+                        </td>
+                        <td>
+                            @item.lampname
+                        </td>
+                        <td>
+                            @item.status
+                        </td>
+                        <td>
+                            @item.brightness
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { @id = item.lamp_id }, new { @class = "edit" })
+
+                        </td>
+                    </tr>
+
+                }
+            </table>
 
 
-            <div class="middle">
-                <h2></h2>
-            </div>
-            <div class="right">
-                <div style="width:100%;">
-                    <a href="~/Admin/Index">
-                        <div class="home1"></div>
-                    </a>
-                </div>
+        </div>
 
-
-               
-            </div>
-
-<script type="text/javascript">
-
-
-</script>
+    </form>
+</div>
