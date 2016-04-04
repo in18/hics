@@ -54,7 +54,7 @@ namespace HicsBL
             //    Console.WriteLine(item.name);
             //}
             //Console.WriteLine(DbAccess.userLogin("admini","123user!"));
-
+            Console.WriteLine(DbAccess.userLogin("admin","123user!"));
             Console.ReadKey();
 
         }
