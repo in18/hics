@@ -1,4 +1,4 @@
-﻿@model List<HicsBL.fn_show_lamp_control_Result>
+﻿@model HicsMVC.Models.LampAssignmentModel
 @{
     ViewBag.Title = "Lamp Assignment";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
@@ -32,11 +32,17 @@
                     </tr>
 
                     <tr>
-                        <td>@Html.DropDownList("groupname", new SelectList(ViewBag.GroupList, "id", "roomgroupname"), "--Select Group--", new { @class = "inputdesign" }) </td>
+                        <td>@Html.DropDownList("groupname", new SelectList(Model.grouplist, "roomgroupname", "roomgroupname"), "--Select Group--", new { @class = "inputdesign" }) </td>
 
-                        <td>@Html.DropDownList("lamp_id", new SelectList(ViewBag.LampList, "id", "name"), "--Select Lamp--", new { @class = "inputdesign" }) </td>
+                        <td>@Html.DropDownList("lamp_id", new SelectList(Model.lamplist, "id", "name"), "--Select Lamp--", new { @class = "inputdesign" }) </td>
                         <td><input class="boxdesign" type="submit" name="assign" value="Assign" /></td>
                         <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.ValidationMessageFor(model => model.grouplist , String.Empty, new { @style = "color:red;font-weight:bold;" })</td>
+                        <td>@Html.ValidationMessageFor(model => model.lamplist, String.Empty, new { @style = "color:red;font-weight:bold;" })</td>
+                        <td></td>                    
                     </tr>
                 </table>
             }
@@ -49,7 +55,7 @@
                 <th align="left">Lampname</th>
                 <th></th>
             </tr>
-            @foreach (var item in Model)
+            @foreach (var item in Model.lampAssignmentList)
             {
                 <tr class="boxrow">
                     <td class="listframepadding">@item.groupname </td>
