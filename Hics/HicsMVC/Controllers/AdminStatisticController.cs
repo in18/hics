@@ -10,9 +10,10 @@ namespace HicsMVC.Controllers
     {
         // GET: AdminStatistic
         public ActionResult Index()
-        {
-          
+        {          
             return View();
         }
+
+
     }
 }
