@@ -1,54 +1,45 @@
 ﻿
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
+
 }
 
 <div>
     <div>
-        <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
+        <a href="~/AdminStatistic/Index"><div class="homepfeifer2"></div></a>
 
         <a href="~/Logout/Logout"><div class="logoutpfeifer2"></div></a>
     </div>
 
     <div align="center" class="middlepfeifer">
-        <h2>Lamp Control</h2>
+        <h2>Admin Statistic</h2>
     </div>
 </div> 
-
 <br style="clear:both;" />
 
-<form>
-
-    <div class="lampcontainer">
-        <table class="lampcon">
-            <tr class="tr">
-
-                <th class="lampcontr"></th>
-                <th class="lampcontr"></th>
-                <th class="lampcontr"></th>
-                <th class="lampcontr"></th>                
-
+<div align="center">
+    <div class="liste">
+        <table>
+            <tr>
+                <th align="left">Date</th>
+                <th align="left">Time</th>
+                <th align="left">Group</th>
+                <th align="left">Lamp Status</th>
+                <th></th>
             </tr>
-            @foreach (var item in )
+            @foreach (var item in Model)
             {
-
-                <tr class="tr">
-
-                    <td class="lampcontd"></td>
-                    <td class="lampcontd"></td>
-                    <td class="lampcontr"></td>
-                    <td class="lampcontr"></td>
-                    <td class="lampcontd"></td>
+                <tr>
+                    <td class="listenpadding">@item.Date</td>
+                    <td class="listenpadding">@item.Time</td>
+                    <td class="listenpadding">@item.Group</td>
+                    <td class="listenpadding">@item.Lampstatus</td>
                 </tr>
-
             }
         </table>
-
-
+    </div>
     </div>
 
-</form>
 
-
-<script type="text/javascript"></script>
