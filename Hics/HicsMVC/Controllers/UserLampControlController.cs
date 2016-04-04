@@ -14,17 +14,29 @@ namespace HicsMVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+
+
             List<fn_show_lamp_control_Result> lamps;
-            lamps = HicsBL.DbAccess.GetAllLampsStatus("user", "123user!");
+            lamps = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
+
+            //UserLampControl ulc = new UserLampControl();
+
+            //ulc.lamplist = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
 
             return View(lamps);
+        }
+
+        [HttpGet]
+        public ActionResult Index_Lampcontrol()
+        {
+            return View();
         }
 
         [HttpGet]
         public ActionResult Edit(int? id)
         {
             List<fn_show_lamp_control_Result> lamps;
-            lamps = HicsBL.DbAccess.GetAllLampsStatus("user", "123user!");
+            lamps = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
 
             HicsBL.fn_show_lamp_control_Result erg = lamps.Where(x => x.lamp_id == id).FirstOrDefault();
 
@@ -34,7 +46,7 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult Edit(HicsBL.fn_show_lamp_control_Result fn)
         {
-            HicsBL.DbAccess.dimLamp("user", "123user!", (int)fn.lamp_id, (byte)fn.brightness, (bool)fn.status);
+            HicsBL.DbAccess.dimLamp("Sepp", "123user!", (int)fn.lamp_id, (byte)fn.brightness, (bool)fn.status);
 
             return RedirectToAction("Index");
         }

@@ -151,7 +151,7 @@ namespace HicsBL
         [DbFunction("itin18_aktEntities", "fn_show_lampgroups")]
         public virtual IQueryable<fn_show_lampgroups_Result> fn_show_lampgroups(string username, byte[] password)
         {
-            var usernameParameter = username != null ?
+            var usernameParameter = username != null ? 
                 new ObjectParameter("username", username) :
                 new ObjectParameter("username", typeof(string));
     

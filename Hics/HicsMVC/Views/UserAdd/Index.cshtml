@@ -21,51 +21,7 @@
     @*Eingabe eines users/admins durch Checkbox*@
 
     @using (Html.BeginForm("AddAdditionalUser", "UserAdd"))
-    {
-        
-		@*<table class="toptext">
-            <tr>
-                <td class="addpadding" colspan="2">Input User</td>
-            </tr>
-            <tr>
-                <td>
-                     @Html.TextBoxFor(model => model.NewUserName, new { @class = "boxdesign", @placeholder = "Username" })
-                   
-                </td>
-            <tr>
-                <td>
-                    @Html.CheckBoxFor(model => model.IsAdmin) Admin
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @Html.ValidationMessageFor(model => model.NewUserName, String.Empty, new { @style = "color:red;font-weight:bold;margin-left:20px;" })
-                </td>           
-            </tr>
-            <tr>
-                <td> 
-                    @Html.PasswordFor(model => model.NewUserPassword, new { @class = "boxdesign", @placeholder = "Password" })
-                   
-                </td>
-                <td>
-                    @Html.ValidationMessageFor(model => model.NewUserPassword, String.Empty, new { @style = "color:red;font-weight:bold;margin-left:20px;" })
-                </td>
-            </tr>
-            <tr>
-                <td> 
-                    @Html.PasswordFor(model => model.RetypeNewUserPassword, new { @class = "boxdesign", @placeholder = "Retype Password" })
-                    
-                </td>  
-                <td>
-                    @Html.ValidationMessageFor(model => model.RetypeNewUserPassword, String.Empty, new { @style = "color:red;font-weight:bold;margin-left:20px;" })
-                </td>           
-            </tr>
-            <tr>
-                <td><input class="boxdesign" type="submit" name="AddAdditionalUser" value="AddUser" /></td>
-            </tr>
-        </table>*@
-                
-       
+    {  
         <table align="center">
             <tr>
                 <td>
