@@ -14,22 +14,25 @@ namespace HicsMVC.Controllers
         // GET: GroupSetup
         public ActionResult Index()
         {
-            GroupSetupModel gsm = new GroupSetupModel();
+            //ViewBag.GroupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+            //List<fn_show_lampgroups_Result> erg = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
 
-            gsm.Grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!"); 
-
+            GroupSetupModel gsm = new GroupSetupModel();            
+            gsm.GroupSetupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+            
             return View(gsm);
-            //return View();
         }
 
         [HttpPost]
         public ActionResult AddGroup(GroupSetupModel gsm)
         {
+            HicsBL.DbAccess.addLampGroup("Sepp", "123user!", gsm.Groupname);
             return RedirectToAction("index");
         }
 
         public ActionResult DeleteGroup(int id)
         {
+            HicsBL.DbAccess.removeLampGroup("Sepp", "123user!", id);
             return RedirectToAction("index");
         }
 

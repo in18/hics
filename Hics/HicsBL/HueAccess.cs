@@ -12,6 +12,7 @@ using NDesk.Options;
 using System.Threading;
 using System.Xml.Linq;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HicsBL
 {
@@ -85,13 +86,23 @@ namespace HicsBL
         {
             
             int lId = 0;
+            LoadConfig();
+            getWebClient();
             getLampList();
 
-            for (int i = 0; i < lamps.Count; i++)
+            //for (int i = 0; i < lamps.Count; i++)
+            //{
+            //    if (lamps[i].name  == lampName)
+            //    {
+            //        lId = lamps[i].GetLampNumber();
+            //    }
+            //}
+
+            foreach (var i in lamps)
             {
-                if (lamps[i].name == lampName)
+                if (i.Value.name == lampName)
                 {
-                    lId = lamps[i].GetLampNumber();
+                    lId = i.Value.GetLampNumber();
                 }
             }
             return lId;
@@ -154,28 +165,42 @@ namespace HicsBL
         /// <returns>true für korrekte Werte</returns>
         public static bool LoadConfig()
         {
-            XDocument doc = XDocument.Load("Settings.xml");
-
-            var data = from item in doc.Descendants("settings")
-                       select new
-                       {
-                           bridge = item.Element("bridgeip").Value,
-                           user = item.Element("username").Value
-                       };
-
-            foreach (var val in data)
+            // Momentan ist die Try/catch nur eine Notfalllösung
+            try
             {
-                bridgeIP = val.bridge;
-                username = val.user;
-                break;
+                XDocument doc = XDocument.Load(@"Settings.xml");
+
+                var data = from item in doc.Descendants("settings")
+                           select new
+                           {
+                               bridge = item.Element("bridgeip").Value,
+                               user = item.Element("username").Value
+                           };
+
+                foreach (var val in data)
+                {
+                    bridgeIP = val.bridge;
+                    username = val.user;
+                    break;
+                }
+
+                Regex ipRegex = new Regex(@"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}");
+
+                bool success = (bridgeIP != null && ipRegex.IsMatch(bridgeIP) && !String.IsNullOrWhiteSpace(username));
+                return success;
             }
+            catch 
+            {
+                bridgeIP = "192.168.118.240";
+                username = "26a36d65807946339133551842be44";
+                return true;
+            }
+            //string tmp = Path.GetDirectoryName(System.Environment.CurrentDirectory);
 
-            Regex ipRegex = new Regex(@"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}");
 
-            bool success = (bridgeIP != null && ipRegex.IsMatch(bridgeIP) && !String.IsNullOrWhiteSpace(username));
 
             //Console.WriteLine("Load config returned bridge ip [" + bridgeIP + "] and username [" + username + "] and return code [" + success + "]");
-            return success;
+            
         } 
 
         #endregion

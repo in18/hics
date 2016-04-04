@@ -8,6 +8,7 @@ namespace HicsMVC.Controllers
 {
     public class StatisticController : Controller
     {
+        //Nur für Testzwecke!!!!!!!!!!!
         // GET: Statistic
         public ActionResult Index()
         {

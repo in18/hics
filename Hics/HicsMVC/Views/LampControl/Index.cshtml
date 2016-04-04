@@ -1,4 +1,4 @@
-﻿@model List<HicsBL.fn_show_lampgroup_status_Result>
+﻿@model List<HicsBL.fn_show_lamp_control_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -30,25 +30,41 @@
         <table class="lampcon">
             <tr class="tr">
                 
+                <th class="lampcontr">ID</th>
+                <th class="lampcontr">Adress</th>
+                <th class="lampcontr">Groupname</th>
                 <th class="lampcontr">Lampname</th>
-                <th class="lampcontr"></th>
-                <th class="lampcontr"></th>
-                <th class="lampcontr">Dimmer</th>
+                <th class="lampcontr">Status</th>
+                <th class="lampcontr">Brigtness</th>
 
                 <th class="lampcontr">Edit</th>
                 
             </tr>
-            @foreach (var item in Model)
-            {
-               
+           @foreach (var item in Model)
+           {
+
                 <tr class="tr">
-                    
-                    <td class="lampcontd">@item.id</td>
-                    <td class="lampcontd">@item.name</td>
-                    <td class="lampcontr">@item.OnOff</td>
-                    <td class="lampcontr">@item.dimmer</td>
-                    <td class="lampcontd">
-                        @Html.ActionLink("Edit","Edit",new { @id=item.id}, new { @class = "edit" })
+                   
+                    <td>
+                    @item.lamp_id
+                    </td>
+                    <td>
+                        @item.address
+                    </td>
+                    <td>
+                    @item.groupname
+                    </td>
+                    <td>
+                    @item.lampname
+                    </td>
+                    <td>
+                    @item.status
+                    </td>
+                    <td>
+                    @item.brightness
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit","Edit",new { @id=item.lamp_id}, new { @class = "edit" })
                         
                     </td>
                 </tr>
