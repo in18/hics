@@ -601,7 +601,8 @@ namespace HicsBL
         /// <param name="password">das dazugehörige Passwort übermitteln (Überprüfung auf Rechte)</param>
         /// <param name="usernameNew">Name des neu anzulegenden Users</param>
         /// <param name="passwordNew">Passwort des neu angelegten User</param>
-        public static bool addUser(string username, string password, string usernameNew, string passwordNew)
+        /// <param name="admin">Ist User Admin?</param>
+        public static bool addUser(string username, string password, string usernameNew, string passwordNew, bool admin)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -614,19 +615,57 @@ namespace HicsBL
 
                 try
                 {
-                    //User hinzufügen
-                cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
-                    success = true;
+                    cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+                    if (admin == true)
+                        {
+                            if (addUserToUsergroup(username, password, usernameNew, 1)==true)
+                            {
+                                return success = true;
+                            }
+                        }
+                    else
+                        {
+                            if (addUserToUsergroup(username, password, usernameNew, 2) == true)
+                            {
+                                return success = true;
+                            }
+                        }
+                    return success = false;
                 }
                 catch 
                 {
-
-                    success = false;
+                    return success = false;
                 }
             }
-            return success;
         }
         #endregion
+
+        public static bool addUserToUsergroup(string username, string password, string userToAdd, int usergroup)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                try
+                {
+                    List<fn_show_users_Result> tmp = cont.fn_show_users(username, pwhash).ToList();
+                    foreach (var item in tmp)
+                    {
+                        if (item.name == userToAdd)
+                        {
+                            cont.sp_add_user_to_usergroup(username, pwhash, item.id, usergroup);
+                            success = true;
+                        }
+                    }
+                    return success;
+                }
+                catch (Exception)
+                {
+                    return success;
+                }
+            }
+        }
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)
         /// <summary>
@@ -990,13 +1029,14 @@ namespace HicsBL
                 try
                 {
                     cont.sp_change_password(username, pwhashOld, pwhashNew);
-                    success = true;
+                    return success = true;
                 }
-                catch 
+                catch
                 {
 
-                    success = false;
+                    return success = false;
                 }
+               
             }
             return success;
         }
