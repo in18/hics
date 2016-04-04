@@ -32,8 +32,16 @@ namespace HicsBL
         /// </summary>
         public static void getLampList()
         {
-            JsonLampList lampList = JsonConvert.DeserializeObject<JsonLampList>(messaging.DownloadState());
-            lamps = lampList.ConvertToHueLamps();
+            try
+            {
+                JsonLampList lampList = JsonConvert.DeserializeObject<JsonLampList>(messaging.DownloadState());
+                lamps = lampList.ConvertToHueLamps();
+            }
+            catch 
+            {
+
+                
+            }
         }
 
         /// <summary>
@@ -90,11 +98,19 @@ namespace HicsBL
             getWebClient();
             getLampList();
 
-            for (int i = 0; i < lamps.Count; i++)
+            //for (int i = 0; i < lamps.Count; i++)
+            //{
+            //    if (lamps[i].name  == lampName)
+            //    {
+            //        lId = lamps[i].GetLampNumber();
+            //    }
+            //}
+
+            foreach (var i in lamps)
             {
-                if (lamps[i].name  == lampName)
+                if (i.Value.name == lampName)
                 {
-                    lId = lamps[i].GetLampNumber();
+                    lId = i.Value.GetLampNumber();
                 }
             }
             return lId;

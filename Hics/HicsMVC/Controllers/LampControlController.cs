@@ -71,7 +71,7 @@ namespace HicsMVC.Controllers
         {
             HicsBL.DbAccess.dimLamp("admin", "123user!", (int)l.lamp_id, (byte)l.brightness,(bool)l.status);
 
-            return View();
+            return RedirectToAction("Index");
 
         }
     }

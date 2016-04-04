@@ -1,24 +1,17 @@
-﻿
+﻿@model HicsBL.fn_show_lamp_control_Result
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
-@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/MicronLayout.cshtml";
-}
 
 <div class="left">
     <h2>Lamp Control</h2>
 </div>
-
-
 <div class="middle">
     <h2></h2>
 </div>
-
 <div class="right">
     <a href="~/Logout/Logout">
         <div class="logout"></div>
@@ -27,7 +20,7 @@
 
 <br style="clear:both;" />
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "UserLampControl"))
 {
 
     <div class="lampcontainer">
@@ -35,18 +28,21 @@
         <table>
             <tr>
                 <th class="lampcontr">ID</th>
+                <th class="lampcontr">Adress</th>
                 <th class="lampcontr">Groupname</th>
                 <th class="lampcontr">Lampname</th>
-                <th class="lampcontr">OnOff</th>
-                <th class="lampcontr">Dimmer</th>
+                <th class="lampcontr">Status</th>
+                <th class="lampcontr">Brigtness</th>
             </tr>
             <tr>
-
                 <td>
-                    @Model.id @*Text*@
-                    @Html.HiddenFor(x => x.id)@*HTML-Steuerelement*@
+                    @Model.lamp_id
+                    @Html.HiddenFor(x => x.lamp_id)
                 </td>
-
+                <td>
+                    @Model.address
+                    @Html.HiddenFor(x => x.address)
+                </td>
 
                 <td>@Model.groupname</td>
                 @Html.HiddenFor(x => x.groupname)
@@ -55,30 +51,21 @@
                 @Html.HiddenFor(x => x.lampname)
 
                 <td>
-                    @Html.CheckBoxFor(x => x.OnOff)
+                    @{ bool status = (bool)Model.status;}
+                    @Html.CheckBoxFor(x => status)
                 </td>
-
-
                 <td>
-                    <input type="range" value="@Model.dimmer" min="0" max="255" name="wert" onchange="updateTextInput(this.value);" />
-                    @Html.TextBoxFor(x => x.dimmer)
+                    <input type="range" value="@Model.brightness" min="0" max="255" name="wert" onchange="updateTextInput(this.value);" />
+                    @Html.TextBoxFor(x => Model.brightness)
                 </td>
-
             </tr>
-
             <tr>
-                <td colspan="2">
+                <td colspan="5">
                     <input type="submit" />
-
-
                 </td>
             </tr>
         </table>
-
-
-
     </div>
-
 }
 
 
@@ -102,6 +89,6 @@
 </div>
 <script type="text/javascript">
     function updateTextInput(val) {
-      document.getElementById('dimmer').value=val;
+        document.getElementById('brightness').value = val;
     }
 </script>
