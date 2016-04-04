@@ -37,6 +37,6 @@
     min-width:666px;
 }
 .text-danger{
-    border-color:red;
     color:red;
+    font-weight:bold;
 }

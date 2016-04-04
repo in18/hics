@@ -27,13 +27,13 @@ namespace HicsMVC.Controllers
             }            
             if (uam.NewUserPassword == uam.RetypeNewUserPassword)
                 {
-                    //Überprüfung wenn admin wird bool true/false übergeben
-                    //if (uam.IsAdmin)
-                    //{
-                    //    HicsBL.DbAccess.addAdmin("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword);
-                    //    return RedirectToAction("Index");
-                    //}
-                    HicsBL.DbAccess.addUser("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword);
+                //Überprüfung wenn admin wird bool true/false übergeben
+                if (uam.IsAdmin)
+                {
+                    HicsBL.DbAccess.addUser("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword,uam.IsAdmin);
+                    return RedirectToAction("Index");
+                }
+                HicsBL.DbAccess.addUser("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword,uam.IsAdmin);
                     //    Weiteleitung zum Login
                     return RedirectToAction("Index");
                 }
