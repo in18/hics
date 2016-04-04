@@ -25,21 +25,28 @@ namespace HicsMVC.Controllers
             //    //Fehler
             //    Debug.WriteLine("Falscher Datentyp");
 
-            List<fn_show_lampgroups_Result> grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
-            List<fn_show_lamps_Result> lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");
-            
-
             //Viewbags mit Gruppen- und Lampenliste per Viewbag an den View übergeben
-            ViewBag.GroupList = grouplist;
-            ViewBag.LampList  = lamplist;
+            //ViewBag.GroupList = grouplist;
+            //ViewBag.LampList  = lamplist;
+            //ViewBag.LampAssignmentList = lampAssignmentList;
+
+            LampAssignmentModel lam = new LampAssignmentModel();
+
+            lam.grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+            lam.lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");
+            lam.lampAssignmentList = HicsBL.DbAccess.GetLampControl("Sepp", "123user!");
 
             //Liste an den View schicken
-            return View(HicsBL.DbAccess.GetLampControl("Sepp", "123user!"));
+            return View(lam);
         }
 
         [HttpPost]
         public ActionResult Assignment(LampAssignmentModel lam)
         {
+            //if (lam.groupname == || lam.lamp_id == )
+            {
+
+            }
             HicsBL.DbAccess.addLampToGroup("Sepp", "123user!", lam.groupname, lam.lamp_id);
             return RedirectToAction("index");
         }

@@ -647,23 +647,25 @@ namespace HicsBL
                         {
                             if (addUserToUsergroup(username, password, usernameNew, 1)==true)
                             {
-                                return success = true;
+                                 success = true;
                             }
                         }
                     else
                         {
                             if (addUserToUsergroup(username, password, usernameNew, 2) == true)
                             {
-                                return success = true;
+                                success = true;
                             }
                         }
-                    return success = false;
+                    success = false;
                 }
                 catch 
                 {
-                    return success = false;
+                    success = false;
                 }
+                
             }
+            return success;
         }
         #endregion
 
@@ -685,13 +687,14 @@ namespace HicsBL
                             success = true;
                         }
                     }
-                    return success;
+                   
                 }
-                catch (Exception)
+                catch 
                 {
-                    return success;
+                   success = false;
                 }
             }
+            return success;
         }
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)
