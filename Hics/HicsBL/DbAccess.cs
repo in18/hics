@@ -193,17 +193,27 @@ namespace HicsBL
                 string dbLampName = "";
                 
                 List<fn_show_lamps_Result> dbLamps = new List<fn_show_lamps_Result>();
-                foreach (var item in dbLamps)
-                {
-                    if (item.id == lampId)
-                    {
-                        dbLampName = item.name;
-                        
-                    }
-                }
 
-                int HueLampId = HelperClass.GetHueLampId(username, pwhash, lampId);
-                HelperClass.SetLampName(HueLampId, lampNameNew);
+
+                try
+                {
+                    foreach (var item in dbLamps)
+                    {
+                        if (item.id == lampId)
+                        {
+                            dbLampName = item.name;
+
+                        }
+                    }
+
+                    int HueLampId = HelperClass.GetHueLampId(username, pwhash, lampId);
+                    HelperClass.SetLampName(HueLampId, lampNameNew);
+                    success = true;
+                }
+                catch 
+                {
+                    success = false;
+                }
             }
             return success;
         }
@@ -755,15 +765,15 @@ namespace HicsBL
                 try
                 {
                     //cont.sp_add_user_to_usergroup(   (username, groupId);
-                    success = true;
+                    return success = true;
                 }
                 catch
                 {
 
-                    success = false;
+                    return success = false;
                 }
             }
-            return success;
+           
         }
         #endregion
 
@@ -801,7 +811,7 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-            bool success = false;
+            
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamps_Result> dbLamps = cont.fn_show_lamps(username, pwhash).ToList();
@@ -810,34 +820,39 @@ namespace HicsBL
 
                 try
                 {
-                foreach (var item in dbLamps)
-                {
-                    if (lampId == item.id)
+                    foreach (var item in dbLamps)
                     {
-                        dbLampName = item.name;
-                        break;
+                        if (lampId == item.id)
+                        {
+                            dbLampName = item.name;
+                            break;
+                        }
                     }
+                    HueLampId = HueAccess.GetLampId(dbLampName);
+
+
+
+                    if (lampOnOff == true)
+                    {
+                        cont.sp_lamp_on(username, pwhash, lampId);
+                        // Vereinfachter aufruf über die HelperClass
+                        HelperClass.SetLampState(HueLampId, true);
+                    }
+                    else
+                    {
+                        cont.sp_lamp_off(username, pwhash, lampId);
+                        // Vereinfachter aufruf über die HelperClass
+                        HelperClass.SetLampState(HueLampId, false);
+                    }
+                    success = true;
+                    
                 }
-                HueLampId = HueAccess.GetLampId(dbLampName);
-
-
-
-                if (lampOnOff == true)
+                catch
                 {
-                    cont.sp_lamp_on(username, pwhash, lampId);
-                    // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(HueLampId, true);
+                    success = false;
                 }
-                else
-                {
-                    cont.sp_lamp_off(username, pwhash, lampId);
-                    // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(HueLampId, false);
-                }
-
-                    return success;
             }
-        }
+            return success;
         }
         #endregion
 
@@ -867,30 +882,30 @@ namespace HicsBL
 
                 try
                 {
-                foreach (var item in db)
-                {
-                    if (lampId == item.id)
+                    foreach (var item in db)
                     {
-                        dbLampName = item.name;
-                        cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+                        if (lampId == item.id)
+                        {
+                            dbLampName = item.name;
+                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                        
-                            hueId = HueAccess.GetLampId(dbLampName);
-                            HelperClass.SetLampBrightness(hueId, brightness);
+                                hueId = HueAccess.GetLampId(dbLampName);
+                                HelperClass.SetLampBrightness(hueId, brightness);
 
-                            if (lampOnOff == true)
-                        {
-                            cont.sp_lamp_on(username, pwhash, lampId);
-                            onOff = true;
+                                if (lampOnOff == true)
+                            {
+                                cont.sp_lamp_on(username, pwhash, lampId);
+                                onOff = true;
+                            }
+                            else
+                            {
+                                cont.sp_lamp_off(username, pwhash, lampId);
+                                onOff = false;
+                            }
+                                HelperClass.SetLampState(hueId, onOff);
                         }
-                        else
-                        {
-                            cont.sp_lamp_off(username, pwhash, lampId);
-                            onOff = false;
-                        }
-                            HelperClass.SetLampState(hueId, onOff);
-                    }
                    
-                }
+                    }
                     success = true;
                 }
                 catch 
@@ -898,8 +913,7 @@ namespace HicsBL
                     success = false;
                 }                              
             }
-            
-            return success;
+            return success;  
         }
         #endregion
 
