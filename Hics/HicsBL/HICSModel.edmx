@@ -480,10 +480,6 @@
           <Property Type="Int32" Name="id" Nullable="true" />
           <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="fn_show_usergroups_Result">
-          <Property Type="Int32" Name="id" Nullable="true" />
-          <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="fn_show_users_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
           <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
@@ -507,6 +503,10 @@
           <Property Type="Boolean" Name="status" Nullable="true" />
           <Property Type="Byte" Name="brightness" Nullable="true" />
           <Property Type="Int32" Name="deleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="fn_show_usergroups_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
