@@ -14,31 +14,42 @@ namespace HicsMVC.Controllers
         public ActionResult Index()
         {
             UserAddModel uam = new UserAddModel();
-            List<fn_show_users_Result> userlist = new List<fn_show_users_Result>();
-            //HicsBL.DbAccess.GetAllUser("Sepp", "123user!");
-            uam.Userlist = userlist;
+            uam.Userlist = HicsBL.DbAccess.GetAllUser("Sepp", "123user!");
             return View(uam);
         }
+        //user erzeugen
         [HttpPost]
-        public ActionResult UserAdd(UserAddModel uam)
+        public ActionResult AddAdditionalUser(UserAddModel uam)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }            
             if (uam.NewUserPassword == uam.RetypeNewUserPassword)
-            {
-                //    DbAccess."ResetPassword();"
+                {
+                    //Überprüfung wenn admin wird bool true/false übergeben
+                    //if (uam.IsAdmin)
+                    //{
+                    //    HicsBL.DbAccess.addAdmin("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword);
+                    //    return RedirectToAction("Index");
+                    //}
+                    HicsBL.DbAccess.addUser("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword);
+                    //    Weiteleitung zum Login
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.errorMsg = "Password does not match";
+                }
+                return RedirectToAction("Index");
 
-                //    Weiteleitung zum Login
-                return RedirectToAction("index");
-            }
-            else
-            {
-                ViewBag.errorMsg = "Password does not match";
-            }
-            return View(uam);
         }
-
+        //User aus Liste löschen
+        [HttpGet]
         public ActionResult DeleteUser(int id)
         {
-            return RedirectToAction("index");
+            HicsBL.DbAccess.removeUser("Sepp", "123user!", id);
+            return RedirectToAction("Index");
         }
     }
 }

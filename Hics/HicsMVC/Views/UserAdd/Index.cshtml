@@ -3,30 +3,27 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
+@*Überschrift*@
 
-<div class="leftpadding">
+<div>
+    <div>
+        <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
 
-    @*Überschrift*@
-    <div style="width:100%;">
-        <div class="left">
-            <h2>Add User</h2>
-        </div>
-
-        <div class="middle">
-            <h2></h2>
-        </div>
-        <div class="right">
-            <a href="~/Logout/Logout">
-                <div class="logout"></div>
-            </a>
-        </div>
+        <a href="~/Logout/Logout"><div class="logoutpfeifer2"></div></a>
     </div>
 
-    <br style="clear:both;" />
-    @*Eingabe eines users*@
-    @using (Html.BeginForm("UserAdd", "UserAddController"))
+    <div align="center" class="middlepfeifer">
+        <h2>Add User</h2>
+    </div>
+</div> 
+<br style="clear:both;" />
+<div align="left" class="mainframe">   
+    @*Eingabe eines users/admins durch Checkbox*@
+
+    @using (Html.BeginForm("AddAdditionalUser", "UserAdd"))
     {
-        <table class="toptext">
+        
+		@*<table class="toptext">
             <tr>
                 <td class="addpadding" colspan="2">Input User</td>
             </tr>
@@ -35,6 +32,12 @@
                      @Html.TextBoxFor(model => model.NewUserName, new { @class = "boxdesign", @placeholder = "Username" })
                    
                 </td>
+            <tr>
+                <td>
+                    @Html.CheckBoxFor(model => model.IsAdmin) Admin
+                </td>
+            </tr>
+            <tr>
                 <td>
                     @Html.ValidationMessageFor(model => model.NewUserName, String.Empty, new { @style = "color:red;font-weight:bold;margin-left:20px;" })
                 </td>           
@@ -58,13 +61,43 @@
                 </td>           
             </tr>
             <tr>
-                <td><input class="boxdesign" type="submit" name="newUserName" value="Add User" /></td>
+                <td><input class="boxdesign" type="submit" name="AddAdditionalUser" value="AddUser" /></td>
+            </tr>
+        </table>*@
+                
+       
+        <table align="center">
+            <tr>
+                <td>
+                    @Html.TextBoxFor(model => model.NewUserName, new { @class = "boxdesign", @placeholder = "Username" })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(model => model.IsAdmin) Admin
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.PasswordFor(model => model.NewUserPassword, new { @class = "boxdesign", @placeholder = "Password" })
+                </td>                
+                <td>
+                    @Html.PasswordFor(model => model.RetypeNewUserPassword, new { @class = "boxdesign", @placeholder = "Retype Password" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="boxdesign" type="submit" name="AddAdditionalUser" value="AddUser" />
+                </td>                          
+            </tr>
+            <tr>
+                <td>@Html.ValidationSummary(false, "", new { @class = "text-danger" })
             </tr>
         </table>
+
+
     }
 
     @*Ausgabeliste*@
-    <div class="listframe">
+    <div align="center" class="borderframe">
         <table>
             <tr>
                 <th align="left" colspan="2">Users</th>
@@ -74,18 +107,11 @@
                 <tr class="boxrow">
                     <td class="listframepadding">@Model.Userlist[i].name</td>
                     <td class="listframepadding">@Model.Userlist[i].group</td>
-                    <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = Model.Userlist[i].id, @class = "deletedesign" })
+                    <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = Model.Userlist[i].id }, new { @class = "deletedesign" })
                 </tr>
             }
         </table>
     </div>
 </div>
 
-<div class="left"><h2></h2></div>
-<div class="middle"><h2></h2></div>
-<div class="right">
-    <div style="width:100%;">
-        <a href="~/Admin/Index"><div class="home"></div></a>
-    </div>
-</div>
 
