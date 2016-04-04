@@ -223,8 +223,8 @@
     <Content Include="Views\LampControl\Edit.cshtml" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\AdminStatistic\Index.cshtml" />
-    <Content Include="Views\UserLampControl\Index.cshtml" />
     <Content Include="Views\UserLampControl\Edit.cshtml" />
+    <Content Include="Views\UserLampControl\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
