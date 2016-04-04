@@ -54,7 +54,12 @@ namespace HicsBL
             //    Console.WriteLine(item.name);
             //}
             //Console.WriteLine(DbAccess.userLogin("admini","123user!"));
-            Console.WriteLine(DbAccess.userLogin("admin","123user!"));
+            //Console.WriteLine(DbAccess.userLogin("admin","123user!"));
+            List<fn_show_lamp_control_history_Result> l = DbAccess.GetLogFile("admin", "123user!", new DateTime(2016, 01, 01), new DateTime(2016, 04, 03)).ToList();
+            foreach (var i in l)
+            {
+                Console.WriteLine($"Datum:{i.date} Lampe:{i.lamp_name} Status:{i.status} User:{i.user_name}");
+            }
             Console.ReadKey();
 
         }

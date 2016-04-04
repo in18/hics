@@ -1105,10 +1105,56 @@ namespace HicsBL
 
                     foreach (var item in db)
                     {
-                        if (item.date >= beginDate && item.date <= endDate)
+                        if (Convert.ToDateTime((item.date).Value.ToShortDateString()) >= Convert.ToDateTime(beginDate.ToShortDateString()) 
+                         && Convert.ToDateTime((item.date).Value.ToShortDateString()) <= Convert.ToDateTime(endDate))
                         {
                             tmp.Add(item);
                         }
+                    }
+                    if (tmp.Count <= 0)
+                    {
+                        tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Daten" });
+                    }
+                    return tmp;
+                }
+                catch
+                {
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "No database connection" });
+
+                    return tmp;
+                }
+            }
+        }
+        #endregion
+        #region PSP 18.2 GetLogFileComplete(string username, string password)
+        /// <summary>
+        /// PSP 18.1
+        /// Logfile von beginDate bis endDate in einer Liste retourgeben
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>Liste des Datentyp's "fn_show_lamp_control_history_Result" </returns>
+        public static List<fn_show_lamp_control_history_Result> GetLogFileComplete(string username, string password)
+        {
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lamp_control_history_Result> tmp = new List<fn_show_lamp_control_history_Result>();
+
+                try
+                {
+
+                    List<fn_show_lamp_control_history_Result> db = cont.fn_show_lamp_control_history(username, pwhash).ToList();
+
+                    foreach (var item in db)
+                    {
+                            tmp.Add(item);
+                    }
+                    if (tmp.Count <= 0)
+                    {
+                        tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Daten" });
                     }
                     return tmp;
                 }
