@@ -58,6 +58,8 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_lamp(username, pwhash, lampAdress, lampName);
+                    //Neue Liste lamps von der HUE-Bridge holen
+                    HueAccess.getLampList();
                     success = true;
                 }
                 catch 
@@ -66,8 +68,7 @@ namespace HicsBL
                 }
             }
             
-            //Neue Liste lamps von der HUE-Bridge holen
-            HueAccess.getLampList();
+           
             return success;
         }
         #endregion
@@ -192,17 +193,27 @@ namespace HicsBL
                 string dbLampName = "";
                 
                 List<fn_show_lamps_Result> dbLamps = new List<fn_show_lamps_Result>();
-                foreach (var item in dbLamps)
-                {
-                    if (item.id == lampId)
-                    {
-                        dbLampName = item.name;
-                        
-                    }
-                }
 
-                int HueLampId = HelperClass.GetHueLampId(username, pwhash, lampId);
-                HelperClass.SetLampName(HueLampId, lampNameNew);
+
+                try
+                {
+                    foreach (var item in dbLamps)
+                    {
+                        if (item.id == lampId)
+                        {
+                            dbLampName = item.name;
+
+                        }
+                    }
+
+                    int HueLampId = HelperClass.GetHueLampId(username, pwhash, lampId);
+                    HelperClass.SetLampName(HueLampId, lampNameNew);
+                    success = true;
+                }
+                catch 
+                {
+                    success = false;
+                }
             }
             return success;
         }
@@ -231,6 +242,9 @@ namespace HicsBL
                 try
                 {
                     cont.sp_delete_lamp(lampId, username, pwhash);
+                    //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+                    //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
+                    HueAccess.getLampList();
                     success = true;
                 }
                 catch 
@@ -240,9 +254,7 @@ namespace HicsBL
                 }
             }
 
-            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
-            //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
-            HueAccess.getLampList();
+            
             return success;
         }
         #endregion
@@ -272,6 +284,9 @@ namespace HicsBL
                         try
                         {   //Lampe aus DB entfernen                    
                             cont.sp_delete_lamp(item.id, username, pwhash);
+                            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+                            //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
+                            HueAccess.getLampList();
                             success = true;
                         }
                         catch
@@ -282,9 +297,6 @@ namespace HicsBL
                 }
             }
 
-            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
-            //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
-            HueAccess.getLampList();
             return success;
 
         }
@@ -298,16 +310,27 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampGroupName"></param>
         /// <returns></returns>
-        public static void addLampGroup(string username, string password, string lampGroupName)
+        public static bool addLampGroup(string username, string password, string lampGroupName)
         {
+            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {                             
+                try
+                {
                     //Lampengruppe erstellen                     
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
+                    success = true;
             }
+                catch 
+                {
+                    success = false;
+        }
+            }
+
+            return success;
         }
         #endregion
 
@@ -781,15 +804,15 @@ namespace HicsBL
                 try
                 {
                     //cont.sp_add_user_to_usergroup(   (username, groupId);
-                    success = true;
+                    return success = true;
                 }
                 catch
                 {
 
-                    success = false;
+                    return success = false;
                 }
             }
-            return success;
+           
         }
         #endregion
 
@@ -821,12 +844,13 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampOnOff"></param>
         /// <param name="lampId"></param>
-        /// <returns>success</returns>
+        /// <returns></returns>
         public static bool switchLamp(string username, string password, bool lampOnOff, int lampId)
         {
+            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-            bool success = false;
+            
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamps_Result> dbLamps = cont.fn_show_lamps(username, pwhash).ToList();
@@ -859,15 +883,15 @@ namespace HicsBL
                         // Vereinfachter aufruf über die HelperClass
                         HelperClass.SetLampState(HueLampId, false);
                     }
-                    return success = true;
+                    success = true;
+                    
                 }
-                catch (Exception)
+                catch
                 {
-
-                    return success;
+                    success = false;
                 }
-
             }
+            return success;
         }
         #endregion
 
@@ -882,9 +906,9 @@ namespace HicsBL
         /// <param name="brightness"></param>
         /// <param name="lampOnOff"></param>
         /// <returns></returns>
-        public static void dimLamp(string username, string password, int lampId, byte brightness, bool lampOnOff)
+        public static bool dimLamp(string username, string password, int lampId, byte brightness, bool lampOnOff)
         {
-            //bool success = false;
+            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
 
@@ -892,35 +916,43 @@ namespace HicsBL
             {
                 string dbLampName = "";
                 bool onOff = true;
+                int hueId = 1;
                 List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
 
-                foreach (var item in db)
+                try
                 {
-                    if (lampId == item.id)
+                    foreach (var item in db)
                     {
-                        dbLampName = item.name;
-                        cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+                        if (lampId == item.id)
+                        {
+                            dbLampName = item.name;
+                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                        
-                        if(lampOnOff == true)
-                        {
-                            cont.sp_lamp_on(username, pwhash, lampId);
-                            onOff = true;
+                                hueId = HueAccess.GetLampId(dbLampName);
+                                HelperClass.SetLampBrightness(hueId, brightness);
+
+                                if (lampOnOff == true)
+                            {
+                                cont.sp_lamp_on(username, pwhash, lampId);
+                                onOff = true;
+                            }
+                            else
+                            {
+                                cont.sp_lamp_off(username, pwhash, lampId);
+                                onOff = false;
+                            }
+                                HelperClass.SetLampState(hueId, onOff);
                         }
-                        else
-                        {
-                            cont.sp_lamp_off(username, pwhash, lampId);
-                            onOff = false;
-                        }
-                    }
                    
+                    }
+                    success = true;
                 }
-
-                int hueId = HueAccess.GetLampId(dbLampName);
-
-                HelperClass.SetLampBrightness(hueId, brightness);
-                HelperClass.SetLampState(hueId, onOff);
+                catch 
+                {
+                    success = false;
+                }                              
             }
-            
+            return success;  
         }
         #endregion
 
