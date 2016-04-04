@@ -782,41 +782,50 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampOnOff"></param>
         /// <param name="lampId"></param>
-        /// <returns></returns>
-        public static void switchLamp(string username, string password, bool lampOnOff, int lampId)
+        /// <returns>success</returns>
+        public static bool switchLamp(string username, string password, bool lampOnOff, int lampId)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-            
+            bool success = false;
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamps_Result> dbLamps = cont.fn_show_lamps(username, pwhash).ToList();
                 int HueLampId = 0;
                 string dbLampName = "";
 
-                foreach (var item in dbLamps)
+                try
                 {
-                    if (lampId == item.id)
+                    foreach (var item in dbLamps)
                     {
-                        dbLampName = item.name;
-                        break;
+                        if (lampId == item.id)
+                        {
+                            dbLampName = item.name;
+                            break;
+                        }
                     }
+                    HueLampId = HueAccess.GetLampId(dbLampName);
+
+
+
+                    if (lampOnOff == true)
+                    {
+                        cont.sp_lamp_on(username, pwhash, lampId);
+                        // Vereinfachter aufruf über die HelperClass
+                        HelperClass.SetLampState(HueLampId, true);
+                    }
+                    else
+                    {
+                        cont.sp_lamp_off(username, pwhash, lampId);
+                        // Vereinfachter aufruf über die HelperClass
+                        HelperClass.SetLampState(HueLampId, false);
+                    }
+                    return success = true;
                 }
-                HueLampId = HueAccess.GetLampId(dbLampName);
-
-
-
-                if (lampOnOff == true)
+                catch (Exception)
                 {
-                    cont.sp_lamp_on(username, pwhash, lampId);
-                    // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(HueLampId, true);
-                }
-                else
-                {
-                    cont.sp_lamp_off(username, pwhash, lampId);
-                    // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(HueLampId, false);
+
+                    return success;
                 }
 
             }
@@ -1009,6 +1018,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamp_control_history_Result> tmp = new List<fn_show_lamp_control_history_Result>();
+            
                 try
                 {
 
@@ -1025,8 +1035,9 @@ namespace HicsBL
                 }
                 catch
                 {
-                    tmp[0].lamp_name = "Keine Datenbankverbindung";
-                    tmp[1].lamp_name = "No databaseconnection";
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "No database connection" });
 
                     return tmp;
                 }
