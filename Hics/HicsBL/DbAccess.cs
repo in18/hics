@@ -669,6 +669,15 @@ namespace HicsBL
         }
         #endregion
 
+        /// <summary>
+        /// PSP 8.2
+        /// User einer Usergruppe hinzufügen
+        /// </summary>
+        /// <param name="username">den angemeldeten Usernamen übergeben (Überprüfung auf Rechte)</param>
+        /// <param name="password">das dazugehörige Passwort übermitteln (Überprüfung auf Rechte)</param>
+        /// <param name="userToAdd">Name des hinzuzufügenden Users</param>
+        /// <param name="usergroup">Name der Gruppe</param>
+        /// <returns>Erfolgreich true/false</returns>
         public static bool addUserToUsergroup(string username, string password, string userToAdd, int usergroup)
         {
             bool success = false;
@@ -1130,8 +1139,8 @@ namespace HicsBL
         #endregion
         #region PSP 18.2 GetLogFileComplete(string username, string password)
         /// <summary>
-        /// PSP 18.1
-        /// Logfile von beginDate bis endDate in einer Liste retourgeben
+        /// PSP 18.2
+        /// Logfile in einer Liste retourgeben
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
