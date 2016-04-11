@@ -14,23 +14,16 @@ namespace HicsMVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-
-
             List<fn_show_lamp_control_Result> lamps;
             lamps = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
 
             //UserLampControl ulc = new UserLampControl();
-
             //ulc.lamplist = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
 
             return View(lamps);
         }
 
-        [HttpGet]
-        public ActionResult Index_Lampcontrol()
-        {
-            return View();
-        }
+        
 
         [HttpGet]
         public ActionResult Edit(int? id)
