@@ -13,11 +13,5 @@ namespace HicsMVC.Controllers
         {
             return View();
         }
-
-        //public ActionResult Statistic()
-        //{
-
-        //    return RedirectToAction("AdminStatistic", "Index", HicsBL.DbAccess.GetLogFileComplete("Sepp", "123user!"));
-        //}
     }
 }

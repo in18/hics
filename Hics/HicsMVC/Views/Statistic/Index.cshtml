@@ -1,9 +1,8 @@
-﻿@model HicsBL.DbAccess.GetLogFile
+﻿@model List<HicsBL.fn_show_lamp_control_history_Result>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
-
 }
 
 <div>
@@ -14,7 +13,7 @@
     </div>
 
     <div align="center" class="middlepfeifer">
-        <h2>User Statistic</h2>
+        <h2>Statistic</h2>
     </div>
 </div>
 <br style="clear:both;" />
@@ -24,18 +23,20 @@
         <table>
             <tr>
                 <th align="left">Date</th>
-                <th align="left">Time</th>
-                <th align="left">Group</th>
-                <th align="left">Lamp Status</th>
+                <th align="left">Adresse</th>
+                <th align="left">Lampname</th>
+                <th align="left">Status</th>
+                <th align="left">Username</th>
                 <th></th>
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td class="listenpadding">@item.Date</td>
-                    <td class="listenpadding">@item.Time</td>
-                    <td class="listenpadding">@item.Group</td>
-                    <td class="listenpadding">@item.Lampstatus</td>
+                    <td class="listenpadding">@item.date</td>
+                    <td class="listenpadding">@item.address </td>
+                    <td class="listenpadding">@item.lamp_name </td>
+                    <td class="listenpadding">@item.status</td>
+                    <td class="listenpadding">@item.user_name</td>
                 </tr>
             }
         </table>
