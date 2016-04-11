@@ -946,8 +946,7 @@ namespace HicsBL
                             dbLampName = item.name;
                             cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                        
-                                hueId = HueAccess.GetLampId(dbLampName);
-                                HelperClass.SetLampBrightness(hueId, brightness);
+                               
 
                                 if (lampOnOff == true)
                             {
@@ -959,7 +958,10 @@ namespace HicsBL
                                 cont.sp_lamp_off(username, pwhash, lampId);
                                 onOff = false;
                             }
-                                HelperClass.SetLampState(hueId, onOff);
+
+                            hueId = HueAccess.GetLampId(dbLampName);
+                            HelperClass.SetLampBrightness(hueId, brightness);
+                            HelperClass.SetLampState(hueId, onOff);
                         }
                    
                     }
