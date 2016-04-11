@@ -1037,15 +1037,17 @@ namespace HicsBL
             {
                 try
                 {
-                    //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId
+                    //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId/AdminId
                     // anfordern. Wenn kein Eintrag vorhanden ist, ist der User
                     // mit den übergebenen Daten nicht berechtigt
                     user = cont.fn_check_user_table(username, pwhash).ToList();
                     admin = cont.fn_check_admin_table(username, pwhash).ToList();
 
+                    //user vorhanden?
                     if (user[0].Value > 0)
                     {
                         userIs = 2;
+                        //ist user admin?
                         if(admin[0].Value > 0)
                         {
                             userIs = 1;
@@ -1053,13 +1055,14 @@ namespace HicsBL
                     }
                     else
                     {
+                        //user nicht vorhanden
                         userIs = 3;
                     }
                  
                 }
                 catch 
                  {
-
+                    //probleme bei überprüfung
                     userIs = 0;
                  }
             }
