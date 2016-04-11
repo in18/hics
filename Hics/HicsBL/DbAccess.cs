@@ -1024,10 +1024,13 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns>true, wenn Anmeldedaten richtig sind ansonsten false</returns>
-        public static bool userLogin(string username, string password)
+        public static int userLogin(string username, string password)
         {
-            bool success = false;
-            List<int?> result = new List<int?>();
+            int userIs = 0;
+            //userIs Codebelegung: 0 = Fehler, 1= Admin, 2= User, 3= nicht vorhanden
+
+            List<int?> user = new List<int?>();
+            List<int?> admin = new List<int?>();
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
@@ -1037,25 +1040,30 @@ namespace HicsBL
                     //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId
                     // anfordern. Wenn kein Eintrag vorhanden ist, ist der User
                     // mit den übergebenen Daten nicht berechtigt
-                    result = cont.fn_check_user_table(username, pwhash).ToList();
+                    user = cont.fn_check_user_table(username, pwhash).ToList();
+                    admin = cont.fn_check_admin_table(username, pwhash).ToList();
 
-                    if (result[0].Value > 0)
+                    if (user[0].Value > 0)
                     {
-                        success = true;
+                        userIs = 2;
+                        if(admin[0].Value > 0)
+                        {
+                            userIs = 1;
+                        }
                     }
                     else
                     {
-                        success = false;
+                        userIs = 3;
                     }
                  
                 }
-                catch (Exception)
+                catch 
                  {
 
-                    success = false;
+                    userIs = 0;
                  }
             }
-            return success;
+            return userIs;
         }
         #endregion
 
