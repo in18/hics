@@ -643,8 +643,7 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
-                    cont.SaveChanges(); // Hoffentlich behebt das den Fehler, das der neu eingetragene User nicht 
-                                        // in der Liste erscheint. (Lt. Kloiber lasy-loading)
+                   
                     if (admin == true)
                         {
                             if (addUserToUsergroup(username, password, usernameNew, 1)==true)
@@ -659,7 +658,6 @@ namespace HicsBL
                                 success = true;
                             }
                         }
-                    success = false;
                 }
                 catch (Exception e)
                 {
@@ -946,8 +944,7 @@ namespace HicsBL
                             dbLampName = item.name;
                             cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                        
-                                hueId = HueAccess.GetLampId(dbLampName);
-                                HelperClass.SetLampBrightness(hueId, brightness);
+                               
 
                                 if (lampOnOff == true)
                             {
@@ -959,6 +956,9 @@ namespace HicsBL
                                 cont.sp_lamp_off(username, pwhash, lampId);
                                 onOff = false;
                             }
+
+                            hueId = HueAccess.GetLampId(dbLampName);
+                            HelperClass.SetLampBrightness(hueId, brightness);
                                 HelperClass.SetLampState(hueId, onOff);
                         }
                    
