@@ -619,7 +619,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 8.1 addUser(string username, string password, string usernameNew, string passwordNew)
+        #region PSP 8.1 addUser(string username, string password, string usernameNew, string passwordNew, bool admin)
         /// <summary>
         /// PSP 8.1
         /// User hinzufügen. (Angemeldeter User wird anhand Usernamen und Passwort auf Rechte geprüft)
@@ -643,6 +643,8 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+                    cont.SaveChanges(); // Hoffentlich behebt das den Fehler, das der neu eingetragene User nicht 
+                                        // in der Liste erscheint. (Lt. Kloiber lasy-loading)
                     if (admin == true)
                         {
                             if (addUserToUsergroup(username, password, usernameNew, 1)==true)
