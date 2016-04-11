@@ -822,15 +822,15 @@ namespace HicsBL
                 try
                 {
                     //cont.sp_add_user_to_usergroup(   (username, groupId);
-                    return success = true;
+                    success = true;
                 }
                 catch
                 {
 
-                    return success = false;
+                    success = false;
                 }
             }
-           
+            return success;
         }
         #endregion
 
@@ -1079,12 +1079,12 @@ namespace HicsBL
                 try
                 {
                     cont.sp_change_password(username, pwhashOld, pwhashNew);
-                    return success = true;
+                     success = true;
                 }
                 catch
                 {
 
-                    return success = false;
+                     success = false;
                 }
                
             }
