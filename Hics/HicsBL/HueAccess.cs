@@ -32,8 +32,16 @@ namespace HicsBL
         /// </summary>
         public static void getLampList()
         {
-            JsonLampList lampList = JsonConvert.DeserializeObject<JsonLampList>(messaging.DownloadState());
-            lamps = lampList.ConvertToHueLamps();
+            try
+            {
+                JsonLampList lampList = JsonConvert.DeserializeObject<JsonLampList>(messaging.DownloadState());
+                lamps = lampList.ConvertToHueLamps();
+            }
+            catch 
+            {
+
+                
+            }
         }
 
         /// <summary>

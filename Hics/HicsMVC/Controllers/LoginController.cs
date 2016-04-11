@@ -24,20 +24,31 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel lm)
         {
-            //Von BL erfragen, ob Login erfolgreich war - bool als return
-            //DbAccess."Login();"
-            bool usercorrect = false;
+            //Von BL erfragen, ob Login erfolgreich war - bool als return            
+            bool usercorrect = DbAccess.userLogin(lm.Username, lm.Password);
 
             //Wenn UserLogin Correct
             if (usercorrect)
             {
                 //Erstelle Session mit Username und Password
                 UserSession us = new UserSession();
-                //us.ID = 
                 us.name = lm.Username;
                 us.pw = lm.Password;
+
+
+                //hard-coded:
                 //Statt True abfrage an BL mit Username/Password
                 us.admin = true;
+
+                //4.4.2016 / LEO:
+                //foreach (var item in DbAccess.GetAllUser(lm.Username, lm.Password))
+                //{
+                //    if (item.name = lm.Username)
+                //    {
+
+                //    }
+                //}             
+
 
                 Session["UserSession"] = us;
                 //Sessionparameter werden in der allgemeinen webconfig konfiguriert
@@ -46,11 +57,11 @@ namespace HicsMVC.Controllers
                 //If "User=Admin" dann gehe zum Index Admin
                 if (us.admin)
                 {
-                    return RedirectToAction("index", "admin");
+                    return RedirectToAction("Index", "Admin");
                 }
                 else
                 {
-                    return RedirectToAction("index", "user");
+                    return RedirectToAction("Index", "User");
                 }
             }
             

@@ -58,6 +58,8 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_lamp(username, pwhash, lampAdress, lampName);
+                    //Neue Liste lamps von der HUE-Bridge holen
+                    HueAccess.getLampList();
                     success = true;
                 }
                 catch 
@@ -66,8 +68,7 @@ namespace HicsBL
                 }
             }
             
-            //Neue Liste lamps von der HUE-Bridge holen
-            HueAccess.getLampList();
+           
             return success;
         }
         #endregion
@@ -82,89 +83,93 @@ namespace HicsBL
         /// <param name="lampNameOld"></param>
         /// <param name="lampNameNew"></param>
         /// <returns></returns>
-        internal static void editLampName(string username, string password, string lampNameOld, string lampNameNew)
+        internal static bool editLampName(string username, string password, string lampNameOld, string lampNameNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-
+            bool success = false;
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                //Table der Db-Fn holen
-                //List<fn_show_lamps_Result> dblamps = cont.fn_show_lamps(username, pwhash).ToList();
+                
                 List<fn_show_lamp_status_Result> dbLampStatus = null;
                 List<fn_show_lamp_control_Result> dbLampsStatus = cont.fn_show_lamp_control(username, pwhash).ToList();
                 List<fn_show_lamp_control_Result> dbLampsStatusResult = new List<fn_show_lamp_control_Result>();
                 List<fn_show_lampgroups_Result> dbLampGroups = cont.fn_show_lampgroups(username, pwhash).ToList();
                 List<fn_show_lampgroup_status_Result> dbLampGroupStatus = null;
-                //List<fn_show_lamp_control_Result> dbLampsStatusNew = null;
                 List<fn_show_lamps_Result> dbLampsNew = null;
                 //temporäre Variablen
                 int? dbLampIdNew = 0;
-                int? dblampId = 0; //Nullable da in der Db Nullable
+                int? dblampId = 0;
                 string dblampAdr = "";
                 string dbLampGroupName = "";
 
-                foreach (var item in dbLampsStatus)
+                try
                 {
-                    // Suche des alten Namens zwecks Änderung
-                    if (item.lampname == lampNameOld)
+                    foreach (var item in dbLampsStatus)
                     {
-                        //Wenn gefunden->
-
-                        dblampId = item.lamp_id;
-                        //Für das Wiederanlegen der Lampe die Adresse temp. speichern
-                        dblampAdr = item.address;
-
-                        dbLampStatus = cont.fn_show_lamp_status(username, pwhash, item.lamp_id).ToList();
-
-                        dbLampsStatusResult.Add(item);
-
-                        dbLampGroupName = item.groupname;  
-                    }
-                }
-
-                //Edit gibt es nicht in der DB, Lampe wird gelöscht und wieder neu angelegt
-                Console.WriteLine(dblampAdr);
-                cont.sp_delete_lamp(dblampId, username, pwhash);
-                cont.sp_add_lamp(username, pwhash, dblampAdr, lampNameNew);
-
-                //dbLampsStatusNew = cont.fn_show_lamp_control(username, pwhash).ToList();
-                dbLampsNew = cont.fn_show_lamps(username, pwhash).ToList();
-                foreach (var item in dbLampsNew)
-                {
-                    if (item.name == lampNameNew)
-                    {
-                        dbLampIdNew = item.id;
-                    }
-                }
-
-
-                foreach (var outerItem in dbLampGroups)
-                {
-                    dbLampGroupStatus = cont.fn_show_lampgroup_status(username, pwhash, outerItem.id).ToList();
-                    foreach (var innerItem in dbLampGroupStatus)
-                    {
-                        if (innerItem.id == dblampId)
+                        // Suche des alten Namens zwecks Änderung
+                        if (item.lampname == lampNameOld)
                         {
-                            cont.sp_delete_lamp_from_roomgroup(username, pwhash, outerItem.id, dblampId);
-                            cont.sp_add_lamp_to_lampgroup(username, pwhash, outerItem.id, dbLampIdNew);
+                            dblampId = item.lamp_id;
+
+                            dblampAdr = item.address;
+
+                            dbLampStatus = cont.fn_show_lamp_status(username, pwhash, item.lamp_id).ToList();
+
+                            dbLampsStatusResult.Add(item);
+
+                            dbLampGroupName = item.groupname;
                         }
                     }
-                }
 
-                cont.sp_lamp_dimm(username, pwhash, dbLampIdNew, dbLampStatus[0].bright);
-                if (dbLampStatus[0].status == true)
-                {
-                    cont.sp_lamp_on(username, pwhash, dbLampIdNew);
+                    //Edit gibt es nicht in der DB, Lampe wird gelöscht und wieder neu angelegt
+                    cont.sp_delete_lamp(dblampId, username, pwhash);
+                    cont.sp_add_lamp(username, pwhash, dblampAdr, lampNameNew);
+
+                    dbLampsNew = cont.fn_show_lamps(username, pwhash).ToList();
+                    foreach (var item in dbLampsNew)
+                    {
+                        if (item.name == lampNameNew)
+                        {
+                            dbLampIdNew = item.id;
+                        }
+                    }
+
+
+                    foreach (var outerItem in dbLampGroups)
+                    {
+                        dbLampGroupStatus = cont.fn_show_lampgroup_status(username, pwhash, outerItem.id).ToList();
+                        foreach (var innerItem in dbLampGroupStatus)
+                        {
+                            if (innerItem.id == dblampId)
+                            {
+                                cont.sp_delete_lamp_from_roomgroup(username, pwhash, outerItem.id, dblampId);
+                                cont.sp_add_lamp_to_lampgroup(username, pwhash, outerItem.id, dbLampIdNew);
+                            }
+                        }
+                    }
+
+                    cont.sp_lamp_dimm(username, pwhash, dbLampIdNew, dbLampStatus[0].bright);
+                    if (dbLampStatus[0].status == true)
+                    {
+                        cont.sp_lamp_on(username, pwhash, dbLampIdNew);
+                    }
+                    else
+                    {
+                        cont.sp_lamp_off(username, pwhash, dbLampIdNew);
+                    }
+                 //Namen der Lampe in der HUE-Bridge ändern
+                 HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
+                    success = true;
                 }
-                else
+                catch (Exception)
                 {
-                    cont.sp_lamp_off(username, pwhash, dbLampIdNew);
+                    success = false;
                 }
+               
                 
             }
-            //Namen der Lampe in der HUE-Bridge ändern
-            HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
+            return success;
         }
         #endregion
 
@@ -192,17 +197,27 @@ namespace HicsBL
                 string dbLampName = "";
                 
                 List<fn_show_lamps_Result> dbLamps = new List<fn_show_lamps_Result>();
-                foreach (var item in dbLamps)
-                {
-                    if (item.id == lampId)
-                    {
-                        dbLampName = item.name;
-                        
-                    }
-                }
 
-                int HueLampId = HelperClass.GetHueLampId(username, pwhash, lampId);
-                HelperClass.SetLampName(HueLampId, lampNameNew);
+
+                try
+                {
+                    foreach (var item in dbLamps)
+                    {
+                        if (item.id == lampId)
+                        {
+                            dbLampName = item.name;
+
+                        }
+                    }
+
+                    int HueLampId = HelperClass.GetHueLampId(username, pwhash, lampId);
+                    HelperClass.SetLampName(HueLampId, lampNameNew);
+                    success = true;
+                }
+                catch 
+                {
+                    success = false;
+                }
             }
             return success;
         }
@@ -231,6 +246,9 @@ namespace HicsBL
                 try
                 {
                     cont.sp_delete_lamp(lampId, username, pwhash);
+                    //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+                    //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
+                    HueAccess.getLampList();
                     success = true;
                 }
                 catch 
@@ -240,9 +258,7 @@ namespace HicsBL
                 }
             }
 
-            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
-            //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
-            HueAccess.getLampList();
+            
             return success;
         }
         #endregion
@@ -272,6 +288,9 @@ namespace HicsBL
                         try
                         {   //Lampe aus DB entfernen                    
                             cont.sp_delete_lamp(item.id, username, pwhash);
+                            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+                            //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
+                            HueAccess.getLampList();
                             success = true;
                         }
                         catch
@@ -282,9 +301,6 @@ namespace HicsBL
                 }
             }
 
-            //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
-            //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
-            HueAccess.getLampList();
             return success;
 
         }
@@ -298,16 +314,27 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampGroupName"></param>
         /// <returns></returns>
-        public static void addLampGroup(string username, string password, string lampGroupName)
+        public static bool addLampGroup(string username, string password, string lampGroupName)
         {
+            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {                             
+                try
+                {
                     //Lampengruppe erstellen                     
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
+                    success = true;
             }
+                catch 
+                {
+                    success = false;
+        }
+            }
+
+            return success;
         }
         #endregion
 
@@ -592,7 +619,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 8.1 addUser(string username, string password, string usernameNew, string passwordNew)
+        #region PSP 8.1 addUser(string username, string password, string usernameNew, string passwordNew, bool admin)
         /// <summary>
         /// PSP 8.1
         /// User hinzufügen. (Angemeldeter User wird anhand Usernamen und Passwort auf Rechte geprüft)
@@ -601,7 +628,8 @@ namespace HicsBL
         /// <param name="password">das dazugehörige Passwort übermitteln (Überprüfung auf Rechte)</param>
         /// <param name="usernameNew">Name des neu anzulegenden Users</param>
         /// <param name="passwordNew">Passwort des neu angelegten User</param>
-        public static bool addUser(string username, string password, string usernameNew, string passwordNew)
+        /// <param name="admin">Ist User Admin?</param>
+        public static bool addUser(string username, string password, string usernameNew, string passwordNew, bool admin)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -614,19 +642,71 @@ namespace HicsBL
 
                 try
                 {
-                    //User hinzufügen
-                cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
-                    success = true;
+                    cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+                    cont.SaveChanges(); // Hoffentlich behebt das den Fehler, das der neu eingetragene User nicht 
+                                        // in der Liste erscheint. (Lt. Kloiber lasy-loading)
+                    if (admin == true)
+                        {
+                            if (addUserToUsergroup(username, password, usernameNew, 1)==true)
+                            {
+                                 success = true;
+                            }
+                        }
+                    else
+                        {
+                            if (addUserToUsergroup(username, password, usernameNew, 2) == true)
+                            {
+                                success = true;
+                            }
+                        }
+                    success = false;
                 }
                 catch 
                 {
-
                     success = false;
                 }
+                
             }
             return success;
         }
         #endregion
+
+        /// <summary>
+        /// PSP 8.2
+        /// User einer Usergruppe hinzufügen
+        /// </summary>
+        /// <param name="username">den angemeldeten Usernamen übergeben (Überprüfung auf Rechte)</param>
+        /// <param name="password">das dazugehörige Passwort übermitteln (Überprüfung auf Rechte)</param>
+        /// <param name="userToAdd">Name des hinzuzufügenden Users</param>
+        /// <param name="usergroup">Name der Gruppe</param>
+        /// <returns>Erfolgreich true/false</returns>
+        public static bool addUserToUsergroup(string username, string password, string userToAdd, int usergroup)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                try
+                {
+                    List<fn_show_users_Result> tmp = cont.fn_show_users(username, pwhash).ToList();
+                    foreach (var item in tmp)
+                    {
+                        if (item.name == userToAdd)
+                        {
+                            cont.sp_add_user_to_usergroup(username, pwhash, item.id, usergroup);
+                            success = true;
+                        }
+                    }
+                   
+                }
+                catch 
+                {
+                   success = false;
+                }
+            }
+            return success;
+        }
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)
         /// <summary>
@@ -783,8 +863,9 @@ namespace HicsBL
         /// <param name="lampOnOff"></param>
         /// <param name="lampId"></param>
         /// <returns></returns>
-        public static void switchLamp(string username, string password, bool lampOnOff, int lampId)
+        public static bool switchLamp(string username, string password, bool lampOnOff, int lampId)
         {
+            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
             
@@ -794,32 +875,41 @@ namespace HicsBL
                 int HueLampId = 0;
                 string dbLampName = "";
 
-                foreach (var item in dbLamps)
+                try
                 {
-                    if (lampId == item.id)
+                    foreach (var item in dbLamps)
                     {
-                        dbLampName = item.name;
-                        break;
+                        if (lampId == item.id)
+                        {
+                            dbLampName = item.name;
+                            break;
+                        }
                     }
+                    HueLampId = HueAccess.GetLampId(dbLampName);
+
+
+
+                    if (lampOnOff == true)
+                    {
+                        cont.sp_lamp_on(username, pwhash, lampId);
+                        // Vereinfachter aufruf über die HelperClass
+                        HelperClass.SetLampState(HueLampId, true);
+                    }
+                    else
+                    {
+                        cont.sp_lamp_off(username, pwhash, lampId);
+                        // Vereinfachter aufruf über die HelperClass
+                        HelperClass.SetLampState(HueLampId, false);
+                    }
+                    success = true;
+                    
                 }
-                HueLampId = HueAccess.GetLampId(dbLampName);
-
-
-
-                if (lampOnOff == true)
+                catch
                 {
-                    cont.sp_lamp_on(username, pwhash, lampId);
-                    // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(HueLampId, true);
+                    success = false;
                 }
-                else
-                {
-                    cont.sp_lamp_off(username, pwhash, lampId);
-                    // Vereinfachter aufruf über die HelperClass
-                    HelperClass.SetLampState(HueLampId, false);
-                }
-
             }
+            return success;
         }
         #endregion
 
@@ -834,9 +924,9 @@ namespace HicsBL
         /// <param name="brightness"></param>
         /// <param name="lampOnOff"></param>
         /// <returns></returns>
-        public static void dimLamp(string username, string password, int lampId, byte brightness, bool lampOnOff)
+        public static bool dimLamp(string username, string password, int lampId, byte brightness, bool lampOnOff)
         {
-            //bool success = false;
+            bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
 
@@ -844,35 +934,43 @@ namespace HicsBL
             {
                 string dbLampName = "";
                 bool onOff = true;
+                int hueId = 1;
                 List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
 
-                foreach (var item in db)
+                try
                 {
-                    if (lampId == item.id)
+                    foreach (var item in db)
                     {
-                        dbLampName = item.name;
-                        cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+                        if (lampId == item.id)
+                        {
+                            dbLampName = item.name;
+                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                        
-                        if(lampOnOff == true)
-                        {
-                            cont.sp_lamp_on(username, pwhash, lampId);
-                            onOff = true;
+                                hueId = HueAccess.GetLampId(dbLampName);
+                                HelperClass.SetLampBrightness(hueId, brightness);
+
+                                if (lampOnOff == true)
+                            {
+                                cont.sp_lamp_on(username, pwhash, lampId);
+                                onOff = true;
+                            }
+                            else
+                            {
+                                cont.sp_lamp_off(username, pwhash, lampId);
+                                onOff = false;
+                            }
+                                HelperClass.SetLampState(hueId, onOff);
                         }
-                        else
-                        {
-                            cont.sp_lamp_off(username, pwhash, lampId);
-                            onOff = false;
-                        }
-                    }
                    
+                    }
+                    success = true;
                 }
-
-                int hueId = HueAccess.GetLampId(dbLampName);
-
-                HelperClass.SetLampBrightness(hueId, brightness);
-                HelperClass.SetLampState(hueId, onOff);
+                catch 
+                {
+                    success = false;
+                }                              
             }
-            
+            return success;  
         }
         #endregion
 
@@ -926,38 +1024,49 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns>true, wenn Anmeldedaten richtig sind ansonsten false</returns>
-        public static bool userLogin(string username, string password)
+        public static int userLogin(string username, string password)
         {
-            bool success = false;
-            List<int?> result = new List<int?>();
+            int userIs = 0;
+            //userIs Codebelegung: 0 = Fehler, 1= Admin, 2= User, 3= nicht vorhanden
+
+            List<int?> user = new List<int?>();
+            List<int?> admin = new List<int?>();
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 try
                 {
-                    //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId
+                    //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId/AdminId
                     // anfordern. Wenn kein Eintrag vorhanden ist, ist der User
                     // mit den übergebenen Daten nicht berechtigt
-                    result = cont.fn_check_user_table(username, pwhash).ToList();
+                    user = cont.fn_check_user_table(username, pwhash).ToList();
+                    admin = cont.fn_check_admin_table(username, pwhash).ToList();
 
-                    if (result[0].Value > 0)
+                    //user vorhanden?
+                    if (user[0].Value > 0)
                     {
-                        success = true;
+                        userIs = 2;
+                        //ist user admin?
+                        if(admin[0].Value > 0)
+                        {
+                            userIs = 1;
+                        }
                     }
                     else
                     {
-                        success = false;
+                        //user nicht vorhanden
+                        userIs = 3;
                     }
                  
                 }
-                catch (Exception)
+                catch 
                  {
-
-                    success = false;
+                    //probleme bei überprüfung
+                    userIs = 0;
                  }
             }
-            return success;
+            return userIs;
         }
         #endregion
 
@@ -981,13 +1090,14 @@ namespace HicsBL
                 try
                 {
                     cont.sp_change_password(username, pwhashOld, pwhashNew);
-                    success = true;
+                     success = true;
                 }
-                catch 
+                catch
                 {
 
-                    success = false;
+                     success = false;
                 }
+               
             }
             return success;
         }
@@ -1009,6 +1119,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamp_control_history_Result> tmp = new List<fn_show_lamp_control_history_Result>();
+            
                 try
                 {
 
@@ -1016,17 +1127,64 @@ namespace HicsBL
 
                     foreach (var item in db)
                     {
-                        if (item.date >= beginDate && item.date <= endDate)
+                        if (Convert.ToDateTime((item.date).Value.ToShortDateString()) >= Convert.ToDateTime(beginDate.ToShortDateString()) 
+                         && Convert.ToDateTime((item.date).Value.ToShortDateString()) <= Convert.ToDateTime(endDate))
                         {
                             tmp.Add(item);
                         }
+                    }
+                    if (tmp.Count <= 0)
+                    {
+                        tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Daten" });
                     }
                     return tmp;
                 }
                 catch
                 {
-                    tmp[0].lamp_name = "Keine Datenbankverbindung";
-                    tmp[1].lamp_name = "No databaseconnection";
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "No database connection" });
+
+                    return tmp;
+                }
+            }
+        }
+        #endregion
+        #region PSP 18.2 GetLogFileComplete(string username, string password)
+        /// <summary>
+        /// PSP 18.2
+        /// Logfile in einer Liste retourgeben
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>Liste des Datentyp's "fn_show_lamp_control_history_Result" </returns>
+        public static List<fn_show_lamp_control_history_Result> GetLogFileComplete(string username, string password)
+        {
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lamp_control_history_Result> tmp = new List<fn_show_lamp_control_history_Result>();
+
+                try
+                {
+
+                    List<fn_show_lamp_control_history_Result> db = cont.fn_show_lamp_control_history(username, pwhash).ToList();
+
+                    foreach (var item in db)
+                    {
+                            tmp.Add(item);
+                    }
+                    if (tmp.Count <= 0)
+                    {
+                        tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Daten" });
+                    }
+                    return tmp;
+                }
+                catch
+                {
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "No database connection" });
 
                     return tmp;
                 }

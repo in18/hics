@@ -11,31 +11,44 @@ namespace HicsMVC.Controllers
     public class UserLampControlController : Controller
     {
         // GET: UserLampControl
+        [HttpGet]
         public ActionResult Index()
         {
-            List<HicsBL.fn_show_lamp_status_Result> lamps;
-            string username = "";
-            string password = "";
-            //Edit by Bernhard  
-            //Lamps hat den falschen Listentyp
-            //Lamps=List<fn_show_lamps_status_result>
-            //GetAllLamps =List<fn_show_lampgroups_result>
-            //Ihr benötigt hier -> DbAccess.GetAllLampsStatus()
-            //Mit List<fn_show_lamp_control_Result>^^
-            //lamps = HicsBL.DbAccess.GetAllLampGroups(username, password);
-            //return View(lamps);
+
+
+            List<fn_show_lamp_control_Result> lamps;
+            lamps = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
+
+            //UserLampControl ulc = new UserLampControl();
+
+            //ulc.lamplist = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
+
+            return View(lamps);
+        }
+
+        [HttpGet]
+        public ActionResult Index_Lampcontrol()
+        {
             return View();
         }
 
         [HttpGet]
-        public ActionResult Edit()
+        public ActionResult Edit(int? id)
         {
+            List<fn_show_lamp_control_Result> lamps;
+            lamps = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
 
-            List<LampControl> lamps;
-            //Wenn nicht funktionstüchtig bitte auskommentieren
-            //lamps = HicsBL.fn_show_lamps_Result.;
+            HicsBL.fn_show_lamp_control_Result erg = lamps.Where(x => x.lamp_id == id).FirstOrDefault();
 
-            return View();
+            return View(erg);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(HicsBL.fn_show_lamp_control_Result fn)
+        {
+            HicsBL.DbAccess.dimLamp("Sepp", "123user!", (int)fn.lamp_id, (byte)fn.brightness, (bool)fn.status);
+
+            return RedirectToAction("Index");
         }
     }
 }

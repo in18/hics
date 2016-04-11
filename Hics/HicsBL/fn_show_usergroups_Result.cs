@@ -11,16 +11,9 @@ namespace HicsBL
 {
     using System;
     
-    public partial class fn_show_lamp_control_history_Result
+    public partial class fn_show_usergroups_Result
     {
-        public Nullable<int> lamp_id { get; set; }
-        public string lamp_name { get; set; }
-        public Nullable<int> userlifetime { get; set; }
-        public string user_name { get; set; }
-        public Nullable<System.DateTime> date { get; set; }
-        public string address { get; set; }
-        public Nullable<bool> status { get; set; }
-        public Nullable<byte> brightness { get; set; }
-        public Nullable<int> deleted { get; set; }
+        public Nullable<int> id { get; set; }
+        public string groupname { get; set; }
     }
 }

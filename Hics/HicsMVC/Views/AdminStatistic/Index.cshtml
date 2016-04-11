@@ -1,7 +1,9 @@
-﻿@model 
+﻿@model List<HicsBL.fn_show_lamp_control_history_Result>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/MicronLayout.cshtml";
+
 }
 
 <div>
@@ -12,43 +14,35 @@
     </div>
 
     <div align="center" class="middlepfeifer">
-        <h2>Lamp Control</h2>
+        <h2>Statistic</h2>
     </div>
-</div> 
-
+</div>
 <br style="clear:both;" />
 
-<form>
-
-    <div class="lampcontainer">
-        <table class="lampcon">
-            <tr class="tr">
-
-                <th class="lampcontr"></th>
-                <th class="lampcontr"></th>
-                <th class="lampcontr"></th>
-                <th class="lampcontr"></th>                
-
-            </tr>
-            @foreach (var item in )
-            {
-
-                <tr class="tr">
-
-                    <td class="lampcontd"></td>
-                    <td class="lampcontd"></td>
-                    <td class="lampcontr"></td>
-                    <td class="lampcontr"></td>
-                    <td class="lampcontd"></td>
+<div align="center">
+    @*<div class="liste">*@
+        <div class="borderframe">
+            <table>
+                <tr>
+                    <th align="left">Date</th>
+                    <th align="left">Adresse</th>
+                    <th align="left">Lampname</th>
+                    <th align="left">Status</th>
+                    <th align="left">Username</th>
+                    <th></th>
                 </tr>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td class="listenpadding">@item.date</td>
+                        <td class="listenpadding">@item.address </td>
+                        <td class="listenpadding">@item.lamp_name </td>
+                        <td class="listenpadding">@item.status</td>
+                        <td class="listenpadding">@item.user_name</td>
+                    </tr>
+                }
+            </table>
+        </div>
+</div>
 
-            }
-        </table>
 
-
-    </div>
-
-</form>
-
-
-<script type="text/javascript"></script>

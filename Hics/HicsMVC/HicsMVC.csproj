@@ -150,7 +150,7 @@
     <Compile Include="Models\SuperAdminModel.cs" />
     <Compile Include="Models\UserAddModel.cs" />
     <Compile Include="Models\UserChangePasswordModel.cs" />
-    <Compile Include="Models\UserLampControl.cs" />
+    <Compile Include="Models\UserLampControlModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleClass\StaticClass.cs" />
     <Compile Include="SampleClass\UserName.cs" />
@@ -223,8 +223,8 @@
     <Content Include="Views\LampControl\Edit.cshtml" />
     <Content Include="Views\Index.cshtml" />
     <Content Include="Views\AdminStatistic\Index.cshtml" />
-    <Content Include="Views\UserLampControl\Index.cshtml" />
     <Content Include="Views\UserLampControl\Edit.cshtml" />
+    <Content Include="Views\UserLampControl\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -247,6 +247,9 @@
       <Project>{5fcd221c-ea3e-4964-88d3-4861016d3889}</Project>
       <Name>HueDotNet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

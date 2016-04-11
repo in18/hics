@@ -62,9 +62,17 @@ namespace huedotnet
         /// <returns>Url samt IP und Username</returns>
         public String DownloadState()
         {
-            WebClient webClient = new WebClient();
-            webClient.BaseAddress = "http://" + bridgeIP + "/api/" + username + "/";
-            return webClient.DownloadString(webClient.BaseAddress);
+            try
+            {
+                WebClient webClient = new WebClient();
+                webClient.BaseAddress = "http://" + bridgeIP + "/api/" + username + "/";
+                return webClient.DownloadString(webClient.BaseAddress);
+            }
+            catch 
+            {
+
+                return "Network error"; 
+            }
         }
 
     }

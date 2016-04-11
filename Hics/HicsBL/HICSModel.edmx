@@ -105,6 +105,7 @@
                 <Property Name="address" Type="varchar" MaxLength="50" />
                 <Property Name="status" Type="bit" />
                 <Property Name="brightness" Type="tinyint" />
+                <Property Name="deleted" Type="int" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -280,16 +281,6 @@
           <Parameter Name="lamp_id" Type="int" Mode="In" />
           <Parameter Name="bright" Type="tinyint" Mode="In" />
         </Function>
-        <Function Name="sp_lamp_off" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="nvarchar" Mode="In" />
-          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
-          <Parameter Name="lamp_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_lamp_on" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="username" Type="nvarchar" Mode="In" />
-          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
-          <Parameter Name="lamp_id" Type="int" Mode="In" />
-        </Function>
         <EntityContainer Name="itin18_aktModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -317,10 +308,6 @@
             <Parameter Name="password" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="fn_show_deleted_users" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_deleted_users_Result)">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="fn_show_lamp_control_history" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lamp_control_history_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
           </FunctionImport>
@@ -445,6 +432,10 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
           </FunctionImport>
+          <FunctionImport Name="fn_show_lamp_control_history" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lamp_control_history_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="fn_show_deleted_lamps_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
@@ -461,16 +452,6 @@
         <ComplexType Name="fn_show_deleted_users_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
           <Property Type="String" Name="user_name" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="fn_show_lamp_control_history_Result">
-          <Property Type="Int32" Name="lamp_id" Nullable="true" />
-          <Property Type="String" Name="lamp_name" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="userlifetime" Nullable="true" />
-          <Property Type="String" Name="user_name" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
-          <Property Type="String" Name="address" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="status" Nullable="true" />
-          <Property Type="Byte" Name="brightness" Nullable="true" />
         </ComplexType>
         <ComplexType Name="fn_show_lamp_status_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
@@ -499,10 +480,6 @@
           <Property Type="Int32" Name="id" Nullable="true" />
           <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="fn_show_usergroups_Result">
-          <Property Type="Int32" Name="id" Nullable="true" />
-          <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="fn_show_users_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
           <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
@@ -515,6 +492,21 @@
           <Property Type="String" Name="address" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="status" Nullable="true" />
           <Property Type="Byte" Name="brightness" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="fn_show_lamp_control_history_Result">
+          <Property Type="Int32" Name="lamp_id" Nullable="true" />
+          <Property Type="String" Name="lamp_name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="userlifetime" Nullable="true" />
+          <Property Type="String" Name="user_name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="status" Nullable="true" />
+          <Property Type="Byte" Name="brightness" Nullable="true" />
+          <Property Type="Int32" Name="deleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="fn_show_usergroups_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -553,20 +545,6 @@
               <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_deleted_users_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="user_name" ColumnName="user_name" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="fn_show_lamp_control_history" FunctionName="itin18_aktModel.Store.fn_show_lamp_control_history">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lamp_control_history_Result">
-                <ScalarProperty Name="lamp_id" ColumnName="lamp_id" />
-                <ScalarProperty Name="lamp_name" ColumnName="lamp_name" />
-                <ScalarProperty Name="userlifetime" ColumnName="userlifetime" />
-                <ScalarProperty Name="user_name" ColumnName="user_name" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="brightness" ColumnName="brightness" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -648,8 +626,6 @@
           <FunctionImportMapping FunctionImportName="sp_delete_user" FunctionName="itin18_aktModel.Store.sp_delete_user" />
           <FunctionImportMapping FunctionImportName="sp_delete_usergroup" FunctionName="itin18_aktModel.Store.sp_delete_usergroup" />
           <FunctionImportMapping FunctionImportName="sp_lamp_dimm" FunctionName="itin18_aktModel.Store.sp_lamp_dimm" />
-          <FunctionImportMapping FunctionImportName="sp_lamp_off" FunctionName="itin18_aktModel.Store.sp_lamp_off" />
-          <FunctionImportMapping FunctionImportName="sp_lamp_on" FunctionName="itin18_aktModel.Store.sp_lamp_on" />
           <FunctionImportMapping FunctionImportName="fn_show_lamp_control" FunctionName="itin18_aktModel.Store.fn_show_lamp_control">
             <ResultMapping>
               <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lamp_control_Result">
@@ -659,6 +635,21 @@
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="brightness" ColumnName="brightness" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fn_show_lamp_control_history" FunctionName="itin18_aktModel.Store.fn_show_lamp_control_history">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lamp_control_history_Result">
+                <ScalarProperty Name="lamp_id" ColumnName="lamp_id" />
+                <ScalarProperty Name="lamp_name" ColumnName="lamp_name" />
+                <ScalarProperty Name="userlifetime" ColumnName="userlifetime" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="brightness" ColumnName="brightness" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
