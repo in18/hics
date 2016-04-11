@@ -619,7 +619,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 8.1 addUser(string username, string password, string usernameNew, string passwordNew)
+        #region PSP 8.1 addUser(string username, string password, string usernameNew, string passwordNew, bool admin)
         /// <summary>
         /// PSP 8.1
         /// User hinzufügen. (Angemeldeter User wird anhand Usernamen und Passwort auf Rechte geprüft)
@@ -643,6 +643,8 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+                    cont.SaveChanges(); // Hoffentlich behebt das den Fehler, das der neu eingetragene User nicht 
+                                        // in der Liste erscheint. (Lt. Kloiber lasy-loading)
                     if (admin == true)
                         {
                             if (addUserToUsergroup(username, password, usernameNew, 1)==true)
@@ -669,6 +671,15 @@ namespace HicsBL
         }
         #endregion
 
+        /// <summary>
+        /// PSP 8.2
+        /// User einer Usergruppe hinzufügen
+        /// </summary>
+        /// <param name="username">den angemeldeten Usernamen übergeben (Überprüfung auf Rechte)</param>
+        /// <param name="password">das dazugehörige Passwort übermitteln (Überprüfung auf Rechte)</param>
+        /// <param name="userToAdd">Name des hinzuzufügenden Users</param>
+        /// <param name="usergroup">Name der Gruppe</param>
+        /// <returns>Erfolgreich true/false</returns>
         public static bool addUserToUsergroup(string username, string password, string userToAdd, int usergroup)
         {
             bool success = false;
@@ -811,15 +822,15 @@ namespace HicsBL
                 try
                 {
                     //cont.sp_add_user_to_usergroup(   (username, groupId);
-                    return success = true;
+                    success = true;
                 }
                 catch
                 {
 
-                    return success = false;
+                    success = false;
                 }
             }
-           
+            return success;
         }
         #endregion
 
@@ -1013,38 +1024,49 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns>true, wenn Anmeldedaten richtig sind ansonsten false</returns>
-        public static bool userLogin(string username, string password)
+        public static int userLogin(string username, string password)
         {
-            bool success = false;
-            List<int?> result = new List<int?>();
+            int userIs = 0;
+            //userIs Codebelegung: 0 = Fehler, 1= Admin, 2= User, 3= nicht vorhanden
+
+            List<int?> user = new List<int?>();
+            List<int?> admin = new List<int?>();
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 try
                 {
-                    //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId
+                    //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId/AdminId
                     // anfordern. Wenn kein Eintrag vorhanden ist, ist der User
                     // mit den übergebenen Daten nicht berechtigt
-                    result = cont.fn_check_user_table(username, pwhash).ToList();
+                    user = cont.fn_check_user_table(username, pwhash).ToList();
+                    admin = cont.fn_check_admin_table(username, pwhash).ToList();
 
-                    if (result[0].Value > 0)
+                    //user vorhanden?
+                    if (user[0].Value > 0)
                     {
-                        success = true;
+                        userIs = 2;
+                        //ist user admin?
+                        if(admin[0].Value > 0)
+                        {
+                            userIs = 1;
+                        }
                     }
                     else
                     {
-                        success = false;
+                        //user nicht vorhanden
+                        userIs = 3;
                     }
                  
                 }
-                catch (Exception)
+                catch 
                  {
-
-                    success = false;
+                    //probleme bei überprüfung
+                    userIs = 0;
                  }
             }
-            return success;
+            return userIs;
         }
         #endregion
 
@@ -1068,12 +1090,12 @@ namespace HicsBL
                 try
                 {
                     cont.sp_change_password(username, pwhashOld, pwhashNew);
-                    return success = true;
+                     success = true;
                 }
                 catch
                 {
 
-                    return success = false;
+                     success = false;
                 }
                
             }
@@ -1130,8 +1152,8 @@ namespace HicsBL
         #endregion
         #region PSP 18.2 GetLogFileComplete(string username, string password)
         /// <summary>
-        /// PSP 18.1
-        /// Logfile von beginDate bis endDate in einer Liste retourgeben
+        /// PSP 18.2
+        /// Logfile in einer Liste retourgeben
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>

@@ -1,4 +1,4 @@
-﻿
+﻿@model List<HicsBL.fn_show_lamp_control_history_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -8,38 +8,41 @@
 
 <div>
     <div>
-        <a href="~/AdminStatistic/Index"><div class="homepfeifer2"></div></a>
+        <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
 
         <a href="~/Logout/Logout"><div class="logoutpfeifer2"></div></a>
     </div>
 
     <div align="center" class="middlepfeifer">
-        <h2>Admin Statistic</h2>
+        <h2>Statistic</h2>
     </div>
-</div> 
+</div>
 <br style="clear:both;" />
 
 <div align="center">
-    <div class="liste">
-        <table>
-            <tr>
-                <th align="left">Date</th>
-                <th align="left">Time</th>
-                <th align="left">Group</th>
-                <th align="left">Lamp Status</th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model)
-            {
+    @*<div class="liste">*@
+        <div class="borderframe">
+            <table>
                 <tr>
-                    <td class="listenpadding">@item.Date</td>
-                    <td class="listenpadding">@item.Time</td>
-                    <td class="listenpadding">@item.Group</td>
-                    <td class="listenpadding">@item.Lampstatus</td>
+                    <th align="left">Date</th>
+                    <th align="left">Adresse</th>
+                    <th align="left">Lampname</th>
+                    <th align="left">Status</th>
+                    <th align="left">Username</th>
+                    <th></th>
                 </tr>
-            }
-        </table>
-    </div>
-    </div>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td class="listenpadding">@item.date</td>
+                        <td class="listenpadding">@item.address </td>
+                        <td class="listenpadding">@item.lamp_name </td>
+                        <td class="listenpadding">@item.status</td>
+                        <td class="listenpadding">@item.user_name</td>
+                    </tr>
+                }
+            </table>
+        </div>
+</div>
 
 

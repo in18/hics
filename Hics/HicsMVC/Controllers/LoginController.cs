@@ -25,10 +25,10 @@ namespace HicsMVC.Controllers
         public ActionResult Login(LoginModel lm)
         {
             //Von BL erfragen, ob Login erfolgreich war - bool als return            
-            bool usercorrect = DbAccess.userLogin(lm.Username, lm.Password);
+            int usercorrect = DbAccess.userLogin(lm.Username, lm.Password);
 
             //Wenn UserLogin Correct
-            if (usercorrect)
+            if (usercorrect!=0)
             {
                 //Erstelle Session mit Username und Password
                 UserSession us = new UserSession();
@@ -38,7 +38,7 @@ namespace HicsMVC.Controllers
 
                 //hard-coded:
                 //Statt True abfrage an BL mit Username/Password
-                //us.admin = true; -->
+                us.admin = true;
 
                 //4.4.2016 / LEO:
                 //foreach (var item in DbAccess.GetAllUser(lm.Username, lm.Password))

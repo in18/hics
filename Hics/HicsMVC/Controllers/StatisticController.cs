@@ -3,50 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HicsBL;
+using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
     public class StatisticController : Controller
     {
-        //Nur für Testzwecke!!!!!!!!!!!
-        // GET: Statistic
         public ActionResult Index()
         {
-            List<SampleClass.StaticClass> stListe = new List<SampleClass.StaticClass>();
-            SampleClass.StaticClass st1 = new SampleClass.StaticClass(1, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Wohnzimmer", true);
-            SampleClass.StaticClass st2 = new SampleClass.StaticClass(2, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Vorzimmer", false);
-            SampleClass.StaticClass st3 = new SampleClass.StaticClass(1, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Wohnzimmer", true);
-            SampleClass.StaticClass st4 = new SampleClass.StaticClass(2, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Vorzimmer", false);
-            SampleClass.StaticClass st5 = new SampleClass.StaticClass(1, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Wohnzimmer", true);
-            SampleClass.StaticClass st6 = new SampleClass.StaticClass(2, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Vorzimmer", false);
-            SampleClass.StaticClass st7 = new SampleClass.StaticClass(1, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Wohnzimmer", true);
-            SampleClass.StaticClass st8 = new SampleClass.StaticClass(2, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Vorzimmer", false);
-            SampleClass.StaticClass st9 = new SampleClass.StaticClass(1, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Wohnzimmer", true);
-            SampleClass.StaticClass st10 = new SampleClass.StaticClass(2, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Vorzimmer", false);
-            SampleClass.StaticClass st11 = new SampleClass.StaticClass(1, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Wohnzimmer", true);
-            SampleClass.StaticClass st12 = new SampleClass.StaticClass(2, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Vorzimmer", false);
-            SampleClass.StaticClass st13 = new SampleClass.StaticClass(1, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Wohnzimmer", true);
-            SampleClass.StaticClass st14 = new SampleClass.StaticClass(2, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Vorzimmer", false);
-            SampleClass.StaticClass st15 = new SampleClass.StaticClass(1, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Wohnzimmer", true);
-            SampleClass.StaticClass st16 = new SampleClass.StaticClass(2, DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), "Vorzimmer", false);
-            stListe.Add(st1);
-            stListe.Add(st2);
-            stListe.Add(st3);
-            stListe.Add(st4);
-            stListe.Add(st5);
-            stListe.Add(st6);
-            stListe.Add(st7);
-            stListe.Add(st8);
-            stListe.Add(st9);
-            stListe.Add(st10);
-            stListe.Add(st11);
-            stListe.Add(st12);
-            stListe.Add(st13);
-            stListe.Add(st14);
-            stListe.Add(st15);
-            stListe.Add(st16);
+            List<fn_show_lamp_control_history_Result> userStatisticList = HicsBL.DbAccess.GetLogFileComplete("Sepp", "123user!");
 
-            return View(stListe);
+            List<fn_show_lamp_control_history_Result> filteredStatisticList = new List<fn_show_lamp_control_history_Result>();
+
+            //UserSession us = (UserSession)Session["UserSession"];
+
+            try
+            {
+                //Temporäre Usersession
+                UserSession us = new UserSession();
+                us.name = "Lisi";
+
+                for (int i = 0; i < userStatisticList.Count; i++)
+                {
+                    if (userStatisticList[i].user_name == us.name)
+                    {
+                        filteredStatisticList.Add(userStatisticList[i]);
+                    }
+                }
+
+                return View(filteredStatisticList);
+            }
+            catch (Exception)
+            {
+                return View(new fn_show_lamp_control_history_Result { address = "", lamp_name = "No database connection", user_name = "" });
+            }
         }
     }
 }
