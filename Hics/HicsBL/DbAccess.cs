@@ -327,11 +327,11 @@ namespace HicsBL
                     //Lampengruppe erstellen                     
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
                     success = true;
-            }
+                }
                 catch 
                 {
                     success = false;
-        }
+                }
             }
 
             return success;
