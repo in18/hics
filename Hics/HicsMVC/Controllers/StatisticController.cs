@@ -18,18 +18,26 @@ namespace HicsMVC.Controllers
 
             //UserSession us = (UserSession)Session["UserSession"];
 
-            UserSession us = new UserSession();
-            us.name = "Karl";
-
-            for (int i = 0; i < userStatisticList.Count; i++)
+            try
             {
-                if (userStatisticList[i].user_name == us.name)
-                {
-                    filteredStatisticList.Add(userStatisticList[i]);
-                }
-            }
+                //Temporäre Usersession
+                UserSession us = new UserSession();
+                us.name = "Lisi";
 
-            return View(filteredStatisticList);
+                for (int i = 0; i < userStatisticList.Count; i++)
+                {
+                    if (userStatisticList[i].user_name == us.name)
+                    {
+                        filteredStatisticList.Add(userStatisticList[i]);
+                    }
+                }
+
+                return View(filteredStatisticList);
+            }
+            catch (Exception)
+            {
+                return View(new fn_show_lamp_control_history_Result { address = "", lamp_name = "No database connection", user_name = "" });
+            }
         }
     }
 }
