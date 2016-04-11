@@ -36,7 +36,8 @@ namespace HicsMVC.Controllers
                 if (usercorrect == 1)
                 {
                     //Erstelle Session mit Username und Password                   
-                    UserSession us = new UserSession();                  
+                    UserSession us = new UserSession();
+                    us.admin = true;                 
                     us.name = lm.Username;
                     us.pw = lm.Password;
 
@@ -51,6 +52,7 @@ namespace HicsMVC.Controllers
                 else if (usercorrect == 2)
                 {
                     UserSession us = new UserSession();
+                    us.admin = false;
                     us.name = lm.Username;
                     us.pw = lm.Password;
 

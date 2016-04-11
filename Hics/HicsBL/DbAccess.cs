@@ -639,11 +639,11 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-
+                
                 try
                 {
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
-                   
+
                     if (admin == true)
                         {
                             if (addUserToUsergroup(username, password, usernameNew, 1)==true)
@@ -686,9 +686,8 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 try
-                {
-                    List<fn_show_users_Result> tmp = cont.fn_show_users(username, pwhash).ToList();
-                    foreach (var item in tmp)
+                {  
+                    foreach (var item in cont.fn_show_users(username, pwhash))
                     {
                         if (item.name == userToAdd)
                         {
