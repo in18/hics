@@ -10,10 +10,8 @@ namespace HicsMVC.Controllers
     {
         // GET: AdminStatistic
         public ActionResult Index()
-        {          
-            return View();
+        {
+            return View(HicsBL.DbAccess.GetLogFileComplete("Sepp", "123user!"));
         }
-
-
     }
 }
