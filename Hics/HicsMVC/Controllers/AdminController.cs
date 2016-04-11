@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HicsMVC.SampleClass;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,11 @@ namespace HicsMVC.Controllers
     {
         // GET: Admin
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult ChangePassword()
         {
             return View();
         }
