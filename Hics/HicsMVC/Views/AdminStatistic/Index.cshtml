@@ -20,28 +20,29 @@
 <br style="clear:both;" />
 
 <div align="center">
-    <div class="liste">
-        <table>
-            <tr>
-                <th align="left">Date</th>
-                <th align="left">Adresse</th>
-                <th align="left">Lampname</th>
-                <th align="left">Status</th>
-                <th align="left">Username</th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model)
-            {
+    @*<div class="liste">*@
+        <div class="borderframe" style="overflow:auto;">
+            <table>
                 <tr>
-                    <td class="listenpadding">@item.date</td>
-                    <td class="listenpadding">@item.address </td>
-                    <td class="listenpadding">@item.lamp_name </td>
-                    <td class="listenpadding">@item.status</td>
-                    <td class="listenpadding">@item.user_name</td>
+                    <th align="left">Date</th>
+                    <th align="left">Adresse</th>
+                    <th align="left">Lampname</th>
+                    <th align="left">Status</th>
+                    <th align="left">Username</th>
+                    <th></th>
                 </tr>
-            }
-        </table>
-    </div>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td class="listenpadding">@item.date</td>
+                        <td class="listenpadding">@item.address </td>
+                        <td class="listenpadding">@item.lamp_name </td>
+                        <td class="listenpadding">@item.status</td>
+                        <td class="listenpadding">@item.user_name</td>
+                    </tr>
+                }
+            </table>
+        </div>
 </div>
 
 
