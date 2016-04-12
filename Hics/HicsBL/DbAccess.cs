@@ -1190,7 +1190,41 @@ namespace HicsBL
             }
         }
         #endregion
-       
+
+        #region 19.2 Change Password by Admin(string username, string password, int changeId, string newpassword)
+        /// <summary>
+        /// 19.2 Change Password by Admin
+        /// </summary>
+        /// <param name="changeId">Id die geändert werden soll</param>
+        /// <param name="newpassword"></param>
+        /// <param name="password"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public static bool ChangePasswordByAdmin(string username, string password, int changeId, string newpassword)
+        {
+            bool success = false;
+
+            Byte[] pwhash = HelperClass.GetHash(password);
+            Byte[] pwNewhash = HelperClass.GetHash(newpassword);
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                try
+                {
+                    cont.sp_change_password_by_admin(username, pwhash, changeId, pwNewhash);
+                    success = true;
+                }
+                catch (Exception e)
+                {
+
+                    success = false;
+                }
+            }
+            return success;
+
+        } 
+        #endregion
+
 
 
         /// <summary>
