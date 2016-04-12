@@ -689,17 +689,12 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 try
-                {
-                    foreach (var item in cont.fn_show_users(username, pwhash))
-                    {
-                        if (item.id == userToAdd)
-                        {
-                            cont.sp_add_user_to_usergroup(username, pwhash, item.id, usergroup);
-                            success = true;
-                        }
-                    }
-                   
+                {             
+                    cont.sp_add_user_to_usergroup(username, pwhash, userToAdd, usergroup);
+                    success = true;                       
                 }
+                   
+                
                 catch (Exception e)
                 {
                    success = false;
