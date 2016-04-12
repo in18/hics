@@ -17,7 +17,7 @@ namespace HicsMVC.Controllers
             UserSession us = (UserSession)Session["UserSession"];
             UserAddModel uam = new UserAddModel();
             uam.Userlist = HicsBL.DbAccess.GetAllUser("Sepp", "123user!");
-            ViewBag.Adminstatus = us.name;
+            ViewBag.Adminstatus = us.name.ToLower();
             return View(uam);
         }
         //user erzeugen
@@ -53,11 +53,6 @@ namespace HicsMVC.Controllers
         {
             HicsBL.DbAccess.removeUser("Sepp", "123user!", id);
             return RedirectToAction("Index");
-        }
-
-        public ActionResult ChangePw()
-        {
-            return RedirectToAction("ChangePassword", "Admin");
         }
     }
 }
