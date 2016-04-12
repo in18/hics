@@ -261,7 +261,7 @@ namespace HicsBL
             
             return success;
         }
-        #endregionö
+        #endregion
 
         #region PSP 3.2 deleteLamp(string username, string password, string lampAdress)
         /// <summary>
@@ -1217,8 +1217,8 @@ namespace HicsBL
             }
             return success;
 
-        } 
-        #endregion
+        }
+        #region
 
 
 
