@@ -24,53 +24,53 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel lm)
         {
-            //Von BL erfragen, ob Login erfolgreich war - bool als return            
+            //Schnittstelle 'uer.Login' von BL        
             int usercorrect = DbAccess.userLogin(lm.Username, lm.Password);
 
             //Wenn UserLogin Correct
-            if (usercorrect!=0)
+            if (usercorrect != 0)
             {
-                //Erstelle Session mit Username und Password
-                UserSession us = new UserSession();
-                us.name = lm.Username;
-                us.pw = lm.Password;
-
-
-                //hard-coded:
-                //Statt True abfrage an BL mit Username/Password
-                us.admin = true;
-
-                //4.4.2016 / LEO:
-                //foreach (var item in DbAccess.GetAllUser(lm.Username, lm.Password))
-                //{
-                //    if (item.name = lm.Username)
-                //    {
-
-                //    }
-                //}             
-
-
-                Session["UserSession"] = us;
-                //Sessionparameter werden in der allgemeinen webconfig konfiguriert
-                //Session.Timeout kann theoretisch auch hier konfiguriert werden, macht aber in der Webconfig mehr Sinn.
-
-                //If "User=Admin" dann gehe zum Index Admin
-                if (us.admin)
+                // 1 = Admin
+                // =  Zuweisung
+                // == Vergleich
+                if (usercorrect == 1)
                 {
+                    //Erstelle Session mit Username und Password                   
+                    UserSession us = new UserSession();
+                    us.admin = true;                 
+                    us.name = lm.Username;
+                    us.pw = lm.Password;
+
+                    //Sessionparameter werden in der allgemeinen Web.config konfiguriert.
+                    //Session.Timeout kann theoretisch auch hier konfiguriert werden,
+                    // macht aber in der Web.config mehr Sinn.
+                    Session["UserSession"] = us;
+
                     return RedirectToAction("Index", "Admin");
                 }
-                else
+                // 2 = User
+                else if (usercorrect == 2)
                 {
+                    UserSession us = new UserSession();
+                    us.admin = false;
+                    us.name = lm.Username;
+                    us.pw = lm.Password;
+
+                    Session["UserSession"] = us;
+
                     return RedirectToAction("Index", "User");
                 }
+                // 3 = nicht vorhanden
+                else
+                {
+                    ViewBag.errorMessage = "Username does not exist";
+                    return View();
+                }
+
             }
-            
-            //else "User=User" dann gehe zum Index User
-            else
-            {
-                ViewBag.errorMessage = "Login failed";
-                return View();
-            }                  
+            ViewBag.errorMessage = "Login failed";
+            return View();
         }
+
     }
 }

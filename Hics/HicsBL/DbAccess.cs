@@ -62,7 +62,7 @@ namespace HicsBL
                     HueAccess.getLampList();
                     success = true;
                 }
-                catch 
+                catch (Exception e)
                 {
                     success = false;
                 }
@@ -162,7 +162,7 @@ namespace HicsBL
                  HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
                     success = true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     success = false;
                 }
@@ -214,7 +214,7 @@ namespace HicsBL
                     HelperClass.SetLampName(HueLampId, lampNameNew);
                     success = true;
                 }
-                catch 
+                catch (Exception e)
                 {
                     success = false;
                 }
@@ -251,7 +251,7 @@ namespace HicsBL
                     HueAccess.getLampList();
                     success = true;
                 }
-                catch 
+                catch (Exception e)
                 {
 
                     success = false;
@@ -293,7 +293,7 @@ namespace HicsBL
                             HueAccess.getLampList();
                             success = true;
                         }
-                        catch
+                        catch (Exception e)
                         {
                             success = false;
                         }
@@ -328,7 +328,7 @@ namespace HicsBL
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
                     success = true;
                 }
-                catch 
+                catch (Exception e)
                 {
                     success = false;
                 }
@@ -368,7 +368,7 @@ namespace HicsBL
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
-                        catch
+                        catch (Exception e)
                         {
                             success = false;
                         }
@@ -409,7 +409,7 @@ namespace HicsBL
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
-                        catch
+                        catch (Exception e)
                         {
                             success = false;
                         }
@@ -451,7 +451,7 @@ namespace HicsBL
                             cont.sp_delete_lamp_from_roomgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
-                        catch
+                        catch (Exception e)
                         {
                             success = false;
                         }
@@ -493,7 +493,7 @@ namespace HicsBL
                             cont.sp_delete_roomgroup(username, pwhash, item.id);
                             success = true;
                         }
-                        catch 
+                        catch (Exception e)
                         {
                             success = false;                          
                         }
@@ -535,7 +535,7 @@ namespace HicsBL
                             cont.sp_delete_lamp_from_roomgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
-                        catch 
+                        catch (Exception e)
                         {
 
                             success = false;
@@ -570,7 +570,7 @@ namespace HicsBL
                     cont.sp_delete_roomgroup(username, pwhash, groupId);
                     success = true;
                 }
-                catch 
+                catch (Exception e)
                 {
 
                     success = false;
@@ -644,25 +644,25 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
-
+                   
                     userId = cont.fn_check_user_table(usernameNew, pwhashNew).ToList();
                     
-                        if (admin == true)
+                    if (admin == true)
                         {
                             if (addUserToUsergroup(username, password, userId[0].Value, 1) == true)
                             {
-                                success = true;
+                                 success = true;
                             }
                         }
-                        else
+                    else
                         {
                             if (addUserToUsergroup(username, password, userId[0].Value, 2) == true)
                             {
                                 success = true;
                             }
-                        }                             
+                        }
                 }
-                catch 
+                catch (Exception e)
                 {
                     success = false;
                 }
@@ -690,8 +690,7 @@ namespace HicsBL
             {
                 try
                 {
-                    List<fn_show_users_Result> tmp = cont.fn_show_users(username, pwhash).ToList();
-                    foreach (var item in tmp)
+                    foreach (var item in cont.fn_show_users(username, pwhash))
                     {
                         if (item.id == userToAdd)
                         {
@@ -701,7 +700,7 @@ namespace HicsBL
                     }
                    
                 }
-                catch 
+                catch (Exception e)
                 {
                    success = false;
                 }
@@ -733,7 +732,7 @@ namespace HicsBL
                     cont.sp_delete_user(username, pwhash, usernameId);
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
                     success = false;
                 }
@@ -772,7 +771,7 @@ namespace HicsBL
                             cont.sp_delete_user(username, pwhash, item.id);
                             success = true;
                         }
-                        catch
+                        catch (Exception e)
                         {
                             success = false;
                         }
@@ -825,7 +824,7 @@ namespace HicsBL
                     //cont.sp_add_user_to_usergroup(   (username, groupId);
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
 
                     success = false;
@@ -905,7 +904,7 @@ namespace HicsBL
                     success = true;
                     
                 }
-                catch
+                catch (Exception e)
                 {
                     success = false;
                 }
@@ -947,10 +946,9 @@ namespace HicsBL
                             dbLampName = item.name;
                             cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                        
-                                hueId = HueAccess.GetLampId(dbLampName);
-                                HelperClass.SetLampBrightness(hueId, brightness);
+                               
 
-                            if (lampOnOff == true)
+                                if (lampOnOff == true)
                             {
                                 cont.sp_lamp_on(username, pwhash, lampId);
                                 //onOff = true;
@@ -966,7 +964,7 @@ namespace HicsBL
                     }
                     success = true;
                 }
-                catch 
+                catch (Exception e)
                 {
                     success = false;
                 }                              
@@ -1061,7 +1059,7 @@ namespace HicsBL
                     }
                  
                 }
-                catch(Exception e)
+                catch (Exception e)
                  {
                     //probleme bei überprüfung
                     userIs = 0;
@@ -1093,7 +1091,7 @@ namespace HicsBL
                     cont.sp_change_password(username, pwhashOld, pwhashNew);
                      success = true;
                 }
-                catch
+                catch (Exception e)
                 {
 
                      success = false;
@@ -1140,7 +1138,7 @@ namespace HicsBL
                     }
                     return tmp;
                 }
-                catch
+                catch(Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
                     tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Datenbankverbindung" });
@@ -1181,7 +1179,7 @@ namespace HicsBL
                     }
                     return tmp;
                 }
-                catch
+                catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
                     tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Datenbankverbindung" });
@@ -1211,7 +1209,7 @@ namespace HicsBL
                 {
                     return cont.fn_show_lamps(username, pwhash).ToList();
                 }
-                catch
+                catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
                     tmp.Add(new fn_show_lamps_Result {address = "", name = "Keine Datenbankverbindung" });
@@ -1240,7 +1238,7 @@ namespace HicsBL
                 {
                     return cont.fn_show_lamp_control(username, pwhash).ToList();
                 }
-                catch 
+                catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Lampenname eingetragen
                     tmp.Add( new fn_show_lamp_control_Result { groupname=" ", address=" ", lampname = "Keine Datenbankverbindung" });
@@ -1267,7 +1265,7 @@ namespace HicsBL
                 {
                     return cont.fn_show_users(username, pwhash).ToList();
                 }
-                catch 
+                catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Username eingetragen
                     tmp.Add(new fn_show_users_Result { group = " ", name = "Keine Datenbankverbindung" });
@@ -1294,7 +1292,7 @@ namespace HicsBL
                 {
                     return cont.fn_show_lampgroups(username, pwhash).ToList();
                 }
-                catch
+                catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Gruppenname eingetragen
                     tmp.Add(new fn_show_lampgroups_Result { roomgroupname = "Keine Datenbankverbindung" });
@@ -1321,7 +1319,7 @@ namespace HicsBL
                 {
                     return cont.fn_show_lamp_control(username, pwhash).ToList();
                 }
-                catch 
+                catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Lampenname eingetragen
                     tmp.Add(new fn_show_lamp_control_Result { address = "", groupname = "", brightness = 0, status = true, lamp_id = 999, lampname = "Keine Datenbankverbindung" });
@@ -1335,3 +1333,4 @@ namespace HicsBL
 
     }
 }
+ 

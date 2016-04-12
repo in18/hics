@@ -29,6 +29,7 @@
     border-radius: 10px;
     padding: 5px 0 5px 0;
     min-width: 450px;
+    max-height: 500px;
     /*overflow:auto;*/
 }
 
