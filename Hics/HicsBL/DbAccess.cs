@@ -643,9 +643,13 @@ namespace HicsBL
 
                 try
                 {
+                    cont.Configuration.LazyLoadingEnabled = false; // [bw] mit diesem Befehl sollten alle Listen ohne Cache geladen werden
+
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
                    
                     userId = cont.fn_check_user_table(usernameNew, pwhashNew).ToList();
+
+                    cont.Configuration.LazyLoadingEnabled = true; // Lazyloading wieder einschalten
                     
                     if (admin == true)
                         {
@@ -668,6 +672,7 @@ namespace HicsBL
                 }
                 
             }
+            
             return success;
         }
         #endregion
