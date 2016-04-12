@@ -39,7 +39,7 @@ namespace HicsMVC.Controllers
                     UserSession us = new UserSession();
                     us.admin = true;                 
                     us.name = lm.Username;
-                    us.pw = lm.Password;
+                    us.pw = lm.Password;                    
 
                     //Sessionparameter werden in der allgemeinen Web.config konfiguriert.
                     //Session.Timeout kann theoretisch auch hier konfiguriert werden,
