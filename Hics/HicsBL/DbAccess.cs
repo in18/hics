@@ -261,7 +261,7 @@ namespace HicsBL
             
             return success;
         }
-        #endregionö
+        #endregion
 
         #region PSP 3.2 deleteLamp(string username, string password, string lampAdress)
         /// <summary>
@@ -801,35 +801,6 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 9.2 editUserGroup (string username, int groupId)
-        /// <summary>
-        /// PSP 9.2
-        /// //editUserGroup
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="groupId"></param>
-        /// <returns></returns>
-        static bool editUserGroup(string username, int groupId)
-        {
-            bool success = false;
-            
-            
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                try
-                {
-                    //cont.sp_add_user_to_usergroup(   (username, groupId);
-                    success = true;
-                }
-                catch (Exception e)
-                {
-
-                    success = false;
-                }
-            }
-            return success;
-        }
-        #endregion
 
         #region PSP 9.2 EditUserGroup(string username, string password, string usernameName, int groupId)
         /// <summary>
