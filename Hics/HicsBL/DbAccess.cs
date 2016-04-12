@@ -672,6 +672,7 @@ namespace HicsBL
         }
         #endregion
 
+        #region 8.2 User einer Usergruppe hinzufügen(string username, string password, int userToAdd, int usergroup)
         /// <summary>
         /// PSP 8.2
         /// User einer Usergruppe hinzufügen
@@ -689,19 +690,20 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 try
-                {             
+                {
                     cont.sp_add_user_to_usergroup(username, pwhash, userToAdd, usergroup);
-                    success = true;                       
+                    success = true;
                 }
-                   
-                
+
+
                 catch (Exception e)
                 {
-                   success = false;
+                    success = false;
                 }
             }
             return success;
-        }
+        } 
+        #endregion
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)
         /// <summary>
