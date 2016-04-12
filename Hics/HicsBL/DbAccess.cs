@@ -636,6 +636,7 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             //Übergebenes neues Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhashNew = HelperClass.GetHash(passwordNew);
+            List<int?> userId = new List<int?>();
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
@@ -643,21 +644,23 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
-                   
-                    if (admin == true)
+
+                    userId = cont.fn_check_user_table(usernameNew, pwhashNew).ToList();
+                    
+                        if (admin == true)
                         {
-                            if (addUserToUsergroup(username, password, usernameNew, 1)==true)
-                            {
-                                 success = true;
-                            }
-                        }
-                    else
-                        {
-                            if (addUserToUsergroup(username, password, usernameNew, 2) == true)
+                            if (addUserToUsergroup(username, password, userId[0].Value, 1) == true)
                             {
                                 success = true;
                             }
                         }
+                        else
+                        {
+                            if (addUserToUsergroup(username, password, userId[0].Value, 2) == true)
+                            {
+                                success = true;
+                            }
+                        }                             
                 }
                 catch 
                 {
@@ -678,7 +681,7 @@ namespace HicsBL
         /// <param name="userToAdd">Name des hinzuzufügenden Users</param>
         /// <param name="usergroup">Name der Gruppe</param>
         /// <returns>Erfolgreich true/false</returns>
-        public static bool addUserToUsergroup(string username, string password, string userToAdd, int usergroup)
+        public static bool addUserToUsergroup(string username, string password, int userToAdd, int usergroup)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -690,7 +693,7 @@ namespace HicsBL
                     List<fn_show_users_Result> tmp = cont.fn_show_users(username, pwhash).ToList();
                     foreach (var item in tmp)
                     {
-                        if (item.name == userToAdd)
+                        if (item.id == userToAdd)
                         {
                             cont.sp_add_user_to_usergroup(username, pwhash, item.id, usergroup);
                             success = true;
@@ -931,7 +934,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 string dbLampName = "";
-                bool onOff = true;
+                //bool onOff = true;
                 int hueId = 1;
                 List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
 
@@ -947,17 +950,17 @@ namespace HicsBL
                                 hueId = HueAccess.GetLampId(dbLampName);
                                 HelperClass.SetLampBrightness(hueId, brightness);
 
-                                if (lampOnOff == true)
+                            if (lampOnOff == true)
                             {
                                 cont.sp_lamp_on(username, pwhash, lampId);
-                                onOff = true;
+                                //onOff = true;
                             }
                             else
                             {
                                 cont.sp_lamp_off(username, pwhash, lampId);
-                                onOff = false;
+                                //onOff = false;
                             }
-                                HelperClass.SetLampState(hueId, onOff);
+                           HelperClass.SetLampState(hueId, lampOnOff);
                         }
                    
                     }
