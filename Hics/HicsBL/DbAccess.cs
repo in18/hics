@@ -1180,6 +1180,8 @@ namespace HicsBL
             }
         }
         #endregion
+       
+
 
         /// <summary>
         /// Die in der DB eingetragenen Lampennamen als Liste
