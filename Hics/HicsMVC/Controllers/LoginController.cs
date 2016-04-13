@@ -32,7 +32,7 @@ namespace HicsMVC.Controllers
             {
                 // 1 = Admin
                 // =  Zuweisung
-                // == Vergleich
+                // == Vergleich 
                 if (usercorrect == 1)
                 {
                     //Erstelle Session mit Username und Password                   
