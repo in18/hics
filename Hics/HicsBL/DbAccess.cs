@@ -643,13 +643,13 @@ namespace HicsBL
 
                 try
                 {
-                    cont.Configuration.LazyLoadingEnabled = false; // [bw] mit diesem Befehl sollten alle Listen ohne Cache geladen werden
+                   
 
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
                    
                     userId = cont.fn_check_user_table(usernameNew, pwhashNew).ToList();
 
-                    cont.Configuration.LazyLoadingEnabled = true; // Lazyloading wieder einschalten
+                    
                     
                     if (admin == true)
                         {
@@ -1011,31 +1011,34 @@ namespace HicsBL
                     //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId/AdminId
                     // anfordern. Wenn kein Eintrag vorhanden ist, ist der User
                     // mit den übergebenen Daten nicht berechtigt
+                    cont.Configuration.LazyLoadingEnabled = false; // [bw] mit diesem Befehl sollten alle Listen ohne Cache geladen werden
                     user = cont.fn_check_user_table(username, pwhash).ToList();
                     admin = cont.fn_check_admin_table(username, pwhash).ToList();
+                    cont.Configuration.LazyLoadingEnabled = true; // Lazyloading wieder einschalten
 
-                   
-                    if(user[0].Value >0)
-                    {
-                        userIs = 2;
-                    }
-
-                    if (admin[0].Value == 1)
+                    if (user[0].Value >0 && admin.Count() == 1)
                     {
                         userIs = 1;
-                        //user admin?  
+                        
+                    }
+                    else
+                    {
+                        if(user[0].Value > 0 && admin.Count() == 0)
+                        {
+                            userIs = 2;
+                        }
+                        else
+                        {
+                            //user nicht vorhanden
+                            userIs = 3;
+                        }
+                       
                     }
 
-                    //else
-                    //{
-                    //    //user nicht vorhanden
-                    //    userIs = 3;
-                    //}
-                 
                 }
                 catch (Exception e)
                  {
-                    //probleme bei überprüfung
+                    //probleme bei DBverbindung
                     userIs = 0;
                  }
             }

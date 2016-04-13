@@ -17,7 +17,7 @@ namespace HicsMVC.Controllers
             UserSession us = (UserSession)Session["UserSession"];
             UserAddModel uam = new UserAddModel();
             uam.Userlist = HicsBL.DbAccess.GetAllUser("Sepp", "123user!");
-            ViewBag.Adminstatus = us.name.ToLower();
+            ViewBag.Adminstatus = us.name; //.ToLower();
             return View(uam);
         }
         //user erzeugen
