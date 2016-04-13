@@ -643,9 +643,13 @@ namespace HicsBL
 
                 try
                 {
+                    cont.Configuration.LazyLoadingEnabled = false; // [bw] mit diesem Befehl sollten alle Listen ohne Cache geladen werden
+
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
                    
                     userId = cont.fn_check_user_table(usernameNew, pwhashNew).ToList();
+
+                    cont.Configuration.LazyLoadingEnabled = true; // Lazyloading wieder einschalten
                     
                     if (admin == true)
                         {
@@ -668,6 +672,7 @@ namespace HicsBL
                 }
                 
             }
+            
             return success;
         }
         #endregion
@@ -797,36 +802,6 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             
            
-            return success;
-        }
-        #endregion
-
-        #region PSP 9.2 editUserGroup (string username, int groupId)
-        /// <summary>
-        /// PSP 9.2
-        /// //editUserGroup
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="groupId"></param>
-        /// <returns></returns>
-        static bool editUserGroup(string username, int groupId)
-        {
-            bool success = false;
-            
-            
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                try
-                {
-                    //cont.sp_add_user_to_usergroup(   (username, groupId);
-                    success = true;
-                }
-                catch (Exception e)
-                {
-
-                    success = false;
-                }
-            }
             return success;
         }
         #endregion
@@ -1039,21 +1014,23 @@ namespace HicsBL
                     user = cont.fn_check_user_table(username, pwhash).ToList();
                     admin = cont.fn_check_admin_table(username, pwhash).ToList();
 
-                    //user vorhanden?
-                    if (user[0].Value > 0)
+                   
+                    if(user[0].Value >0)
                     {
                         userIs = 2;
-                        //ist user admin?
-                        if(admin[0].Value > 0)
-                        {
-                            userIs = 1;
-                        }
                     }
-                    else
+
+                    if (admin[0].Value == 1)
                     {
-                        //user nicht vorhanden
-                        userIs = 3;
+                        userIs = 1;
+                        //user admin?  
                     }
+
+                    //else
+                    //{
+                    //    //user nicht vorhanden
+                    //    userIs = 3;
+                    //}
                  
                 }
                 catch (Exception e)
@@ -1064,40 +1041,7 @@ namespace HicsBL
             }
             return userIs;
         }
-        #endregion
-
-        #region PSP 19.1 EditUserPassword(string username, string passwordNew, string passwordOld)
-        /// <summary>
-        /// PSP 19.1
-        /// Edit UserPassword
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="passwordOld"></param>
-        /// <param name="passwordNew"></param>
-        /// <returns>Bool ob erfolgreich</returns>
-        public static bool EditUserPassword(string username, string passwordOld,string passwordNew )
-        {
-            bool success = false;
-            //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
-            Byte[] pwhashOld = HelperClass.GetHash(passwordOld);
-            Byte[] pwhashNew = HelperClass.GetHash(passwordNew);
-            using(itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                try
-                {
-                    cont.sp_change_password(username, pwhashOld, pwhashNew);
-                     success = true;
-                }
-                catch (Exception e)
-                {
-
-                     success = false;
-                }
-               
-            }
-            return success;
-        }
-        #endregion
+        #endregion 
 
         #region PSP 18.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
         /// <summary>
@@ -1146,6 +1090,7 @@ namespace HicsBL
             }
         }
         #endregion
+
         #region PSP 18.2 GetLogFileComplete(string username, string password)
         /// <summary>
         /// PSP 18.2
@@ -1188,7 +1133,40 @@ namespace HicsBL
         }
         #endregion
 
-        #region 19.2 Change Password by Admin(string username, string password, int changeId, string newpassword)
+        #region PSP 19.1 EditUserPassword(string username, string passwordNew, string passwordOld)
+                /// <summary>
+                /// PSP 19.1
+                /// Edit UserPassword
+                /// </summary>
+                /// <param name="username"></param>
+                /// <param name="passwordOld"></param>
+                /// <param name="passwordNew"></param>
+                /// <returns>Bool ob erfolgreich</returns>
+                public static bool EditUserPassword(string username, string passwordOld,string passwordNew )
+                {
+                    bool success = false;
+                    //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
+                    Byte[] pwhashOld = HelperClass.GetHash(passwordOld);
+                    Byte[] pwhashNew = HelperClass.GetHash(passwordNew);
+                    using(itin18_aktEntities cont = new itin18_aktEntities())
+                    {
+                        try
+                        {
+                            cont.sp_change_password(username, pwhashOld, pwhashNew);
+                             success = true;
+                        }
+                        catch (Exception e)
+                        {
+
+                             success = false;
+                        }
+               
+                    }
+                    return success;
+                }
+                #endregion
+
+        #region PSP 19.2 Change Password by Admin(string username, string password, int changeId, string newpassword)
         /// <summary>
         /// 19.2 Change Password by Admin
         /// </summary>
@@ -1219,10 +1197,10 @@ namespace HicsBL
             }
             return success;
 
-        } 
+        }
         #endregion
 
-
+        #region Die in der DB eingetragenen Lampennamen als Liste
 
         /// <summary>
         /// Die in der DB eingetragenen Lampennamen als Liste
@@ -1245,13 +1223,15 @@ namespace HicsBL
                 catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
-                    tmp.Add(new fn_show_lamps_Result {address = "", name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamps_Result { address = "", name = "Keine Datenbankverbindung" });
                     tmp.Add(new fn_show_lamps_Result { address = "", name = "No database connection" });
                     return tmp;
                 }
             }
         }
+        #endregion
 
+        #region GetAllLampsStatus
         /// <summary>
         /// Eine Liste welche zurechtgeschnitten ist für den LampControlController
         /// Gibt folgendes zurück: address, brightness, groupname, Lamp_id, lampname, status
@@ -1274,12 +1254,15 @@ namespace HicsBL
                 catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Lampenname eingetragen
-                    tmp.Add( new fn_show_lamp_control_Result { groupname=" ", address=" ", lampname = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lamp_control_Result { groupname = " ", address = " ", lampname = "Keine Datenbankverbindung" });
                     tmp.Add(new fn_show_lamp_control_Result { groupname = " ", address = " ", lampname = "No database connection" });
                     return tmp;
                 }
             }
         }
+        #endregion
+
+        #region Die in der DB eingetragenen User als Liste
 
         /// <summary>
         /// Die in der DB eingetragenen User als Liste
@@ -1302,11 +1285,14 @@ namespace HicsBL
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Username eingetragen
                     tmp.Add(new fn_show_users_Result { group = " ", name = "Keine Datenbankverbindung" });
-                    tmp.Add(new fn_show_users_Result { group =" ", name = "No database connection" });
+                    tmp.Add(new fn_show_users_Result { group = " ", name = "No database connection" });
                     return tmp;
                 }
             }
         }
+        #endregion
+
+        #region Die in der DB eingetragenen Lampengruppe als Liste
 
         /// <summary>
         /// Die in der DB eingetragenen Lampengruppe als Liste
@@ -1334,6 +1320,9 @@ namespace HicsBL
                 }
             }
         }
+        #endregion
+
+        #region Special 4 Bastl
 
         /// <summary>
         /// Special 4 Bastl
@@ -1341,7 +1330,7 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static List<fn_show_lamp_control_Result>GetLampControl(string username, string password)
+        public static List<fn_show_lamp_control_Result> GetLampControl(string username, string password)
         {
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
@@ -1361,7 +1350,8 @@ namespace HicsBL
                     //tmp[1].groupname = "No database connection";
                     return tmp;
                 }
-            }
+            } 
+            #endregion
         }
 
     }
