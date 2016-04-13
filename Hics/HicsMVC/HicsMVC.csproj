@@ -151,6 +151,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminChangePasswordModel.cs" />
     <Compile Include="Models\GroupSetupModel.cs" />
     <Compile Include="Models\LampAssignmentModel.cs" />
     <Compile Include="Models\LampControl.cs" />

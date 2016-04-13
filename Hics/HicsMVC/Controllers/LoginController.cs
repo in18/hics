@@ -38,7 +38,7 @@ namespace HicsMVC.Controllers
                     //Erstelle Session mit Username und Password                   
                     UserSession us = new UserSession();
                     us.admin = true;                 
-                    us.name = lm.Username;
+                    us.name = lm.Username.ToLower();
                     us.pw = lm.Password;                    
 
                     //Sessionparameter werden in der allgemeinen Web.config konfiguriert.
@@ -53,7 +53,7 @@ namespace HicsMVC.Controllers
                 {
                     UserSession us = new UserSession();
                     us.admin = false;
-                    us.name = lm.Username;
+                    us.name = lm.Username.ToLower();
                     us.pw = lm.Password;
 
                     Session["UserSession"] = us;
@@ -61,11 +61,11 @@ namespace HicsMVC.Controllers
                     return RedirectToAction("Index", "User");
                 }
                 // 3 = nicht vorhanden
-                else
-                {
-                    ViewBag.errorMessage = "Username does not exist";
-                    return View();
-                }
+                //else
+                //{
+                //    ViewBag.errorMessage = "Username does not exist";
+                //    return View();
+                //}
 
             }
             ViewBag.errorMessage = "Login failed";
