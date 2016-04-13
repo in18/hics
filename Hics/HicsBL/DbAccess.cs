@@ -1009,24 +1009,23 @@ namespace HicsBL
                     user = cont.fn_check_user_table(username, pwhash).ToList();
                     admin = cont.fn_check_admin_table(username, pwhash).ToList();
 
-                    if (user[0].Value > 0 )
+                   
+                    if(user[0].Value >0)
                     {
+                        userIs = 2;
+                    }
 
-                        if (admin[0].Value == 1)
-                        {
-                            userIs = 1;
-                            //user admin?  
-                        }
-                        else
-                        {
-                            userIs = 2;
-                        }
-                    }
-                    else
+                    if (admin[0].Value == 1)
                     {
-                        //user nicht vorhanden
-                        userIs = 3;
+                        userIs = 1;
+                        //user admin?  
                     }
+
+                    //else
+                    //{
+                    //    //user nicht vorhanden
+                    //    userIs = 3;
+                    //}
                  
                 }
                 catch (Exception e)

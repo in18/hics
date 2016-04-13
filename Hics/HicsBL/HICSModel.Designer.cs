@@ -1,7 +1,7 @@
-﻿// Die T4-Codegenerierung ist für Modell 'C:\Users\Emre\Source\Repos\hics\Hics\HicsBL\HICSModel.edmx' aktiviert. 
-// Um die Generierung von Legacycode zu aktivieren, ändern Sie den Wert der Designer-Eigenschaft 'Code Generation Strategy'
-// in 'Legacy ObjectContext'. Diese Eigenschaft wird im Eigenschaftenfenster angezeigt, wenn das Modell
-// im Designer geöffnet ist.
+﻿// T4 code generation is enabled for model 'C:\Users\docmoc\Source\Repos\hics\Hics\HicsBL\HICSModel.edmx'. 
+// To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
+// property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
+// is open in the designer.
 
 // If no context and entity classes have been generated, it may be because you created an empty model but
 // have not yet chosen which version of Entity Framework to use. To generate a context class and entity
