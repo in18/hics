@@ -998,7 +998,7 @@ namespace HicsBL
         public static int userLogin(string username, string password)
         {
             int userIs = 0;
-            //userIs Codebelegung: 0 = Fehler, 1= Admin, 2= User, 3= nicht vorhanden
+            //userIs Codebelegung: 0 = Fehler, 1= Admin, 2= User
 
             List<int?> user = new List<int?>();
             List<int?> admin = new List<int?>();
@@ -1011,12 +1011,12 @@ namespace HicsBL
                     //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId/AdminId
                     // anfordern. Wenn kein Eintrag vorhanden ist, ist der User
                     // mit den übergebenen Daten nicht berechtigt
-                    cont.Configuration.LazyLoadingEnabled = false; // [bw] mit diesem Befehl sollten alle Listen ohne Cache geladen werden
+                    
                     user = cont.fn_check_user_table(username, pwhash).ToList();
                     admin = cont.fn_check_admin_table(username, pwhash).ToList();
-                    cont.Configuration.LazyLoadingEnabled = true; // Lazyloading wieder einschalten
+                   
 
-                    if (user[0].Value >0 && admin.Count() == 1)
+                    if (user[0].Value > 0  && admin.Count() == 1)
                     {
                         userIs = 1;
                         
@@ -1026,15 +1026,8 @@ namespace HicsBL
                         if(user[0].Value > 0 && admin.Count() == 0)
                         {
                             userIs = 2;
-                        }
-                        else
-                        {
-                            //user nicht vorhanden
-                            userIs = 3;
-                        }
-                       
+                        }                     
                     }
-
                 }
                 catch (Exception e)
                  {
