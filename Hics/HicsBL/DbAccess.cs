@@ -43,9 +43,9 @@ namespace HicsBL
         /// PSP 1.1
         /// Lampe in der DB hinzufügen, Hue-Bridge erkennt eine neue Lampe automatisch
         /// </summary>
-        /// <param name="username">username</param>
-        /// <param name="password">password</param>
-        /// <param name="lampAdress">lamp adress</param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="lampAdress">lampAdress</param>
         /// <param name="lampName">lamp name</param>
         public static bool addLamp(string username, string password, string lampAdress, string lampName)
         {
