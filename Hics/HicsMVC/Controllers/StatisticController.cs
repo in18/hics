@@ -22,7 +22,7 @@ namespace HicsMVC.Controllers
             {
                 //Temporäre Usersession
                 UserSession us = new UserSession();
-                us.name = "Lisi";
+                us.name = "Karl";
 
                 for (int i = 0; i < userStatisticList.Count; i++)
                 {

@@ -66,6 +66,10 @@
                     <td class="listframepadding">@Model.Userlist[i].name</td>
                     <td class="listframepadding">@Model.Userlist[i].group</td>
                     <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = Model.Userlist[i].id }, new { @class = "deletedesign" })
+                    @if (ViewBag.adminstatus == Model.Userlist[i].name.ToLower() || Model.Userlist[i].group.ToLower() == "user")
+                    {
+                    <td> @Html.ActionLink("Change Password", "ChangePassword", "Admin", new { @id = Model.Userlist[i].id }, new { @class = "deletedesign" })</td>
+                    }
                 </tr>
             }
         </table>

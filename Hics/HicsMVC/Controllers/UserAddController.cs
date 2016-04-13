@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using HicsBL;
 using HicsMVC.Models;
+using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
@@ -13,8 +14,10 @@ namespace HicsMVC.Controllers
         // GET: UserAdd
         public ActionResult Index()
         {
+            UserSession us = (UserSession)Session["UserSession"];
             UserAddModel uam = new UserAddModel();
             uam.Userlist = HicsBL.DbAccess.GetAllUser("Sepp", "123user!");
+            ViewBag.Adminstatus = us.name; //.ToLower();
             return View(uam);
         }
         //user erzeugen
@@ -33,7 +36,7 @@ namespace HicsMVC.Controllers
                     HicsBL.DbAccess.addUser("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword,uam.IsAdmin);
                     return RedirectToAction("Index");
                 }
-                HicsBL.DbAccess.addUser("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword,uam.IsAdmin);
+                    HicsBL.DbAccess.addUser("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword,uam.IsAdmin);
                     //    Weiteleitung zum Login
                     return RedirectToAction("Index");
                 }
