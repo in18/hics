@@ -61,11 +61,11 @@ namespace HicsMVC.Controllers
                     return RedirectToAction("Index", "User");
                 }
                 // 3 = nicht vorhanden
-                else
-                {
-                    ViewBag.errorMessage = "Username does not exist";
-                    return View();
-                }
+                //else
+                //{
+                //    ViewBag.errorMessage = "Username does not exist";
+                //    return View();
+                //}
 
             }
             ViewBag.errorMessage = "Login failed";
