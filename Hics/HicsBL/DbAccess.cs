@@ -43,10 +43,10 @@ namespace HicsBL
         /// PSP 1.1
         /// Lampe in der DB hinzufügen, Hue-Bridge erkennt eine neue Lampe automatisch
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampAdress"></param>
-        /// <param name="lampName"></param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="lampAdress">lampAdress</param>
+        /// <param name="lampName">lamp name</param>
         public static bool addLamp(string username, string password, string lampAdress, string lampName)
         {
             bool success = false;
@@ -78,11 +78,11 @@ namespace HicsBL
         /// PSP 2.1
         /// Editieren eines Lampennamens anhand des alten Lampennamens
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampNameOld"></param>
-        /// <param name="lampNameNew"></param>
-        /// <returns></returns>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <param name="lampNameOld">old lamp name</param>
+        /// <param name="lampNameNew">new lamp name</param>
+        /// <returns>success</returns>
         internal static bool editLampName(string username, string password, string lampNameOld, string lampNameNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -180,11 +180,11 @@ namespace HicsBL
         /// Is aber wurscht, da die Hue-Bridge entfernte Lampen automatisch erkennt
         /// Es geht nur um den Db Eintrag
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampId"></param>
-        /// <param name="lampNameNew"></param>
-        /// <returns></returns>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <param name="lampId">lampId</param>
+        /// <param name="lampNameNew">new lamp name</param>
+        /// <returns>success</returns>
         static bool editLampName(string username, string password, int lampId, string lampNameNew)
         {
             bool success = false;
@@ -230,10 +230,10 @@ namespace HicsBL
         /// Is aber wurscht, da die Hue-Bridge entfernte Lampen automatisch erkennt
         /// Es geht nur um den Db Eintrag
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampId">Id der Lampe aus der DB</param>
-        /// <returns></returns>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <param name="lampId">lampId</param>
+        /// <returns>success</returns>
         public static bool deleteLamp(string username, string password, int lampId)
         {
             bool success = false;
@@ -268,9 +268,9 @@ namespace HicsBL
         /// PSP 3.2
         /// Löschen einer Lampe anhand der Lampenadresse
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampAdress"></param>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <param name="lampAdress">lampAdress</param>
         /// <returns></returns>
         public static bool deleteLamp(string username, string password, string lampAdress)
         {
@@ -998,7 +998,7 @@ namespace HicsBL
         public static int userLogin(string username, string password)
         {
             int userIs = 0;
-            //userIs Codebelegung: 0 = Fehler, 1= Admin, 2= User, 3= nicht vorhanden
+            //userIs Codebelegung: 0 = Fehler, 1= Admin, 2= User
 
             List<int?> user = new List<int?>();
             List<int?> admin = new List<int?>();
@@ -1011,12 +1011,12 @@ namespace HicsBL
                     //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId/AdminId
                     // anfordern. Wenn kein Eintrag vorhanden ist, ist der User
                     // mit den übergebenen Daten nicht berechtigt
-                    cont.Configuration.LazyLoadingEnabled = false; // [bw] mit diesem Befehl sollten alle Listen ohne Cache geladen werden
+                    
                     user = cont.fn_check_user_table(username, pwhash).ToList();
                     admin = cont.fn_check_admin_table(username, pwhash).ToList();
-                    cont.Configuration.LazyLoadingEnabled = true; // Lazyloading wieder einschalten
+                   
 
-                    if (user[0].Value >0 && admin.Count() == 1)
+                    if (user[0].Value > 0  && admin.Count() == 1)
                     {
                         userIs = 1;
                         
@@ -1026,15 +1026,8 @@ namespace HicsBL
                         if(user[0].Value > 0 && admin.Count() == 0)
                         {
                             userIs = 2;
-                        }
-                        else
-                        {
-                            //user nicht vorhanden
-                            userIs = 3;
-                        }
-                       
+                        }                     
                     }
-
                 }
                 catch (Exception e)
                  {
