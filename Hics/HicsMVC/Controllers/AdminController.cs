@@ -43,8 +43,11 @@ namespace HicsMVC.Controllers
         {            
             UserSession us = (UserSession)Session["UserSession"];
 
+
+            //Überprüfung des eingegebenen Passworts auf die Übereinstimmung
             if (acpm.NewPassword == acpm.RetypeNewPassword)
             {
+                //Unterscheidung zwischen User (Recent-Password == Null [weil bei der User-PW-Zurücksetzung keine Eingabe des aktuellen Passwortes vorhanden ist]) und dem eigenen Admin-Konto (wenn Recent-Password mit Session-Password übereinstimmt)
                 if (acpm.RecentPassword == null)
                 {
                     DbAccess.ChangePasswordByAdmin(us.name, us.pw, acpm.id, acpm.NewPassword);
@@ -56,7 +59,7 @@ namespace HicsMVC.Controllers
             }
             else
             {
-                return RedirectToAction("index", "useradd");
+                return RedirectToAction("changepassword", "admin");
             }
 
             return RedirectToAction("index", "useradd");

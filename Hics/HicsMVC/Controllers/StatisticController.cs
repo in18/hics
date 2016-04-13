@@ -10,19 +10,18 @@ namespace HicsMVC.Controllers
 {
     public class StatisticController : Controller
     {
+
+
         public ActionResult Index()
         {
-            List<fn_show_lamp_control_history_Result> userStatisticList = HicsBL.DbAccess.GetLogFileComplete("Sepp", "123user!");
+            UserSession us = (UserSession)Session["UserSession"];
+
+            List<fn_show_lamp_control_history_Result> userStatisticList = HicsBL.DbAccess.GetLogFileComplete(us.name, us.pw);
 
             List<fn_show_lamp_control_history_Result> filteredStatisticList = new List<fn_show_lamp_control_history_Result>();
 
-            //UserSession us = (UserSession)Session["UserSession"];
-
             try
             {
-                //Temporäre Usersession
-                UserSession us = new UserSession();
-                us.name = "Karl";
 
                 for (int i = 0; i < userStatisticList.Count; i++)
                 {
