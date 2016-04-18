@@ -13,6 +13,10 @@ namespace HicsMVC.Controllers
     public class GroupSetupController : Controller
     {
         // GET: GroupSetup
+        /// <summary>
+        /// Startpunkt für den GroupSetup-View - UserSession-Abfrage, Lampenliste von der BL abfragen, Model initialisieren und an View senden.
+        /// </summary>
+        /// <returns>GroupSetupModel</returns>
         public ActionResult Index()
         {
             //ViewBag.GroupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
@@ -25,6 +29,11 @@ namespace HicsMVC.Controllers
             return View(gsm);
         }
 
+        /// <summary>
+        /// Vom erhaltenen Model den Gruppennamen an die BL zur weiteren Bearbeitung weiterschicken. 
+        /// </summary>
+        /// <param name="gsm"></param>
+        /// <returns>rückkehr zum Index</returns>
         [HttpPost]
         public ActionResult AddGroup(GroupSetupModel gsm)
         {
@@ -34,6 +43,11 @@ namespace HicsMVC.Controllers
             return RedirectToAction("index");
         }
 
+        /// <summary>
+        /// Vom Anchor-Verweis erhaltene ID zur Löschung eines Gruppen-Datensatzes an die BL weiterleiten, um eine vorhandene Gruppe zu löschen.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Rückkehr zum Index</returns>
         public ActionResult DeleteGroup(int id)
         {
             UserSession us = (UserSession)Session["UserSession"];
