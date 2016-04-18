@@ -43,10 +43,10 @@ namespace HicsBL
         /// PSP 1.1
         /// Lampe in der DB hinzufügen, Hue-Bridge erkennt eine neue Lampe automatisch
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampAdress"></param>
-        /// <param name="lampName"></param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="lampAdress">lampAdress</param>
+        /// <param name="lampName">lamp name</param>
         public static bool addLamp(string username, string password, string lampAdress, string lampName)
         {
             bool success = false;
@@ -78,11 +78,11 @@ namespace HicsBL
         /// PSP 2.1
         /// Editieren eines Lampennamens anhand des alten Lampennamens
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampNameOld"></param>
-        /// <param name="lampNameNew"></param>
-        /// <returns></returns>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <param name="lampNameOld">old lamp name</param>
+        /// <param name="lampNameNew">new lamp name</param>
+        /// <returns>success</returns>
         internal static bool editLampName(string username, string password, string lampNameOld, string lampNameNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -180,11 +180,11 @@ namespace HicsBL
         /// Is aber wurscht, da die Hue-Bridge entfernte Lampen automatisch erkennt
         /// Es geht nur um den Db Eintrag
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampId"></param>
-        /// <param name="lampNameNew"></param>
-        /// <returns></returns>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <param name="lampId">lampId</param>
+        /// <param name="lampNameNew">new lamp name</param>
+        /// <returns>success</returns>
         static bool editLampName(string username, string password, int lampId, string lampNameNew)
         {
             bool success = false;
@@ -230,10 +230,10 @@ namespace HicsBL
         /// Is aber wurscht, da die Hue-Bridge entfernte Lampen automatisch erkennt
         /// Es geht nur um den Db Eintrag
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampId">Id der Lampe aus der DB</param>
-        /// <returns></returns>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <param name="lampId">lampId</param>
+        /// <returns>success</returns>
         public static bool deleteLamp(string username, string password, int lampId)
         {
             bool success = false;
@@ -268,9 +268,9 @@ namespace HicsBL
         /// PSP 3.2
         /// Löschen einer Lampe anhand der Lampenadresse
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampAdress"></param>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <param name="lampAdress">lampAdress</param>
         /// <returns></returns>
         public static bool deleteLamp(string username, string password, string lampAdress)
         {
@@ -885,6 +885,32 @@ namespace HicsBL
         }
         #endregion
 
+        public static bool swichtGroup(string username, string password, int groupId, bool onOff)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lamp_control_Result> dbL = cont.fn_show_lamp_control(username, pwhash).ToList();
+                List<fn_show_lampgroups_Result> dbGr = cont.fn_show_lampgroups(username, pwhash).ToList();
+                int dbGroupId = 0;
+
+
+                foreach (var item in dbL)
+                {
+                    if (item.groupname == "jj")
+                    {
+
+                    }
+                }
+                
+            }
+            return success;
+
+            }
+
         #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness,bool lampOnOff)
         /// <summary>
         /// PSP 15.1
@@ -920,7 +946,7 @@ namespace HicsBL
                             hueId = HueAccess.GetLampId(dbLampName);
                             HelperClass.SetLampBrightness(hueId, brightness);
 
-                            if (lampOnOff == true)
+                                if (lampOnOff == true)
                             {
                                 cont.sp_lamp_on(username, pwhash, lampId);
                             }
@@ -929,10 +955,10 @@ namespace HicsBL
                                 cont.sp_lamp_off(username, pwhash, lampId);
                             }
 
-                            HelperClass.SetLampState(hueId, lampOnOff);
+                           HelperClass.SetLampState(hueId, lampOnOff);
                         }
-                        
-                    }                 
+                   
+                    }
                     success = true;
                 }
                 catch (Exception e)

@@ -16,14 +16,16 @@ namespace HicsMVC.Controllers
         {
             UserSession us = (UserSession)Session["UserSession"];
             UserAddModel uam = new UserAddModel();
-            uam.Userlist = HicsBL.DbAccess.GetAllUser("Sepp", "123user!");
-            ViewBag.Adminstatus = us.name; //.ToLower();
+            uam.Userlist = HicsBL.DbAccess.GetAllUser(us.name, us.pw);
+            ViewBag.Adminname = us.name.ToLower();
             return View(uam);
         }
         //user erzeugen
         [HttpPost]
         public ActionResult AddAdditionalUser(UserAddModel uam)
         {
+            UserSession us = (UserSession)Session["UserSession"];
+
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Index");
@@ -33,10 +35,10 @@ namespace HicsMVC.Controllers
                 //Überprüfung wenn admin wird bool true/false übergeben
                 if (uam.IsAdmin)
                 {
-                    HicsBL.DbAccess.addUser("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword,uam.IsAdmin);
+                    HicsBL.DbAccess.addUser(us.name, us.pw, uam.NewUserName, uam.NewUserPassword,uam.IsAdmin);
                     return RedirectToAction("Index");
                 }
-                    HicsBL.DbAccess.addUser("Sepp", "123user!", uam.NewUserName, uam.NewUserPassword,uam.IsAdmin);
+                    HicsBL.DbAccess.addUser(us.name, us.pw, uam.NewUserName, uam.NewUserPassword,uam.IsAdmin);
                     //    Weiteleitung zum Login
                     return RedirectToAction("Index");
                 }
@@ -51,7 +53,9 @@ namespace HicsMVC.Controllers
         [HttpGet]
         public ActionResult DeleteUser(int id)
         {
-            HicsBL.DbAccess.removeUser("Sepp", "123user!", id);
+            UserSession us = (UserSession)Session["UserSession"];
+
+            HicsBL.DbAccess.removeUser(us.name, us.pw, id);
             return RedirectToAction("Index");
         }
     }

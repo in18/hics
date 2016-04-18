@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
@@ -14,9 +15,9 @@ namespace HicsMVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            UserSession us = (UserSession)Session["UserSession"];
             List<fn_show_lamp_control_Result> lamps;
-            lamps = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
-             
+            lamps = HicsBL.DbAccess.GetAllLampsStatus(us.name, us.pw);
 
             //UserLampControl ulc = new UserLampControl();
             //ulc.lamplist = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
@@ -29,8 +30,9 @@ namespace HicsMVC.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
+            UserSession us = (UserSession)Session["UserSession"];
             List<fn_show_lamp_control_Result> lamps;
-            lamps = HicsBL.DbAccess.GetAllLampsStatus("Sepp", "123user!");
+            lamps = HicsBL.DbAccess.GetAllLampsStatus(us.name, us.pw);
 
             HicsBL.fn_show_lamp_control_Result erg = lamps.Where(x => x.lamp_id == id).FirstOrDefault();
 
@@ -40,7 +42,8 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult Edit(HicsBL.fn_show_lamp_control_Result fn)
         {
-            HicsBL.DbAccess.dimLamp("Sepp", "123user!", (int)fn.lamp_id, (byte)fn.brightness, (bool)fn.status);
+            UserSession us = (UserSession)Session["UserSession"];
+            HicsBL.DbAccess.dimLamp(us.name,us.pw, (int)fn.lamp_id, (byte)fn.brightness, (bool)fn.status);
 
             return RedirectToAction("Index");
         }
