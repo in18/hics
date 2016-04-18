@@ -126,6 +126,34 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="fn_show_lampgroopallocate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Lampen_id" Type="int" />
+                <Property Name="Lampen_name" Type="nvarchar" MaxLength="50" />
+                <Property Name="Gruppen_id" Type="int" />
+                <Property Name="Gruppen_name" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_show_lampgroup_allocate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="lampen_id" Type="int" />
+                <Property Name="lampen_name" Type="nvarchar" MaxLength="50" />
+                <Property Name="gruppen_id" Type="int" />
+                <Property Name="gruppen_name" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="fn_show_lampgroup_status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
@@ -269,6 +297,12 @@
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
           <Parameter Name="del_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_delete_user_from_usergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="user_id" Type="int" Mode="In" />
+          <Parameter Name="usergroup_id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_delete_usergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
@@ -435,6 +469,12 @@
           <FunctionImport Name="fn_show_lamp_control_history" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lamp_control_history_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_delete_user_from_usergroup">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+            <Parameter Name="user_id" Mode="In" Type="Int32" />
+            <Parameter Name="usergroup_id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="fn_show_deleted_lamps_Result">
@@ -650,6 +690,37 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="brightness" ColumnName="brightness" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fn_show_lampgroopallocate" FunctionName="itin18_aktModel.Store.fn_show_lampgroopallocate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lampgroopallocate_Result">
+                <ScalarProperty Name="Lampen_id" ColumnName="Lampen_id" />
+                <ScalarProperty Name="Lampen_name" ColumnName="Lampen_name" />
+                <ScalarProperty Name="Gruppen_id" ColumnName="Gruppen_id" />
+                <ScalarProperty Name="Gruppen_name" ColumnName="Gruppen_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_delete_user_from_usergroup" FunctionName="itin18_aktModel.Store.sp_delete_user_from_usergroup" />
+          <FunctionImportMapping FunctionImportName="fn_show_lampgroopallocate" FunctionName="itin18_aktModel.Store.fn_show_lampgroopallocate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lampgroopallocate_Result">
+                <ScalarProperty Name="Lampen_id" ColumnName="Lampen_id" />
+                <ScalarProperty Name="Lampen_name" ColumnName="Lampen_name" />
+                <ScalarProperty Name="Gruppen_id" ColumnName="Gruppen_id" />
+                <ScalarProperty Name="Gruppen_name" ColumnName="Gruppen_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fn_show_lampgroup_allocate" FunctionName="itin18_aktModel.Store.fn_show_lampgroup_allocate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lampgroup_allocate_Result">
+                <ScalarProperty Name="lampen_id" ColumnName="lampen_id" />
+                <ScalarProperty Name="lampen_name" ColumnName="lampen_name" />
+                <ScalarProperty Name="gruppen_id" ColumnName="gruppen_id" />
+                <ScalarProperty Name="gruppen_name" ColumnName="gruppen_name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
