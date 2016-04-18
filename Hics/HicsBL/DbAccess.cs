@@ -1392,8 +1392,10 @@ namespace HicsBL
             #endregion
         }
 
+        #region User aus der User-Gruppe löschen
+
         /// <summary>
-        /// Delete User from Usergroup
+        /// User aus der User-Gruppe löschen
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
@@ -1429,7 +1431,9 @@ namespace HicsBL
             }
             return success;
         }
-        
+        #endregion
+
     }
 }
+
  
