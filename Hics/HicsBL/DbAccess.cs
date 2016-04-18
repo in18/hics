@@ -365,6 +365,7 @@ namespace HicsBL
                         try
                         {
                             //Hinzufügen einer Lampe zu einer Lampengruppe über DB-Funktion
+                           
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
