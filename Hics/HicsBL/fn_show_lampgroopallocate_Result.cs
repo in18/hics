@@ -11,13 +11,11 @@ namespace HicsBL
 {
     using System;
     
-    public partial class fn_show_lamp_control_Result
+    public partial class fn_show_lampgroopallocate_Result
     {
-        public Nullable<int> lamp_id { get; set; }
-        public string groupname { get; set; }
-        public string lampname { get; set; }
-        public string address { get; set; }
-        public Nullable<bool> status { get; set; }
-        public Nullable<byte> brightness { get; set; }
+        public Nullable<int> Lampen_id { get; set; }
+        public string Lampen_name { get; set; }
+        public Nullable<int> Gruppen_id { get; set; }
+        public string Gruppen_name { get; set; }
     }
 }

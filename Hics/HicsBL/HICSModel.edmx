@@ -126,6 +126,20 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="fn_show_lampgroopallocate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Lampen_id" Type="int" />
+                <Property Name="Lampen_name" Type="nvarchar" MaxLength="50" />
+                <Property Name="Gruppen_id" Type="int" />
+                <Property Name="Gruppen_name" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="fn_show_lampgroup_status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
@@ -436,6 +450,10 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
           </FunctionImport>
+          <FunctionImport Name="fn_show_lampgroopallocate" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lampgroopallocate_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="fn_show_deleted_lamps_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
@@ -507,6 +525,12 @@
         <ComplexType Name="fn_show_usergroups_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
           <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="fn_show_lampgroopallocate_Result">
+          <Property Type="Int32" Name="Lampen_id" Nullable="true" />
+          <Property Type="String" Name="Lampen_name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Gruppen_id" Nullable="true" />
+          <Property Type="String" Name="Gruppen_name" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -650,6 +674,16 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="brightness" ColumnName="brightness" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fn_show_lampgroopallocate" FunctionName="itin18_aktModel.Store.fn_show_lampgroopallocate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lampgroopallocate_Result">
+                <ScalarProperty Name="Lampen_id" ColumnName="Lampen_id" />
+                <ScalarProperty Name="Lampen_name" ColumnName="Lampen_name" />
+                <ScalarProperty Name="Gruppen_id" ColumnName="Gruppen_id" />
+                <ScalarProperty Name="Gruppen_name" ColumnName="Gruppen_name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
