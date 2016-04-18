@@ -1392,6 +1392,44 @@ namespace HicsBL
             #endregion
         }
 
+        /// <summary>
+        /// Delete User from Usergroup
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="userId"></param>
+        /// <param name="groupId"></param>
+        /// <returns>success</returns>
+        public static bool deleteUserFromUsergroup(string username, string password, int userId, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
+                
+                foreach (var item in sur)
+                {
+                    //Überprüfung der User Id
+                    if (item.id == userId)
+                    {
+                        try
+                        {
+                            //Löschen des Users aus der UserGruppe
+                            cont.sp_delete_user_from_usergroup(username, pwhash, item.id, userId);
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            success = false;
+                        }
+                    }
+                }
+            }
+            return success;
+        }
+        
     }
 }
  
