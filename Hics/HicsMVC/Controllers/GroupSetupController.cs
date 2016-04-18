@@ -14,7 +14,7 @@ namespace HicsMVC.Controllers
     {
         // GET: GroupSetup
         /// <summary>
-        /// Startpunkt für den GroupSetup-View - UserSession-Abfrage, Lampenliste von der BL abfragen, Model initialisieren und an View senden.
+        /// Startpunkt für den GroupSetup-View, UserSession-Abfrage, Gruppenliste von der BL abfragen, Model initialisieren und an View senden.
         /// </summary>
         /// <returns>GroupSetupModel</returns>
         public ActionResult Index()
@@ -33,7 +33,7 @@ namespace HicsMVC.Controllers
         /// Vom erhaltenen Model den Gruppennamen an die BL zur weiteren Bearbeitung weiterschicken. 
         /// </summary>
         /// <param name="gsm"></param>
-        /// <returns>rückkehr zum Index</returns>
+        /// <returns>Rückkehr zum Index</returns>
         [HttpPost]
         public ActionResult AddGroup(GroupSetupModel gsm)
         {
