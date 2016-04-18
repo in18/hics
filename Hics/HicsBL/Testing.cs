@@ -87,7 +87,7 @@ namespace HicsBL
             //    Console.WriteLine(item.name);
             //}
             //DbAccess.addLampToGroup("admin","123user!", 16, 1);
-
+            //............................................................
             //using (itin18_aktEntities cont = new itin18_aktEntities())
             //{
             //    List<fn_show_users_Result> l = new List<fn_show_users_Result>();
@@ -97,7 +97,7 @@ namespace HicsBL
             //        Console.WriteLine(item.name);
             //    }
             //}
-
+            //............................................................
             //using (itin18_aktEntities cont = new itin18_aktEntities())
             //{
             //    List<fn_show_lampgroups_Result> lampgroups = DbAccess.GetAllLampGroups("admin", "123user!");
