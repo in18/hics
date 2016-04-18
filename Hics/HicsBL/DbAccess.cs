@@ -356,8 +356,9 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                List<fn_show_lampgroups_Result> lgr = cont.fn_show_lampgroups(username, pwhash).ToList();
                 //Durchlauf der Lampengruppen mit Hilfe der DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
+                foreach (var item in lgr)
                 {
                     //Überprüfung der GruppenId
                     if (item.id == groupId)
@@ -365,6 +366,7 @@ namespace HicsBL
                         try
                         {
                             //Hinzufügen einer Lampe zu einer Lampengruppe über DB-Funktion
+                           
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
@@ -396,8 +398,9 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                List<fn_show_lampgroups_Result> lgr = cont.fn_show_lampgroups(username, pwhash).ToList();
                 //Durchlauf der Lampengruppen mit Hilfe von DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
+                foreach (var item in lgr)
                 {
                     //Überprüfung des Gruppennamens
                     if(item.roomgroupname == groupName)
@@ -464,47 +467,7 @@ namespace HicsBL
     
         #endregion
 
-        #region PSP 7.1 removeLampGroup(string username, string password, string groupName)
-        /// <summary>
-        /// PSP 7.1
-        /// Lampengruppe entfernen mittels Gruppennamen
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="groupName"></param>
-        /// <returns></returns>
-        public static bool removeLampGroup(string username, string password, string groupName)
-        {
-            bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            Byte[] pwhash = HelperClass.GetHash(password);
-
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                //Durchlauf der Lampengruppen mittels DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username,pwhash))
-                {
-                    //Überprüfung des Gruppennamens
-                    if(item.roomgroupname == groupName)
-                    {
-                        try
-                        {
-                            //Löschen der Raumgruppe
-                            cont.sp_delete_roomgroup(username, pwhash, item.id);
-                            success = true;
-                        }
-                        catch (Exception e)
-                        {
-                            success = false;                          
-                        }
-                    }
-                }
-
-            }
-            return success;
-        }
-
-        #endregion
+        
 
         #region PSP 6.3 removeLampFromGroup(string username, string password, string groupName, int lampId)
         /// <summary>
@@ -523,9 +486,8 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                List<fn_show_lampgroups_Result> slg = cont.fn_show_lampgroups(username, pwhash).ToList();
                 //Durchsuchen mittels DB-Funktion
-                foreach (var item in slg)
+                foreach (var item in cont.fn_show_lampgroups(username,pwhash))
                 {
                     //Überprüfung des Gruppennamens
                     if(item.roomgroupname == groupName)
@@ -539,13 +501,56 @@ namespace HicsBL
                         catch (Exception e)
                         {
 
-                            success = false;
+                            success = false;                          
                         }
                     }
                 }
             }
             return success;
         }
+        #endregion
+
+        #region PSP 7.1 removeLampGroup(string username, string password, string groupName)
+        /// <summary>
+        /// PSP 7.1
+        /// Lampengruppe entfernen mittels Gruppennamen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
+        public static bool removeLampGroup(string username, string password, string groupName)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lampgroups_Result> slg = cont.fn_show_lampgroups(username, pwhash).ToList();
+                //Durchsuchen mittels DB-Funktion
+                foreach (var item in slg)
+                {
+                    //Überprüfung des Gruppennamens
+                    if(item.roomgroupname == groupName)
+                    {
+                        try
+                        {
+                            //Löschen der Raumgruppe
+                            cont.sp_delete_roomgroup(username, pwhash, item.id);
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            success = false;
+                        }
+                    }
+                }
+
+            }
+            return success;
+        }
+
         #endregion
 
         #region PSP 7.3 removeLampGroup(string username, string password, int groupId)
@@ -678,7 +683,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region 8.2 User einer Usergruppe hinzufügen(string username, string password, int userToAdd, int usergroup)
+        #region PSP 8.2 User einer Usergruppe hinzufügen(string username, string password, int userToAdd, int usergroup)
         /// <summary>
         /// PSP 8.2
         /// User einer Usergruppe hinzufügen
@@ -828,7 +833,7 @@ namespace HicsBL
 
         #region PSP 13.1 switchLamp(string username, string password, bool lampOnOff, int lampId)
         /// <summary>
-        /// PSP 13.1
+        /// PSP 13.1 switchLamp
         /// Lampe Ein/Aus
         /// </summary>
         /// <param name="username"></param>
@@ -932,8 +937,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 string dbLampName = "";
-                //bool onOff = true;
-                int hueId = 1;
+                int hueId = -1;
                 List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
 
                 try
@@ -943,20 +947,20 @@ namespace HicsBL
                         if (lampId == item.id)
                         {
                             dbLampName = item.name;
-                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
-                       
 
+                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+                            hueId = HueAccess.GetLampId(dbLampName);
+                            HelperClass.SetLampBrightness(hueId, brightness);
 
                                 if (lampOnOff == true)
                             {
                                 cont.sp_lamp_on(username, pwhash, lampId);
-                                //onOff = true;
                             }
                             else
                             {
                                 cont.sp_lamp_off(username, pwhash, lampId);
-                                //onOff = false;
                             }
+
                            HelperClass.SetLampState(hueId, lampOnOff);
                         }
                    
@@ -1171,12 +1175,20 @@ namespace HicsBL
                     //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
                     Byte[] pwhashOld = HelperClass.GetHash(passwordOld);
                     Byte[] pwhashNew = HelperClass.GetHash(passwordNew);
+                    int result = 0;
                     using(itin18_aktEntities cont = new itin18_aktEntities())
                     {
                         try
                         {
-                            cont.sp_change_password(username, pwhashOld, pwhashNew);
+                            result = cont.sp_change_password(username, pwhashOld, pwhashNew);
+                            if (result == 1)
+                            {
                              success = true;
+                        }
+                            else
+                            {
+                                success = false;
+                            }
                         }
                         catch (Exception e)
                         {

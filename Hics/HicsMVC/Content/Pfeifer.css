@@ -114,6 +114,19 @@
     left: 7%;
 }
 
+
+.backpfeifer {
+    background-image: url('../../Resources/Back.png');
+    height:28px;
+    width:108px;
+    background-repeat:no-repeat;
+    background-position:center;
+    border-radius:7px;
+    border: solid 2px #054588;
+    float: left;
+    left: 7%;
+}
+
 .logoutpfeifer {
     background-image: url('../../Resources/Logout.png'); 
     height:28px;
