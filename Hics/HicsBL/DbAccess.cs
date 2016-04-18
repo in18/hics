@@ -643,6 +643,8 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
+                    cont.SaveChanges();
+
                     if (admin == true)
                         {
                             if (addUserToUsergroup(username, password, usernameNew, 1)==true)
@@ -910,6 +912,32 @@ namespace HicsBL
             return success;
         }
         #endregion
+
+        public static bool swichtGroup(string username, string password, int groupId, bool onOff)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lamp_control_Result> dbL = cont.fn_show_lamp_control(username, pwhash).ToList();
+                List<fn_show_lampgroups_Result> dbGr = cont.fn_show_lampgroups(username, pwhash).ToList();
+                int dbGroupId = 0;
+
+
+                foreach (var item in dbL)
+                {
+                    if (item.groupname == "jj")
+                    {
+
+                    }
+                }
+                
+            }
+            return success;
+
+            }
 
         #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness,bool lampOnOff)
         /// <summary>
