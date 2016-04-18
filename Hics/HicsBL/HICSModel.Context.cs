@@ -546,20 +546,6 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lamp_control_history_Result>("[itin18_aktEntities].[fn_show_lamp_control_history](@username, @password)", usernameParameter, passwordParameter);
         }
     
-        [DbFunction("itin18_aktEntities", "fn_show_lampgroopallocate")]
-        public virtual IQueryable<fn_show_lampgroopallocate_Result> fn_show_lampgroopallocate(string username, byte[] password)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroopallocate_Result>("[itin18_aktEntities].[fn_show_lampgroopallocate](@username, @password)", usernameParameter, passwordParameter);
-        }
-    
         public virtual int sp_delete_user_from_usergroup(string username, byte[] password, Nullable<int> user_id, Nullable<int> usergroup_id)
         {
             var usernameParameter = username != null ?
@@ -579,7 +565,7 @@ namespace HicsBL
                 new ObjectParameter("usergroup_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_delete_user_from_usergroup", usernameParameter, passwordParameter, user_idParameter, usergroup_idParameter);
-        }   
+        }
     
         [DbFunction("itin18_aktEntities", "fn_show_lampgroup_allocate")]
         public virtual IQueryable<fn_show_lampgroup_allocate_Result> fn_show_lampgroup_allocate(string username, byte[] password)
