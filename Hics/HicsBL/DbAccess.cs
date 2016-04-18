@@ -486,8 +486,9 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                List<fn_show_lampgroups_Result> slg = cont.fn_show_lampgroups(username, pwhash).ToList();
                 //Durchsuchen mittels DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username,pwhash))
+                foreach (var item in slg)
                 {
                     //Überprüfung des Gruppennamens
                     if(item.roomgroupname == groupName)
