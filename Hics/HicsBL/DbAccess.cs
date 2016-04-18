@@ -1172,12 +1172,20 @@ namespace HicsBL
                     //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
                     Byte[] pwhashOld = HelperClass.GetHash(passwordOld);
                     Byte[] pwhashNew = HelperClass.GetHash(passwordNew);
+                    int result = 0;
                     using(itin18_aktEntities cont = new itin18_aktEntities())
                     {
                         try
                         {
-                            cont.sp_change_password(username, pwhashOld, pwhashNew);
-                             success = true;
+                            result = cont.sp_change_password(username, pwhashOld, pwhashNew);
+                            if (result == 1)
+                            {
+                                success = true;
+                            }
+                            else
+                            {
+                                success = false;
+                            }
                         }
                         catch (Exception e)
                         {
