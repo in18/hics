@@ -356,8 +356,9 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                List<fn_show_lampgroups_Result> lgr = cont.fn_show_lampgroups(username, pwhash).ToList();
                 //Durchlauf der Lampengruppen mit Hilfe der DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
+                foreach (var item in lgr)
                 {
                     //Überprüfung der GruppenId
                     if (item.id == groupId)
@@ -397,8 +398,9 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                List<fn_show_lampgroups_Result> lgr = cont.fn_show_lampgroups(username, pwhash).ToList();
                 //Durchlauf der Lampengruppen mit Hilfe von DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
+                foreach (var item in lgr)
                 {
                     //Überprüfung des Gruppennamens
                     if(item.roomgroupname == groupName)
