@@ -327,11 +327,11 @@ namespace HicsBL
                     //Lampengruppe erstellen                     
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
                     success = true;
-            }
+                }
                 catch (Exception e)
                 {
                     success = false;
-        }
+                }
             }
 
             return success;
@@ -697,17 +697,17 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_user_to_usergroup(username, pwhash, userToAdd, usergroup);
-                            success = true;
-                        }
-                   
+                    success = true;
+                }
+
 
                 catch (Exception e)
                 {
-                   success = false;
+                    success = false;
                 }
             }
             return success;
-        }
+        } 
         #endregion
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)
@@ -931,8 +931,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 string dbLampName = "";
-                //bool onOff = true;
-                int hueId = 1;
+                int hueId = -1;
                 List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
 
                 try
@@ -942,20 +941,20 @@ namespace HicsBL
                         if (lampId == item.id)
                         {
                             dbLampName = item.name;
-                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
-                       
 
+                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+                            hueId = HueAccess.GetLampId(dbLampName);
+                            HelperClass.SetLampBrightness(hueId, brightness);
 
                                 if (lampOnOff == true)
                             {
                                 cont.sp_lamp_on(username, pwhash, lampId);
-                                //onOff = true;
                             }
                             else
                             {
                                 cont.sp_lamp_off(username, pwhash, lampId);
-                                //onOff = false;
                             }
+
                            HelperClass.SetLampState(hueId, lampOnOff);
                         }
                    
@@ -1050,20 +1049,20 @@ namespace HicsBL
                     else
                     {
                         if(user[0].Value > 0 && admin.Count() == 0)
-                 {
+                        {
                             userIs = 2;
-            }
-        }
+                        }                     
+                    }
                 }
                 catch (Exception e)
-                {
+                 {
                     //probleme bei DBverbindung
                     userIs = 0;
-                }
+                 }
             }
             return userIs;
         }
-        #endregion
+        #endregion 
 
         #region PSP 18.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
         /// <summary>
@@ -1372,7 +1371,7 @@ namespace HicsBL
                     //tmp[1].groupname = "No database connection";
                     return tmp;
                 }
-            }
+            } 
             #endregion
         }
 

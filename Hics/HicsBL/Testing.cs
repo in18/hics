@@ -61,6 +61,7 @@ namespace HicsBL
             //{
             //    Console.WriteLine($"Datum:{i.date} Lampe:{i.lamp_name} Status:{i.status} User:{i.user_name}");
             //}
+          
             
             Console.ReadKey();
 
