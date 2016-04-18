@@ -327,11 +327,11 @@ namespace HicsBL
                     //Lampengruppe erstellen                     
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
                     success = true;
-                }
+            }
                 catch (Exception e)
                 {
                     success = false;
-                }
+        }
             }
 
             return success;
@@ -697,17 +697,17 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_user_to_usergroup(username, pwhash, userToAdd, usergroup);
-                    success = true;
-                }
-
+                            success = true;
+                        }
+                   
 
                 catch (Exception e)
                 {
-                    success = false;
+                   success = false;
                 }
             }
             return success;
-        } 
+        }
         #endregion
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)
@@ -885,6 +885,32 @@ namespace HicsBL
         }
         #endregion
 
+        public static bool swichtGroup(string username, string password, int groupId, bool onOff)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lamp_control_Result> dbL = cont.fn_show_lamp_control(username, pwhash).ToList();
+                List<fn_show_lampgroups_Result> dbGr = cont.fn_show_lampgroups(username, pwhash).ToList();
+                int dbGroupId = 0;
+
+
+                foreach (var item in dbL)
+                {
+                    if (item.groupname == "jj")
+                    {
+
+                    }
+                }
+                
+            }
+            return success;
+
+            }
+
         #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness,bool lampOnOff)
         /// <summary>
         /// PSP 15.1
@@ -918,7 +944,7 @@ namespace HicsBL
                             dbLampName = item.name;
                             cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                        
-                               
+
 
                                 if (lampOnOff == true)
                             {
@@ -1024,20 +1050,20 @@ namespace HicsBL
                     else
                     {
                         if(user[0].Value > 0 && admin.Count() == 0)
-                        {
+                 {
                             userIs = 2;
-                        }                     
-                    }
+            }
+        }
                 }
                 catch (Exception e)
-                 {
+                {
                     //probleme bei DBverbindung
                     userIs = 0;
-                 }
+                }
             }
             return userIs;
         }
-        #endregion 
+        #endregion
 
         #region PSP 18.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
         /// <summary>
@@ -1346,7 +1372,7 @@ namespace HicsBL
                     //tmp[1].groupname = "No database connection";
                     return tmp;
                 }
-            } 
+            }
             #endregion
         }
 
