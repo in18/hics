@@ -905,8 +905,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 string dbLampName = "";
-                //bool onOff = true;
-                int hueId = 1;
+                int hueId = -1;
                 List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
 
                 try
@@ -916,24 +915,24 @@ namespace HicsBL
                         if (lampId == item.id)
                         {
                             dbLampName = item.name;
-                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
-                       
-                               
 
-                                if (lampOnOff == true)
+                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+                            hueId = HueAccess.GetLampId(dbLampName);
+                            HelperClass.SetLampBrightness(hueId, brightness);
+
+                            if (lampOnOff == true)
                             {
                                 cont.sp_lamp_on(username, pwhash, lampId);
-                                //onOff = true;
                             }
                             else
                             {
                                 cont.sp_lamp_off(username, pwhash, lampId);
-                                //onOff = false;
                             }
-                           HelperClass.SetLampState(hueId, lampOnOff);
+
+                            HelperClass.SetLampState(hueId, lampOnOff);
                         }
-                   
-                    }
+                        
+                    }                 
                     success = true;
                 }
                 catch (Exception e)
