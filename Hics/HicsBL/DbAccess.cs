@@ -442,8 +442,10 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                List<fn_show_lampgroups_Result> slr = cont.fn_show_lampgroups(username, pwhash).ToList();
+
                 //Durchlauf der Lampengruppen über DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
+                foreach (var item in slr)
                 {
                     //GruppenId wird überprüüft
                     if (item.id == groupId)
