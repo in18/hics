@@ -61,7 +61,13 @@ namespace HicsBL
             //{
             //    Console.WriteLine($"Datum:{i.date} Lampe:{i.lamp_name} Status:{i.status} User:{i.user_name}");
             //}
-          
+            
+            List < fn_show_users_Result > l = new List<fn_show_users_Result>();
+            l= DbAccess.GetAllUser("admin", "123user!");
+            foreach (var item in l)
+            {
+                Console.WriteLine(item.name);
+            }
             
             Console.ReadKey();
 
