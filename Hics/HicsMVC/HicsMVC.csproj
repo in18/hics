@@ -177,6 +177,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Resources\Back.png" />
     <Content Include="Resources\Change Password.png" />
     <Content Include="Resources\Group Setup.png" />
     <Content Include="Resources\HicsLogoHeader 347x100.png" />

@@ -13,6 +13,10 @@ namespace HicsMVC.Controllers
     public class LampAssignmentController : Controller
     {
         // GET: LampAssigment
+        /// <summary>
+        /// Startpunkt für den LampAssignmentController-View, UserSession-Abfrage, Lampenliste von der BL abfragen, Model initialisieren und an View senden.
+        /// </summary>
+        /// <returns>LampAssignmentModel</returns>
         public ActionResult Index()
         {
 
@@ -35,6 +39,11 @@ namespace HicsMVC.Controllers
             return View(lam);
         }
 
+        /// <summary>
+        /// Vorhandene Lampe einer vorhandenen Gruppe über das erhaltene Model zuordnen, UserSession-Abfrage.
+        /// </summary>
+        /// <param name="lam"></param>
+        /// <returns>Rückkehr zum Index</returns>
         [HttpPost]
         public ActionResult Assignment(LampAssignmentModel lam)
         {
@@ -44,6 +53,12 @@ namespace HicsMVC.Controllers
             return RedirectToAction("index");
         }
 
+        /// <summary>
+        /// Vom Anchor-Verweis erhaltene ID und erhaltenen Gruppenname zur Löschung eines Lampen-Gruppen-Zuordnungsdatensatzes an die BL weiterleiten, um eine Zuordnung aufzuheben.
+        /// </summary>
+        /// <param name="lamp_id"></param>
+        /// <param name="groupname"></param>
+        /// <returns>Rückkehr zum Index</returns>
         public ActionResult DeleteEntry(int lamp_id, string groupname)
         {
             UserSession us = (UserSession)Session["UserSession"];

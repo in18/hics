@@ -65,7 +65,7 @@ namespace HicsBL
             //using (itin18_aktEntities cont = new itin18_aktEntities())
             //{
             //    List<fn_show_lamp_control_Result> l = cont.fn_show_lamp_control("admin", ha).ToList();
-
+            
             //    foreach (var i in l)
             //    {
             //        Console.WriteLine($"{i.lampname}|{i.groupname}");
