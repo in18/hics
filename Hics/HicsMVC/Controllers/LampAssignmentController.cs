@@ -25,16 +25,11 @@ namespace HicsMVC.Controllers
             //    //Fehler
             //    Debug.WriteLine("Falscher Datentyp");
 
-            //Viewbags mit Gruppen- und Lampenliste per Viewbag an den View übergeben
-            //ViewBag.GroupList = grouplist;
-            //ViewBag.LampList  = lamplist;
-            //ViewBag.LampAssignmentList = lampAssignmentList;
-
             LampAssignmentModel lam = new LampAssignmentModel();
 
-            lam.grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
-            lam.lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");
-            lam.lampAssignmentList = HicsBL.DbAccess.GetLampControl("Sepp", "123user!");
+            lam.grouplist = HicsBL.DbAccess.GetAllLampGroups(us.name, us.pw);
+            lam.lamplist = HicsBL.DbAccess.GetAllLamps(us.name, us.pw);
+            lam.lampAssignmentList = HicsBL.DbAccess.GetLampControl(us.name, us.pw);
 
             //Liste an den View schicken
             return View(lam);
@@ -43,17 +38,17 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult Assignment(LampAssignmentModel lam)
         {
-            //if (lam.groupname == || lam.lamp_id == )
-            {
+            UserSession us = (UserSession)Session["UserSession"];
 
-            }
-            HicsBL.DbAccess.addLampToGroup("Sepp", "123user!", lam.groupname, lam.lamp_id);
+            HicsBL.DbAccess.addLampToGroup(us.name, us.pw, lam.groupname, lam.lamp_id);
             return RedirectToAction("index");
         }
 
         public ActionResult DeleteEntry(int lamp_id, string groupname)
         {
-            HicsBL.DbAccess.removeLampFromGroup("Sepp", "123user!", groupname, lamp_id);
+            UserSession us = (UserSession)Session["UserSession"];
+
+            HicsBL.DbAccess.removeLampFromGroup(us.name, us.pw, groupname, lamp_id);
             return RedirectToAction("index");
         }
     }

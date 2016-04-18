@@ -16,7 +16,9 @@
         <h2>Add User</h2>
     </div>
 </div> 
+
 <br style="clear:both;" />
+
 <div align="left" class="mainframe">   
     @*Eingabe eines users/admins durch Checkbox*@
 
@@ -64,6 +66,10 @@
                     <td class="listframepadding">@Model.Userlist[i].name</td>
                     <td class="listframepadding">@Model.Userlist[i].group</td>
                     <td> @Html.ActionLink("Delete", "DeleteUser", new { @id = Model.Userlist[i].id }, new { @class = "deletedesign" })
+                    @if (ViewBag.adminname == Model.Userlist[i].name.ToLower() || Model.Userlist[i].group.ToLower() == "user" || Model.Userlist[i].group.ToLower() == "User")
+                    {
+                    <td> @Html.ActionLink("Change Password", "ChangePassword", "Admin", new { @id = Model.Userlist[i].id }, new { @class = "deletedesign" })</td>
+                    }
                 </tr>
             }
         </table>

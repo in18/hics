@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using HicsBL;
 using HicsMVC.Models;
 using System.Diagnostics;
+using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
@@ -16,9 +17,10 @@ namespace HicsMVC.Controllers
         {
             //ViewBag.GroupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
             //List<fn_show_lampgroups_Result> erg = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+            UserSession us = (UserSession)Session["UserSession"];
 
             GroupSetupModel gsm = new GroupSetupModel();            
-            gsm.GroupSetupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
+            gsm.GroupSetupList = HicsBL.DbAccess.GetAllLampGroups(us.name, us.pw);
             
             return View(gsm);
         }
@@ -26,15 +28,18 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult AddGroup(GroupSetupModel gsm)
         {
-            HicsBL.DbAccess.addLampGroup("Sepp", "123user!", gsm.Groupname);
+            UserSession us = (UserSession)Session["UserSession"];
+
+            HicsBL.DbAccess.addLampGroup(us.name, us.pw, gsm.Groupname);
             return RedirectToAction("index");
         }
 
         public ActionResult DeleteGroup(int id)
         {
-            HicsBL.DbAccess.removeLampGroup("Sepp", "123user!", id);
+            UserSession us = (UserSession)Session["UserSession"];
+
+            HicsBL.DbAccess.removeLampGroup(us.name, us.pw, id);
             return RedirectToAction("index");
         }
-
     }
 }

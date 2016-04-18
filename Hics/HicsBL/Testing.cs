@@ -23,6 +23,7 @@ namespace HicsBL
             //int i = HueAccess.GetLampId("Hue Lamp 1");
             //HelperClass.SetLampState(1, false);
             //HelperClass.SetLampBrightness(1, 254);
+
             ////DbAccess.addUser("admin", "123user!", "Walter", "123user!");
             ////Byte[] ha = HelperClass.GetHash("123user!");
             ////HelperClass.GetHash(HelperClass.ByteArrayToString(ha));
@@ -60,7 +61,6 @@ namespace HicsBL
             //{
             //    Console.WriteLine($"Datum:{i.date} Lampe:{i.lamp_name} Status:{i.status} User:{i.user_name}");
             //}
-
             
             Console.ReadKey();
 

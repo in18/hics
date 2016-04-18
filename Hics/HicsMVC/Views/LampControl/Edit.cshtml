@@ -6,23 +6,6 @@
 }
 
 
-
-@*<div class="left">
-    <h2>Lamp Control</h2>
-</div>
-
-
-<div class="middle">
-    <h2></h2>
-</div>
-
-<div class="right">
-    <a href="~/Logout/Logout">
-        <div class="logout"></div>
-    </a>
-</div>
-
-<br style="clear:both;" />*@
 <div>
     <div>
         <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
@@ -31,7 +14,7 @@
     </div>
 
     <div align="center" class="middlepfeifer">
-        <h2>Lamp Edith</h2>
+        <h2>Lamp Edit</h2>
     </div>
 </div>
 <br style="clear:both;" />
@@ -41,7 +24,6 @@
 
     <div align="center">
         <div class="lampcontainer">
-
             <table>
                 <tr>
                     <th class="lampcontr">ID</th>
@@ -52,7 +34,6 @@
                     <th class="lampcontr">Brigtness</th>
                 </tr>
                 <tr>
-
                     <td>
                         @Model.lamp_id
                         @Html.HiddenFor(x => x.lamp_id)
@@ -83,42 +64,18 @@
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <input type="submit" />
-
-
+                        <a style="margin-right:10px;" href="~/LampControl/Index"><input type="button" value="Back" /></a>
+                    </td>
+                    <td class="rechts">
+                        <input type="submit" value="Send"/>
                     </td>
                 </tr>
-
-
-
             </table>
-
-
-
         </div>
     </div>
 
 }
 
-
-@*<div class="left">
-    <h2></h2>
-</div>
-
-
-<div class="middle">
-    <h2></h2>
-</div>
-<div class="right">
-    <div style="width:100%;">
-        <a href="~/Admin/Index">
-            <div class="home1"></div>
-        </a>
-    </div>
-
-
-
-</div>*@
 
 <script type="text/javascript">
     function updateTextInput(val) {

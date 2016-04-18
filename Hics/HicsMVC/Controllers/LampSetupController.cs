@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using HicsBL;
 using HicsMVC.Models;
 using System.Diagnostics;
+using HicsMVC.SampleClass;
 
 namespace HicsMVC.Controllers
 {
@@ -14,9 +15,11 @@ namespace HicsMVC.Controllers
         // GET: LampSetup
         public ActionResult Index()
         {
+            UserSession us = (UserSession)Session["UserSession"];
+
             LampSetupModel lsm = new LampSetupModel();
 
-            lsm.Lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");            
+            lsm.Lamplist = HicsBL.DbAccess.GetAllLamps(us.name, us.pw);            
 
             return View(lsm);
         }
@@ -24,13 +27,17 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult AddLamp(LampSetupModel lsm)
         {
-            HicsBL.DbAccess.addLamp("Sepp", "123user!", lsm.Id, lsm.Description);
+            UserSession us = (UserSession)Session["UserSession"];
+
+            HicsBL.DbAccess.addLamp(us.name, us.pw, lsm.Id, lsm.Description);
             return RedirectToAction("index");
         }
 
         public ActionResult DeleteLamp(int id)
         {
-            HicsBL.DbAccess.deleteLamp("Sepp", "123user!", id);
+            UserSession us = (UserSession)Session["UserSession"];
+
+            HicsBL.DbAccess.deleteLamp(us.name, us.pw, id);
             return RedirectToAction("index");
         }
 
