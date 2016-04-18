@@ -25,7 +25,7 @@ namespace HicsMVC.Controllers
 
                 for (int i = 0; i < userStatisticList.Count; i++)
                 {
-                    if (userStatisticList[i].user_name == us.name)
+                    if (userStatisticList[i].user_name.ToLower() == us.name.ToLower())
                     {
                         filteredStatisticList.Add(userStatisticList[i]);
                     }
