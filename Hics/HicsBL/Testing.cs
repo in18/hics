@@ -65,7 +65,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamp_control_Result> l = cont.fn_show_lamp_control("admin", ha).ToList();
-
+            
                 foreach (var i in l)
                 {
                     Console.WriteLine($"{i.lampname}|{i.groupname}");
@@ -79,7 +79,14 @@ namespace HicsBL
             //        Console.WriteLine($"{i.id}|{i.roomgroupname}");
             //    }
             //}
-            //DbAccess.addLampToGroup("admin","123user!", 16, 1);
+            DbAccess.addLampToGroup("admin","123user!", 16, 1);
+            List < fn_show_users_Result > l = new List<fn_show_users_Result>();
+            l= DbAccess.GetAllUser("admin", "123user!");
+            foreach (var item in l)
+            {
+                Console.WriteLine(item.name);
+            }
+            
             Console.ReadKey();
 
         }
