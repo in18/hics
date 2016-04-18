@@ -467,47 +467,7 @@ namespace HicsBL
     
         #endregion
 
-        #region PSP 7.1 removeLampGroup(string username, string password, string groupName)
-        /// <summary>
-        /// PSP 7.1
-        /// Lampengruppe entfernen mittels Gruppennamen
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="groupName"></param>
-        /// <returns></returns>
-        public static bool removeLampGroup(string username, string password, string groupName)
-        {
-            bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            Byte[] pwhash = HelperClass.GetHash(password);
-
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                //Durchlauf der Lampengruppen mittels DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username,pwhash))
-                {
-                    //Überprüfung des Gruppennamens
-                    if(item.roomgroupname == groupName)
-                    {
-                        try
-                        {
-                            //Löschen der Raumgruppe
-                            cont.sp_delete_roomgroup(username, pwhash, item.id);
-                            success = true;
-                        }
-                        catch (Exception e)
-                        {
-                            success = false;                          
-                        }
-                    }
-                }
-
-            }
-            return success;
-        }
-
-        #endregion
+        
 
         #region PSP 6.3 removeLampFromGroup(string username, string password, string groupName, int lampId)
         /// <summary>
@@ -548,6 +508,48 @@ namespace HicsBL
             }
             return success;
         }
+        #endregion
+
+        #region PSP 7.1 removeLampGroup(string username, string password, string groupName)
+        /// <summary>
+        /// PSP 7.1
+        /// Lampengruppe entfernen mittels Gruppennamen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
+        public static bool removeLampGroup(string username, string password, string groupName)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                //Durchlauf der Lampengruppen mittels DB-Funktion
+                foreach (var item in cont.fn_show_lampgroups(username,pwhash))
+                {
+                    //Überprüfung des Gruppennamens
+                    if(item.roomgroupname == groupName)
+                    {
+                        try
+                        {
+                            //Löschen der Raumgruppe
+                            cont.sp_delete_roomgroup(username, pwhash, item.id);
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            success = false;                          
+                        }
+                    }
+                }
+
+            }
+            return success;
+        }
+
         #endregion
 
         #region PSP 7.3 removeLampGroup(string username, string password, int groupId)
@@ -680,7 +682,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region 8.2 User einer Usergruppe hinzufügen(string username, string password, int userToAdd, int usergroup)
+        #region PSP 8.2 User einer Usergruppe hinzufügen(string username, string password, int userToAdd, int usergroup)
         /// <summary>
         /// PSP 8.2
         /// User einer Usergruppe hinzufügen
@@ -830,7 +832,7 @@ namespace HicsBL
 
         #region PSP 13.1 switchLamp(string username, string password, bool lampOnOff, int lampId)
         /// <summary>
-        /// PSP 13.1
+        /// PSP 13.1 switchLamp
         /// Lampe Ein/Aus
         /// </summary>
         /// <param name="username"></param>
