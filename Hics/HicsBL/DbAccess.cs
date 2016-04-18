@@ -442,8 +442,10 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                List<fn_show_lampgroups_Result> slr = cont.fn_show_lampgroups(username, pwhash).ToList();
+
                 //Durchlauf der Lampengruppen über DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
+                foreach (var item in slr)
                 {
                     //GruppenId wird überprüüft
                     if (item.id == groupId)
@@ -1390,6 +1392,48 @@ namespace HicsBL
             #endregion
         }
 
+        #region User aus der User-Gruppe löschen
+
+        /// <summary>
+        /// User aus der User-Gruppe löschen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="userId"></param>
+        /// <param name="groupId"></param>
+        /// <returns>success</returns>
+        public static bool deleteUserFromUsergroup(string username, string password, int userId, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
+                
+                foreach (var item in sur)
+                {
+                    //Überprüfung der User Id
+                    if (item.id == userId)
+                    {
+                        try
+                        {
+                            //Löschen des Users aus der UserGruppe
+                            cont.sp_delete_user_from_usergroup(username, pwhash, item.id, userId);
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            success = false;
+                        }
+                    }
+                }
+            }
+            return success;
+        }
+        #endregion
+
     }
 }
+
  

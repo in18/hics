@@ -559,5 +559,26 @@ namespace HicsBL
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroopallocate_Result>("[itin18_aktEntities].[fn_show_lampgroopallocate](@username, @password)", usernameParameter, passwordParameter);
         }
+    
+        public virtual int sp_delete_user_from_usergroup(string username, byte[] password, Nullable<int> user_id, Nullable<int> usergroup_id)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            var user_idParameter = user_id.HasValue ?
+                new ObjectParameter("user_id", user_id) :
+                new ObjectParameter("user_id", typeof(int));
+    
+            var usergroup_idParameter = usergroup_id.HasValue ?
+                new ObjectParameter("usergroup_id", usergroup_id) :
+                new ObjectParameter("usergroup_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_delete_user_from_usergroup", usernameParameter, passwordParameter, user_idParameter, usergroup_idParameter);
+        }
     }
 }

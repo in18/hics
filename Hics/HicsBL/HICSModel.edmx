@@ -284,6 +284,12 @@
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
           <Parameter Name="del_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_delete_user_from_usergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="user_id" Type="int" Mode="In" />
+          <Parameter Name="usergroup_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_delete_usergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
@@ -449,6 +455,12 @@
           <FunctionImport Name="fn_show_lamp_control_history" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lamp_control_history_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_delete_user_from_usergroup">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+            <Parameter Name="user_id" Mode="In" Type="Int32" />
+            <Parameter Name="usergroup_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="fn_show_lampgroopallocate" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lampgroopallocate_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
@@ -687,6 +699,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_delete_user_from_usergroup" FunctionName="itin18_aktModel.Store.sp_delete_user_from_usergroup" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
