@@ -327,11 +327,11 @@ namespace HicsBL
                     //Lampengruppe erstellen                     
                     cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
                     success = true;
-            }
+                }
                 catch (Exception e)
                 {
                     success = false;
-        }
+                }
             }
 
             return success;
@@ -469,8 +469,6 @@ namespace HicsBL
     
         #endregion
 
-        
-
         #region PSP 6.3 removeLampFromGroup(string username, string password, string groupName, int lampId)
         /// <summary>
         /// PSP 6.3
@@ -504,7 +502,7 @@ namespace HicsBL
                         catch (Exception e)
                         {
 
-                            success = false;                          
+                            success = false;
                         }
                     }
                 }
@@ -545,7 +543,7 @@ namespace HicsBL
                         }
                         catch (Exception e)
                         {
-                            success = false;
+                            success = false;                          
                         }
                     }
                 }
@@ -706,17 +704,17 @@ namespace HicsBL
                 try
                 {
                     cont.sp_add_user_to_usergroup(username, pwhash, userToAdd, usergroup);
-                            success = true;
-                        }
-                   
+                    success = true;
+                }
+
 
                 catch (Exception e)
                 {
-                   success = false;
+                    success = false;
                 }
             }
             return success;
-        }
+        } 
         #endregion
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)
@@ -894,6 +892,7 @@ namespace HicsBL
         }
         #endregion
 
+        #region swichtGroup
         public static bool swichtGroup(string username, string password, int groupId, bool onOff)
         {
             bool success = false;
@@ -919,6 +918,7 @@ namespace HicsBL
             return success;
 
             }
+        #endregion
 
         #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness,bool lampOnOff)
         /// <summary>
@@ -1058,20 +1058,20 @@ namespace HicsBL
                     else
                     {
                         if(user[0].Value > 0 && admin.Count() == 0)
-                 {
+                        {
                             userIs = 2;
-            }
-        }
+                        }                     
+                    }
                 }
                 catch (Exception e)
-                {
+                 {
                     //probleme bei DBverbindung
                     userIs = 0;
-                }
+                 }
             }
             return userIs;
         }
-        #endregion
+        #endregion 
 
         #region PSP 18.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
         /// <summary>
@@ -1186,8 +1186,8 @@ namespace HicsBL
                             result = cont.sp_change_password(username, pwhashOld, pwhashNew);
                             if (result == 1)
                             {
-                             success = true;
-                        }
+                                success = true;
+                            }
                             else
                             {
                                 success = false;
@@ -1390,8 +1390,10 @@ namespace HicsBL
                 }
             }
            
+            } 
+           
         }
-        #endregion
+            #endregion
 
         #region PSP 8.6 User aus der User-Gruppe löschen
 
@@ -1461,5 +1463,5 @@ namespace HicsBL
         #endregion
     }
 }
-
+ 
  
