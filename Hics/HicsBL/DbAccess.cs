@@ -972,11 +972,20 @@ namespace HicsBL
                         {
                             dbLampName = item.name;
                             ls = cont.fn_show_lamp_status(username, pwhash, item.id).ToList();
-                            if (ls[0].bright != brightness)
+                            if (ls[0].bright != brightness && ls[0].status == lampOnOff)
                             {
                                 cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                             }
-                            else
+                            else if(ls[0].bright != brightness && ls[0].status != lampOnOff)
+                            {
+                                cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+
+                                if (lampOnOff == false)
+                                {
+                                    cont.sp_lamp_off(username, pwhash, lampId);
+                                }
+                            }
+                            else if(ls[0].bright == brightness && ls[0].status != lampOnOff)
                             {
                                 if (lampOnOff == false)
                                 {
