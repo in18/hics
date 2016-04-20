@@ -1143,7 +1143,10 @@ namespace HicsBL
 
                     foreach (var item in db)
                     {
+                        if (tmp.Count > 0)
+                        {
                             tmp.Add(item);
+                        }
                     }
                     if (tmp.Count <= 0)
                     {
