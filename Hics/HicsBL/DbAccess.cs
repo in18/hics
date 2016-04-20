@@ -893,8 +893,8 @@ namespace HicsBL
         }
         #endregion
 
-        #region swichtGroup
-        public static bool swichtGroup(string username, string password, int groupId, bool onOff)
+        #region switchGroup
+        public static bool switchGroup(string username, string password, int groupId, bool onOff)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -904,14 +904,33 @@ namespace HicsBL
             {
                 List<fn_show_lamp_control_Result> dbL = cont.fn_show_lamp_control(username, pwhash).ToList();
                 List<fn_show_lampgroups_Result> dbGr = cont.fn_show_lampgroups(username, pwhash).ToList();
-                int dbGroupId = 0;
+                string dbGroupName = "";
+                int HueLampId = 0;
 
+
+                foreach (var item in dbGr)
+                {
+                    if (item.id==groupId)
+                    {
+                        dbGroupName = item.roomgroupname;
+                    }
+                }
 
                 foreach (var item in dbL)
                 {
-                    if (item.groupname == "jj")
+                    if (item.groupname==dbGroupName)
                     {
-
+                        HueLampId = HueAccess.GetLampId(item.lampname);
+                        if (onOff==true)
+                        {
+                            cont.sp_lamp_on(username, pwhash, item.lamp_id);
+                            HelperClass.SetLampState(HueLampId, true);
+                        }
+                        else
+                        {
+                            cont.sp_lamp_off(username, pwhash, item.lamp_id);
+                            HelperClass.SetLampState(HueLampId, false);
+                        }
                     }
                 }
                 
