@@ -50,9 +50,9 @@ namespace HicsBL
             //List<fn_show_lamps_Result> lamplist = new List<fn_show_lamps_Result>();
             //lamplist = DbAccess.GetAllLamps("Sepp", "123user!");
 
-            //foreach (var item in lamplist)
+            //foreach (var i in lamplist)
             //{
-            //    Console.WriteLine(item.name);
+            //    Console.WriteLine($"{i.name}");
             //}
             //Console.WriteLine(DbAccess.userLogin("admini","123user!"));
             //Console.WriteLine(DbAccess.userLogin("admin","123user!"));
@@ -68,7 +68,7 @@ namespace HicsBL
 
             //    foreach (var i in la)
             //    {
-            //        Console.WriteLine($"{i.lampname}|{i.groupname}");
+            //        Console.WriteLine($"{i.lampname}|{i.groupname}|{i.lamp_id}");
             //    }
             //}
             //using (itin18_aktEntities cont = new itin18_aktEntities())
@@ -151,7 +151,7 @@ namespace HicsBL
             {
                 cont.sp_lamp_off("admin", ha,1);
             }
-                //............................................................
+            //............................................................
             Console.ReadKey();
         }
     }
