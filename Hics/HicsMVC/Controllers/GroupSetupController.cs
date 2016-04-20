@@ -23,8 +23,15 @@ namespace HicsMVC.Controllers
             //List<fn_show_lampgroups_Result> erg = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
             UserSession us = (UserSession)Session["UserSession"];
 
-            GroupSetupModel gsm = new GroupSetupModel();            
-            gsm.GroupSetupList = HicsBL.DbAccess.GetAllLampGroups(us.name, us.pw);
+            GroupSetupModel gsm = new GroupSetupModel();
+            gsm.GroupSetupList = new List<fn_show_lampgroups_Result>();
+
+            List<fn_show_lampgroups_Result> slr = HicsBL.DbAccess.GetAllLampGroups(us.name, us.pw);
+
+            for (int i = slr.Count - 1; i >= 0; i--)
+            {
+                gsm.GroupSetupList.Add(slr[i]);
+            }
             
             return View(gsm);
         }

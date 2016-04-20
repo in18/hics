@@ -33,7 +33,14 @@ namespace HicsMVC.Controllers
 
             lam.grouplist = HicsBL.DbAccess.GetAllLampGroups(us.name, us.pw);
             lam.lamplist = HicsBL.DbAccess.GetAllLamps(us.name, us.pw);
-            lam.lampAssignmentList = HicsBL.DbAccess.GetLampControl(us.name, us.pw);
+            lam.lampAssignmentList = new List<fn_show_lampgroup_allocate_Result>();
+
+            List<fn_show_lampgroup_allocate_Result> slcsort = HicsBL.DbAccess.AllocateResult(us.name, us.pw);
+
+            for (int i = slcsort.Count - 1; i >= 0; i --)
+            {
+                lam.lampAssignmentList.Add(slcsort[i]);
+            }
 
             //Liste an den View schicken
             return View(lam);

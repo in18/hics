@@ -1,0 +1,63 @@
+﻿
+@{ 
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MicronLayout.cshtml";
+
+}
+
+@*@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MicronLayout.cshtml";
+
+    var myChart = new Chart(width: 600, height: 400)
+.AddTitle("Chart Title")
+.AddSeries(
+name: "Employee",
+xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
+yValues: new[] { "2", "6", "4", "5", "3" })
+.Write();
+}*@
+    
+@*@{
+    var db = Database.Open("SmallBakery");
+    var data = db.Query("SELECT Name, Price FROM Product");
+    var myChart = new Chart(width: 600, height: 400)
+        .AddTitle("Product Sales")
+        .DataBindTable(dataSource: data, xField: "Name")
+        .Write();
+}*@
+
+    
+<div>
+    <div>
+        <a href="~/User/Index"><div class="homepfeifer2"></div></a>
+
+        <a href="~/Logout/Logout"><div class="logoutpfeifer2"></div></a>
+    </div>
+
+    <div align="center" class="middlepfeifer">
+        <h2>History</h2>
+
+       
+    </div>
+    
+</div>
+<br style="clear:both;" />
+                
+        <div>
+            @{
+                string[] xvalues = new string[] { "christian", "Andrew", "Julie", "Mary", "Dave" };
+                int[] yvalues = new int[] { 20, 6, 4, 5, 3 };
+
+           var myChart = new Chart(width: 600, height: 400, theme: ChartTheme.Green)
+            .AddTitle("Chart Title")
+            .AddSeries(
+            name: "Employee",
+            xValue: xvalues,
+            yValues: yvalues)
+            .Write();
+
+        } 
+
+        </div>
+

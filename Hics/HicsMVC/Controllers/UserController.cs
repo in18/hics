@@ -41,14 +41,20 @@ namespace HicsMVC.Controllers
             {
                 UserSession userdaten = (UserSession)Session["UserSession"];
 
-                DbAccess.EditUserPassword(userdaten.name, ucpm.RecentPassword, ucpm.NewPassword);
+                bool b = DbAccess.EditUserPassword(userdaten.name, ucpm.RecentPassword, ucpm.NewPassword);
 
-                // Weiteleitung zum Logout
-            return RedirectToAction("Logout", "Logout");
+                if (b == true)
+                { 
+                    return RedirectToAction("Logout", "Logout");
+                }
+                else
+                {
+                    ViewBag.errorMessage = "RecentPassword wrong";
+                }
             }
             else
             {
-                ViewBag.errorMsg = "Password does not match";
+                ViewBag.errorMessage = "Password does not match";
             }
             return View(ucpm);
         }    

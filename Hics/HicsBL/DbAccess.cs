@@ -442,8 +442,10 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                List<fn_show_lampgroups_Result> slr = cont.fn_show_lampgroups(username, pwhash).ToList();
+
                 //Durchlauf der Lampengruppen über DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username, pwhash))
+                foreach (var item in slr)
                 {
                     //GruppenId wird überprüüft
                     if (item.id == groupId)
@@ -465,7 +467,7 @@ namespace HicsBL
             return success;
         }
     
-        #endregion 
+        #endregion
 
         #region PSP 6.3 removeLampFromGroup(string username, string password, string groupName, int lampId)
         /// <summary>
@@ -484,8 +486,9 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
+                List<fn_show_lampgroups_Result> slg = cont.fn_show_lampgroups(username, pwhash).ToList();
                 //Durchsuchen mittels DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username,pwhash))
+                foreach (var item in slg)
                 {
                     //Überprüfung des Gruppennamens
                     if(item.roomgroupname == groupName)
@@ -525,8 +528,9 @@ namespace HicsBL
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                //Durchlauf der Lampengruppen mittels DB-Funktion
-                foreach (var item in cont.fn_show_lampgroups(username,pwhash))
+                List<fn_show_lampgroups_Result> slg = cont.fn_show_lampgroups(username, pwhash).ToList();
+                //Durchsuchen mittels DB-Funktion
+                foreach (var item in slg)
                 {
                     //Überprüfung des Gruppennamens
                     if(item.roomgroupname == groupName)
@@ -909,11 +913,11 @@ namespace HicsBL
 
                     }
                 }
-
+                
             }
             return success;
 
-        } 
+            }
         #endregion
 
         #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness,bool lampOnOff)
@@ -1386,9 +1390,78 @@ namespace HicsBL
                 }
             }
            
+            } 
+           
+        }
+            #endregion
+
+        #region PSP 8.6 User aus der User-Gruppe löschen
+
+        /// <summary>
+        /// User aus der User-Gruppe löschen
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="userId"></param>
+        /// <param name="groupId"></param>
+        /// <returns>success</returns>
+        public static bool deleteUserFromUsergroup(string username, string password, int userId, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
+                
+                foreach (var item in sur)
+                {
+                    //Überprüfung der User Id
+                    if (item.id == userId)
+                    {
+                        try
+                        {
+                            //Löschen des Users aus der UserGruppe
+                            cont.sp_delete_user_from_usergroup(username, pwhash, item.id, userId);
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            success = false;
+                        }
+                    }
+                }
+            }
+            return success;
         }
         #endregion
 
+        #region 19.3 Allocate Result
+
+        public static List<fn_show_lampgroup_allocate_Result> AllocateResult(string username, string password)
+        {
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lampgroup_allocate_Result> tmp = new List<fn_show_lampgroup_allocate_Result>();
+
+                try
+                {
+                    return cont.fn_show_lampgroup_allocate(username, pwhash).ToList();
+                }
+                catch (Exception e)
+                {
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Lampenname eingetragen
+                    tmp.Add(new fn_show_lampgroup_allocate_Result {  gruppen_name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lampgroup_allocate_Result {  gruppen_name = "No database connection" });
+                    //tmp[0].groupname = "Keine Datenbankverbindung";
+                    //tmp[1].groupname = "No database connection";
+                    return tmp;
+                }
+            }
+        }
+        #endregion
     }
 }
+ 
  
