@@ -280,7 +280,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 //Nach Lampe in DB über Funktion suchen
-                foreach (var item in cont.fn_show_lamps(username,pwhash))
+                foreach (var item in cont.fn_show_lamps(username, pwhash))
                 {
                     //Adress wird geprüft
                     if (item.address == lampAdress)
@@ -403,7 +403,7 @@ namespace HicsBL
                 foreach (var item in lgr)
                 {
                     //Überprüfung des Gruppennamens
-                    if(item.roomgroupname == groupName)
+                    if (item.roomgroupname == groupName)
                     {                    
                         try
                         {
@@ -491,7 +491,7 @@ namespace HicsBL
                 foreach (var item in slg)
                 {
                     //Überprüfung des Gruppennamens
-                    if(item.roomgroupname == groupName)
+                    if (item.roomgroupname == groupName)
                     {
                         try
                         {
@@ -533,7 +533,7 @@ namespace HicsBL
                 foreach (var item in slg)
                 {
                     //Überprüfung des Gruppennamens
-                    if(item.roomgroupname == groupName)
+                    if (item.roomgroupname == groupName)
                     {
                         try
                         {
@@ -1050,14 +1050,14 @@ namespace HicsBL
                     admin = cont.fn_check_admin_table(username, pwhash).ToList();
                    
 
-                    if (user[0].Value > 0  && admin.Count() == 1)
+                    if (user[0].Value > 0 && admin.Count() == 1)
                     {
                         userIs = 1;
                         
                     }
                     else
                     {
-                        if(user[0].Value > 0 && admin.Count() == 0)
+                        if (user[0].Value > 0 && admin.Count() == 0)
                         {
                             userIs = 2;
                         }                     
@@ -1109,7 +1109,7 @@ namespace HicsBL
                     }
                     return tmp;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als name eingetragen
                     tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Datenbankverbindung" });
@@ -1174,14 +1174,14 @@ namespace HicsBL
                 /// <param name="passwordOld"></param>
                 /// <param name="passwordNew"></param>
                 /// <returns>Bool ob erfolgreich</returns>
-                public static bool EditUserPassword(string username, string passwordOld,string passwordNew )
+        public static bool EditUserPassword(string username, string passwordOld, string passwordNew)
                 {
                     bool success = false;
                     //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
                     Byte[] pwhashOld = HelperClass.GetHash(passwordOld);
                     Byte[] pwhashNew = HelperClass.GetHash(passwordNew);
                     int result = 0;
-                    using(itin18_aktEntities cont = new itin18_aktEntities())
+            using (itin18_aktEntities cont = new itin18_aktEntities())
                     {
                         try
                         {
@@ -1454,8 +1454,8 @@ namespace HicsBL
                 catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Lampenname eingetragen
-                    tmp.Add(new fn_show_lampgroup_allocate_Result {  gruppen_name = "Keine Datenbankverbindung" });
-                    tmp.Add(new fn_show_lampgroup_allocate_Result {  gruppen_name = "No database connection" });
+                tmp.Add(new fn_show_lampgroup_allocate_Result { gruppen_name = "Keine Datenbankverbindung" });
+                tmp.Add(new fn_show_lampgroup_allocate_Result { gruppen_name = "No database connection" });
                     //tmp[0].groupname = "Keine Datenbankverbindung";
                     //tmp[1].groupname = "No database connection";
                     return tmp;
@@ -1463,7 +1463,7 @@ namespace HicsBL
             }
         }
         #endregion
-    }
+
 }
  
  
