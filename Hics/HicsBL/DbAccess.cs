@@ -1389,9 +1389,9 @@ namespace HicsBL
                     return tmp;
                 }
             }
-            
+           
         }
-#endregion
+        #endregion
 
         #region User aus der User-Gruppe löschen
 
@@ -1434,6 +1434,31 @@ namespace HicsBL
         }
         #endregion
 
+        #region 
+
+        public static List<fn_show_lampgroup_allocate_Result> AllocateResult(string username, string password)
+        {
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_lampgroup_allocate_Result> tmp = new List<fn_show_lampgroup_allocate_Result>();
+
+                try
+                {
+                    return cont.fn_show_lampgroup_allocate(username, pwhash).ToList();
+                }
+                catch (Exception e)
+                {
+                    //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Lampenname eingetragen
+                    tmp.Add(new fn_show_lampgroup_allocate_Result {  gruppen_name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lampgroup_allocate_Result {  gruppen_name = "No database connection" });
+                    //tmp[0].groupname = "Keine Datenbankverbindung";
+                    //tmp[1].groupname = "No database connection";
+                    return tmp;
+                }
+            }
+        }
+        #endregion
     }
 }
 
