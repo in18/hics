@@ -978,20 +978,21 @@ namespace HicsBL
                             }
                             else
                             {
-                                cont.sp_lamp_on(username, pwhash, lampId);
-                            }
-                            hueId = HueAccess.GetLampId(dbLampName);
-                            HelperClass.SetLampBrightness(hueId, brightness);
-
-                            if (lampOnOff == false)
-                            {
-                                cont.sp_lamp_off(username, pwhash, lampId);
-                            }
-
-                           
+                                if (lampOnOff == false)
+                                {
+                                    cont.sp_lamp_off(username, pwhash, lampId);
+                                }
+                                else
+                                {
+                                    cont.sp_lamp_on(username, pwhash, lampId);
+                                }
+                            }   
                         }
                    
                     }
+
+                    hueId = HueAccess.GetLampId(dbLampName);
+                    HelperClass.SetLampBrightness(hueId, brightness);
                     HelperClass.SetLampState(hueId, lampOnOff);
                     success = true;
                 }
