@@ -1140,16 +1140,16 @@ namespace HicsBL
                 {
 
                     List<fn_show_lamp_control_history_Result> db = cont.fn_show_lamp_control_history(username, pwhash).ToList();
-
-                    foreach (var item in db)
-                    {
-                        
-                            tmp.Add(item);
-                        
-                    }
                     if (tmp.Count <= 0)
                     {
                         tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Daten" });
+                    }
+                    else
+                    {
+                        foreach (var item in db)
+                        {
+                            tmp.Add(item);
+                        }
                     }
                     return tmp;
                 }
