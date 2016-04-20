@@ -23,10 +23,22 @@ namespace HicsMVC.Controllers
             UserSession us = (UserSession)Session["UserSession"];
 
             LampSetupModel lsm = new LampSetupModel();
+            lsm.Lamplist = new List<fn_show_lamps_Result>();
+            try
+            {
+                List<fn_show_lamps_Result> slrsort = HicsBL.DbAccess.GetAllLamps(us.name, us.pw);
 
-            lsm.Lamplist = HicsBL.DbAccess.GetAllLamps(us.name, us.pw);            
+                for (int i = slrsort.Count - 1; i >= 0; i--)
+                {
+                    lsm.Lamplist.Add(slrsort[i]);
+                }         
 
-            return View(lsm);
+                return View(lsm);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
