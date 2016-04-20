@@ -962,6 +962,7 @@ namespace HicsBL
                 string dbLampName = "";
                 int hueId = -1;
                 List<fn_show_lamps_Result> db = cont.fn_show_lamps(username, pwhash).ToList();
+                List<fn_show_lamp_status_Result> ls = new List<fn_show_lamp_status_Result>();
 
                 try
                 {
@@ -970,20 +971,21 @@ namespace HicsBL
                         if (lampId == item.id)
                         {
                             dbLampName = item.name;
-
-                            cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
-                            hueId = HueAccess.GetLampId(dbLampName);
-                            HelperClass.SetLampBrightness(hueId, brightness);
-
-                            if (lampOnOff == true)
+                            ls = cont.fn_show_lamp_status(username, pwhash, item.id).ToList();
+                            if (ls[0].bright != brightness)
                             {
-                                cont.sp_lamp_on(username, pwhash, lampId);
-                                break;
+                                cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
                             }
                             else
                             {
+                                cont.sp_lamp_on(username, pwhash, lampId);
+                            }
+                            hueId = HueAccess.GetLampId(dbLampName);
+                            HelperClass.SetLampBrightness(hueId, brightness);
+
+                            if (lampOnOff == false)
+                            {
                                 cont.sp_lamp_off(username, pwhash, lampId);
-                                break;
                             }
 
                            
