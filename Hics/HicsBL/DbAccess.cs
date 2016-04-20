@@ -1393,7 +1393,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region User aus der User-Gruppe löschen
+        #region PSP 8.6 User aus der User-Gruppe löschen
 
         /// <summary>
         /// User aus der User-Gruppe löschen
@@ -1434,7 +1434,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region 
+        #region 19.3 Allocate Result
 
         public static List<fn_show_lampgroup_allocate_Result> AllocateResult(string username, string password)
         {
