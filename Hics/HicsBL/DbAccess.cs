@@ -67,8 +67,8 @@ namespace HicsBL
                     success = false;
                 }
             }
-            
-           
+
+
             return success;
         }
         #endregion
@@ -90,7 +90,7 @@ namespace HicsBL
             bool success = false;
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                
+
                 List<fn_show_lamp_status_Result> dbLampStatus = null;
                 List<fn_show_lamp_control_Result> dbLampsStatus = cont.fn_show_lamp_control(username, pwhash).ToList();
                 List<fn_show_lamp_control_Result> dbLampsStatusResult = new List<fn_show_lamp_control_Result>();
@@ -158,16 +158,16 @@ namespace HicsBL
                     {
                         cont.sp_lamp_off(username, pwhash, dbLampIdNew);
                     }
-                 //Namen der Lampe in der HUE-Bridge ändern
-                 HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
+                    //Namen der Lampe in der HUE-Bridge ändern
+                    HelperClass.SetLampName(HueAccess.GetLampId(lampNameOld), lampNameNew);
                     success = true;
                 }
                 catch (Exception e)
                 {
                     success = false;
                 }
-               
-                
+
+
             }
             return success;
         }
@@ -195,7 +195,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 string dbLampName = "";
-                
+
                 List<fn_show_lamps_Result> dbLamps = new List<fn_show_lamps_Result>();
 
 
@@ -258,7 +258,7 @@ namespace HicsBL
                 }
             }
 
-            
+
             return success;
         }
         #endregion
@@ -321,11 +321,11 @@ namespace HicsBL
             Byte[] pwhash = HelperClass.GetHash(password);
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
-            {                             
+            {
                 try
                 {
                     //Lampengruppe erstellen                     
-                    cont.sp_add_lampgroup(username, pwhash, lampGroupName);                          
+                    cont.sp_add_lampgroup(username, pwhash, lampGroupName);
                     success = true;
                 }
                 catch (Exception e)
@@ -366,7 +366,7 @@ namespace HicsBL
                         try
                         {
                             //Hinzufügen einer Lampe zu einer Lampengruppe über DB-Funktion
-                           
+
                             cont.sp_add_lamp_to_lampgroup(username, pwhash, item.id, lampId);
                             success = true;
                         }
@@ -404,7 +404,7 @@ namespace HicsBL
                 {
                     //Überprüfung des Gruppennamens
                     if (item.roomgroupname == groupName)
-                    {                    
+                    {
                         try
                         {
                             //Hinzufügen der Lampe zur Lampengruppe
@@ -416,8 +416,8 @@ namespace HicsBL
                         {
                             success = false;
                         }
-                            
-                    }    
+
+                    }
                 }
             }
             return success;
@@ -466,7 +466,7 @@ namespace HicsBL
             }
             return success;
         }
-    
+
         #endregion
 
         #region PSP 6.3 removeLampFromGroup(string username, string password, string groupName, int lampId)
@@ -543,7 +543,7 @@ namespace HicsBL
                         }
                         catch (Exception e)
                         {
-                            success = false;                          
+                            success = false;
                         }
                     }
                 }
@@ -581,7 +581,7 @@ namespace HicsBL
                 {
 
                     success = false;
-            }
+                }
             }
 
             return success;
@@ -598,7 +598,8 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupId"></param>
         /// <returns></returns>
-        public static bool editLampGroup(string username, string password, int groupId) {
+        public static bool editLampGroup(string username, string password, int groupId)
+        {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
@@ -621,8 +622,8 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-           
-                return success;   
+
+            return success;
         }
         #endregion
 
@@ -650,36 +651,36 @@ namespace HicsBL
 
                 try
                 {
-                   
+
 
                     cont.sp_add_user(username, pwhash, usernameNew, pwhashNew);
-                   
+
                     userId = cont.fn_check_user_table(usernameNew, pwhashNew).ToList();
 
-                    
-                    
+
+
                     if (admin == true)
+                    {
+                        if (addUserToUsergroup(username, password, userId[0].Value, 1) == true)
                         {
-                            if (addUserToUsergroup(username, password, userId[0].Value, 1) == true)
-                            {
-                                 success = true;
-                            }
+                            success = true;
                         }
+                    }
                     else
+                    {
+                        if (addUserToUsergroup(username, password, userId[0].Value, 2) == true)
                         {
-                            if (addUserToUsergroup(username, password, userId[0].Value, 2) == true)
-                            {
-                                success = true;
-                            }
+                            success = true;
                         }
+                    }
                 }
                 catch (Exception e)
                 {
                     success = false;
                 }
-                
+
             }
-            
+
             return success;
         }
         #endregion
@@ -714,7 +715,7 @@ namespace HicsBL
                 }
             }
             return success;
-        } 
+        }
         #endregion
 
         #region PSP 8.3 removeUser(string username, string password, int usernameId)
@@ -790,7 +791,7 @@ namespace HicsBL
                 return success;
             }
         }
-            #endregion
+        #endregion
 
         #region PSP 9.1 EditUserGroup(string username, string password, int usernameId, int groupId)
         /// <summary>
@@ -807,8 +808,8 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-            
-           
+
+
             return success;
         }
         #endregion
@@ -847,7 +848,7 @@ namespace HicsBL
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
-            
+
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamps_Result> dbLamps = cont.fn_show_lamps(username, pwhash).ToList();
@@ -881,7 +882,7 @@ namespace HicsBL
                         HelperClass.SetLampState(HueLampId, false);
                     }
                     success = true;
-                    
+
                 }
                 catch (Exception e)
                 {
@@ -913,11 +914,11 @@ namespace HicsBL
 
                     }
                 }
-                
+
             }
             return success;
 
-            }
+        }
         #endregion
 
         #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness,bool lampOnOff)
@@ -955,7 +956,7 @@ namespace HicsBL
                             hueId = HueAccess.GetLampId(dbLampName);
                             HelperClass.SetLampBrightness(hueId, brightness);
 
-                                if (lampOnOff == true)
+                            if (lampOnOff == true)
                             {
                                 cont.sp_lamp_on(username, pwhash, lampId);
                             }
@@ -964,18 +965,18 @@ namespace HicsBL
                                 cont.sp_lamp_off(username, pwhash, lampId);
                             }
 
-                           HelperClass.SetLampState(hueId, lampOnOff);
+                            HelperClass.SetLampState(hueId, lampOnOff);
                         }
-                   
+
                     }
                     success = true;
                 }
                 catch (Exception e)
                 {
                     success = false;
-                }                              
+                }
             }
-            return success;  
+            return success;
         }
         #endregion
 
@@ -991,7 +992,7 @@ namespace HicsBL
         /// <returns></returns>
         public static void dimLamp(string username, string password, string lampName, byte brightness)
         {
-           
+
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
             using (itin18_aktEntities cont = new itin18_aktEntities())
@@ -1011,7 +1012,7 @@ namespace HicsBL
                     }
 
                 }
-                
+
                 //Setzt die Brightness für die Lampe(Ausführung)
                 HelperClass.SetLampBrightness(hueId, brightness);
 
@@ -1045,29 +1046,29 @@ namespace HicsBL
                     //Von der DB mit den übergebenen Usernamen und PW einen Table mit der UserId/AdminId
                     // anfordern. Wenn kein Eintrag vorhanden ist, ist der User
                     // mit den übergebenen Daten nicht berechtigt
-                    
+
                     user = cont.fn_check_user_table(username, pwhash).ToList();
                     admin = cont.fn_check_admin_table(username, pwhash).ToList();
-                   
+
 
                     if (user[0].Value > 0 && admin.Count() == 1)
                     {
                         userIs = 1;
-                        
+
                     }
                     else
                     {
                         if (user[0].Value > 0 && admin.Count() == 0)
                         {
                             userIs = 2;
-                        }                     
+                        }
                     }
                 }
                 catch (Exception e)
-                 {
+                {
                     //probleme bei DBverbindung
                     userIs = 0;
-                 }
+                }
             }
             return userIs;
         }
@@ -1089,7 +1090,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_lamp_control_history_Result> tmp = new List<fn_show_lamp_control_history_Result>();
-            
+
                 try
                 {
 
@@ -1097,7 +1098,7 @@ namespace HicsBL
 
                     foreach (var item in db)
                     {
-                        if (Convert.ToDateTime((item.date).Value.ToShortDateString()) >= Convert.ToDateTime(beginDate.ToShortDateString()) 
+                        if (Convert.ToDateTime((item.date).Value.ToShortDateString()) >= Convert.ToDateTime(beginDate.ToShortDateString())
                          && Convert.ToDateTime((item.date).Value.ToShortDateString()) <= Convert.ToDateTime(endDate))
                         {
                             tmp.Add(item);
@@ -1143,9 +1144,9 @@ namespace HicsBL
 
                     foreach (var item in db)
                     {
-                        
-                            tmp.Add(item);
-                        
+
+                        tmp.Add(item);
+
                     }
                     if (tmp.Count <= 0)
                     {
@@ -1166,45 +1167,45 @@ namespace HicsBL
         #endregion
 
         #region PSP 19.1 EditUserPassword(string username, string passwordNew, string passwordOld)
-                /// <summary>
-                /// PSP 19.1
-                /// Edit UserPassword
-                /// </summary>
-                /// <param name="username"></param>
-                /// <param name="passwordOld"></param>
-                /// <param name="passwordNew"></param>
-                /// <returns>Bool ob erfolgreich</returns>
+        /// <summary>
+        /// PSP 19.1
+        /// Edit UserPassword
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="passwordOld"></param>
+        /// <param name="passwordNew"></param>
+        /// <returns>Bool ob erfolgreich</returns>
         public static bool EditUserPassword(string username, string passwordOld, string passwordNew)
-                {
-                    bool success = false;
-                    //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
-                    Byte[] pwhashOld = HelperClass.GetHash(passwordOld);
-                    Byte[] pwhashNew = HelperClass.GetHash(passwordNew);
-                    int result = 0;
+        {
+            bool success = false;
+            //Übergebene Passwörte hashen und in Var speichern für Übergabe an DB
+            Byte[] pwhashOld = HelperClass.GetHash(passwordOld);
+            Byte[] pwhashNew = HelperClass.GetHash(passwordNew);
+            int result = 0;
             using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                try
+                {
+                    result = cont.sp_change_password(username, pwhashOld, pwhashNew);
+                    if (result == 1)
                     {
-                        try
-                        {
-                            result = cont.sp_change_password(username, pwhashOld, pwhashNew);
-                            if (result == 1)
-                            {
-                                success = true;
-                            }
-                            else
-                            {
-                                success = false;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-
-                             success = false;
-                        }
-               
+                        success = true;
                     }
-                    return success;
+                    else
+                    {
+                        success = false;
+                    }
                 }
-                #endregion
+                catch (Exception e)
+                {
+
+                    success = false;
+                }
+
+            }
+            return success;
+        }
+        #endregion
 
         #region PSP 19.2 Change Password by Admin(string username, string password, int changeId, string newpassword)
         /// <summary>
@@ -1391,11 +1392,11 @@ namespace HicsBL
                     return tmp;
                 }
             }
-           
-             
-           
+
+
+
         }
-            #endregion
+        #endregion
 
         #region PSP 8.6 User aus der User-Gruppe löschen
 
@@ -1415,7 +1416,7 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
-                
+
                 foreach (var item in sur)
                 {
                     //Überprüfung der User Id
@@ -1454,8 +1455,8 @@ namespace HicsBL
                 catch (Exception e)
                 {
                     //Fehlermeldung in die leere Liste hinzufügen, die FM wird als Lampenname eingetragen
-                tmp.Add(new fn_show_lampgroup_allocate_Result { gruppen_name = "Keine Datenbankverbindung" });
-                tmp.Add(new fn_show_lampgroup_allocate_Result { gruppen_name = "No database connection" });
+                    tmp.Add(new fn_show_lampgroup_allocate_Result { gruppen_name = "Keine Datenbankverbindung" });
+                    tmp.Add(new fn_show_lampgroup_allocate_Result { gruppen_name = "No database connection" });
                     //tmp[0].groupname = "Keine Datenbankverbindung";
                     //tmp[1].groupname = "No database connection";
                     return tmp;
@@ -1463,7 +1464,7 @@ namespace HicsBL
             }
         }
         #endregion
-
+    }
 }
  
  
