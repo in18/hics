@@ -98,18 +98,22 @@ namespace HicsBL
             //    }
             //}
             //............................................................
+            //using (itin18_aktEntities cont = new itin18_aktEntities())
+            //{
+            //    List<fn_show_lampgroups_Result> lampgroups = DbAccess.GetAllLampGroups("admin", "123user!");
+
+            //    for (int i = 0; i < lampgroups.Count; i++)
+            //    {
+            //        Console.WriteLine(lampgroups[i].roomgroupname);
+            //    }
+
+            //}
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
-                List<fn_show_lampgroups_Result> lampgroups = DbAccess.GetAllLampGroups("admin", "123user!");
-
-                for (int i = 0; i < lampgroups.Count; i++)
-                {
-                    Console.WriteLine(lampgroups[i].roomgroupname);
-                }
-
+                cont.sp_lamp_off("admin", ha,1);
             }
-            //............................................................
-            Console.ReadKey();
+                //............................................................
+                Console.ReadKey();
 
         }
     }
