@@ -88,15 +88,15 @@ namespace HicsBL
             //}
             //DbAccess.addLampToGroup("admin","123user!", 16, 1);
             //............................................................
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                List<fn_show_users_Result> l = new List<fn_show_users_Result>();
-                l = DbAccess.GetAllUser("admin", "123user!");
-                foreach (var item in l)
-                {
-                    Console.WriteLine($"{item.name}|{item.group}|{item.id}");
-                }
-            }
+            //using (itin18_aktEntities cont = new itin18_aktEntities())
+            //{
+            //    List<fn_show_users_Result> l = new List<fn_show_users_Result>();
+            //    l = DbAccess.GetAllUser("admin", "123user!");
+            //    foreach (var item in l)
+            //    {
+            //        Console.WriteLine($"{item.name}|{item.group}|{item.id}");
+            //    }
+            //}
             //............................................................
             //using (itin18_aktEntities cont = new itin18_aktEntities())
             //{
