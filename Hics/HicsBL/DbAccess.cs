@@ -956,19 +956,22 @@ namespace HicsBL
                             hueId = HueAccess.GetLampId(dbLampName);
                             HelperClass.SetLampBrightness(hueId, brightness);
 
-                                if (lampOnOff == true)
+                            if (lampOnOff == true)
                             {
                                 cont.sp_lamp_on(username, pwhash, lampId);
+                                break;
                             }
                             else
                             {
                                 cont.sp_lamp_off(username, pwhash, lampId);
+                                break;
                             }
 
-                           HelperClass.SetLampState(hueId, lampOnOff);
+                           
                         }
                    
                     }
+                    HelperClass.SetLampState(hueId, lampOnOff);
                     success = true;
                 }
                 catch (Exception e)
@@ -1141,7 +1144,7 @@ namespace HicsBL
                 {
 
                     List<fn_show_lamp_control_history_Result> db = cont.fn_show_lamp_control_history(username, pwhash).ToList();
-                    if (tmp.Count <= 0)
+                    if (db.Count <= 0)
                     {
                         tmp.Add(new fn_show_lamp_control_history_Result { address = "", lamp_name = "Keine Daten" });
                     }

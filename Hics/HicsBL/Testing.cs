@@ -147,9 +147,14 @@ namespace HicsBL
             //    }
 
             //}
-            using (itin18_aktEntities cont = new itin18_aktEntities())
+            //using (itin18_aktEntities cont = new itin18_aktEntities())
+            //{
+            //    cont.sp_lamp_off("admin", ha,1);
+            //}
+            List<fn_show_lamp_control_history_Result> lr = DbAccess.GetLogFileComplete("admin", "123user!").ToList();
+            foreach (var i in lr)
             {
-                cont.sp_lamp_off("admin", ha,1);
+                Console.WriteLine($"{i.date}|{i.lamp_name}|{i.status}");
             }
             //............................................................
             Console.ReadKey();
