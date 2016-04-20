@@ -22,7 +22,7 @@ namespace HicsMVC.Models
 
         public List<fn_show_lamps_Result> lamplist { get; set; }
 
-        public List<fn_show_lamp_control_Result> lampAssignmentList { get; set; }
+        public List<fn_show_lampgroup_allocate_Result> lampAssignmentList { get; set; }
 
         #endregion
     }

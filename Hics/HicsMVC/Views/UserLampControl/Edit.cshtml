@@ -9,7 +9,7 @@
 
 <div>
     <div>
-        <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
+        <a href="~/User/Index"><div class="homepfeifer2"></div></a>
 
         <a href="~/Logout/Logout"><div class="logoutpfeifer2"></div></a>
     </div>
@@ -21,7 +21,8 @@
 
 <br style="clear:both;" />
 
-<div align="center" class="mainframe">
+
+<div align="center">
     @using (Html.BeginForm("Edit", "UserLampControl"))
     {
 
@@ -69,11 +70,15 @@
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <input type="submit" />
+                        <a style="margin-right:10px;" href="~/UserLampControl/Index"><input type="button" value="Back" /></a>
+                    </td>
+                    <td class="rechts">
+                        <input type="submit" value="Send" />
                     </td>
                 </tr>
             </table>
-        </div>                            }
+        </div>                            
+      }
 </div>
 
 <script type="text/javascript">

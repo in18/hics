@@ -58,9 +58,9 @@
             @foreach (var item in Model.lampAssignmentList)
             {
                 <tr class="boxrow">
-                    <td class="listframepadding">@item.groupname </td>
-                    <td class="listframepadding">@item.lampname </td>
-                    <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { @groupname = item.groupname, @lamp_id = (int)item.lamp_id }, null)</td>
+                    <td class="listframepadding">@item.gruppen_name </td>
+                    <td class="listframepadding">@item.lampen_name </td>
+                    <td>@Html.ActionLink("Delete", "DeleteEntry", "LampAssignment", new { @groupname = item.gruppen_name, @lamp_id = (int)item.lampen_id }, null)</td>
                 </tr>
             }
         </table>

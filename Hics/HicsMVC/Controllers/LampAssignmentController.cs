@@ -13,6 +13,10 @@ namespace HicsMVC.Controllers
     public class LampAssignmentController : Controller
     {
         // GET: LampAssigment
+        /// <summary>
+        /// Startpunkt für den LampAssignmentController-View, UserSession-Abfrage, Lampenliste von der BL abfragen, Model initialisieren und an View senden.
+        /// </summary>
+        /// <returns>LampAssignmentModel</returns>
         public ActionResult Index()
         {
 
@@ -25,35 +29,48 @@ namespace HicsMVC.Controllers
             //    //Fehler
             //    Debug.WriteLine("Falscher Datentyp");
 
-            //Viewbags mit Gruppen- und Lampenliste per Viewbag an den View übergeben
-            //ViewBag.GroupList = grouplist;
-            //ViewBag.LampList  = lamplist;
-            //ViewBag.LampAssignmentList = lampAssignmentList;
-
             LampAssignmentModel lam = new LampAssignmentModel();
 
-            lam.grouplist = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
-            lam.lamplist = HicsBL.DbAccess.GetAllLamps("Sepp", "123user!");
-            lam.lampAssignmentList = HicsBL.DbAccess.GetLampControl("Sepp", "123user!");
+            lam.grouplist = HicsBL.DbAccess.GetAllLampGroups(us.name, us.pw);
+            lam.lamplist = HicsBL.DbAccess.GetAllLamps(us.name, us.pw);
+            lam.lampAssignmentList = new List<fn_show_lampgroup_allocate_Result>();
+
+            List<fn_show_lampgroup_allocate_Result> slcsort = HicsBL.DbAccess.AllocateResult(us.name, us.pw);
+
+            for (int i = slcsort.Count - 1; i >= 0; i --)
+            {
+                lam.lampAssignmentList.Add(slcsort[i]);
+            }
 
             //Liste an den View schicken
             return View(lam);
         }
 
+        /// <summary>
+        /// Vorhandene Lampe einer vorhandenen Gruppe über das erhaltene Model zuordnen, UserSession-Abfrage.
+        /// </summary>
+        /// <param name="lam"></param>
+        /// <returns>Rückkehr zum Index</returns>
         [HttpPost]
         public ActionResult Assignment(LampAssignmentModel lam)
         {
-            //if (lam.groupname == || lam.lamp_id == )
-            {
+            UserSession us = (UserSession)Session["UserSession"];
 
-            }
-            HicsBL.DbAccess.addLampToGroup("Sepp", "123user!", lam.groupname, lam.lamp_id);
+            HicsBL.DbAccess.addLampToGroup(us.name, us.pw, lam.groupname, lam.lamp_id);
             return RedirectToAction("index");
         }
 
+        /// <summary>
+        /// Vom Anchor-Verweis erhaltene ID und erhaltenen Gruppenname zur Löschung eines Lampen-Gruppen-Zuordnungsdatensatzes an die BL weiterleiten, um eine Zuordnung aufzuheben.
+        /// </summary>
+        /// <param name="lamp_id"></param>
+        /// <param name="groupname"></param>
+        /// <returns>Rückkehr zum Index</returns>
         public ActionResult DeleteEntry(int lamp_id, string groupname)
         {
-            HicsBL.DbAccess.removeLampFromGroup("Sepp", "123user!", groupname, lamp_id);
+            UserSession us = (UserSession)Session["UserSession"];
+
+            HicsBL.DbAccess.removeLampFromGroup(us.name, us.pw, groupname, lamp_id);
             return RedirectToAction("index");
         }
     }

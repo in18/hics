@@ -126,6 +126,20 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="fn_show_lampgroup_allocate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="lampen_id" Type="int" />
+                <Property Name="lampen_name" Type="nvarchar" MaxLength="50" />
+                <Property Name="gruppen_id" Type="int" />
+                <Property Name="gruppen_name" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="fn_show_lampgroup_status" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
@@ -269,6 +283,12 @@
           <Parameter Name="username" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
           <Parameter Name="del_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_delete_user_from_usergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="user_id" Type="int" Mode="In" />
+          <Parameter Name="usergroup_id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_delete_usergroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="nvarchar" Mode="In" />
@@ -436,6 +456,16 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
           </FunctionImport>
+          <FunctionImport Name="sp_delete_user_from_usergroup">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+            <Parameter Name="user_id" Mode="In" Type="Int32" />
+            <Parameter Name="usergroup_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fn_show_lampgroup_allocate" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lampgroup_allocate_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="fn_show_deleted_lamps_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
@@ -507,6 +537,12 @@
         <ComplexType Name="fn_show_usergroups_Result">
           <Property Type="Int32" Name="id" Nullable="true" />
           <Property Type="String" Name="groupname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="fn_show_lampgroup_allocate_Result">
+          <Property Type="Int32" Name="lampen_id" Nullable="true" />
+          <Property Type="String" Name="lampen_name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="gruppen_id" Nullable="true" />
+          <Property Type="String" Name="gruppen_name" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -653,7 +689,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-        </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="sp_delete_user_from_usergroup" FunctionName="itin18_aktModel.Store.sp_delete_user_from_usergroup" />
+          <FunctionImportMapping FunctionImportName="fn_show_lampgroup_allocate" FunctionName="itin18_aktModel.Store.fn_show_lampgroup_allocate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lampgroup_allocate_Result">
+                <ScalarProperty Name="lampen_id" ColumnName="lampen_id" />
+                <ScalarProperty Name="lampen_name" ColumnName="lampen_name" />
+                <ScalarProperty Name="gruppen_id" ColumnName="gruppen_id" />
+                <ScalarProperty Name="gruppen_name" ColumnName="gruppen_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
