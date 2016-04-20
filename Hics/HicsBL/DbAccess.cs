@@ -1389,8 +1389,9 @@ namespace HicsBL
                     return tmp;
                 }
             }
-            #endregion
+            
         }
+#endregion
 
         #region User aus der User-Gruppe löschen
 
