@@ -465,9 +465,7 @@ namespace HicsBL
             return success;
         }
     
-        #endregion
-
-        
+        #endregion 
 
         #region PSP 6.3 removeLampFromGroup(string username, string password, string groupName, int lampId)
         /// <summary>
@@ -890,6 +888,7 @@ namespace HicsBL
         }
         #endregion
 
+        #region swichtGroup
         public static bool swichtGroup(string username, string password, int groupId, bool onOff)
         {
             bool success = false;
@@ -910,11 +909,12 @@ namespace HicsBL
 
                     }
                 }
-                
+
             }
             return success;
 
-            }
+        } 
+        #endregion
 
         #region PSP 15.1 dimLamp(string username, string password, int lampId, byte brightness,bool lampOnOff)
         /// <summary>
@@ -1384,9 +1384,10 @@ namespace HicsBL
                     //tmp[1].groupname = "No database connection";
                     return tmp;
                 }
-            } 
-            #endregion
+            }
+           
         }
+        #endregion
 
     }
 }
