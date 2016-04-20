@@ -484,40 +484,6 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_dimm", usernameParameter, passwordParameter, lamp_idParameter, brightParameter);
         }
     
-        public virtual int sp_lamp_off(string username, byte[] password, Nullable<int> lamp_id)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(byte[]));
-    
-            var lamp_idParameter = lamp_id.HasValue ?
-                new ObjectParameter("lamp_id", lamp_id) :
-                new ObjectParameter("lamp_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_off", usernameParameter, passwordParameter, lamp_idParameter);
-        }
-    
-        public virtual int sp_lamp_on(string username, byte[] password, Nullable<int> lamp_id)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(byte[]));
-    
-            var lamp_idParameter = lamp_id.HasValue ?
-                new ObjectParameter("lamp_id", lamp_id) :
-                new ObjectParameter("lamp_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_on", usernameParameter, passwordParameter, lamp_idParameter);
-        }
-    
         [DbFunction("itin18_aktEntities", "fn_show_lamp_control")]
         public virtual IQueryable<fn_show_lamp_control_Result> fn_show_lamp_control(string username, byte[] password)
         {
@@ -579,6 +545,40 @@ namespace HicsBL
                 new ObjectParameter("password", typeof(byte[]));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroup_allocate_Result>("[itin18_aktEntities].[fn_show_lampgroup_allocate](@username, @password)", usernameParameter, passwordParameter);
+        }
+    
+        public virtual int sp_lamp_off(string username, byte[] password, Nullable<int> lamp_id)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_off", usernameParameter, passwordParameter, lamp_idParameter);
+        }
+    
+        public virtual int sp_lamp_on(string username, byte[] password, Nullable<int> lamp_id)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_on", usernameParameter, passwordParameter, lamp_idParameter);
         }
     }
 }

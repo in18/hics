@@ -94,7 +94,7 @@ namespace HicsBL
             //    l = DbAccess.GetAllUser("admin", "123user!");
             //    foreach (var item in l)
             //    {
-            //        Console.WriteLine(item.name);
+            //        Console.WriteLine($"{item.name}|{item.group}|{item.id}");
             //    }
             //}
             //............................................................
@@ -104,14 +104,55 @@ namespace HicsBL
 
             //    for (int i = 0; i < lampgroups.Count; i++)
             //    {
-            //        Console.WriteLine(lampgroups[i].roomgroupname + "," + lampgroups[i].id);
-
+            //        Console.WriteLine(lampgroups[i].roomgroupname);
             //    }
 
             //}
             //............................................................
-            Console.ReadKey();
+            //using (itin18_aktEntities cont = new itin18_aktEntities())
+            //{
+            //    List<fn_show_lamp_control_Result> slsr = DbAccess.GetAllLampsStatus("admin", "123user!");
+            //    {
+            //        for (int i = 0; i < slsr.Count; i++)
+            //        {
+            //            Console.WriteLine($"Lampenname:{slsr[i].lampname} Lampenstatus:{slsr[i].status}");
+            //        }
+            //    }
 
+            //}
+            //------------------------------------------------------------
+            //using (itin18_aktEntities cont = new itin18_aktEntities())
+            //{
+            //    List<fn_show_lamps_Result> slr = DbAccess.GetAllLamps("admin", "123user!");
+            //    {
+            //        for (int i = 0; i < slr.Count; i++)
+            //        {
+            //            Console.WriteLine($"Lampenname:{slr[i].name}");
+            //        }
+            //    }    
+            //}
+            //------------------------------------------------------------
+            //DbAccess.addLampGroup("admin", "123user!", "Kellerscheißhaus");
+            //------------------------------------------------------------
+
+            //DbAccess.addUserToUsergroup("admin", "123user!", 4, 1);
+
+            //using (itin18_aktEntities cont = new itin18_aktEntities())
+            //{
+            //    List<fn_show_lampgroups_Result> lampgroups = DbAccess.GetAllLampGroups("admin", "123user!");
+
+            //    for (int i = 0; i < lampgroups.Count; i++)
+            //    {
+            //        Console.WriteLine(lampgroups[i].roomgroupname);
+            //    }
+
+            //}
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                cont.sp_lamp_off("admin", ha,1);
+            }
+            //............................................................
+            Console.ReadKey();
         }
     }
 }

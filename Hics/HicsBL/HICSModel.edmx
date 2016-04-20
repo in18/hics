@@ -301,6 +301,16 @@
           <Parameter Name="lamp_id" Type="int" Mode="In" />
           <Parameter Name="bright" Type="tinyint" Mode="In" />
         </Function>
+        <Function Name="sp_lamp_off" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="lamp_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_lamp_on" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="lamp_id" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="itin18_aktModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -438,16 +448,6 @@
             <Parameter Name="lamp_id" Mode="In" Type="Int32" />
             <Parameter Name="bright" Mode="In" Type="Byte" />
           </FunctionImport>
-          <FunctionImport Name="sp_lamp_off">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="Binary" />
-            <Parameter Name="lamp_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_lamp_on">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="Binary" />
-            <Parameter Name="lamp_id" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="fn_show_lamp_control" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lamp_control_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
@@ -465,6 +465,16 @@
           <FunctionImport Name="fn_show_lampgroup_allocate" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lampgroup_allocate_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_lamp_off">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+            <Parameter Name="lamp_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_lamp_on">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+            <Parameter Name="lamp_id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="fn_show_deleted_lamps_Result">
@@ -700,6 +710,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_lamp_off" FunctionName="itin18_aktModel.Store.sp_lamp_off" />
+          <FunctionImportMapping FunctionImportName="sp_lamp_on" FunctionName="itin18_aktModel.Store.sp_lamp_on" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
