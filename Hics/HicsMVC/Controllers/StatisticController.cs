@@ -10,27 +10,20 @@ namespace HicsMVC.Controllers
 {
     public class StatisticController : Controller
     {
-
-
         public ActionResult Index()
         {
-            UserSession us = (UserSession)Session["UserSession"];
-
-            List<fn_show_lamp_control_history_Result> userStatisticList = HicsBL.DbAccess.GetLogFileComplete(us.name, us.pw);
-
-            List<fn_show_lamp_control_history_Result> filteredStatisticList = new List<fn_show_lamp_control_history_Result>();
-
             try
             {
+                //User-Session-Informationen abrufen.
+                UserSession us = (UserSession)Session["UserSession"];
 
-                //for (int i = 0; i < userStatisticList.Count; i++)
-                //{
-                //    if (userStatisticList[i].user_name.ToLower() == us.name.ToLower())
-                //    {
-                //        filteredStatisticList.Add(userStatisticList[i]);
-                //    }
-                //}
+                //Statistik-Liste von BL abrufen.
+                List<fn_show_lamp_control_history_Result> userStatisticList = HicsBL.DbAccess.GetLogFileComplete(us.name, us.pw);
 
+                //Temporäre Statistik-Liste initialisieren.
+                List<fn_show_lamp_control_history_Result> filteredStatisticList = new List<fn_show_lamp_control_history_Result>();
+
+                //Liste invertiert sortieren.
                 for (int i = userStatisticList.Count -1; i >= 0; i--)
                 {
                     if (userStatisticList[i].user_name.ToLower() == us.name.ToLower())
@@ -43,7 +36,7 @@ namespace HicsMVC.Controllers
             }
             catch (Exception)
             {
-                return View(new fn_show_lamp_control_history_Result { address = "", lamp_name = "No database connection", user_name = "" });
+                return RedirectToAction("Login", "Login");
             }
         }
     }

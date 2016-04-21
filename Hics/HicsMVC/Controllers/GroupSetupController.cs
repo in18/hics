@@ -19,21 +19,31 @@ namespace HicsMVC.Controllers
         /// <returns>GroupSetupModel</returns>
         public ActionResult Index()
         {
-            //ViewBag.GroupList = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
-            //List<fn_show_lampgroups_Result> erg = HicsBL.DbAccess.GetAllLampGroups("Sepp", "123user!");
-            UserSession us = (UserSession)Session["UserSession"];
-
-            GroupSetupModel gsm = new GroupSetupModel();
-            gsm.GroupSetupList = new List<fn_show_lampgroups_Result>();
-
-            List<fn_show_lampgroups_Result> slr = HicsBL.DbAccess.GetAllLampGroups(us.name, us.pw);
-
-            for (int i = slr.Count - 1; i >= 0; i--)
+            try
             {
-                gsm.GroupSetupList.Add(slr[i]);
-            }
+                //User-Session-Informationen abrufen.
+                UserSession us = (UserSession)Session["UserSession"];
+
+                //Model initialisieren.
+                GroupSetupModel gsm = new GroupSetupModel();
+                gsm.GroupSetupList = new List<fn_show_lampgroups_Result>();
+
+                //Liste für Ausgabe initialisieren.
+                List<fn_show_lampgroups_Result> slr = HicsBL.DbAccess.GetAllLampGroups(us.name, us.pw);
+
+                //Liste invertiert sortieren.
+                for (int i = slr.Count - 1; i >= 0; i--)
+                {
+                    gsm.GroupSetupList.Add(slr[i]);
+                }
             
-            return View(gsm);
+                return View(gsm);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
         }
 
         /// <summary>
@@ -44,6 +54,7 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult AddGroup(GroupSetupModel gsm)
         {
+            //User-Session-Informationen abrufen.
             UserSession us = (UserSession)Session["UserSession"];
 
             HicsBL.DbAccess.addLampGroup(us.name, us.pw, gsm.Groupname);
@@ -57,8 +68,10 @@ namespace HicsMVC.Controllers
         /// <returns>Rückkehr zum Index</returns>
         public ActionResult DeleteGroup(int id)
         {
+            //User-Session-Informationen abrufen.
             UserSession us = (UserSession)Session["UserSession"];
 
+            //angelegte Lampengruppenlöschbefehl an BL per ID weiterleiten.
             HicsBL.DbAccess.removeLampGroup(us.name, us.pw, id);
             return RedirectToAction("index");
         }

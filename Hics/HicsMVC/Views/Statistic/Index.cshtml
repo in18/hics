@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/MicronLayout.cshtml";
 }
 
+@*Kopfzeileninformationen - Zurück-Button, Überschrift, Logout-Button*@
 <div>
     <div>
         <a href="~/User/Index"><div class="homepfeifer2"></div></a>
@@ -18,6 +19,16 @@
 </div>
 <br style="clear:both;" />
 
+@*Benutzername*@
+    <div>
+    Username: @if (Model[0].user_name != null) {
+                @Model[0].user_name }
+
+                else {
+      	        @Model[0].user_name = "User not found" }
+    </div>
+
+@*Ausgabe der gefilterten Statistik-Liste für den eingeloggten User*@
 <div align="center">
     <div class="borderframe" style="overflow:auto;">
         <table>
@@ -26,7 +37,8 @@
                 <th align="left">Adresse</th>
                 <th align="left">Lampname</th>
                 <th align="left">Status</th>
-                <th align="left">Username</th>
+                <th align="left">Brightness</th>
+                @*<th align="left">Username</th>*@
                 <th></th>
             </tr>
             @foreach (var item in Model)
@@ -36,7 +48,8 @@
                     <td class="listenpadding">@item.address </td>
                     <td class="listenpadding">@item.lamp_name </td>
                     <td class="listenpadding">@item.status</td>
-                    <td class="listenpadding">@item.user_name</td>
+                    <td class="listenpadding">@item.brightness</td>
+                    @*<td class="listenpadding">@item.user_name</td>*@
                 </tr>
             }
         </table>

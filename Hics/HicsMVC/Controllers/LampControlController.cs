@@ -18,21 +18,28 @@ namespace HicsMVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            UserSession us = (UserSession)Session["UserSession"];
-            List<HicsBL.fn_show_lamp_control_Result> lamps;
+            try
+            {
+                //User-Session-Informationen abrufen.
+                UserSession us = (UserSession)Session["UserSession"];
 
-            lamps = HicsBL.DbAccess.GetAllLampsStatus(us.name, us.pw).ToList();
+                //Liste initialisieren.
+                List<HicsBL.fn_show_lamp_control_Result> lamps;
+
+                //Liste Inhalt zuweisen.
+                lamps = HicsBL.DbAccess.GetAllLampsStatus(us.name, us.pw).ToList();
                            
-            return View(lamps);
+                return View(lamps);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Login");
+            }
         }
-
-
 
         [HttpGet]
         public ActionResult Index_Lampcontrol()
-        {
-            
-
+        { 
             return View();
         }
 
@@ -44,18 +51,28 @@ namespace HicsMVC.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            UserSession us = (UserSession)Session["UserSession"];
-            List<HicsBL.fn_show_lamp_control_Result> lamp;
-            lamp = HicsBL.DbAccess.GetAllLampsStatus(us.name, us.pw).ToList();
-            
-             HicsBL.fn_show_lamp_control_Result erg = lamp.Where(x => x.lamp_id == id).FirstOrDefault();
-            //List<LampControl> lamps = DbHelper.DbHelperClass.getLamps();
-            // List<HicsBL.fn_show_lamps_Result> lamps = HicsBL.DbAccess.GetAllLamps("admin","123user!");
-            //LampControl lc = (from a in lamps where a.id == id select a).FirstOrDefault<LampControl>();
+            try
+            {
+                //User-Session-Informationen abrufen.
+                UserSession us = (UserSession)Session["UserSession"];
 
-            
+                //Liste initialisieren.
+                List<HicsBL.fn_show_lamp_control_Result> lamp;
 
-            return View(erg);
+                //Liste Inhalt zuwesien.
+                lamp = HicsBL.DbAccess.GetAllLampsStatus(us.name, us.pw).ToList();
+            
+                 HicsBL.fn_show_lamp_control_Result erg = lamp.Where(x => x.lamp_id == id).FirstOrDefault();
+                //List<LampControl> lamps = DbHelper.DbHelperClass.getLamps();
+                // List<HicsBL.fn_show_lamps_Result> lamps = HicsBL.DbAccess.GetAllLamps("admin","123user!");
+                //LampControl lc = (from a in lamps where a.id == id select a).FirstOrDefault<LampControl>();
+
+                return View(erg);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Login");
+            }
         }
 
 
@@ -72,11 +89,17 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult Edit (HicsBL.fn_show_lamp_control_Result l)
         {
-            UserSession us = (UserSession)Session["UserSession"];
-            HicsBL.DbAccess.dimLamp(us.name, us.pw, (int)l.lamp_id, (byte)l.brightness,(bool)l.status);
+            try
+            {
+                UserSession us = (UserSession)Session["UserSession"];
+                HicsBL.DbAccess.dimLamp(us.name, us.pw, (int)l.lamp_id, (byte)l.brightness,(bool)l.status);
 
-            return RedirectToAction("Index");
-
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Login");
+            }
         }
     }
 }

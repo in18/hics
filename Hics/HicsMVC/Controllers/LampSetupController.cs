@@ -20,14 +20,21 @@ namespace HicsMVC.Controllers
         /// <returns>LampSetupModel</returns>
         public ActionResult Index()
         {
-            UserSession us = (UserSession)Session["UserSession"];
-
-            LampSetupModel lsm = new LampSetupModel();
-            lsm.Lamplist = new List<fn_show_lamps_Result>();
             try
             {
+                //User-Session-Informationen abrufen.
+                UserSession us = (UserSession)Session["UserSession"];
+
+                //Model initialisieren.
+                LampSetupModel lsm = new LampSetupModel();
+
+                //Model-Lampenliste initialisieren.
+                lsm.Lamplist = new List<fn_show_lamps_Result>();
+
+                //Temporäre Sortierliste Inhalt zuweisen.
                 List<fn_show_lamps_Result> slrsort = HicsBL.DbAccess.GetAllLamps(us.name, us.pw);
 
+                //Liste invertieren.
                 for (int i = slrsort.Count - 1; i >= 0; i--)
                 {
                     lsm.Lamplist.Add(slrsort[i]);
@@ -37,7 +44,7 @@ namespace HicsMVC.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return RedirectToAction("Login", "Login");
             }
         }
 
@@ -49,10 +56,21 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult AddLamp(LampSetupModel lsm)
         {
-            UserSession us = (UserSession)Session["UserSession"];
+            try
+            {
+                //User-Session-Informationen abrufen.
+                UserSession us = (UserSession)Session["UserSession"];
 
-            HicsBL.DbAccess.addLamp(us.name, us.pw, lsm.Id, lsm.Description);
-            return RedirectToAction("index");
+                //Lampe über BL erstellen.
+                HicsBL.DbAccess.addLamp(us.name, us.pw, lsm.Id, lsm.Description);
+
+                //View neu aufbauen.
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Login");
+            }
         }
 
         /// <summary>
@@ -62,12 +80,20 @@ namespace HicsMVC.Controllers
         /// <returns>Rückkehr zum Index</returns>
         public ActionResult DeleteLamp(int id)
         {
-            UserSession us = (UserSession)Session["UserSession"];
+            try
+            {
+                //User-Session-Informationen abrufen.
+                UserSession us = (UserSession)Session["UserSession"];
 
-            HicsBL.DbAccess.deleteLamp(us.name, us.pw, id);
-            return RedirectToAction("index");
+                //Lampe über BL als inaktiv markieren.
+                HicsBL.DbAccess.deleteLamp(us.name, us.pw, id);
+
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Login", "Login");
+            }
         }
-
-
     }
 }

@@ -35,28 +35,35 @@ namespace HicsMVC.Controllers
         [HttpPost]
         public ActionResult ChangePassword(UserChangePasswordModel ucpm)
         {
-            //Altes PW mit der DB abgleichen, wenn gleich -> neues PW in DB speichern.
-
-            if (ucpm.NewPassword == ucpm.RetypeNewPassword)
+            try
             {
-                UserSession userdaten = (UserSession)Session["UserSession"];
+                //Altes PW mit der DB abgleichen, wenn gleich -> neues PW in DB speichern.
+                if (ucpm.NewPassword == ucpm.RetypeNewPassword)
+                {
+                    //User-Session-Informationen abrufen.
+                    UserSession userdaten = (UserSession)Session["UserSession"];
 
-                bool b = DbAccess.EditUserPassword(userdaten.name, ucpm.RecentPassword, ucpm.NewPassword);
+                    bool b = DbAccess.EditUserPassword(userdaten.name, ucpm.RecentPassword, ucpm.NewPassword);
 
-                if (b == true)
-                { 
-                    return RedirectToAction("Logout", "Logout");
+                    if (b == true)
+                    { 
+                        return RedirectToAction("Logout", "Logout");
+                    }
+                    else
+                    {
+                        ViewBag.errorMessage = "RecentPassword wrong";
+                    }
                 }
                 else
                 {
-                    ViewBag.errorMessage = "RecentPassword wrong";
+                    ViewBag.errorMessage = "Password does not match";
                 }
+                return View(ucpm);
             }
-            else
+            catch (Exception)
             {
-                ViewBag.errorMessage = "Password does not match";
+                return RedirectToAction("Login", "Login");
             }
-            return View(ucpm);
         }    
     }
 }

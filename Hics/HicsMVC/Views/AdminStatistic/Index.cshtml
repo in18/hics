@@ -6,6 +6,7 @@
 
 }
 
+@*Kopfzeileninformationen - Zurück-Button, Überschrift, Logout-Button*@
 <div>
     <div>
         <a href="~/Admin/Index"><div class="homepfeifer2"></div></a>
@@ -19,6 +20,13 @@
 </div>
 <br style="clear:both;" />
 
+@*Benutzername*@
+<div>
+    Username: @if (ViewBag.Sessionname != null) {<p>ViewBag.Sessionname</p>}
+               else                             {<p>User not found</p>}
+</div>
+
+@*Statistik-Listenausgabe*@
 <div align="center">
     @*<div class="liste">*@
         <div class="borderframe" style="overflow:auto;">
@@ -28,16 +36,18 @@
                     <th align="left">Adresse</th>
                     <th align="left">Lampname</th>
                     <th align="left">Status</th>
+                    <th align="left">Brightness</th>
                     <th align="left">Username</th>
                     <th></th>
                 </tr>
                 @foreach (var item in Model)
-            {
+                {
                     <tr>
                         <td class="listenpadding">@item.date</td>
                         <td class="listenpadding">@item.address </td>
                         <td class="listenpadding">@item.lamp_name </td>
                         <td class="listenpadding">@item.status</td>
+                        <td class="listenpadding">@item.brightness</td>
                         <td class="listenpadding">@item.user_name</td>
                     </tr>
                 }
