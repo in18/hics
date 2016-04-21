@@ -20,13 +20,17 @@
 <br style="clear:both;" />
 
 @*Benutzername*@
-    <div>
-    Username: @if (Model[0].user_name != null) {
-                @Model[0].user_name }
-
-                else {
-      	        @Model[0].user_name = "User not found" }
-    </div>
+<table style="padding-left:10px;">
+    <tr>
+        <td style="color:#054588; font-weight:bold">Username: </td>
+        <td style="font-weight:bold"">@if (Model[0].user_name != null)
+        {
+            @Model[0].user_name }
+        else
+        {
+            <text>User not found</text> }</td>
+    </tr>
+</table><br />
 
 @*Ausgabe der gefilterten Statistik-Liste für den eingeloggten User*@
 <div align="center">
@@ -44,11 +48,11 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td class="listenpadding">@item.date</td>
-                    <td class="listenpadding">@item.address </td>
-                    <td class="listenpadding">@item.lamp_name </td>
-                    <td class="listenpadding">@item.status</td>
-                    <td class="listenpadding">@item.brightness</td>
+                    <td class="listenpaddingstatistic">@item.date</td>
+                    <td class="listenpaddingstatistic">@item.address </td>
+                    <td class="listenpaddingstatistic">@item.lamp_name </td>
+                    <td class="listenpaddingstatistic">@item.status</td>
+                    <td class="listenpaddingstatistic">@item.brightness</td>
                     @*<td class="listenpadding">@item.user_name</td>*@
                 </tr>
             }

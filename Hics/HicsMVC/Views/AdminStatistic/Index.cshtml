@@ -21,10 +21,16 @@
 <br style="clear:both;" />
 
 @*Benutzername*@
-<div>
-    Username: @if (ViewBag.Sessionname != null) {<p>ViewBag.Sessionname</p>}
-               else                             {<p>User not found</p>}
-</div>
+<table style="padding-left:10px;">
+    <tr>
+        <td style="color:#054588; font-weight:bold">Username: </td>
+        <td style="font-weight:bold"">@if (ViewBag.Sessionname != null)
+                {<p>@ViewBag.Sessionname</p>}
+             else
+                {<p>User not found</p>}
+        </td>
+    </tr>
+</table><br />
 
 @*Statistik-Listenausgabe*@
 <div align="center">
