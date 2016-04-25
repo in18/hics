@@ -35,9 +35,20 @@
 @*Statistik-Listenausgabe*@
 <div align="center">
     @*<div class="liste">*@
+        <table style="padding-left:20px;">
+            <tr>
+                <th align="left" class="listenpadding">Date</th>
+                <th align="left" class="listenpadding">Adresse</th>
+                <th align="left" class="listenpadding">Lampname</th>
+                <th align="left" class="listenpadding" style="padding-left:20px;">Status</th>
+                <th align="left" class="listenpadding">Brightness</th>
+                <th align="left" class="listenpadding">Username</th>
+                <th></th>
+            </tr>
+        </table>
         <div class="borderframe" style="overflow:auto;">
             <table>
-                <tr>
+                @*<tr>
                     <th align="left">Date</th>
                     <th align="left">Adresse</th>
                     <th align="left">Lampname</th>
@@ -45,10 +56,10 @@
                     <th align="left">Brightness</th>
                     <th align="left">Username</th>
                     <th></th>
-                </tr>
+                </tr>*@
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr >
                         <td class="listenpadding">@item.date</td>
                         <td class="listenpadding">@item.address </td>
                         <td class="listenpadding">@item.lamp_name </td>

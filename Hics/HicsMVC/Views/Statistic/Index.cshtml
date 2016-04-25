@@ -34,17 +34,28 @@
 
 @*Ausgabe der gefilterten Statistik-Liste für den eingeloggten User*@
 <div align="center">
+    <table style="min-width:513px;margin-left:120px;">
+        <tr>
+            <th align="left">Date</th>
+            <th align="left" style="padding-left:70px;">Adresse</th>
+            <th align="left" style="padding-left:10px;">Lampname</th>
+            <th align="left" style="padding-left:10px;">Status</th>
+            <th align="left">Brightness</th>
+            @*<th align="left">Username</th>*@
+            <th></th>
+        </tr>
+    </table>
     <div class="borderframe" style="overflow:auto;">
         <table>
-            <tr>
+            @*<tr>
                 <th align="left">Date</th>
                 <th align="left">Adresse</th>
                 <th align="left">Lampname</th>
                 <th align="left">Status</th>
                 <th align="left">Brightness</th>
                 @*<th align="left">Username</th>*@
-                <th></th>
-            </tr>
+                @*<th></th>
+            </tr>*@
             @foreach (var item in Model)
             {
                 <tr>
