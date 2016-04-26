@@ -589,25 +589,6 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 7.4 editLampGroup(string username, string password, int groupId)
-        /// <summary>
-        /// PSP 7.4
-        /// Lampengruppen editieren
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="groupId"></param>
-        /// <returns></returns>
-        public static bool editLampGroup(string username, string password, int groupId)
-        {
-            bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            Byte[] pwhash = HelperClass.GetHash(password);
-            return success;
-
-        }
-        #endregion
-
         #region PSP  7.4 editLampGroup (string username, string password, int groupId)
         /// <summary>
         /// PSP 7.4
@@ -1275,8 +1256,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region Die in der DB eingetragenen Lampennamen als Liste
-
+        #region GetAllLamps (string username, string password)
         /// <summary>
         /// Die in der DB eingetragenen Lampennamen als Liste
         /// </summary>
@@ -1450,11 +1430,23 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
-                
+                List<fn_show_usergroup_Result> ugr = cont.fn_show_usergroup(username, pwhash).ToList();
+
+                string ugrName = "";
+
+                foreach (var item in ugr)
+                {
+                    if (item.id == groupId)
+                    {
+                        ugrName = item.groupname;
+                    }
+                }
+
+
                 foreach (var item in sur)
                 {
-                    //Überprüfung der User Id
-                    if (item.id == userId)
+                    //Überprüfung der User Id und des Gruppennamens
+                    if (item.id == userId && item.group == ugrName)
                     {
                         try
                         {
