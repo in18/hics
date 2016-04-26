@@ -1257,7 +1257,6 @@ namespace HicsBL
         #endregion
 
         #region GetAllLamps (string username, string password)
-
         /// <summary>
         /// Die in der DB eingetragenen Lampennamen als Liste
         /// </summary>
@@ -1431,11 +1430,23 @@ namespace HicsBL
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
-                
+                List<fn_show_usergroup_Result> ugr = cont.fn_show_usergroup(username, pwhash).ToList();
+
+                string ugrName = "";
+
+                foreach (var item in ugr)
+                {
+                    if (item.id == groupId)
+                    {
+                        ugrName = item.groupname;
+                    }
+                }
+
+
                 foreach (var item in sur)
                 {
-                    //Überprüfung der User Id
-                    if (item.id == userId)
+                    //Überprüfung der User Id und des Gruppennamens
+                    if (item.id == userId && item.group == ugrName)
                     {
                         try
                         {
