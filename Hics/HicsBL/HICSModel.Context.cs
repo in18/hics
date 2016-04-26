@@ -463,27 +463,6 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_delete_usergroup", usernameParameter, passwordParameter, del_idParameter);
         }
     
-        public virtual int sp_lamp_dimm(string username, byte[] password, Nullable<int> lamp_id, Nullable<byte> bright)
-        {
-            var usernameParameter = username != null ?
-                new ObjectParameter("username", username) :
-                new ObjectParameter("username", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("password", password) :
-                new ObjectParameter("password", typeof(byte[]));
-    
-            var lamp_idParameter = lamp_id.HasValue ?
-                new ObjectParameter("lamp_id", lamp_id) :
-                new ObjectParameter("lamp_id", typeof(int));
-    
-            var brightParameter = bright.HasValue ?
-                new ObjectParameter("bright", bright) :
-                new ObjectParameter("bright", typeof(byte));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_dimm", usernameParameter, passwordParameter, lamp_idParameter, brightParameter);
-        }
-    
         [DbFunction("itin18_aktEntities", "fn_show_lamp_control")]
         public virtual IQueryable<fn_show_lamp_control_Result> fn_show_lamp_control(string username, byte[] password)
         {
@@ -547,6 +526,27 @@ namespace HicsBL
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_show_lampgroup_allocate_Result>("[itin18_aktEntities].[fn_show_lampgroup_allocate](@username, @password)", usernameParameter, passwordParameter);
         }
     
+        public virtual int sp_lamp_dimm(string username, byte[] password, Nullable<int> lamp_id, Nullable<byte> bright)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
+    
+            var brightParameter = bright.HasValue ?
+                new ObjectParameter("bright", bright) :
+                new ObjectParameter("bright", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_dimm", usernameParameter, passwordParameter, lamp_idParameter, brightParameter);
+        }
+    
         public virtual int sp_lamp_off(string username, byte[] password, Nullable<int> lamp_id)
         {
             var usernameParameter = username != null ?
@@ -579,6 +579,31 @@ namespace HicsBL
                 new ObjectParameter("lamp_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_lamp_on", usernameParameter, passwordParameter, lamp_idParameter);
+        }
+    
+        public virtual int sp_set_lamp_stat(string username, byte[] password, Nullable<int> lamp_id, Nullable<byte> bright, Nullable<bool> stat)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(byte[]));
+    
+            var lamp_idParameter = lamp_id.HasValue ?
+                new ObjectParameter("lamp_id", lamp_id) :
+                new ObjectParameter("lamp_id", typeof(int));
+    
+            var brightParameter = bright.HasValue ?
+                new ObjectParameter("bright", bright) :
+                new ObjectParameter("bright", typeof(byte));
+    
+            var statParameter = stat.HasValue ?
+                new ObjectParameter("stat", stat) :
+                new ObjectParameter("stat", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_set_lamp_stat", usernameParameter, passwordParameter, lamp_idParameter, brightParameter, statParameter);
         }
     }
 }
