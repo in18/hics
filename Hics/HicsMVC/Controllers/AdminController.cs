@@ -17,11 +17,25 @@ namespace HicsMVC.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Der Administrator hat hier das Recht das Password aller Benutzer zu ändern,
+        /// innerhalb der aktuellen Session
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult ChangePassword(int id)
         {
+
+            //Model initialisieren.
             AdminChangePasswordModel acpm = new AdminChangePasswordModel();
+
+            //Momentane Usersession Abfragen und zur weiteren Benutzung zur Verfügung stellen.
             UserSession us = (UserSession)Session["UserSession"];
+
+            //Session-Name über Viewbag an View übermitteln.
             ViewBag.Adminstatus = us.name.ToLower();
+
+            //Inhalt aus Datenbank auslesen und in Liste speichern 
             List<fn_show_users_Result> users = HicsBL.DbAccess.GetAllUser(us.name, us.pw);
 
             for (int i = 0; i < users.Count; i++)
@@ -37,7 +51,11 @@ namespace HicsMVC.Controllers
             ViewBag.UserId = id;
             return View(acpm);
         }
-
+        /// <summary>
+        /// Zugehörige Post Methode zum ändern des Passwortes
+        /// </summary>
+        /// <param name="acpm"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ChangePassword(AdminChangePasswordModel acpm)
         {            
