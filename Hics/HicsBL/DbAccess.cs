@@ -1477,61 +1477,6 @@ namespace HicsBL
         }
             #endregion
 
-        
-
-        #region PSP 19.3 Allocate Result
-
-        /// <summary>
-        /// Zwischentabelle
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="userId"></param>
-        /// <param name="groupId"></param>
-        /// <returns>success</returns>
-        public static bool deleteUserFromUsergroup(string username, string password, int userId, int groupId)
-        {
-            bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            Byte[] pwhash = HelperClass.GetHash(password);
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
-                List<fn_show_usergroup_Result> ugr = cont.fn_show_usergroup(username, pwhash).ToList();
-
-                string ugrName = "";
-
-                foreach (var item in ugr)
-                {
-                    if (item.id == groupId)
-                    {
-                        ugrName = item.groupname;
-                    }
-                }
-
-
-                foreach (var item in sur)
-                {
-                    //Überprüfung der User Id und des Gruppennamens
-                    if (item.id == userId && item.group == ugrName)
-                    {
-                        try
-                        {
-                            //Löschen des Users aus der UserGruppe
-                            cont.sp_delete_user_from_usergroup(username, pwhash, item.id, userId);
-                            success = true;
-                        }
-                        catch (Exception e)
-                        {
-                            success = false;
-                        }
-                    }
-                }
-            }
-            return success;
-        }
-        #endregion
-
         #region 19.3 Allocate Result
 
         /// <summary>
@@ -1564,6 +1509,7 @@ namespace HicsBL
         }
         #endregion
     }
+    
 }
- 
- 
+
+
