@@ -311,6 +311,13 @@
           <Parameter Name="password" Type="varbinary(max)" Mode="In" />
           <Parameter Name="lamp_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_set_lamp_stat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="lamp_id" Type="int" Mode="In" />
+          <Parameter Name="bright" Type="tinyint" Mode="In" />
+          <Parameter Name="stat" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="itin18_aktModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -442,12 +449,6 @@
             <Parameter Name="password" Mode="In" Type="Binary" />
             <Parameter Name="del_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_lamp_dimm">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="Binary" />
-            <Parameter Name="lamp_id" Mode="In" Type="Int32" />
-            <Parameter Name="bright" Mode="In" Type="Byte" />
-          </FunctionImport>
           <FunctionImport Name="fn_show_lamp_control" IsComposable="true" ReturnType="Collection(itin18_aktModel.fn_show_lamp_control_Result)">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
@@ -466,6 +467,12 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
           </FunctionImport>
+          <FunctionImport Name="sp_lamp_dimm">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+            <Parameter Name="lamp_id" Mode="In" Type="Int32" />
+            <Parameter Name="bright" Mode="In" Type="Byte" />
+          </FunctionImport>
           <FunctionImport Name="sp_lamp_off">
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
@@ -475,6 +482,13 @@
             <Parameter Name="username" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="Binary" />
             <Parameter Name="lamp_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_set_lamp_stat">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="Binary" />
+            <Parameter Name="lamp_id" Mode="In" Type="Int32" />
+            <Parameter Name="bright" Mode="In" Type="Byte" />
+            <Parameter Name="stat" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="fn_show_deleted_lamps_Result">
@@ -671,7 +685,6 @@
           <FunctionImportMapping FunctionImportName="sp_delete_roomgroup" FunctionName="itin18_aktModel.Store.sp_delete_roomgroup" />
           <FunctionImportMapping FunctionImportName="sp_delete_user" FunctionName="itin18_aktModel.Store.sp_delete_user" />
           <FunctionImportMapping FunctionImportName="sp_delete_usergroup" FunctionName="itin18_aktModel.Store.sp_delete_usergroup" />
-          <FunctionImportMapping FunctionImportName="sp_lamp_dimm" FunctionName="itin18_aktModel.Store.sp_lamp_dimm" />
           <FunctionImportMapping FunctionImportName="fn_show_lamp_control" FunctionName="itin18_aktModel.Store.fn_show_lamp_control">
             <ResultMapping>
               <ComplexTypeMapping TypeName="itin18_aktModel.fn_show_lamp_control_Result">
@@ -710,8 +723,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_lamp_dimm" FunctionName="itin18_aktModel.Store.sp_lamp_dimm" />
           <FunctionImportMapping FunctionImportName="sp_lamp_off" FunctionName="itin18_aktModel.Store.sp_lamp_off" />
           <FunctionImportMapping FunctionImportName="sp_lamp_on" FunctionName="itin18_aktModel.Store.sp_lamp_on" />
+          <FunctionImportMapping FunctionImportName="sp_set_lamp_stat" FunctionName="itin18_aktModel.Store.sp_set_lamp_stat" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
