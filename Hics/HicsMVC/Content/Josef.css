@@ -54,3 +54,13 @@
     background-repeat: no-repeat;
     background-position:center;
 }
+
+.sendbutton{
+    background-image: url('../../Resources/Send.png');
+    border-radius:7px;
+    border: solid 2px #054588; 
+    height:28px;
+    width:108px;
+    background-repeat: no-repeat;
+    background-position:center;
+}
