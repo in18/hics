@@ -931,7 +931,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region switchGroup
+        #region PSP 13.2 switchGroup(string username, string password, int groupId, bool onOff)
         /// <summary>
         /// Lampengruppen ein-/ausschalten
         /// </summary>
