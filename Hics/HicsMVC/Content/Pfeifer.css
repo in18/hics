@@ -139,6 +139,11 @@
     float: left;
     left: 7%;
 }
+.backpfeifer:hover{
+    border: solid 2px #054588;
+    border-radius: 7px; 
+    box-shadow: 0 0 2px 2px #054588;
+}
 
 .logoutpfeifer {
     background-image: url('../../Resources/Logout.png'); 
