@@ -121,6 +121,12 @@
     left: 7%;
 }
 
+.homepfeifer2:hover {
+            border: solid 2px #054588;
+            border-radius: 7px; 
+            box-shadow: 0 0 2px 2px #054588;
+        }
+
 
 .backpfeifer {
     background-image: url('../../Resources/Back.png');
@@ -159,6 +165,12 @@
     float: right;
     right: 7%;
 }
+
+.logoutpfeifer2:hover {
+            border: solid 2px #054588;
+            border-radius: 7px; 
+            box-shadow: 0 0 2px 2px #054588;
+        }
 
 .rightpfeifer { 
     float: right; 
