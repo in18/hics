@@ -44,6 +44,7 @@ namespace HicsMVC.Controllers
                 //User-Session-Informationen abrufen.
                 UserSession us = (UserSession)Session["UserSession"];
 
+                //Überpfüfungen aus dem Model keine leehren Inhalte
                 if (!ModelState.IsValid)
                 {
                     return RedirectToAction("Index");

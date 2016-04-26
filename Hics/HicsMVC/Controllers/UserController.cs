@@ -26,12 +26,16 @@ namespace HicsMVC.Controllers
         /// Methode: [HttpGet]
         /// Methode ruft ChangePassword-View auf
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Zurück zum index</returns>
         public ActionResult ChangePassword()
         {
             return View();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ucpm">Übergabe ans Model</param>
+        /// <returns>Zum Login Index</returns>
         [HttpPost]
         public ActionResult ChangePassword(UserChangePasswordModel ucpm)
         {
