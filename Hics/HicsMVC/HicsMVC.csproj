@@ -192,6 +192,7 @@
     <Content Include="Resources\LampControl.png" />
     <Content Include="Resources\Logout.png" />
     <Content Include="Resources\Micron logo header 347x100.png" />
+    <Content Include="Resources\Send.png" />
     <Content Include="Resources\Statistic.png" />
     <Content Include="Resources\UserSetup.png" />
     <Content Include="Scripts\bootstrap.js" />
