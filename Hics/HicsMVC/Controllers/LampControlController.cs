@@ -86,11 +86,11 @@ namespace HicsMVC.Controllers
         /// <summary>
         /// Lampcontrol
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="groupname"></param>
-        /// <param name="lampname"></param>
-        /// <param name="status"></param>
-        /// <param name="brigthness"></param>
+        /// <param name="id">lampID</param>
+        /// <param name="groupname">Gruppenname</param>
+        /// <param name="lampname">Lampenname</param>
+        /// <param name="status">lampOnOff</param>
+        /// <param name="brigthness">brightness</param>
         /// <returns>übernimmt die Daten vom View und speichert diese auf dem Server</returns>
         [HttpPost]
         public ActionResult Edit (HicsBL.fn_show_lamp_control_Result l)
