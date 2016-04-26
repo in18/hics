@@ -1467,6 +1467,12 @@ namespace HicsBL
 
         #region 19.3 Allocate Result
 
+        /// <summary>
+        /// Allocates the result.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns></returns>
         public static List<fn_show_lampgroup_allocate_Result> AllocateResult(string username, string password)
         {
             Byte[] pwhash = HelperClass.GetHash(password);
