@@ -11,7 +11,12 @@ namespace HicsMVC.Controllers
 {
     public class UserLampControlController : Controller
     {
-        // GET: UserLampControl
+        
+        /// <summary>
+        /// Methode: [HttpGet]
+        /// Mehtode ruft den UserLampControlController-View auf für den aktuellen User
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Index()
         {
@@ -38,7 +43,13 @@ namespace HicsMVC.Controllers
         }
 
         
-
+        /// <summary>
+        /// Mehtode: [HttpGet]
+        /// Mehtode ermöglicht das Editieren der ausgewählten Lampen im Edit-View für den
+        /// aktuellen User
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -64,6 +75,13 @@ namespace HicsMVC.Controllers
             }
         }
 
+        /// <summary>
+        /// Mehtode: [HttpPost]
+        /// Methode übergibt die Änderungen an die BL und übernimmt diese
+        /// auch im UserLampControlController-View
+        /// </summary>
+        /// <param name="fn"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Edit(HicsBL.fn_show_lamp_control_Result fn)
         {

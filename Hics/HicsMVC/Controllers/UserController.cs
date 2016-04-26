@@ -32,6 +32,12 @@ namespace HicsMVC.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Methode: [HttpGet]
+        /// Methode ermöglicht die Änderung des Passwortes für den aktuellen User
+        /// </summary>
+        /// <param name="ucpm"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult ChangePassword(UserChangePasswordModel ucpm)
         {
