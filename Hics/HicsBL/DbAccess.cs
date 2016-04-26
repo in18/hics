@@ -31,6 +31,7 @@ namespace HicsBL
         //#14.03.2016|Wolf          |Hashfunktion bearbeitet                       #
         //#23.03.2016|Kornfeld,Acs  |Exception Behandlung                          #
         //##########################################################################
+
         /// <summary>
         /// Konstruktor welcher automatisch von der HUE die Konfiguration läd und die aktuelle Lampenliste abruft 
         /// </summary>
