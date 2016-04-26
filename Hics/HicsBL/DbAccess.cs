@@ -31,13 +31,16 @@ namespace HicsBL
         //#14.03.2016|Wolf          |Hashfunktion bearbeitet                       #
         //#23.03.2016|Kornfeld,Acs  |Exception Behandlung                          #
         //##########################################################################
-
+        /// <summary>
+        /// Konstruktor welcher automatisch von der HUE die Konfiguration läd und die aktuelle Lampenliste abruft 
+        /// </summary>
         public DbAccess()
         {
             HueAccess.LoadConfig();
             HueAccess.getWebClient();
             HueAccess.getLampList();
         }
+
         #region PSP 1.1 addLamp(string username, string password, string lampAdress, string lampName)
         /// <summary>
         /// PSP 1.1
@@ -588,7 +591,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP  7.4 editLampGroup (string username, string password, int groupId)
+        #region PSP 7.4 editLampGroup (string username, string password, int groupId)
         /// <summary>
         /// PSP 7.4
         /// Lampengruppe umbenennen anhand Id
@@ -774,6 +777,59 @@ namespace HicsBL
         }
         #endregion
 
+        #region PSP 8.6 deleteUserFromUsergroup
+
+        /// <summary>
+        /// User aus der User-Gruppe löschen
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="userId">User Id</param>
+        /// <param name="groupId">Gruppen Id</param>
+        /// <returns>success</returns>
+        public static bool deleteUserFromUsergroup(string username, string password, int userId, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
+                List<fn_show_usergroup_Result> ugr = cont.fn_show_usergroup(username, pwhash).ToList();
+
+                string ugrName = "";
+
+                foreach (var item in ugr)
+                {
+                    if (item.id == groupId)
+                    {
+                        ugrName = item.groupname;
+                    }
+                }
+
+
+                foreach (var item in sur)
+                {
+                    //Überprüfung der User Id und des Gruppennamens
+                    if (item.id == userId && item.group == ugrName)
+                    {
+                        try
+                        {
+                            //Löschen des Users aus der UserGruppe
+                            cont.sp_delete_user_from_usergroup(username, pwhash, item.id, userId);
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            success = false;
+                        }
+                    }
+                }
+            }
+            return success;
+        }
+        #endregion
+        
         #region PSP 9.1 EditUserGroup(string username, string password, int usernameId, int groupId)
         /// <summary>
         /// PSP 9.1
@@ -1002,7 +1058,8 @@ namespace HicsBL
             return success;  
         }
         #endregion
-        //Wird nicht gebraucht!
+
+        //15.2 Wird nicht gebraucht!
         //#region PSP 15.2 dimLamp(string username, string password, string lampName, byte brightness)
         ///// <summary>
         ///// PSP 15.2
@@ -1419,60 +1476,9 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 8.6 deleteUserFromUsergroup
+        
 
-        /// <summary>
-        /// User aus der User-Gruppe löschen
-        /// </summary>
-        /// <param name="username">Username</param>
-        /// <param name="password">Passwort</param>
-        /// <param name="userId">User Id</param>
-        /// <param name="groupId">Gruppen Id</param>
-        /// <returns>success</returns>
-        public static bool deleteUserFromUsergroup(string username, string password, int userId, int groupId)
-        {
-            bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            Byte[] pwhash = HelperClass.GetHash(password);
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
-                List<fn_show_usergroup_Result> ugr = cont.fn_show_usergroup(username, pwhash).ToList();
-
-                string ugrName = "";
-
-                foreach (var item in ugr)
-                {
-                    if (item.id == groupId)
-                    {
-                        ugrName = item.groupname;
-                    }
-                }
-
-
-                foreach (var item in sur)
-                {
-                    //Überprüfung der User Id und des Gruppennamens
-                    if (item.id == userId && item.group == ugrName)
-                    {
-                        try
-                        {
-                            //Löschen des Users aus der UserGruppe
-                            cont.sp_delete_user_from_usergroup(username, pwhash, item.id, userId);
-                            success = true;
-                        }
-                        catch (Exception e)
-                        {
-                            success = false;
-                        }
-                    }
-                }
-            }
-            return success;
-        }
-        #endregion
-
-        #region 19.3 Allocate Result
+        #region PSP 19.3 Allocate Result
 
         /// <summary>
         /// Zwischentabelle
