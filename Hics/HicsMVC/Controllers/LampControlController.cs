@@ -13,8 +13,11 @@ namespace HicsMVC.Controllers
 
     public class LampControlController : Controller
     {
-        
-        // GET: LampControl
+        /// <summary>
+        /// 
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Index()
         {
@@ -37,11 +40,14 @@ namespace HicsMVC.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Index_Lampcontrol()
-        { 
-            return View();
-        }
+       // AUSKOMMENTIERT LASSEN ---------- KEINE VERWENDUNG ---------
+        //[HttpGet]
+        //public ActionResult Index_Lampcontrol()
+        //{ 
+        //    return View();
+        //}
+        //------------------------------------------------------------
+
 
         /// <summary>
         /// Lampcontrol
