@@ -32,12 +32,16 @@ namespace HicsBL
         //#23.03.2016|Kornfeld,Acs  |Exception Behandlung                          #
         //##########################################################################
 
+        /// <summary>
+        /// Konstruktor welcher automatisch von der HUE die Konfiguration läd und die aktuelle Lampenliste abruft 
+        /// </summary>
         public DbAccess()
         {
             HueAccess.LoadConfig();
             HueAccess.getWebClient();
             HueAccess.getLampList();
         }
+
         #region PSP 1.1 addLamp(string username, string password, string lampAdress, string lampName)
         /// <summary>
         /// PSP 1.1
@@ -45,8 +49,9 @@ namespace HicsBL
         /// </summary>
         /// <param name="username">Username</param>
         /// <param name="password">Passwort</param>
-        /// <param name="lampAdress">lampAdress</param>
-        /// <param name="lampName">lamp name</param>
+        /// <param name="lampAdress">Lampen Adreses</param>
+        /// <param name="lampName">Lampen Name</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool addLamp(string username, string password, string lampAdress, string lampName)
         {
             bool success = false;
@@ -78,11 +83,11 @@ namespace HicsBL
         /// PSP 2.1
         /// Editieren eines Lampennamens anhand des alten Lampennamens
         /// </summary>
-        /// <param name="username">username</param>
-        /// <param name="password">password</param>
-        /// <param name="lampNameOld">old lamp name</param>
-        /// <param name="lampNameNew">new lamp name</param>
-        /// <returns>success</returns>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="lampNameOld">alter Lampenname</param>
+        /// <param name="lampNameNew">neuer Lampenname</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         internal static bool editLampName(string username, string password, string lampNameOld, string lampNameNew)
         {
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
@@ -135,7 +140,6 @@ namespace HicsBL
                         }
                     }
 
-
                     foreach (var outerItem in dbLampGroups)
                     {
                         dbLampGroupStatus = cont.fn_show_lampgroup_status(username, pwhash, outerItem.id).ToList();
@@ -167,7 +171,6 @@ namespace HicsBL
                     success = false;
                 }
                
-                
             }
             return success;
         }
@@ -176,22 +179,21 @@ namespace HicsBL
         #region PSP 2.4 editLampName(string username, string password, int lampId, string lampNameNew)
         /// <summary>
         /// PSP 2.4
-        /// Editieren eines Lampennamens anhand der DB-LampenId      
-        /// Is aber wurscht, da die Hue-Bridge entfernte Lampen automatisch erkennt
-        /// Es geht nur um den Db Eintrag
+        /// Editieren eines Lampennamens anhand der DB-LampenId.      
+        /// Hue-Bridge erkennt entfernte Lampen automatisch ->es geht nur um den Db Eintrag
         /// </summary>
-        /// <param name="username">username</param>
-        /// <param name="password">password</param>
-        /// <param name="lampId">lampId</param>
-        /// <param name="lampNameNew">new lamp name</param>
-        /// <returns>success</returns>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="lampId">Lampen Id</param>
+        /// <param name="lampNameNew">neuer Lampen Name</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         static bool editLampName(string username, string password, int lampId, string lampNameNew)
         {
             bool success = false;
             //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
 
-            // Das wichtigste ist, wir brauchen 2 Listen, DB und Hue
+            // Das wichtigste ist, wir brauchen 2 Listen (DB und Hue)
             using (itin18_aktEntities cont = new itin18_aktEntities())
             {
                 string dbLampName = "";
@@ -227,17 +229,16 @@ namespace HicsBL
         ///<summary>
         /// PSP 3.1
         /// Löschen der Lampe anhand der LampenId
-        /// Is aber wurscht, da die Hue-Bridge entfernte Lampen automatisch erkennt
-        /// Es geht nur um den Db Eintrag
+        /// Hue-Bridge erkennt entfernte Lampen automatisch ->es geht nur um den Db Eintrag
         /// </summary>
-        /// <param name="username">username</param>
-        /// <param name="password">password</param>
-        /// <param name="lampId">lampId</param>
-        /// <returns>success</returns>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="lampId">Lampen Id</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool deleteLamp(string username, string password, int lampId)
         {
             bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            //Übergebenes Passwort hashen und in Variable pwhash speichern für Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
 
             //Lampe aus der DB löschen
@@ -246,7 +247,7 @@ namespace HicsBL
                 try
                 {
                     cont.sp_delete_lamp(lampId, username, pwhash);
-                    //HUE-Bridge entfernt die Lampe (Da nicht benutzt) automatisch. Liste lamps aktualisieren
+                    //HUE-Bridge entfernt die Lampe (da nicht benutzt) automatisch. Liste lamps aktualisieren
                     //Sollte die Lampe, obwohl vorhanden gelöscht werden, wird dies von uns nicht unterstützt!
                     HueAccess.getLampList();
                     success = true;
@@ -268,10 +269,10 @@ namespace HicsBL
         /// PSP 3.2
         /// Löschen einer Lampe anhand der Lampenadresse
         /// </summary>
-        /// <param name="username">username</param>
-        /// <param name="password">password</param>
-        /// <param name="lampAdress">lampAdress</param>
-        /// <returns></returns>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="lampAdress">Lampen Adresse</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool deleteLamp(string username, string password, string lampAdress)
         {
             bool success = false;
@@ -282,7 +283,7 @@ namespace HicsBL
                 //Nach Lampe in DB über Funktion suchen
                 foreach (var item in cont.fn_show_lamps(username, pwhash))
                 {
-                    //Adress wird geprüft
+                    //Adresse wird geprüft
                     if (item.address == lampAdress)
                     {
                         try
@@ -309,15 +310,16 @@ namespace HicsBL
         #region PSP 4.1 addLampGroup(string username, string password, string lampGroupName)
         /// <summary>
         /// PSP 4.1
+        /// Lampegruppe hinzufuegen
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampGroupName"></param>
-        /// <returns></returns>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="lampGroupName">Name der neuen Lampengruppe</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool addLampGroup(string username, string password, string lampGroupName)
         {
             bool success = false;
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            //Übergebenes Passwort hashen und in Var pwhash speichern für die Übergabe an DB
             Byte[] pwhash = HelperClass.GetHash(password);
 
             using (itin18_aktEntities cont = new itin18_aktEntities())
@@ -343,11 +345,11 @@ namespace HicsBL
         /// PSP 5.1
         /// Lampe einer Gruppe anhand groupId und lampId hinzufügen
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="groupId"></param>
-        /// <param name="lampId"></param>
-        /// <returns>Bool ob erfolgreich oder nicht</returns>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="groupId">Gruppen Id</param>
+        /// <param name="lampId">Lampen Id</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool addLampToGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
@@ -390,6 +392,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupName"></param>
         /// <param name="lampId"></param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool addLampToGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
@@ -429,11 +432,11 @@ namespace HicsBL
         /// PSP 6.1
         /// Entfernt eine Lampe von einer Gruppe mittels group_id und lamp_id
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="groupId"></param>
-        /// <param name="lampId"></param>
-        /// <returns></returns>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="groupId">Gruppen Id</param>
+        /// <param name="lampId">Lampen Id</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool removeLampFromGroup(string username, string password, int groupId, int lampId)
         {
             bool success = false;
@@ -478,7 +481,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="groupName"></param>
         /// <param name="lampId"></param>
-        /// <returns></returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool removeLampFromGroup(string username, string password, string groupName, int lampId)
         {
             bool success = false;
@@ -519,7 +522,7 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="groupName"></param>
-        /// <returns></returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool removeLampGroup(string username, string password, string groupName)
         {
             bool success = false;
@@ -562,7 +565,7 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="groupId"></param>
-        /// <returns></returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool removeLampGroup(string username, string password, int groupId)
         {
             bool success = false;
@@ -589,7 +592,7 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP  7.4 editLampGroup (string username, string password, int groupId)
+        #region PSP 7.4 editLampGroup (string username, string password, int groupId)
         /// <summary>
         /// PSP 7.4
         /// Lampengruppe umbenennen anhand Id
@@ -597,7 +600,7 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="groupId"></param>
-        /// <returns></returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool editLampGroup(string username, string password, int groupId, string newGroupName)
         {
             bool success = false;
@@ -618,6 +621,7 @@ namespace HicsBL
         /// <param name="usernameNew">Name des neu anzulegenden Users</param>
         /// <param name="passwordNew">Passwort des neu angelegten User</param>
         /// <param name="admin">Ist User Admin?</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool addUser(string username, string password, string usernameNew, string passwordNew, bool admin)
         {
             bool success = false;
@@ -675,7 +679,7 @@ namespace HicsBL
         /// <param name="password">das dazugehörige Passwort übermitteln (Überprüfung auf Rechte)</param>
         /// <param name="userToAdd">Name des hinzuzufügenden Users</param>
         /// <param name="usergroup">Name der Gruppe</param>
-        /// <returns>Erfolgreich true/false</returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool addUserToUsergroup(string username, string password, int userToAdd, int usergroup)
         {
             bool success = false;
@@ -707,7 +711,7 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="usernameId"></param>
-        /// <returns></returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool removeUser(string username, string password, int usernameId)
         {
             bool success = false;
@@ -741,7 +745,7 @@ namespace HicsBL
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="usernameName"></param>
-        /// <returns></returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool removeUser(string username, string password, string usernameName)
         {
             bool success = false;
@@ -774,6 +778,59 @@ namespace HicsBL
         }
             #endregion
 
+        #region PSP 8.6 deleteUserFromUsergroup
+
+        /// <summary>
+        /// User aus der User-Gruppe löschen
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="userId">User Id</param>
+        /// <param name="groupId">Gruppen Id</param>
+        /// <returns>success</returns>
+        public static bool deleteUserFromUsergroup(string username, string password, int userId, int groupId)
+        {
+            bool success = false;
+            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+            Byte[] pwhash = HelperClass.GetHash(password);
+            using (itin18_aktEntities cont = new itin18_aktEntities())
+            {
+                List<fn_show_users_Result> sur = cont.fn_show_users(username, pwhash).ToList();
+                List<fn_show_usergroup_Result> ugr = cont.fn_show_usergroup(username, pwhash).ToList();
+
+                string ugrName = "";
+
+                foreach (var item in ugr)
+                {
+                    if (item.id == groupId)
+                    {
+                        ugrName = item.groupname;
+                    }
+                }
+
+
+                foreach (var item in sur)
+                {
+                    //Überprüfung der User Id und des Gruppennamens
+                    if (item.id == userId && item.group == ugrName)
+                    {
+                        try
+                        {
+                            //Löschen des Users aus der UserGruppe
+                            cont.sp_delete_user_from_usergroup(username, pwhash, item.id, userId);
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            success = false;
+                        }
+                    }
+                }
+            }
+            return success;
+        }
+        #endregion
+        
         #region PSP 9.1 EditUserGroup(string username, string password, int usernameId, int groupId)
         /// <summary>
         /// PSP 9.1
@@ -783,7 +840,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="usernameId"></param>
         /// <param name="groupId"></param>
-        /// <returns></returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         static bool EditUserGroup(string username, string password, int usernameId, int groupId)
         {
             bool success = false;
@@ -804,7 +861,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="usernameName"></param>
         /// <param name="groupId"></param>
-        /// <returns></returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         static bool EditUserGroup(string username, string password, string usernameName, int groupId)
         {
             bool success = false;
@@ -823,7 +880,7 @@ namespace HicsBL
         /// <param name="password"></param>
         /// <param name="lampOnOff"></param>
         /// <param name="lampId"></param>
-        /// <returns></returns>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool switchLamp(string username, string password, bool lampOnOff, int lampId)
         {
             bool success = false;
@@ -875,6 +932,14 @@ namespace HicsBL
         #endregion
 
         #region switchGroup
+        /// <summary>
+        /// Lampengruppen ein-/ausschalten
+        /// </summary>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="groupId">Lampengruppen Id</param>
+        /// <param name="onOff">Lampe ein/ Lampe aus</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool switchGroup(string username, string password, int groupId, bool onOff)
         {
             bool success = false;
@@ -926,12 +991,12 @@ namespace HicsBL
         /// PSP 15.1
         /// Lampen dimmen
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampId"></param>
-        /// <param name="brightness"></param>
-        /// <param name="lampOnOff"></param>
-        /// <returns></returns>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="lampId">Lampen Id</param>
+        /// <param name="brightness">Helligkeit</param>
+        /// <param name="lampOnOff">Lampe ein/ Lampe aus</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool dimLamp(string username, string password, int lampId, byte brightness, bool lampOnOff)
         {
             bool success = false;
@@ -995,55 +1060,56 @@ namespace HicsBL
         }
         #endregion
 
-        #region PSP 15.2 dimLamp(string username, string password, string lampName, byte brightness)
-        /// <summary>
-        /// PSP 15.2
-        /// Lampen dimmen
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="lampName"></param>
-        /// <param name="brightness"></param>
-        /// <returns></returns>
-        public static void dimLamp(string username, string password, string lampName, byte brightness)
-        {
+        //15.2 Wird nicht gebraucht!
+        //#region PSP 15.2 dimLamp(string username, string password, string lampName, byte brightness)
+        ///// <summary>
+        ///// PSP 15.2
+        ///// Lampen dimmen
+        ///// </summary>
+        ///// <param name="username"></param>
+        ///// <param name="password"></param>
+        ///// <param name="lampName"></param>
+        ///// <param name="brightness"></param>
+        ///// <returns></returns>
+        //public static void dimLamp(string username, string password, string lampName, byte brightness)
+        //{
            
-            //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
-            Byte[] pwhash = HelperClass.GetHash(password);
-            using (itin18_aktEntities cont = new itin18_aktEntities())
-            {
-                //ÜbergabeId 
-                int hueId = 0;
+        //    //Übergebenes Passwort hashen und in Var pwhash speichern für Übergabe an DB
+        //    Byte[] pwhash = HelperClass.GetHash(password);
+        //    using (itin18_aktEntities cont = new itin18_aktEntities())
+        //    {
+        //        //ÜbergabeId 
+        //        int hueId = 0;
 
-                //Suche nach Lampe mittels DB-Funktion
-                foreach (var item in cont.fn_show_lamps(username, pwhash))
-                {
-                    //Lampenname überprüfen
-                    if (lampName == item.name)
-                    {
-                        //Holen der LampenId über HueAccess und speichern auf hueId
-                        hueId = HueAccess.GetLampId(item.name);
-                        cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
-                    }
+        //        //Suche nach Lampe mittels DB-Funktion
+        //        foreach (var item in cont.fn_show_lamps(username, pwhash))
+        //        {
+        //            //Lampenname überprüfen
+        //            if (lampName == item.name)
+        //            {
+        //                //Holen der LampenId über HueAccess und speichern auf hueId
+        //                hueId = HueAccess.GetLampId(item.name);
+        //                cont.sp_lamp_dimm(username, pwhash, item.id, brightness);
+        //            }
 
-                }
+        //        }
                 
-                //Setzt die Brightness für die Lampe(Ausführung)
-                HelperClass.SetLampBrightness(hueId, brightness);
+        //        //Setzt die Brightness für die Lampe(Ausführung)
+        //        HelperClass.SetLampBrightness(hueId, brightness);
 
-            }
+        //    }
 
 
-        }
-        #endregion
+        //}
+        //#endregion
 
         #region PSP 16.1 userLogin(string username, string password)
         /// <summary>
         /// PSP 16.1
         /// User Login
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
         /// <returns>true, wenn Anmeldedaten richtig sind ansonsten false</returns>
         public static int userLogin(string username, string password)
         {
@@ -1081,7 +1147,7 @@ namespace HicsBL
                 }
                 catch (Exception e)
                  {
-                    //probleme bei DBverbindung
+                    //wenn Probleme bei DB-Verbindung
                     userIs = 0;
                  }
             }
@@ -1092,12 +1158,12 @@ namespace HicsBL
         #region PSP 18.1 GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
         /// <summary>
         /// PSP 18.1
-        /// Logfile von beginDate bis endDate in einer Liste retourgeben
+        /// Logfile wird von Begindatum bis Endedatum in einer Liste retourgegeben
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="beginDate"></param>
-        /// <param name="endDate"></param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="beginDate">Begindatum</param>
+        /// <param name="endDate">Endedatum</param>
         /// <returns>Liste des Datentyp's "fn_show_lamp_control_history_Result" </returns>
         public static List<fn_show_lamp_control_history_Result> GetLogFile(string username, string password, DateTime beginDate, DateTime endDate)
         {
@@ -1142,8 +1208,8 @@ namespace HicsBL
         /// PSP 18.2
         /// Logfile in einer Liste retourgeben
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
         /// <returns>Liste des Datentyp's "fn_show_lamp_control_history_Result" </returns>
         public static List<fn_show_lamp_control_history_Result> GetLogFileComplete(string username, string password)
         {
@@ -1184,12 +1250,12 @@ namespace HicsBL
         #region PSP 19.1 EditUserPassword(string username, string passwordNew, string passwordOld)
                 /// <summary>
                 /// PSP 19.1
-                /// Edit UserPassword
+        /// UserPassword bearbeiten
                 /// </summary>
-                /// <param name="username"></param>
-                /// <param name="passwordOld"></param>
-                /// <param name="passwordNew"></param>
-                /// <returns>Bool ob erfolgreich</returns>
+        /// <param name="username">Username</param>
+        /// <param name="passwordOld">altes Passwort</param>
+        /// <param name="passwordNew">neues Passwort</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool EditUserPassword(string username, string passwordOld, string passwordNew)
                 {
                     bool success = false;
@@ -1222,15 +1288,16 @@ namespace HicsBL
                 }
                 #endregion
 
-        #region PSP 19.2 Change Password by Admin(string username, string password, int changeId, string newpassword)
+        #region PSP 19.2 ChangePasswordbByAdmin(string username, string password, int changeId, string newpassword)
         /// <summary>
-        /// 19.2 Change Password by Admin
+        /// 19.2 
+        /// Change Password by Admin
         /// </summary>
         /// <param name="changeId">Id die geändert werden soll</param>
-        /// <param name="newpassword"></param>
-        /// <param name="password"></param>
-        /// <param name="username"></param>
-        /// <returns></returns>
+        /// <param name="newpassword">neues Passwort</param>
+        /// <param name="password">Passwort</param>
+        /// <param name="username">Username</param>
+        /// <returns>success -> ob erfolgreich oder nicht</returns>
         public static bool ChangePasswordByAdmin(string username, string password, int changeId, string newpassword)
         {
             bool success = false;
@@ -1256,12 +1323,12 @@ namespace HicsBL
         }
         #endregion
 
-        #region GetAllLamps (string username, string password)
+        #region GetAllLamps(string username, string password)
         /// <summary>
         /// Die in der DB eingetragenen Lampennamen als Liste
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
         /// <returns>Liste des Datentyp's "fn_show_lamps_Result". D.h. einen Table aller Lampen</returns>
         public static List<fn_show_lamps_Result> GetAllLamps(string username, string password)
         {
@@ -1291,8 +1358,8 @@ namespace HicsBL
         /// Eine Liste welche zurechtgeschnitten ist für den LampControlController
         /// Gibt folgendes zurück: address, brightness, groupname, Lamp_id, lampname, status
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
         /// <returns>Liste des Datentyp's "fn_show_lamp_control_Result"</returns>
         public static List<fn_show_lamp_control_Result> GetAllLampsStatus(string username, string password)
         {
@@ -1317,13 +1384,13 @@ namespace HicsBL
         }
         #endregion
 
-        #region Die in der DB eingetragenen User als Liste
+        #region GetAllUser
 
         /// <summary>
         /// Die in der DB eingetragenen User als Liste
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
         /// <returns>Liste des Datentyp's "fn_show_users_Result". D.h. einen Table aller User</returns>
         public static List<fn_show_users_Result> GetAllUser(string username, string password)
         {
@@ -1347,13 +1414,13 @@ namespace HicsBL
         }
         #endregion
 
-        #region Die in der DB eingetragenen Lampengruppe als Liste
+        #region GetAllLampGroups
 
         /// <summary>
         /// Die in der DB eingetragenen Lampengruppe als Liste
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
         /// <returns>Liste des Datentyp's "fn_show_lampgroups_Result". D.h. einen Table aller User</returns>
         public static List<fn_show_lampgroups_Result> GetAllLampGroups(string username, string password)
         {
@@ -1382,9 +1449,9 @@ namespace HicsBL
         /// <summary>
         /// Special 4 Bastl
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
+        /// <param name="username">Username</param>
+        /// <param name="password">Passwort</param>
+        /// <returns>Liste des Datentyp's"fn_show_lamp_control_Result"</returns>
         public static List<fn_show_lamp_control_Result> GetLampControl(string username, string password)
         {
             Byte[] pwhash = HelperClass.GetHash(password);
@@ -1407,15 +1474,15 @@ namespace HicsBL
                 }
             }
            
-             
-           
         }
             #endregion
 
-        #region PSP 8.6 User aus der User-Gruppe löschen
+        
+
+        #region PSP 19.3 Allocate Result
 
         /// <summary>
-        /// User aus der User-Gruppe löschen
+        /// Zwischentabelle
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
