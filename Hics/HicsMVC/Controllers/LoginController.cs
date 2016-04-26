@@ -20,7 +20,11 @@ namespace HicsMVC.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// Zugehörige Post Methode für das Login
+        /// </summary>
+        /// <param name="lm">LoginModel</param>
+        /// <returns>Rückkehr zum Hauptmenue</returns>
         [HttpPost]
         public ActionResult Login(LoginModel lm)
         {

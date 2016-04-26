@@ -21,8 +21,8 @@ namespace HicsMVC.Controllers
         /// Der Administrator hat hier das Recht das Password aller Benutzer zu ändern,
         /// innerhalb der aktuellen Session
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">User ID</param>
+        /// <returns>Zurück zum Index</returns>
         public ActionResult ChangePassword(int id)
         {
 
@@ -52,10 +52,10 @@ namespace HicsMVC.Controllers
             return View(acpm);
         }
         /// <summary>
-        /// Zugehörige Post Methode zum ändern des Passwortes
+        /// Zugehörige Post Methode zum Ändern des Passwortes
         /// </summary>
-        /// <param name="acpm"></param>
-        /// <returns></returns>
+        /// <param name="acpm">Übergabe Model</param>
+        /// <returns>Zurück zum Index</returns>
         [HttpPost]
         public ActionResult ChangePassword(AdminChangePasswordModel acpm)
         {            

@@ -46,8 +46,8 @@ namespace HicsMVC.Controllers
         /// <summary>
         /// Lampcontrol
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Lampen ID</param>
+        /// <returns>Zurück zum index</returns>
         [HttpGet]
         public ActionResult Edit(int? id)
         {

@@ -12,6 +12,7 @@ namespace HicsMVC.Controllers
     {
         public ActionResult Index()
         {
+            
             try
             {
                 //User-Session-Informationen abrufen.
@@ -32,6 +33,7 @@ namespace HicsMVC.Controllers
                     }
                 }
 
+                //Den Namen aus der User-Session auslesen und per ViewBag an den View schicken.
                 ViewBag.Username = us.name;
 
                 return View(filteredStatisticList);
