@@ -151,12 +151,21 @@ namespace HicsBL
             //{
             //    cont.sp_lamp_off("admin", ha,1);
             //}
-            List<fn_show_lamp_control_history_Result> lr = DbAccess.GetLogFileComplete("admin", "123user!").ToList();
-            foreach (var i in lr)
-            {
-                Console.WriteLine($"{i.date}|{i.lamp_name}|{i.status}");
-            }
+            //List<fn_show_lamp_control_history_Result> lr = DbAccess.GetLogFileComplete("admin", "123user!").ToList();
+            //foreach (var i in lr)
+            //{
+            //    Console.WriteLine($"{i.date}|{i.lamp_name}|{i.status}");
+            //}
             //............................................................
+            //using (itin18_aktEntities cont = new itin18_aktEntities())
+            //{
+            //    List<fn_show_usergroup_Result> ug = cont.fn_show_usergroup("admin", ha).ToList();
+
+            //    foreach (var i in ug)
+            //    {
+            //        Console.WriteLine($"{i.id}|{i.groupname}");
+            //    }
+            //}
             Console.ReadKey();
         }
     }

@@ -32,6 +32,8 @@ namespace HicsMVC.Controllers
                     }
                 }
 
+                ViewBag.Username = us.name;
+
                 return View(filteredStatisticList);
             }
             catch (Exception)

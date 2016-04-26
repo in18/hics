@@ -23,9 +23,9 @@
 <table style="padding-left:10px;">
     <tr>
         <td style="color:#054588; font-weight:bold">Username: </td>
-        <td style="font-weight:bold"">@if (Model[0].user_name != null)
+        <td style="font-weight:bold"">@if (ViewBag.Username != null)
         {
-            @Model[0].user_name }
+            @ViewBag.Username }
         else
         {
             <text>User not found</text> }</td>
