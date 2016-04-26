@@ -5,7 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using HicsBL;
 using HicsMVC.Models;
-
+/// <summary>
+/// Dieses View ist aus einer Älteren Version des Projektes und wir derzeit nicht benötigt
+/// </summary>
 namespace HicsMVC.Controllers
 {
     public class SetupController : Controller
