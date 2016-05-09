@@ -11,6 +11,73 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HicsBL", "HicsBL\HicsBL.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HueDotNet", "HueDotNet\HueDotNet.csproj", "{5FCD221C-EA3E-4964-88D3-4861016D3889}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database_Scripts", "Database_Scripts", "{B3E9A2F5-A8AF-486C-8B37-FF8C00AF00C7}"
+	ProjectSection(SolutionItems) = preProject
+		G:\Hics\Code\Hics_BatchJob_v3.4\00_create_db_hics_lokal.bat = G:\Hics\Code\Hics_BatchJob_v3.4\00_create_db_hics_lokal.bat
+		G:\Hics\Code\Hics_BatchJob_v3.4\00_create_db_hics_server.bat = G:\Hics\Code\Hics_BatchJob_v3.4\00_create_db_hics_server.bat
+		G:\Hics\Code\Hics_BatchJob_v3.4\01.1_delete_all_object.sql = G:\Hics\Code\Hics_BatchJob_v3.4\01.1_delete_all_object.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\01_drop_db_hics.sql = G:\Hics\Code\Hics_BatchJob_v3.4\01_drop_db_hics.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\02_create_db_hics.sql = G:\Hics\Code\Hics_BatchJob_v3.4\02_create_db_hics.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\03_create_table_hics.sql = G:\Hics\Code\Hics_BatchJob_v3.4\03_create_table_hics.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\04_create_pk_hics.sql = G:\Hics\Code\Hics_BatchJob_v3.4\04_create_pk_hics.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\05_create_fk_hics.sql = G:\Hics\Code\Hics_BatchJob_v3.4\05_create_fk_hics.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\06_create_index_hics.sql = G:\Hics\Code\Hics_BatchJob_v3.4\06_create_index_hics.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\07_create_grant_hics_lokal.sql = G:\Hics\Code\Hics_BatchJob_v3.4\07_create_grant_hics_lokal.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\07_create_grant_hics_server.sql = G:\Hics\Code\Hics_BatchJob_v3.4\07_create_grant_hics_server.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\13_exec_main_data.sql = G:\Hics\Code\Hics_BatchJob_v3.4\13_exec_main_data.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4.zip = G:\Hics\Code\Hics_BatchJob_v3.4.zip
+		G:\Hics\Code\Hics_BatchJob_v3.4\logfile.log = G:\Hics\Code\Hics_BatchJob_v3.4\logfile.log
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Funktionen", "Funktionen", "{7328C13E-B16B-4046-84C9-3EB3FC0E75FF}"
+	ProjectSection(SolutionItems) = preProject
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.1_fn_show_lamp_status.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.1_fn_show_lamp_status.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.2_fn_show_lampgroup_status.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.2_fn_show_lampgroup_status.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.3.1_fn_show_lamps.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.3.1_fn_show_lamps.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.3.2_fn_show_deleted_lamps.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.3.2_fn_show_deleted_lamps.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.4.1_fn_show_lampgroups.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.4.1_fn_show_lampgroups.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.4.2_fn_show_deleted_roomgroups.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\18.4.2_fn_show_deleted_roomgroups.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.10_fn_show_lamp_brightness_scalar.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.10_fn_show_lamp_brightness_scalar.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.11_fn_check_lamp_delete_scalar.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.11_fn_check_lamp_delete_scalar.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.2_fn_check_user_table.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.2_fn_check_user_table.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.3.1_fn_show_users.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.3.1_fn_show_users.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.3.2_fn_show_deleted_users.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.3.2_fn_show_deleted_users.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.4.1_fn_show_usergroups.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.4.1_fn_show_usergroups.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.4.2_fn_show_deleted_usergroups.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.4.2_fn_show_deleted_usergroups.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.5_fn_hash_password.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.5_fn_hash_password.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.6_fn_check_admin_table.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.6_fn_check_admin_table.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.7.1_fn_check_user_scalar.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.7.1_fn_check_user_scalar.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.7.2_fn_check_admin_scalar.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.7.2_fn_check_admin_scalar.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.8.1_fn_show_lamp_control.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.8.1_fn_show_lamp_control.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.8.2_fn_show_lamp_control_history.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.8.2_fn_show_lamp_control_history.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.8.3_fn_show_lampgroup_allocate.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.8.3_fn_show_lampgroup_allocate.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.9_fn_show_lamp_status_scalar.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Funktionen\19.9_fn_show_lamp_status_scalar.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prozeduren", "Prozeduren", "{49CB2CC7-780E-48D2-ABBF-349214C82300}"
+	ProjectSection(SolutionItems) = preProject
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\1.2_sp_delete_data_from_tables.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\1.2_sp_delete_data_from_tables.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\1.3_sp_insert_test_data.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\1.3_sp_insert_test_data.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\13.1_sp_lamp_on.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\13.1_sp_lamp_on.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\13.2_sp_set_lamp_stat.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\13.2_sp_set_lamp_stat.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\14.1_sp_lamp_off.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\14.1_sp_lamp_off.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\15.1_sp_lamp_dimm.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\15.1_sp_lamp_dimm.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\19.1.1_sp_change_password.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\19.1.1_sp_change_password.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\19.1.2_sp_change_password_by_admin.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\19.1.2_sp_change_password_by_admin.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\2.1_sp_add_lamp.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\2.1_sp_add_lamp.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\3.1_sp_delete_lamp.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\3.1_sp_delete_lamp.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\4.1_sp_add_lampgroup.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\4.1_sp_add_lampgroup.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\5.1_sp_add_lamp_to_lampgroup.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\5.1_sp_add_lamp_to_lampgroup.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\6.1_sp_delete_lamp_from_roomgroup.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\6.1_sp_delete_lamp_from_roomgroup.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\7.1_sp_delete_roomgroup.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\7.1_sp_delete_roomgroup.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.1_sp_add_usergroup.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.1_sp_add_usergroup.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.2_sp_delete_usergroup.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.2_sp_delete_usergroup.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.3_sp_add_user.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.3_sp_add_user.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.4_sp_delete_user.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.4_sp_delete_user.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.5_sp_add_user_to_usergroup.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.5_sp_add_user_to_usergroup.sql
+		G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.6_sp_delete_user_from_usergroup.sql = G:\Hics\Code\Hics_BatchJob_v3.4\Prozeduren\8.6_sp_delete_user_from_usergroup.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +103,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7328C13E-B16B-4046-84C9-3EB3FC0E75FF} = {B3E9A2F5-A8AF-486C-8B37-FF8C00AF00C7}
+		{49CB2CC7-780E-48D2-ABBF-349214C82300} = {B3E9A2F5-A8AF-486C-8B37-FF8C00AF00C7}
 	EndGlobalSection
 EndGlobal
